@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  font-feature-settings: "ss01";
+}
+
+::selection {
+  background: rgba(244, 244, 245, 0.2);
+}
