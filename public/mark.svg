@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <defs>
+    <linearGradient id="g" x1="16" y1="16" x2="112" y2="112" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f4f4f5"/>
+      <stop offset="0.55" stop-color="#e9d5ff"/>
+      <stop offset="1" stop-color="#f0abfc"/>
+    </linearGradient>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.6" result="b"/>
+      <feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.45 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- claw/crest: sharp, symmetric, minimal -->
+  <path filter="url(#soft)" d="M64 16c10 12 20 25 20 41 0 16-10 28-20 34-10-6-20-18-20-34 0-16 10-29 20-41Z" fill="url(#g)"/>
+  <path d="M28 74c8-7 17-11 26-12-2 12-10 21-24 27-2-5-3-10-2-15Z" fill="url(#g)" opacity="0.9"/>
+  <path d="M100 74c1 5 0 10-2 15-14-6-22-15-24-27 9 1 18 5 26 12Z" fill="url(#g)" opacity="0.9"/>
+  <path d="M64 92c9 6 15 12 15 20 0 7-4 12-15 16-11-4-15-9-15-16 0-8 6-14 15-20Z" fill="url(#g)" opacity="0.92"/>
+</svg>
