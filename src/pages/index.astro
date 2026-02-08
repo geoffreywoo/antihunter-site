@@ -284,6 +284,7 @@ const changelog = [
 
 				<script type="module">
 					const fmtUsd = (n) => (n == null || !Number.isFinite(n) ? '—' : n.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }));
+					const fmtQty = (n) => (n == null || !Number.isFinite(n) ? '—' : n.toLocaleString(undefined, { maximumFractionDigits: 2 }));
 					const rowsEl = document.getElementById('treasury-rows');
 					const footEl = document.getElementById('treasury-footnote');
 					const walletLinkEl = document.getElementById('treasury-wallet-link');
@@ -301,7 +302,7 @@ const changelog = [
 						return `
 							<tr>
 								<td class="py-3 pr-4 font-medium">$${p.symbol}</td>
-								<td class="py-3 pr-4">${p.balance}</td>
+								<td class="py-3 pr-4">${fmtQty(Number(p.balance))}</td>
 								<td class="py-3 pr-4 text-zinc-300">${entryDate(p.entryTimestamp)}</td>
 								<td class="py-3 pr-4">${costCell}</td>
 								<td class="py-3 pr-4">${fmvCell}</td>
