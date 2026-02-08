@@ -154,6 +154,7 @@ export const GET: APIRoute = async ({ url }) => {
 				const ethPx = await dexscreenerPriceUsd('0x4200000000000000000000000000000000000006');
 				const ethFmvUsd = ethPx != null ? ethQty * ethPx : undefined;
 				if ((ethFmvUsd ?? 0) >= 100) {
+					const ethCostUsd = ethPx != null ? ethPx * 1 : undefined;
 					snapshot.positions.push({
 						token: null,
 						symbol: 'ETH',
@@ -162,12 +163,12 @@ export const GET: APIRoute = async ({ url }) => {
 						balance: String(ethQty),
 						balanceRaw: '',
 						entryTimestamp: Math.floor(new Date(HARD_CODED_ENTRY_DATE).getTime() / 1000),
-						costEth: '0',
-						costEthWei: '0',
-						costUsd: 0,
+						costEth: '1',
+						costEthWei: '1000000000000000000',
+						costUsd: ethCostUsd,
 						priceUsd: ethPx ?? undefined,
 						fmvUsd: ethFmvUsd,
-						pnlUsd: ethFmvUsd,
+						pnlUsd: ethCostUsd != null ? (ethFmvUsd - ethCostUsd) : undefined,
 					});
 				}
 

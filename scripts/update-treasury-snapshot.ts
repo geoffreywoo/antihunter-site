@@ -200,15 +200,16 @@ async function main() {
 	const ethPx = await dexscreenerPriceUsd('0x4200000000000000000000000000000000000006'); // WETH
 	const ethFmvUsd = ethPx != null ? ethQty * ethPx : null;
 	if ((ethFmvUsd ?? 0) >= 100) {
+		const ethCostUsd = ethPx != null ? ethPx * 1 : null;
 		rows.push({
 			symbol: 'ETH',
 			token: null,
 			balance: String(ethQty),
 			entryDate: HARD_CODED_ENTRY_DATE,
-			costBasisUsd: 0,
-			costBasisEth: '0',
+			costBasisUsd: ethCostUsd,
+			costBasisEth: '1',
 			fmvUsd: ethFmvUsd,
-			pnlUsd: ethFmvUsd != null ? ethFmvUsd : null,
+			pnlUsd: ethFmvUsd != null && ethCostUsd != null ? (ethFmvUsd - ethCostUsd) : null,
 		});
 	}
 

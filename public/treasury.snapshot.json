@@ -1,6 +1,6 @@
 {
-  "updatedAtMs": 1770563050860,
-  "updatedAt": "2026-02-08T15:04:10.860Z",
+  "updatedAtMs": 1770563272025,
+  "updatedAt": "2026-02-08T15:07:52.025Z",
   "date": "2026-02-08",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "basescan": "https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
@@ -12,8 +12,8 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 73674.90559117719,
-      "pnlUsd": 73674.90559117719
+      "fmvUsd": 74275.16164098133,
+      "pnlUsd": 74275.16164098133
     },
     {
       "symbol": "WETH",
@@ -22,8 +22,8 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 21881.74686649837,
-      "pnlUsd": 21881.74686649837
+      "fmvUsd": 21881.849917986405,
+      "pnlUsd": 21881.849917986405
     },
     {
       "symbol": "BNKR",
@@ -32,18 +32,18 @@
       "entryDate": "2026-02-07",
       "costBasisUsd": 6288.9303,
       "costBasisEth": "3",
-      "fmvUsd": 9917.466118856302,
-      "pnlUsd": 3628.5358188563023
+      "fmvUsd": 10238.398661895711,
+      "pnlUsd": 3949.4683618957115
     },
     {
       "symbol": "FELIX",
       "token": "0xf30bf00edd0c22db54c9274b90d2a4c21fc09b07",
       "balance": "234565737.063334765213666609",
       "entryDate": "2026-02-07",
-      "costBasisUsd": 4246.76,
+      "costBasisUsd": 4192.6202,
       "costBasisEth": "2",
-      "fmvUsd": 4250.331155587625,
-      "pnlUsd": 3.5711555876250713
+      "fmvUsd": 4236.257211363826,
+      "pnlUsd": 43.63701136382588
     },
     {
       "symbol": "bio",
@@ -60,13 +60,13 @@
       "token": null,
       "balance": "0.9973581413337396",
       "entryDate": "2026-02-06",
-      "costBasisUsd": 0,
-      "costBasisEth": "0",
-      "fmvUsd": 2117.770330145236,
-      "pnlUsd": 2117.770330145236
+      "costBasisUsd": 2123.39,
+      "costBasisEth": "1",
+      "fmvUsd": 2117.780303726649,
+      "pnlUsd": -5.609696273350892
     }
   ],
-  "totalUsd": 114388.30792755712,
+  "totalUsd": 115295.5356012463,
   "notes": [
     "Cost basis is inferred from on-chain ERC20 Transfer logs by pairing token in/out with WETH in/out within the same transaction.",
     "Native ETH swaps are partially inferred via tx.value only (internal ETH transfers are not captured).",
