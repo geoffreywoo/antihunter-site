@@ -1,4 +1,3 @@
-import path from 'node:path';
 import { rpcCall, toHexBlock } from './rpc.js';
 import {
 	decodeAddressTopic,
@@ -9,7 +8,6 @@ import {
 	hexToBigInt,
 	padAddressTopic,
 	readUint256,
-	strip0x,
 } from './abi.js';
 import { defaultCachePath, loadCache, saveCache, type TreasuryCacheState } from './state.js';
 import { fetchDexPairsForToken, parseUsdPrice, pickBestBasePair } from './dexscreener.js';
