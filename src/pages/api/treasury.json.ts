@@ -1,49 +1,165 @@
 import type { APIRoute } from 'astro';
 import { getTreasurySnapshot } from '../../lib/treasury/baseTreasury.js';
+import { decodeAbiString, encodeDecimalsCall, encodeSymbolCall, encodeNameCall, encodeBalanceOfCall, readUint256 } from '../../lib/treasury/abi.js';
+import { fetchDexPairsForToken, parseUsdPrice, pickBestBasePair } from '../../lib/treasury/dexscreener.js';
+
+// Public RPC fallbacks (override with BASE_RPC_URL)
+const BASE_RPCS = [
+	process.env.BASE_RPC_URL,
+	process.env.BASE_RPC,
+	'https://mainnet.base.org',
+	'https://base.llamarpc.com',
+	'https://base-rpc.publicnode.com',
+].filter(Boolean) as string[];
+
+async function rpcCall(rpcUrl: string, method: string, params: unknown[]) {
+	const res = await fetch(rpcUrl, {
+		method: 'POST',
+		headers: { 'content-type': 'application/json' },
+		body: JSON.stringify({ jsonrpc: '2.0', id: 1, method, params }),
+	});
+	const j = (await res.json()) as any;
+	if (!res.ok) throw new Error(`rpc http ${res.status}: ${JSON.stringify(j)}`);
+	if (j?.error) throw new Error(JSON.stringify(j));
+	return j.result;
+}
+
+function formatUnits(raw: bigint, decimals: number): string {
+	const base = 10n ** BigInt(decimals);
+	const i = raw / base;
+	const f = raw % base;
+	if (f === 0n) return i.toString();
+	let frac = f.toString().padStart(decimals, '0').replace(/0+$/g, '');
+	return `${i.toString()}.${frac}`;
+}
+
+async function erc20Meta(rpcUrl: string, token: string) {
+	const [decHex, symHex, nameHex] = await Promise.all([
+		rpcCall(rpcUrl, 'eth_call', [{ to: token, data: encodeDecimalsCall() }, 'latest']),
+		rpcCall(rpcUrl, 'eth_call', [{ to: token, data: encodeSymbolCall() }, 'latest']).catch(() => null),
+		rpcCall(rpcUrl, 'eth_call', [{ to: token, data: encodeNameCall() }, 'latest']).catch(() => null),
+	]);
+	const decimals = Number(readUint256(decHex as string, 0));
+	const symbol = symHex ? decodeAbiString(symHex as string) : '';
+	const name = nameHex ? decodeAbiString(nameHex as string) : '';
+	return { decimals: Number.isFinite(decimals) ? decimals : 18, symbol: symbol || 'TOKEN', name: name || undefined };
+}
+
+async function erc20Balance(rpcUrl: string, token: string, owner: string): Promise<bigint> {
+	const res = await rpcCall(rpcUrl, 'eth_call', [{ to: token, data: encodeBalanceOfCall(owner) }, 'latest']);
+	return readUint256(res as string, 0);
+}
+
+async function dexscreenerPriceUsd(token: string): Promise<number | null> {
+	try {
+		const pairs = await fetchDexPairsForToken(token);
+		const best = pickBestBasePair(pairs);
+		return parseUsdPrice(best);
+	} catch {
+		return null;
+	}
+}
 
 export const GET: APIRoute = async ({ url }) => {
 	try {
 		// Canonical wallet (override via env)
 		const wallet = (process.env.TREASURY_WALLET ?? '0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3').toLowerCase();
-		const rpcUrl = process.env.BASE_RPC_URL ?? 'https://mainnet.base.org';
+
+		// Optional knobs
 		let startBlock = Number(process.env.TREASURY_START_BLOCK ?? '0');
 		if (!Number.isFinite(startBlock) || startBlock < 0) throw new Error('TREASURY_START_BLOCK must be a non-negative integer');
-		const cacheTtlMs = Number(process.env.TREASURY_CACHE_TTL_MS ?? '30000');
+		const cacheTtlMs = Number(process.env.TREASURY_CACHE_TTL_MS ?? '60000');
 		const refresh = url.searchParams.get('refresh');
 
-		// If not configured, default to a recent window to avoid scanning from genesis.
-		if (startBlock === 0) {
-			const latestHex = await fetch(rpcUrl, {
-				method: 'POST',
-				headers: { 'content-type': 'application/json' },
-				body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'eth_blockNumber', params: [] }),
-			}).then((r) => r.json() as Promise<{ result?: string }>);
-			const latest = latestHex.result ? Number(BigInt(latestHex.result)) : 0;
-			startBlock = Math.max(0, latest - 200_000); // ~1-2 weeks on Base (approx)
+		// Vercel serverless: project root may be read-only; use /tmp for cache
+		const projectRoot = process.env.VERCEL ? '/tmp' : process.cwd();
+
+		let lastErr: any = null;
+		for (const rpcUrl of BASE_RPCS) {
+			try {
+				let effectiveStartBlock = startBlock;
+				if (effectiveStartBlock === 0) {
+					const latestHex = await rpcCall(rpcUrl, 'eth_blockNumber', []);
+					const latest = latestHex ? Number(BigInt(latestHex)) : 0;
+					effectiveStartBlock = Math.max(0, latest - 20_000); // recent window to keep first-load fast (can extend via TREASURY_START_BLOCK)
+				}
+
+				const tokenAllowlist = [
+					// canonical tokens we care about today (Base)
+					'0xe2f3fae4bc62e21826018364aa30ae45d430bb07', // ANTIHUNTER
+					'0x4200000000000000000000000000000000000006', // WETH
+					'0x22af33fe49fd1fa80c7149773dde5890d3c76f3b', // BNKR
+					'0xf30bf00edd0c22db54c9274b90d2a4c21fc09b07', // FELIX
+					'0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07', // BIO
+				].map((a) => a.toLowerCase());
+
+				const snapshot = await getTreasurySnapshot({
+					projectRoot,
+					wallet,
+					rpcUrl,
+					startBlock: effectiveStartBlock,
+					cacheTtlMs: refresh ? 0 : cacheTtlMs,
+					tokenAllowlist,
+				});
+
+				// Ensure we show *current holdings* even if they were acquired before the scan window.
+				// Cost basis/entry will be null until the scan range covers acquisition history.
+				const existing = new Set((snapshot.positions ?? []).map((p: any) => (p.token ?? '').toLowerCase()));
+				for (const token of tokenAllowlist) {
+					if (existing.has(token)) continue;
+					const [meta, balRaw, px] = await Promise.all([
+						erc20Meta(rpcUrl, token),
+						erc20Balance(rpcUrl, token, wallet),
+						dexscreenerPriceUsd(token),
+					]);
+					if (balRaw <= 0n) continue;
+					const balance = formatUnits(balRaw, meta.decimals);
+					const balanceNum = Number(balance);
+					const fmvUsd = px != null && Number.isFinite(balanceNum) ? balanceNum * px : undefined;
+					snapshot.positions.push({
+						token,
+						symbol: meta.symbol,
+						name: meta.name,
+						decimals: meta.decimals,
+						balance,
+						balanceRaw: balRaw.toString(),
+						entryTimestamp: undefined,
+						costEth: '0',
+						costEthWei: '0',
+						costUsd: undefined,
+						priceUsd: px ?? undefined,
+						fmvUsd,
+						pnlUsd: undefined,
+					});
+				}
+				snapshot.positions.sort((a: any, b: any) => (b.fmvUsd ?? 0) - (a.fmvUsd ?? 0));
+
+				return new Response(JSON.stringify(snapshot, null, 2) + '\n', {
+					status: 200,
+					headers: {
+						'content-type': 'application/json; charset=utf-8',
+						'cache-control': 'no-store',
+					},
+				});
+			} catch (e: any) {
+				lastErr = e;
+				const msg = String(e?.message ?? e);
+				// If we're rate-limited, try the next RPC immediately.
+				if (msg.includes('429') || msg.toLowerCase().includes('rate limit') || msg.includes('over rate limit')) {
+					continue;
+				}
+				// For other errors, still try next RPC but keep error.
+				continue;
+			}
 		}
 
-		const projectRoot = process.cwd();
-		const snapshot = await getTreasurySnapshot({
-			projectRoot,
-			wallet,
-			rpcUrl,
-			startBlock,
-			cacheTtlMs: refresh ? 0 : cacheTtlMs,
-		});
-
-		return new Response(JSON.stringify(snapshot, null, 2) + '\n', {
-			status: 200,
-			headers: {
-				'content-type': 'application/json; charset=utf-8',
-				'cache-control': 'no-store',
-			},
-		});
+		throw lastErr ?? new Error('All RPC fallbacks failed');
 	} catch (e: any) {
 		return new Response(
 			JSON.stringify(
 				{
 					error: e?.message ?? 'Unknown error',
-					hint: 'Optional env: TREASURY_WALLET, TREASURY_START_BLOCK, BASE_RPC_URL, TREASURY_CACHE_TTL_MS. If TREASURY_START_BLOCK is unset, the API defaults to scanning a recent window and then increments from cache.',
+					hint: 'Env: TREASURY_WALLET, TREASURY_START_BLOCK, BASE_RPC_URL, TREASURY_CACHE_TTL_MS. Add ?refresh=1 to force refresh. The API will fail over across multiple public Base RPCs when rate-limited.',
 				},
 				null,
 				2,

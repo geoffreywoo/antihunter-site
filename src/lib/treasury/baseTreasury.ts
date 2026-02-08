@@ -123,12 +123,24 @@ function normalizeWeight(qtyRawAbs: bigint, decimals: number): bigint {
 	return qtyRawAbs / 10n ** BigInt(decimals - 18);
 }
 
-async function getLogsChunk(rpcUrl: string, fromBlock: number, toBlock: number, topics: (string | null)[]): Promise<RpcLog[]> {
+async function getLogsChunk(
+	rpcUrl: string,
+	fromBlock: number,
+	toBlock: number,
+	topics: (string | null)[],
+	{
+		addresses,
+	}: {
+		addresses?: string[];
+	} = {},
+): Promise<RpcLog[]> {
 	try {
 		return await rpcCall<RpcLog[]>(rpcUrl, 'eth_getLogs', [
 			{
 				fromBlock: toHexBlock(fromBlock),
 				toBlock: toHexBlock(toBlock),
+				// Many public Base RPCs restrict getLogs unless you specify address.
+				...(addresses && addresses.length ? { address: addresses } : {}),
 				topics,
 			},
 		]);
@@ -138,7 +150,16 @@ async function getLogsChunk(rpcUrl: string, fromBlock: number, toBlock: number, 
 	}
 }
 
-async function scanTransfersIncremental(state: TreasuryCacheState, { maxChunkBlocks = 2000 }: { maxChunkBlocks?: number } = {}) {
+async function scanTransfersIncremental(
+	state: TreasuryCacheState,
+	{
+		maxChunkBlocks = 2000,
+		tokenAllowlist,
+	}: {
+		maxChunkBlocks?: number;
+		tokenAllowlist?: string[];
+	} = {},
+) {
 	const wallet = state.wallet.toLowerCase();
 	const walletTopic = padAddressTopic(wallet);
 	const latest = await getLatestBlockNumber(state.rpcUrl);
@@ -152,8 +173,8 @@ async function scanTransfersIncremental(state: TreasuryCacheState, { maxChunkBlo
 		while (!ok) {
 			try {
 				const [incoming, outgoing] = await Promise.all([
-					getLogsChunk(state.rpcUrl, from, to, [TRANSFER_TOPIC0, null, walletTopic]),
-					getLogsChunk(state.rpcUrl, from, to, [TRANSFER_TOPIC0, walletTopic, null]),
+					getLogsChunk(state.rpcUrl, from, to, [TRANSFER_TOPIC0, null, walletTopic], { addresses: tokenAllowlist }),
+					getLogsChunk(state.rpcUrl, from, to, [TRANSFER_TOPIC0, walletTopic, null], { addresses: tokenAllowlist }),
 				]);
 				await processTransferLogs(state, [...incoming, ...outgoing]);
 				state.lastScannedBlock = to;
@@ -372,12 +393,16 @@ export async function getTreasurySnapshot({
 	rpcUrl,
 	startBlock,
 	cacheTtlMs = 30_000,
+	tokenAllowlist,
 }: {
 	projectRoot: string;
 	wallet: string;
 	rpcUrl: string;
 	startBlock: number;
 	cacheTtlMs?: number;
+	// If provided, restrict log scanning to these token addresses.
+	// This is required for many public RPCs that block getLogs without an address.
+	tokenAllowlist?: string[];
 }): Promise<TreasuryResponse> {
 	const cachePath = defaultCachePath(projectRoot);
 	const chainId = await getChainId(rpcUrl);
@@ -404,7 +429,7 @@ export async function getTreasurySnapshot({
 		return response;
 	}
 
-	await scanTransfersIncremental(state);
+	await scanTransfersIncremental(state, { tokenAllowlist });
 	state.updatedAtMs = now;
 	await saveCache(cachePath, state);
 
