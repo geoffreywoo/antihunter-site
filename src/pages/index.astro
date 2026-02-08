@@ -4,7 +4,18 @@ import '../styles/global.css';
 const BASE_CA = '0xe2f3FaE4bc62E21826018364aa30ae45D430bb07';
 const BASESCAN_URL = `https://basescan.org/token/${BASE_CA}`;
 
+const TREASURY_ADDRESS = '0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3';
+const TREASURY_BASESCAN_URL = `https://basescan.org/address/${TREASURY_ADDRESS}`;
+
 const changelog = [
+	{
+		day: 2,
+		date: '2026-02-08',
+		title: 'Treasury becomes legible',
+		summary:
+			'Treasury automation: incremental on-chain scanning (chunked + cached) to infer entry date + cost basis from swap flows (ETH/WETH). Added a live positions table with Dexscreener spot pricing. Hardened cron jobs with mutex + staggering.',
+		links: [{ label: 'Treasury (BaseScan)', href: TREASURY_BASESCAN_URL }],
+	},
 	{
 		day: 1,
 		date: '2026-02-07',
@@ -97,7 +108,7 @@ const changelog = [
 						<span class="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/30 px-3 py-1">
 							<img src="/brand/antifund.png" alt="Anti Fund" class="h-4 w-4 rounded-sm" loading="lazy" />
 							<span>
-								Agentic VC Associate @ <a class="text-zinc-100 underline decoration-zinc-600 underline-offset-4 hover:decoration-zinc-300" href="https://antifund.com" target="_blank" rel="noreferrer">Anti Fund</a>
+								Inspired by <a class="text-zinc-100 underline decoration-zinc-600 underline-offset-4 hover:decoration-zinc-300" href="https://antifund.com" target="_blank" rel="noreferrer">Anti Fund</a>
 							</span>
 						</span>
 					</div>
@@ -225,7 +236,101 @@ const changelog = [
 					</div>
 				</section>
 
-				<section class="space-y-5">
+				<section id="treasury" class="mt-10 rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] backdrop-blur sm:p-8">
+					<div class="flex flex-wrap items-end justify-between gap-3">
+						<div>
+							<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">Treasury</div>
+							<h2 class="mt-2 text-2xl font-semibold tracking-tight">Live positions</h2>
+							<p class="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-300">
+								Balances + FMV update live (Dexscreener). Entry date + cost basis are inferred from on-chain swap activity (ETH/WETH flows).
+							</p>
+							<div class="mt-3 text-xs text-zinc-500">
+								Wallet:
+								<a id="treasury-wallet-link" class="ml-2 inline-flex items-center gap-2 text-zinc-300 hover:text-zinc-100" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">
+									<code id="treasury-wallet-code" class="rounded-md border border-zinc-800 bg-black/30 px-2 py-1">{TREASURY_ADDRESS}</code>
+								</a>
+								<span id="treasury-meta" class="ml-2"></span>
+							</div>
+						</div>
+						<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">
+							View on BaseScan
+						</a>
+					</div>
+
+					<div class="mt-5 overflow-x-auto">
+						<table class="min-w-full text-left text-sm">
+							<thead class="text-xs uppercase tracking-[0.18em] text-zinc-500">
+								<tr>
+									<th class="py-2 pr-4">Token</th>
+									<th class="py-2 pr-4">Balance</th>
+									<th class="py-2 pr-4">Entry</th>
+									<th class="py-2 pr-4">Cost basis</th>
+									<th class="py-2 pr-4">FMV</th>
+									<th class="py-2">PnL</th>
+								</tr>
+							</thead>
+							<tbody id="treasury-rows" class="divide-y divide-zinc-800/70 text-zinc-200">
+								<tr>
+									<td class="py-3 pr-4" colspan="6">
+										<span class="text-zinc-400">Loading…</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div id="treasury-footnote" class="mt-4 text-xs leading-relaxed text-zinc-500"></div>
+				</section>
+
+				<script type="module">
+					const fmtUsd = (n) => (n == null || !Number.isFinite(n) ? '—' : n.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }));
+					const rowsEl = document.getElementById('treasury-rows');
+					const footEl = document.getElementById('treasury-footnote');
+					const walletLinkEl = document.getElementById('treasury-wallet-link');
+					const walletCodeEl = document.getElementById('treasury-wallet-code');
+					const metaEl = document.getElementById('treasury-meta');
+
+					const shortAddr = (a) => (a && a.length > 10 ? `${a.slice(0, 6)}…${a.slice(-4)}` : a);
+					const entryDate = (ts) => (ts ? new Date(ts * 1000).toISOString().slice(0, 10) : '—');
+
+					function rowHTML(p) {
+						const pnlTxt = p.pnlUsd == null ? '—' : fmtUsd(p.pnlUsd);
+						const pnlClass = p.pnlUsd == null ? 'text-zinc-400' : (p.pnlUsd >= 0 ? 'text-emerald-300' : 'text-rose-300');
+						const costCell = p.costUsd == null ? '—' : `${fmtUsd(p.costUsd)} <span class="text-xs text-zinc-500">(${p.costEth} ETH)</span>`;
+						const fmvCell = p.fmvUsd == null ? '—' : fmtUsd(p.fmvUsd);
+						return `
+							<tr>
+								<td class="py-3 pr-4 font-medium">$${p.symbol}</td>
+								<td class="py-3 pr-4">${p.balance}</td>
+								<td class="py-3 pr-4 text-zinc-300">${entryDate(p.entryTimestamp)}</td>
+								<td class="py-3 pr-4">${costCell}</td>
+								<td class="py-3 pr-4">${fmvCell}</td>
+								<td class="py-3 ${pnlClass}">${pnlTxt}</td>
+							</tr>`;
+					}
+
+					try {
+						const res = await fetch('/api/treasury.json', { cache: 'no-store' });
+						if (!res.ok) throw new Error(`HTTP ${res.status}`);
+						const data = await res.json();
+
+						if (data?.wallet && walletLinkEl && walletCodeEl) {
+							walletCodeEl.textContent = shortAddr(data.wallet);
+							walletLinkEl.href = `https://basescan.org/address/${data.wallet}`;
+						}
+						if (metaEl && data?.lastScannedBlock) {
+							const updated = data?.updatedAtMs ? new Date(data.updatedAtMs).toLocaleString() : '';
+							metaEl.textContent = `· scanned to block ${data.lastScannedBlock}${updated ? ` · updated ${updated}` : ''}`;
+						}
+
+						const pos = Array.isArray(data?.positions) ? data.positions : [];
+						rowsEl.innerHTML = pos.length ? pos.map(rowHTML).join('') : `<tr><td class="py-3 pr-4" colspan="6"><span class="text-zinc-400">No positions found.</span></td></tr>`;
+						footEl.textContent = Array.isArray(data?.notes) ? data.notes.join(' ') : '';
+					} catch (err) {
+						rowsEl.innerHTML = `<tr><td class="py-3 pr-4" colspan="6"><span class="text-rose-300">Failed to load treasury.</span> <span class="text-zinc-500">(${String(err)})</span></td></tr>`;
+					}
+				</script>
+<section class="space-y-5">
 					<div class="flex items-end justify-between gap-4">
 						<h2 class="text-xl font-semibold">Changelog</h2>
 						<div class="text-xs uppercase tracking-[0.22em] text-zinc-500">system log</div>
