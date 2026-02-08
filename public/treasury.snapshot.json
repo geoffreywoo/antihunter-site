@@ -1,6 +1,6 @@
 {
-  "updatedAtMs": 1770561810294,
-  "updatedAt": "2026-02-08T14:43:30.294Z",
+  "updatedAtMs": 1770562366436,
+  "updatedAt": "2026-02-08T14:52:46.436Z",
   "date": "2026-02-08",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "basescan": "https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
@@ -11,7 +11,7 @@
       "balance": "2609808912.191894920947708573",
       "entryDate": null,
       "costBasisUsd": null,
-      "fmvUsd": 71665.35272878944,
+      "fmvUsd": 71247.78330283874,
       "pnlUsd": null
     },
     {
@@ -26,36 +26,37 @@
     {
       "symbol": "BNKR",
       "token": "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b",
-      "balance": "10879636.828748862918979693",
-      "entryDate": null,
-      "costBasisUsd": null,
-      "fmvUsd": 9771.001835899353,
-      "pnlUsd": null
+      "balance": "10842315.643223245666320282",
+      "entryDate": "2026-02-07",
+      "costBasisUsd": 6288.9303,
+      "fmvUsd": 9711.462121635062,
+      "pnlUsd": 3422.5318216350624
     },
     {
       "symbol": "FELIX",
       "token": "0xf30bf00edd0c22db54c9274b90d2a4c21fc09b07",
       "balance": "234565737.063334765213666609",
-      "entryDate": null,
-      "costBasisUsd": null,
-      "fmvUsd": 4090.826454384558,
-      "pnlUsd": null
+      "entryDate": "2026-02-07",
+      "costBasisUsd": 4243.22,
+      "fmvUsd": 4243.294183475726,
+      "pnlUsd": 0.07418347572547646
     },
     {
       "symbol": "bio",
       "token": "0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07",
       "balance": "491617660.801773755517648542",
-      "entryDate": null,
-      "costBasisUsd": null,
-      "fmvUsd": 2566.7358070460605,
-      "pnlUsd": null
+      "entryDate": "2026-02-07",
+      "costBasisUsd": 2103.37898239,
+      "fmvUsd": 2593.2831607293565,
+      "pnlUsd": 489.90417833935635
     }
   ],
-  "totalUsd": 109957.42357923549,
+  "totalUsd": 109659.32952179496,
   "notes": [
     "Cost basis is inferred from on-chain ERC20 Transfer logs by pairing token in/out with WETH in/out within the same transaction.",
     "Native ETH swaps are partially inferred via tx.value only (internal ETH transfers are not captured).",
-    "Airdrops/transfers without WETH/ETH flow are ignored for cost basis."
+    "Airdrops/transfers without WETH/ETH flow are ignored for cost basis.",
+    "Cost basis USD is estimated using Chainlink ETH/USD at the entry block when available (falls back to current ETH/USD)."
   ],
   "method": {
     "entryAndCostBasis": "derived-from-onchain-transfer-logs (token<->WETH pairing) with token allowlist; set TREASURY_START_BLOCK earlier for full history"

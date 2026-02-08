@@ -15,6 +15,13 @@ import { fetchDexPairsForToken, parseUsdPrice, pickBestBasePair } from './dexscr
 // Base canonical WETH address
 export const BASE_WETH = '0x4200000000000000000000000000000000000006';
 
+// Chainlink ETH/USD feed on Base
+// Verified via eth_call(latestRoundData) on Base RPC.
+const CHAINLINK_ETH_USD_FEED = '0x71041dddad3595f9ced3dccfbe3d1f4b0a16bb70';
+const CHAINLINK_DECIMALS = '0x313ce567';
+const CHAINLINK_LATEST_ROUND_DATA = '0xfeaf968c';
+
+
 // keccak256("Transfer(address,address,uint256)")
 const TRANSFER_TOPIC0 = '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef';
 
@@ -362,6 +369,22 @@ async function getEthPriceUsd(state: TreasuryCacheState): Promise<number | undef
 	return state.ethPriceUsd?.priceUsd;
 }
 
+async function getEthUsdFromChainlinkAtBlock(rpcUrl: string, blockNumber: number): Promise<number | undefined> {
+	try {
+		const [decHex, roundHex] = await Promise.all([
+			rpcCall<string>(rpcUrl, 'eth_call', [{ to: CHAINLINK_ETH_USD_FEED, data: CHAINLINK_DECIMALS }, toHexBlock(blockNumber)]),
+			rpcCall<string>(rpcUrl, 'eth_call', [{ to: CHAINLINK_ETH_USD_FEED, data: CHAINLINK_LATEST_ROUND_DATA }, toHexBlock(blockNumber)]),
+		]);
+		const decimals = Number(readUint256(decHex, 0));
+		// latestRoundData returns: roundId, answer, startedAt, updatedAt, answeredInRound
+		const answer = readUint256(roundHex, 32);
+		const px = Number(answer) / 10 ** (Number.isFinite(decimals) ? decimals : 8);
+		return Number.isFinite(px) ? px : undefined;
+	} catch {
+		return undefined;
+	}
+}
+
 async function getTokenPriceUsd(state: TreasuryCacheState, token: string): Promise<number | undefined> {
 	const now = Date.now();
 	state.prices ??= {};
@@ -420,6 +443,14 @@ export async function getTreasurySnapshot({
 			updatedAtMs: 0,
 			positions: {},
 		};
+	} else if (startBlock < state.startBlock) {
+		// If the caller asks for an earlier start block, we need to rescan from that point.
+		state.startBlock = startBlock;
+		state.lastScannedBlock = startBlock - 1;
+		state.updatedAtMs = 0;
+		state.positions = {};
+		state.prices = undefined;
+		state.ethPriceUsd = undefined;
 	}
 
 	// return cached response if still fresh AND already caught up
@@ -441,6 +472,7 @@ async function buildResponseFromState(state: TreasuryCacheState): Promise<Treasu
 	notes.push('Cost basis is inferred from on-chain ERC20 Transfer logs by pairing token in/out with WETH in/out within the same transaction.');
 	notes.push('Native ETH swaps are partially inferred via tx.value only (internal ETH transfers are not captured).');
 	notes.push('Airdrops/transfers without WETH/ETH flow are ignored for cost basis.');
+	notes.push('Cost basis USD is estimated using Chainlink ETH/USD at the entry block when available (falls back to current ETH/USD).');
 
 	const ethPriceUsd = await getEthPriceUsd(state);
 	const positions: TokenPosition[] = [];
@@ -459,7 +491,13 @@ async function buildResponseFromState(state: TreasuryCacheState): Promise<Treasu
 		const priceUsd = await getTokenPriceUsd(state, token);
 		const balanceNum = toNumberSafe(balance);
 		const fmvUsd = priceUsd !== undefined ? balanceNum * priceUsd : undefined;
-		const costUsd = ethPriceUsd !== undefined ? toNumberSafe(costEth) * ethPriceUsd : undefined;
+
+		let costEthUsd = ethPriceUsd;
+		if (st.entryBlock !== undefined) {
+			const atEntry = await getEthUsdFromChainlinkAtBlock(state.rpcUrl, st.entryBlock);
+			if (atEntry !== undefined) costEthUsd = atEntry;
+		}
+		const costUsd = costEthUsd !== undefined ? toNumberSafe(costEth) * costEthUsd : undefined;
 		const pnlUsd = fmvUsd !== undefined && costUsd !== undefined ? fmvUsd - costUsd : undefined;
 
 		positions.push({
