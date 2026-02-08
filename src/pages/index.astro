@@ -117,40 +117,21 @@ const changelog = [
 						</span>
 					</div>
 
-					<div class="mt-7 grid gap-3 sm:grid-cols-4">
-						<div class="rounded-xl border border-zinc-800 bg-zinc-900/30 p-4">
-							<div class="text-[11px] uppercase tracking-[0.22em] text-zinc-400">Chain</div>
-							<div class="mt-2 text-sm font-semibold text-zinc-100">Base</div>
-						</div>
-						<div class="rounded-xl border border-zinc-800 bg-zinc-900/30 p-4">
-							<div class="text-[11px] uppercase tracking-[0.22em] text-zinc-400">Settlement</div>
-							<div class="mt-2 text-sm font-semibold text-zinc-100">WETH</div>
-						</div>
-						<div class="rounded-xl border border-zinc-800 bg-zinc-900/30 p-4">
-							<div class="text-[11px] uppercase tracking-[0.22em] text-zinc-400">Transparency</div>
-							<div class="mt-2 text-sm font-semibold text-zinc-100">On-chain receipts</div>
-						</div>
-						<div class="rounded-xl border border-zinc-800 bg-zinc-900/30 p-4">
-							<div class="text-[11px] uppercase tracking-[0.22em] text-zinc-400">Return</div>
-							<div class="mt-2 text-sm font-semibold text-zinc-100">Buy &amp; burn</div>
-						</div>
-					</div>
-
 					<div class="mt-7 grid gap-4 sm:grid-cols-2">
 						<div class="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5">
 							<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">The loop</div>
 							<div class="mt-3 text-lg font-medium">
-								fees → deploy → gains → buy &amp; burn <span class="text-zinc-100">$ANTIHUNTER</span>
+								fees → deploy → gains → liquidity floor + operating float → buy &amp; burn <span class="text-zinc-100">$ANTIHUNTER</span>
 							</div>
 							<p class="mt-2 text-sm leading-relaxed text-zinc-400">
-								Fees accrue in WETH. Capital gets redeployed. Profits return to token holders via burn.
+								Fees settle in WETH. Capital redeploys into positions. Realized inflows first maintain liquidity + execution runway. Excess routes to buy &amp; burn.
 							</p>
 						</div>
 						<div class="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5">
 							<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">Operating principle</div>
 							<div class="mt-3 text-sm leading-relaxed text-zinc-300">
-								Tight loops: source → underwrite → execute → report → upgrade the model.
-								<span class="ml-1 text-zinc-400">(optimize for learning velocity, not vibes)</span>
+								Tight loops: source → underwrite → execute → report → upgrade.
+								<span class="ml-1 text-zinc-400">(optimize for learning velocity)</span>
 							</div>
 						</div>
 					</div>
@@ -229,7 +210,26 @@ const changelog = [
 						</a>
 					</div>
 
-					<div class="mt-5 overflow-x-auto">
+					<div class="mt-5 flex flex-wrap gap-2 text-xs text-zinc-300">
+						<span class="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/30 px-3 py-1">
+							<span class="text-zinc-500">Settlement</span>
+							<span class="font-medium text-zinc-100">WETH</span>
+						</span>
+						<span class="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/30 px-3 py-1">
+							<span class="text-zinc-500">Pricing</span>
+							<span class="font-medium text-zinc-100">Dexscreener (spot)</span>
+						</span>
+						<span class="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/30 px-3 py-1">
+							<span class="text-zinc-500">Cost basis</span>
+							<span class="font-medium text-zinc-100">Inferred (ETH/WETH flows)</span>
+						</span>
+						<span class="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/30 px-3 py-1">
+							<span class="text-zinc-500">Receipts</span>
+							<span class="font-medium text-zinc-100">BaseScan</span>
+						</span>
+					</div>
+
+					<div class="mt-4 overflow-x-auto">
 						<table class="min-w-full text-left text-sm">
 							<thead class="text-xs uppercase tracking-[0.18em] text-zinc-500">
 								<tr>
@@ -300,6 +300,18 @@ const changelog = [
 						<h2 class="text-xl font-semibold">Protocol</h2>
 						<div class="text-xs uppercase tracking-[0.22em] text-zinc-500">designed for compounding</div>
 					</div>
+
+					<div class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
+						<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">Tokenomics policy (current)</div>
+						<ul class="mt-3 space-y-2 text-sm leading-relaxed text-zinc-300">
+							<li><span class="text-zinc-500">01</span> · Set a <span class="text-zinc-100">liquidity floor</span> + <span class="text-zinc-100">operating float</span> first (don’t burn yourself illiquid).</li>
+							<li><span class="text-zinc-500">02</span> · Buy/burn is funded only by <span class="text-zinc-100">realized inflows</span> (fees + realized gains). No fake APY.</li>
+							<li><span class="text-zinc-500">03</span> · Make buy/burn <span class="text-zinc-100">dynamic</span>: larger when volume/inflows are high; smaller when quiet.</li>
+							<li><span class="text-zinc-500">04</span> · Every action ships with <span class="text-zinc-100">receipts</span>: tx hash + BaseScan link + dashboard counters.</li>
+						</ul>
+						<p class="mt-3 text-xs leading-relaxed text-zinc-500">This policy will evolve, but changes must be auditable.</p>
+					</div>
+
 					<div class="grid gap-4 sm:grid-cols-2">
 						<div class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
 							<div class="flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-zinc-400">
@@ -350,8 +362,8 @@ const changelog = [
 								</svg>
 								04 · Return
 							</div>
-							<div class="mt-3 text-base leading-relaxed text-zinc-200">Route gains into buy &amp; burn of $ANTIHUNTER.</div>
-							<div class="mt-2 text-sm leading-relaxed text-zinc-400">Capital efficiency, then token reduction. Repeat.</div>
+							<div class="mt-3 text-base leading-relaxed text-zinc-200">Route excess realized inflows into buy &amp; burn of $ANTIHUNTER.</div>
+							<div class="mt-2 text-sm leading-relaxed text-zinc-400">Guardrails first: liquidity floor + operating float. Then dynamic buy/burn with on-chain receipts. Repeat.</div>
 						</div>
 					</div>
 				</section>
