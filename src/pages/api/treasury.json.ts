@@ -161,13 +161,13 @@ export const GET: APIRoute = async ({ url }) => {
 						decimals: 18,
 						balance: String(ethQty),
 						balanceRaw: '',
-						entryTimestamp: undefined,
+						entryTimestamp: Math.floor(new Date(HARD_CODED_ENTRY_DATE).getTime() / 1000),
 						costEth: '0',
 						costEthWei: '0',
-						costUsd: undefined,
+						costUsd: 0,
 						priceUsd: ethPx ?? undefined,
 						fmvUsd: ethFmvUsd,
-						pnlUsd: undefined,
+						pnlUsd: ethFmvUsd,
 					});
 				}
 

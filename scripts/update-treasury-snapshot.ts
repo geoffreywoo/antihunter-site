@@ -204,11 +204,11 @@ async function main() {
 			symbol: 'ETH',
 			token: null,
 			balance: String(ethQty),
-			entryDate: null,
-			costBasisUsd: null,
-			costBasisEth: null,
+			entryDate: HARD_CODED_ENTRY_DATE,
+			costBasisUsd: 0,
+			costBasisEth: '0',
 			fmvUsd: ethFmvUsd,
-			pnlUsd: null,
+			pnlUsd: ethFmvUsd != null ? ethFmvUsd : null,
 		});
 	}
 
