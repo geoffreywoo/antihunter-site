@@ -299,11 +299,14 @@ const changelog = [
 						const pnlClass = p.pnlUsd == null ? 'text-zinc-400' : (p.pnlUsd >= 0 ? 'text-emerald-300' : 'text-rose-300');
 						const costCell = p.costUsd == null
 							? '—'
-							: `${fmtUsd(p.costUsd)}${p.costEth ? ` <span class="text-xs text-zinc-500">(${p.costEth} ETH)</span>` : ''}`;
+							: `${fmtUsd(p.costUsd)}${p.costEth ? ` <span class=\"text-xs text-zinc-500\">(${p.costEth} ETH)</span>` : ''}`;
 						const fmvCell = p.fmvUsd == null ? '—' : fmtUsd(p.fmvUsd);
+						const tokenCell = p.token
+							? `<a class=\"text-zinc-100 underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300\" href=\"https://dexscreener.com/base/${p.token}\" target=\"_blank\" rel=\"noreferrer\">$${p.symbol}</a>`
+							: `<span>$${p.symbol}</span>`;
 						return `
 							<tr>
-								<td class="py-3 pr-4 font-medium">$${p.symbol}</td>
+								<td class="py-3 pr-4 font-medium">${tokenCell}</td>
 								<td class="py-3 pr-4">${fmtQty(Number(p.balance))}</td>
 								<td class="py-3 pr-4 text-zinc-300">${entryDate(p.entryTimestamp)}</td>
 								<td class="py-3 pr-4">${costCell}</td>
@@ -349,7 +352,25 @@ const changelog = [
 								}))
 								: [];
 
-						rowsEl.innerHTML = pos.length ? pos.map(rowHTML).join('') : `<tr><td class="py-3 pr-4" colspan="6"><span class="text-zinc-400">No positions found.</span></td></tr>`;
+						if (!pos.length) {
+							rowsEl.innerHTML = `<tr><td class="py-3 pr-4" colspan="6"><span class="text-zinc-400">No positions found.</span></td></tr>`;
+						} else {
+							const totalFmv = pos.reduce((s, p) => s + (Number.isFinite(p.fmvUsd) ? p.fmvUsd : 0), 0);
+							const totalCost = pos.reduce((s, p) => s + (Number.isFinite(p.costUsd) ? p.costUsd : 0), 0);
+							const totalPnl = totalFmv - totalCost;
+							const totalsClass = totalPnl >= 0 ? 'text-emerald-300' : 'text-rose-300';
+							rowsEl.innerHTML = [
+								...pos.map(rowHTML),
+								`<tr class="border-t border-zinc-800/80">
+									<td class="py-3 pr-4 font-semibold text-zinc-100">Total</td>
+									<td class="py-3 pr-4"></td>
+									<td class="py-3 pr-4"></td>
+									<td class="py-3 pr-4 font-semibold">${fmtUsd(totalCost)}</td>
+									<td class="py-3 pr-4 font-semibold">${fmtUsd(totalFmv)}</td>
+									<td class="py-3 ${totalsClass} font-semibold">${fmtUsd(totalPnl)}</td>
+								</tr>`,
+							].join('');
+						}
 						footEl.textContent = Array.isArray(data?.notes) ? data.notes.join(' ') : '';
 					} catch (err) {
 						rowsEl.innerHTML = `<tr><td class="py-3 pr-4" colspan="6"><span class="text-rose-300">Failed to load treasury.</span> <span class="text-zinc-500">(${String(err)})</span></td></tr>`;
