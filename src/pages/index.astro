@@ -310,9 +310,17 @@ const changelog = [
 					}
 
 					try {
-						const res = await fetch('/api/treasury.json', { cache: 'no-store' });
-						if (!res.ok) throw new Error(`HTTP ${res.status}`);
-						const data = await res.json();
+						// Prefer the daily-generated static snapshot (fast, cached by CDN).
+						// Fall back to the live API when missing.
+						const res = await fetch('/treasury.snapshot.json', { cache: 'no-store' });
+						let data;
+						if (res.ok) {
+							data = await res.json();
+						} else {
+							const live = await fetch('/api/treasury.json', { cache: 'no-store' });
+							if (!live.ok) throw new Error(`HTTP ${live.status}`);
+							data = await live.json();
+						}
 
 						if (data?.wallet && walletLinkEl && walletCodeEl) {
 							walletCodeEl.textContent = shortAddr(data.wallet);
@@ -323,7 +331,21 @@ const changelog = [
 							metaEl.textContent = `· scanned to block ${data.lastScannedBlock}${updated ? ` · updated ${updated}` : ''}`;
 						}
 
-						const pos = Array.isArray(data?.positions) ? data.positions : [];
+						const pos = Array.isArray(data?.positions)
+							? data.positions
+							: Array.isArray(data?.rows)
+								? data.rows.map((r) => ({
+									...r,
+									// adapt snapshot format to the live API shape expected by rowHTML
+									balance: r.balance,
+									entryTimestamp: r.entryDate ? Math.floor(new Date(r.entryDate).getTime() / 1000) : undefined,
+									costUsd: r.costBasisUsd,
+									costEth: null,
+									fmvUsd: r.fmvUsd,
+									pnlUsd: r.pnlUsd,
+								}))
+								: [];
+
 						rowsEl.innerHTML = pos.length ? pos.map(rowHTML).join('') : `<tr><td class="py-3 pr-4" colspan="6"><span class="text-zinc-400">No positions found.</span></td></tr>`;
 						footEl.textContent = Array.isArray(data?.notes) ? data.notes.join(' ') : '';
 					} catch (err) {
