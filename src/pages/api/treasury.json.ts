@@ -93,6 +93,22 @@ export const GET: APIRoute = async ({ url }) => {
 					'0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07', // BIO
 				].map((a) => a.toLowerCase());
 
+				const HARD_CODED_ENTRY_DATE = '2026-02-06';
+				const ZERO_COST = new Set([
+					'0xe2f3fae4bc62e21826018364aa30ae45d430bb07', // ANTIHUNTER
+					'0x4200000000000000000000000000000000000006', // WETH
+				].map((a) => a.toLowerCase()));
+
+				// helper: add native ETH pseudo-position
+				async function ethBalance(): Promise<number> {
+					const hex = await rpcCall(rpcUrl, 'eth_getBalance', [wallet, 'latest']);
+					try {
+						return Number(BigInt(hex)) / 1e18;
+					} catch {
+						return 0;
+					}
+				}
+
 				const snapshot = await getTreasurySnapshot({
 					projectRoot,
 					wallet,
@@ -116,6 +132,7 @@ export const GET: APIRoute = async ({ url }) => {
 					const balance = formatUnits(balRaw, meta.decimals);
 					const balanceNum = Number(balance);
 					const fmvUsd = px != null && Number.isFinite(balanceNum) ? balanceNum * px : undefined;
+					const hardZero = ZERO_COST.has(token);
 					snapshot.positions.push({
 						token,
 						symbol: meta.symbol,
@@ -123,15 +140,37 @@ export const GET: APIRoute = async ({ url }) => {
 						decimals: meta.decimals,
 						balance,
 						balanceRaw: balRaw.toString(),
+						entryTimestamp: hardZero ? Math.floor(new Date(HARD_CODED_ENTRY_DATE).getTime() / 1000) : undefined,
+						costEth: hardZero ? '0' : '0',
+						costEthWei: hardZero ? '0' : '0',
+						costUsd: hardZero ? 0 : undefined,
+						priceUsd: px ?? undefined,
+						fmvUsd,
+						pnlUsd: hardZero && fmvUsd != null ? fmvUsd : undefined,
+					});
+				}
+				// Add native ETH pseudo-position (FMV derived from ETH price = WETH price)
+				const ethQty = await ethBalance();
+				const ethPx = await dexscreenerPriceUsd('0x4200000000000000000000000000000000000006');
+				const ethFmvUsd = ethPx != null ? ethQty * ethPx : undefined;
+				if ((ethFmvUsd ?? 0) >= 100) {
+					snapshot.positions.push({
+						token: null,
+						symbol: 'ETH',
+						name: 'Ethereum',
+						decimals: 18,
+						balance: String(ethQty),
+						balanceRaw: '',
 						entryTimestamp: undefined,
 						costEth: '0',
 						costEthWei: '0',
 						costUsd: undefined,
-						priceUsd: px ?? undefined,
-						fmvUsd,
+						priceUsd: ethPx ?? undefined,
+						fmvUsd: ethFmvUsd,
 						pnlUsd: undefined,
 					});
 				}
+
 				snapshot.positions.sort((a: any, b: any) => (b.fmvUsd ?? 0) - (a.fmvUsd ?? 0));
 
 				return new Response(JSON.stringify(snapshot, null, 2) + '\n', {

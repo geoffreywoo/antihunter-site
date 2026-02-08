@@ -36,6 +36,12 @@ const TOKEN_ALLOWLIST = [
 	'0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07', // BIO
 ].map((a) => a.toLowerCase());
 
+const HARD_CODED_ENTRY_DATE = '2026-02-06';
+const HARD_CODED_ZERO_COST_TOKENS = new Set([
+	'0xe2f3fae4bc62e21826018364aa30ae45d430bb07', // ANTIHUNTER
+	'0x4200000000000000000000000000000000000006', // WETH
+].map((a) => a.toLowerCase()));
+
 async function rpcCall(method: string, params: unknown[]) {
 	let lastErr: any = null;
 	for (const rpcUrl of BASE_RPCS) {
@@ -100,6 +106,15 @@ async function dexscreenerPriceUsd(token: string): Promise<number | null> {
 	}
 }
 
+async function ethBalance(owner: string): Promise<number> {
+	const hex = await rpcCall('eth_getBalance', [owner, 'latest']);
+	try {
+		return Number(BigInt(hex)) / 1e18;
+	} catch {
+		return 0;
+	}
+}
+
 function dayISO(ms: number) {
 	return new Date(ms).toISOString().slice(0, 10);
 }
@@ -158,17 +173,43 @@ async function main() {
 	}
 	(snapshot.positions ?? []).sort((a: any, b: any) => (b.fmvUsd ?? 0) - (a.fmvUsd ?? 0));
 
-	const rows = (snapshot.positions ?? [])
+	// Build rows (apply hard-coded rules for fee-derived assets)
+	let rows = (snapshot.positions ?? [])
 		.filter((p: any) => (p.fmvUsd ?? 0) >= 100)
-		.map((p: any) => ({
-			symbol: p.symbol,
-			token: p.token,
-			balance: p.balance,
-			entryDate: fmtDateFromSec(p.entryTimestamp),
-			costBasisUsd: p.costUsd ?? null,
-			fmvUsd: p.fmvUsd ?? null,
-			pnlUsd: p.pnlUsd ?? null,
-		}));
+		.map((p: any) => {
+			const token = (p.token ?? '').toLowerCase();
+			const hardZero = HARD_CODED_ZERO_COST_TOKENS.has(token);
+			const entryDate = hardZero ? HARD_CODED_ENTRY_DATE : fmtDateFromSec(p.entryTimestamp);
+			const costBasisUsd = hardZero ? 0 : (p.costUsd ?? null);
+			const pnlUsd = (p.fmvUsd ?? null) != null && costBasisUsd != null ? (p.fmvUsd - costBasisUsd) : (p.pnlUsd ?? null);
+			return {
+				symbol: p.symbol,
+				token: p.token,
+				balance: p.balance,
+				entryDate,
+				costBasisUsd,
+				fmvUsd: p.fmvUsd ?? null,
+				pnlUsd,
+			};
+		});
+
+	// Add native ETH as a row (FMV from current ETH/USD)
+	const ethQty = await ethBalance(TREASURY_WALLET);
+	const ethPx = await dexscreenerPriceUsd('0x4200000000000000000000000000000000000006'); // WETH
+	const ethFmvUsd = ethPx != null ? ethQty * ethPx : null;
+	if ((ethFmvUsd ?? 0) >= 100) {
+		rows.push({
+			symbol: 'ETH',
+			token: null,
+			balance: String(ethQty),
+			entryDate: null,
+			costBasisUsd: null,
+			fmvUsd: ethFmvUsd,
+			pnlUsd: null,
+		});
+	}
+
+	rows = rows.sort((a: any, b: any) => (b.fmvUsd ?? 0) - (a.fmvUsd ?? 0));
 
 	const totalUsd = rows.reduce((s: number, r: any) => s + (r.fmvUsd ?? 0), 0);
 
@@ -182,7 +223,7 @@ async function main() {
 		totalUsd,
 		notes: snapshot.notes,
 		method: {
-			entryAndCostBasis: 'derived-from-onchain-transfer-logs (token<->WETH pairing) with token allowlist; set TREASURY_START_BLOCK earlier for full history',
+			entryAndCostBasis: 'derived-from-onchain-transfer-logs (token<->WETH pairing) with token allowlist; fee-derived $ANTIHUNTER and $WETH are hard-coded as entry=2026-02-06 and cost basis $0.',
 		},
 	};
 

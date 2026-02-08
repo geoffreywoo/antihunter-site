@@ -1,6 +1,6 @@
 {
-  "updatedAtMs": 1770562366436,
-  "updatedAt": "2026-02-08T14:52:46.436Z",
+  "updatedAtMs": 1770562712699,
+  "updatedAt": "2026-02-08T14:58:32.699Z",
   "date": "2026-02-08",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "basescan": "https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
@@ -9,19 +9,19 @@
       "symbol": "AntiHunter",
       "token": "0xe2f3fae4bc62e21826018364aa30ae45d430bb07",
       "balance": "2609808912.191894920947708573",
-      "entryDate": null,
-      "costBasisUsd": null,
-      "fmvUsd": 71247.78330283874,
-      "pnlUsd": null
+      "entryDate": "2026-02-06",
+      "costBasisUsd": 0,
+      "fmvUsd": 75005.90813639505,
+      "pnlUsd": 75005.90813639505
     },
     {
       "symbol": "WETH",
       "token": "0x4200000000000000000000000000000000000006",
       "balance": "10.305148803557710219",
-      "entryDate": null,
-      "costBasisUsd": null,
-      "fmvUsd": 21863.506753116075,
-      "pnlUsd": null
+      "entryDate": "2026-02-06",
+      "costBasisUsd": 0,
+      "fmvUsd": 21863.403701628038,
+      "pnlUsd": 21863.403701628038
     },
     {
       "symbol": "BNKR",
@@ -29,17 +29,17 @@
       "balance": "10842315.643223245666320282",
       "entryDate": "2026-02-07",
       "costBasisUsd": 6288.9303,
-      "fmvUsd": 9711.462121635062,
-      "pnlUsd": 3422.5318216350624
+      "fmvUsd": 9767.842162979823,
+      "pnlUsd": 3478.911862979823
     },
     {
       "symbol": "FELIX",
       "token": "0xf30bf00edd0c22db54c9274b90d2a4c21fc09b07",
       "balance": "234565737.063334765213666609",
       "entryDate": "2026-02-07",
-      "costBasisUsd": 4243.22,
-      "fmvUsd": 4243.294183475726,
-      "pnlUsd": 0.07418347572547646
+      "costBasisUsd": 4192.6202,
+      "fmvUsd": 4224.528924510659,
+      "pnlUsd": 31.90872451065843
     },
     {
       "symbol": "bio",
@@ -47,11 +47,20 @@
       "balance": "491617660.801773755517648542",
       "entryDate": "2026-02-07",
       "costBasisUsd": 2103.37898239,
-      "fmvUsd": 2593.2831607293565,
-      "pnlUsd": 489.90417833935635
+      "fmvUsd": 2545.5962476315844,
+      "pnlUsd": 442.2172652415843
+    },
+    {
+      "symbol": "ETH",
+      "token": null,
+      "balance": "0.9973581413337396",
+      "entryDate": null,
+      "costBasisUsd": null,
+      "fmvUsd": 2115.995032653662,
+      "pnlUsd": null
     }
   ],
-  "totalUsd": 109659.32952179496,
+  "totalUsd": 115523.27420579882,
   "notes": [
     "Cost basis is inferred from on-chain ERC20 Transfer logs by pairing token in/out with WETH in/out within the same transaction.",
     "Native ETH swaps are partially inferred via tx.value only (internal ETH transfers are not captured).",
@@ -59,6 +68,6 @@
     "Cost basis USD is estimated using Chainlink ETH/USD at the entry block when available (falls back to current ETH/USD)."
   ],
   "method": {
-    "entryAndCostBasis": "derived-from-onchain-transfer-logs (token<->WETH pairing) with token allowlist; set TREASURY_START_BLOCK earlier for full history"
+    "entryAndCostBasis": "derived-from-onchain-transfer-logs (token<->WETH pairing) with token allowlist; fee-derived $ANTIHUNTER and $WETH are hard-coded as entry=2026-02-06 and cost basis $0."
   }
 }
