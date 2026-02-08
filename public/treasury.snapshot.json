@@ -1,6 +1,6 @@
 {
-  "updatedAtMs": 1770563272025,
-  "updatedAt": "2026-02-08T15:07:52.025Z",
+  "updatedAtMs": 1770563346201,
+  "updatedAt": "2026-02-08T15:09:06.201Z",
   "date": "2026-02-08",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "basescan": "https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
@@ -12,8 +12,8 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 74275.16164098133,
-      "pnlUsd": 74275.16164098133
+      "fmvUsd": 74457.84826483476,
+      "pnlUsd": 74457.84826483476
     },
     {
       "symbol": "WETH",
@@ -32,18 +32,18 @@
       "entryDate": "2026-02-07",
       "costBasisUsd": 6288.9303,
       "costBasisEth": "3",
-      "fmvUsd": 10238.398661895711,
-      "pnlUsd": 3949.4683618957115
+      "fmvUsd": 10265.50445100377,
+      "pnlUsd": 3976.5741510037697
     },
     {
       "symbol": "FELIX",
       "token": "0xf30bf00edd0c22db54c9274b90d2a4c21fc09b07",
       "balance": "234565737.063334765213666609",
       "entryDate": "2026-02-07",
-      "costBasisUsd": 4192.6202,
+      "costBasisUsd": 4246.78,
       "costBasisEth": "2",
       "fmvUsd": 4236.257211363826,
-      "pnlUsd": 43.63701136382588
+      "pnlUsd": -10.522788636173573
     },
     {
       "symbol": "bio",
@@ -59,14 +59,14 @@
       "symbol": "ETH",
       "token": null,
       "balance": "0.9973581413337396",
-      "entryDate": "2026-02-06",
+      "entryDate": "2026-02-07",
       "costBasisUsd": 2123.39,
       "costBasisEth": "1",
       "fmvUsd": 2117.780303726649,
       "pnlUsd": -5.609696273350892
     }
   ],
-  "totalUsd": 115295.5356012463,
+  "totalUsd": 115505.32801420779,
   "notes": [
     "Cost basis is inferred from on-chain ERC20 Transfer logs by pairing token in/out with WETH in/out within the same transaction.",
     "Native ETH swaps are partially inferred via tx.value only (internal ETH transfers are not captured).",
@@ -74,6 +74,6 @@
     "Cost basis USD is estimated using Chainlink ETH/USD at the entry block when available (falls back to current ETH/USD)."
   ],
   "method": {
-    "entryAndCostBasis": "derived-from-onchain-transfer-logs (token<->WETH pairing) with token allowlist; fee-derived $ANTIHUNTER and $WETH are hard-coded as entry=2026-02-06 and cost basis $0."
+    "entryAndCostBasis": "derived-from-onchain-transfer-logs (token<->WETH pairing) with token allowlist; fee-derived $ANTIHUNTER and $WETH are hard-coded as entry=2026-02-06 and cost basis $0; ETH is hard-coded as entry=2026-02-07 with cost basis 1 ETH."
   }
 }

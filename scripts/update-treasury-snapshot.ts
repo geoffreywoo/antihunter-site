@@ -36,7 +36,8 @@ const TOKEN_ALLOWLIST = [
 	'0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07', // BIO
 ].map((a) => a.toLowerCase());
 
-const HARD_CODED_ENTRY_DATE = '2026-02-06';
+const FEE_ENTRY_DATE = '2026-02-06';
+const ETH_ENTRY_DATE = '2026-02-07';
 const HARD_CODED_ZERO_COST_TOKENS = new Set([
 	'0xe2f3fae4bc62e21826018364aa30ae45d430bb07', // ANTIHUNTER
 	'0x4200000000000000000000000000000000000006', // WETH
@@ -179,7 +180,7 @@ async function main() {
 		.map((p: any) => {
 			const token = (p.token ?? '').toLowerCase();
 			const hardZero = HARD_CODED_ZERO_COST_TOKENS.has(token);
-			const entryDate = hardZero ? HARD_CODED_ENTRY_DATE : fmtDateFromSec(p.entryTimestamp);
+			const entryDate = hardZero ? FEE_ENTRY_DATE : fmtDateFromSec(p.entryTimestamp);
 			const costBasisUsd = hardZero ? 0 : (p.costUsd ?? null);
 			const costBasisEth = hardZero ? '0' : (p.costEth ?? null);
 			const pnlUsd = (p.fmvUsd ?? null) != null && costBasisUsd != null ? (p.fmvUsd - costBasisUsd) : (p.pnlUsd ?? null);
@@ -205,7 +206,7 @@ async function main() {
 			symbol: 'ETH',
 			token: null,
 			balance: String(ethQty),
-			entryDate: HARD_CODED_ENTRY_DATE,
+			entryDate: ETH_ENTRY_DATE,
 			costBasisUsd: ethCostUsd,
 			costBasisEth: '1',
 			fmvUsd: ethFmvUsd,
@@ -227,7 +228,7 @@ async function main() {
 		totalUsd,
 		notes: snapshot.notes,
 		method: {
-			entryAndCostBasis: 'derived-from-onchain-transfer-logs (token<->WETH pairing) with token allowlist; fee-derived $ANTIHUNTER and $WETH are hard-coded as entry=2026-02-06 and cost basis $0.',
+			entryAndCostBasis: 'derived-from-onchain-transfer-logs (token<->WETH pairing) with token allowlist; fee-derived $ANTIHUNTER and $WETH are hard-coded as entry=2026-02-06 and cost basis $0; ETH is hard-coded as entry=2026-02-07 with cost basis 1 ETH.',
 		},
 	};
 

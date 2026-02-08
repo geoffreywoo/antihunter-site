@@ -93,7 +93,8 @@ export const GET: APIRoute = async ({ url }) => {
 					'0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07', // BIO
 				].map((a) => a.toLowerCase());
 
-				const HARD_CODED_ENTRY_DATE = '2026-02-06';
+				const FEE_ENTRY_DATE = '2026-02-06';
+				const ETH_ENTRY_DATE = '2026-02-07';
 				const ZERO_COST = new Set([
 					'0xe2f3fae4bc62e21826018364aa30ae45d430bb07', // ANTIHUNTER
 					'0x4200000000000000000000000000000000000006', // WETH
@@ -140,7 +141,7 @@ export const GET: APIRoute = async ({ url }) => {
 						decimals: meta.decimals,
 						balance,
 						balanceRaw: balRaw.toString(),
-						entryTimestamp: hardZero ? Math.floor(new Date(HARD_CODED_ENTRY_DATE).getTime() / 1000) : undefined,
+						entryTimestamp: hardZero ? Math.floor(new Date(FEE_ENTRY_DATE).getTime() / 1000) : undefined,
 						costEth: hardZero ? '0' : '0',
 						costEthWei: hardZero ? '0' : '0',
 						costUsd: hardZero ? 0 : undefined,
@@ -162,7 +163,7 @@ export const GET: APIRoute = async ({ url }) => {
 						decimals: 18,
 						balance: String(ethQty),
 						balanceRaw: '',
-						entryTimestamp: Math.floor(new Date(HARD_CODED_ENTRY_DATE).getTime() / 1000),
+						entryTimestamp: Math.floor(new Date(ETH_ENTRY_DATE).getTime() / 1000),
 						costEth: '1',
 						costEthWei: '1000000000000000000',
 						costUsd: ethCostUsd,
