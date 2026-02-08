@@ -81,10 +81,16 @@ async function erc20Meta(token: string) {
 		rpcCall('eth_call', [{ to: token, data: encodeSymbolCall() }, 'latest']).catch(() => null),
 		rpcCall('eth_call', [{ to: token, data: encodeNameCall() }, 'latest']).catch(() => null),
 	]);
-	const decimals = Number(readUint256(decHex, 0));
+	let decimals = 18;
+	try {
+		decimals = Number(readUint256(decHex, 0));
+		if (!Number.isFinite(decimals) || decimals <= 0 || decimals > 255) decimals = 18;
+	} catch {
+		decimals = 18;
+	}
 	const symbol = symHex ? decodeAbiString(symHex) : '';
 	const name = nameHex ? decodeAbiString(nameHex) : '';
-	return { decimals: Number.isFinite(decimals) ? decimals : 18, symbol: symbol || 'TOKEN', name: name || undefined };
+	return { decimals, symbol: symbol || 'TOKEN', name: name || undefined };
 }
 
 async function erc20Balance(token: string, owner: string): Promise<bigint> {
