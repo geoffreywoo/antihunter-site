@@ -297,7 +297,9 @@ const changelog = [
 					function rowHTML(p) {
 						const pnlTxt = p.pnlUsd == null ? '—' : fmtUsd(p.pnlUsd);
 						const pnlClass = p.pnlUsd == null ? 'text-zinc-400' : (p.pnlUsd >= 0 ? 'text-emerald-300' : 'text-rose-300');
-						const costCell = p.costUsd == null ? '—' : `${fmtUsd(p.costUsd)} <span class="text-xs text-zinc-500">(${p.costEth} ETH)</span>`;
+						const costCell = p.costUsd == null
+							? '—'
+							: `${fmtUsd(p.costUsd)}${p.costEth ? ` <span class="text-xs text-zinc-500">(${p.costEth} ETH)</span>` : ''}`;
 						const fmvCell = p.fmvUsd == null ? '—' : fmtUsd(p.fmvUsd);
 						return `
 							<tr>
@@ -341,7 +343,7 @@ const changelog = [
 									balance: r.balance,
 									entryTimestamp: r.entryDate ? Math.floor(new Date(r.entryDate).getTime() / 1000) : undefined,
 									costUsd: r.costBasisUsd,
-									costEth: null,
+									costEth: r.costBasisEth,
 									fmvUsd: r.fmvUsd,
 									pnlUsd: r.pnlUsd,
 								}))

@@ -181,6 +181,7 @@ async function main() {
 			const hardZero = HARD_CODED_ZERO_COST_TOKENS.has(token);
 			const entryDate = hardZero ? HARD_CODED_ENTRY_DATE : fmtDateFromSec(p.entryTimestamp);
 			const costBasisUsd = hardZero ? 0 : (p.costUsd ?? null);
+			const costBasisEth = hardZero ? '0' : (p.costEth ?? null);
 			const pnlUsd = (p.fmvUsd ?? null) != null && costBasisUsd != null ? (p.fmvUsd - costBasisUsd) : (p.pnlUsd ?? null);
 			return {
 				symbol: p.symbol,
@@ -188,6 +189,7 @@ async function main() {
 				balance: p.balance,
 				entryDate,
 				costBasisUsd,
+				costBasisEth,
 				fmvUsd: p.fmvUsd ?? null,
 				pnlUsd,
 			};
@@ -204,6 +206,7 @@ async function main() {
 			balance: String(ethQty),
 			entryDate: null,
 			costBasisUsd: null,
+			costBasisEth: null,
 			fmvUsd: ethFmvUsd,
 			pnlUsd: null,
 		});
