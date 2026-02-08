@@ -55,6 +55,10 @@ async function rpcCall(method: string, params: unknown[]) {
 			const j = (await res.json()) as any;
 			if (!res.ok) throw new Error(`rpc http ${res.status}: ${JSON.stringify(j)}`);
 			if (j?.error) throw new Error(JSON.stringify(j));
+			// Some public RPCs return `0x` for eth_call under load; treat as failure so we can fail over.
+			if (method === 'eth_call' && (j.result == null || j.result === '0x' || j.result === '0x0')) {
+				throw new Error(`rpc eth_call returned empty result`);
+			}
 			return j.result as string;
 		} catch (e: any) {
 			lastErr = e;
@@ -108,6 +112,55 @@ async function dexscreenerPriceUsd(token: string): Promise<number | null> {
 		const pairs = await fetchDexPairsForToken(token);
 		const best = pickBestBasePair(pairs);
 		return parseUsdPrice(best);
+	} catch {
+		return null;
+	}
+}
+
+// Chainlink ETH/USD feed on Base (fallback when Dexscreener is flaky)
+const CHAINLINK_ETH_USD_FEED = '0x71041dddad3595f9ced3dccfbe3d1f4b0a16bb70';
+const CHAINLINK_DECIMALS = '0x313ce567';
+const CHAINLINK_LATEST_ROUND_DATA = '0xfeaf968c';
+
+async function basescanTokenBalance(token: string, wallet: string, symbol: string): Promise<number | null> {
+	try {
+		const url = `https://basescan.org/token/${token}?a=${wallet}`;
+		const res = await fetch(url, {
+			headers: {
+				'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+				'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36',
+			},
+		});
+		if (!res.ok) return null;
+		const html = await res.text();
+		// Heuristic: prefer the token-holder filtered section to avoid matching unrelated "Balance" occurrences.
+		const re = new RegExp(`Filtered by Token Holder[\\s\\S]*?Balance[\\s\\S]*?([0-9,]+(?:\\.[0-9]+)?)\\s*${symbol}`, 'i');
+		const m = html.match(re);
+		if (!m) return null;
+		const n = Number(String(m[1]).replace(/,/g, ''));
+		return Number.isFinite(n) ? n : null;
+	} catch {
+		return null;
+	}
+}
+
+async function chainlinkEthUsdLatest(): Promise<number | null> {
+	try {
+		const [decHex, roundHex] = await Promise.all([
+			rpcCall('eth_call', [{ to: CHAINLINK_ETH_USD_FEED, data: CHAINLINK_DECIMALS }, 'latest']),
+			rpcCall('eth_call', [{ to: CHAINLINK_ETH_USD_FEED, data: CHAINLINK_LATEST_ROUND_DATA }, 'latest']),
+		]);
+		let decimals = 8;
+		try {
+			decimals = Number(readUint256(decHex, 0));
+			if (!Number.isFinite(decimals) || decimals <= 0 || decimals > 255) decimals = 8;
+		} catch {
+			decimals = 8;
+		}
+		// latestRoundData: roundId, answer, startedAt, updatedAt, answeredInRound
+		const answer = readUint256(roundHex, 32);
+		const px = Number(answer) / 10 ** decimals;
+		return Number.isFinite(px) ? px : null;
 	} catch {
 		return null;
 	}
@@ -202,9 +255,39 @@ async function main() {
 			};
 		});
 
+	// Ensure WETH is always computed from a reliable ETH/USD source
+	const WETH = '0x4200000000000000000000000000000000000006';
+	let wethBalRaw = await erc20Balance(WETH, TREASURY_WALLET);
+	const wethMeta = await erc20Meta(WETH);
+	let wethBal = wethBalRaw > 0n ? formatUnits(wethBalRaw, wethMeta.decimals) : '0';
+	// Some public RPCs incorrectly return 0 for balanceOf under load; BaseScan is the fallback source of truth.
+	if (wethBalRaw === 0n) {
+		const bs = await basescanTokenBalance(WETH, TREASURY_WALLET, 'WETH');
+		if (bs != null && bs > 0) {
+			wethBal = String(bs);
+			wethBalRaw = BigInt(Math.floor(bs * 1e6)) * 10n ** 12n; // approximate to 18 decimals
+		}
+	}
+	const wethBalNum = Number(wethBal);
+	let ethPx = await dexscreenerPriceUsd(WETH);
+	if (ethPx == null) ethPx = await chainlinkEthUsdLatest();
+
+	if (wethBalRaw > 0n) {
+		const wethFmvUsd = ethPx != null && Number.isFinite(wethBalNum) ? wethBalNum * ethPx : null;
+		rows.push({
+			symbol: 'WETH',
+			token: WETH,
+			balance: wethBal,
+			entryDate: FEE_ENTRY_DATE,
+			costBasisUsd: 0,
+			costBasisEth: '0',
+			fmvUsd: wethFmvUsd,
+			pnlUsd: wethFmvUsd,
+		});
+	}
+
 	// Add native ETH as a row (FMV from current ETH/USD)
 	const ethQty = await ethBalance(TREASURY_WALLET);
-	const ethPx = await dexscreenerPriceUsd('0x4200000000000000000000000000000000000006'); // WETH
 	const ethFmvUsd = ethPx != null ? ethQty * ethPx : null;
 	if ((ethFmvUsd ?? 0) >= 100) {
 		const ethCostUsd = ethPx != null ? ethPx * 1 : null;
