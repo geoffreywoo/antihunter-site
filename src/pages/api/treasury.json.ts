@@ -66,7 +66,8 @@ export const GET: APIRoute = async ({ url }) => {
 		const wallet = (process.env.TREASURY_WALLET ?? '0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3').toLowerCase();
 
 		// Optional knobs
-		let startBlock = Number(process.env.TREASURY_START_BLOCK ?? '0');
+		// Default startBlock chosen to cover earliest known BNKR/BIO receipts; override via env.
+		let startBlock = Number(process.env.TREASURY_START_BLOCK ?? '41805000');
 		if (!Number.isFinite(startBlock) || startBlock < 0) throw new Error('TREASURY_START_BLOCK must be a non-negative integer');
 		const cacheTtlMs = Number(process.env.TREASURY_CACHE_TTL_MS ?? '60000');
 		const refresh = url.searchParams.get('refresh');
@@ -77,12 +78,7 @@ export const GET: APIRoute = async ({ url }) => {
 		let lastErr: any = null;
 		for (const rpcUrl of BASE_RPCS) {
 			try {
-				let effectiveStartBlock = startBlock;
-				if (effectiveStartBlock === 0) {
-					const latestHex = await rpcCall(rpcUrl, 'eth_blockNumber', []);
-					const latest = latestHex ? Number(BigInt(latestHex)) : 0;
-					effectiveStartBlock = Math.max(0, latest - 20_000); // recent window to keep first-load fast (can extend via TREASURY_START_BLOCK)
-				}
+				const effectiveStartBlock = startBlock;
 
 				const tokenAllowlist = [
 					// canonical tokens we care about today (Base)

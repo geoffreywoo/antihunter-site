@@ -1,6 +1,6 @@
 {
-  "updatedAtMs": 1770604480511,
-  "updatedAt": "2026-02-09T02:34:40.511Z",
+  "updatedAtMs": 1770605223178,
+  "updatedAt": "2026-02-09T02:47:03.178Z",
   "date": "2026-02-09",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "basescan": "https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
@@ -12,37 +12,45 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 126119.99999999894,
-      "pnlUsd": 126119.99999999894,
+      "fmvUsd": 126383.99999999895,
+      "pnlUsd": 126383.99999999895,
       "lots": null
     },
     {
       "symbol": "WETH",
       "token": "0x4200000000000000000000000000000000000006",
-      "balance": "18.077081312239105",
+      "balance": "18.07708131223910597",
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 37430.40456512229,
-      "pnlUsd": 37430.40456512229
+      "fmvUsd": 37747.476571338964,
+      "pnlUsd": 37747.476571338964
     },
     {
       "symbol": "BNKR",
       "token": "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b",
       "balance": "18550955.881367005521883258",
-      "entryDate": "2026-02-07",
-      "costBasisUsd": 6288.9303,
+      "entryDate": "2026-02-06",
+      "costBasisUsd": 6160.70454312,
       "costBasisEth": "3",
-      "fmvUsd": 16684.729719701485,
-      "pnlUsd": 10395.799419701485,
+      "fmvUsd": 16823.861888811738,
+      "pnlUsd": 10663.157345691738,
       "lots": [
+        {
+          "txHash": "0x6e27de06d278883617e89b17eecb8dddf113c5e6a68406d4520f84e5adafa843",
+          "blockNumber": 41809617,
+          "entryDate": "2026-02-06",
+          "qty": "73792.245739337662659411",
+          "costBasisEth": "0",
+          "costBasisUsd": 0
+        },
         {
           "txHash": "0x870c62a9cc2e852b5b342d86a3b0f08455ab256849c65aef7201c00f60b27170",
           "blockNumber": 41856586,
           "entryDate": "2026-02-07",
           "qty": "7362579.735653162987260778",
           "costBasisEth": "2",
-          "costBasisUsd": 4192.6202
+          "costBasisUsd": 4176.28
         },
         {
           "txHash": "0x6fceacabccffe3e2a364f56bd993c3b9ffa3466bb902b401925395357935dbf2",
@@ -50,13 +58,21 @@
           "entryDate": "2026-02-07",
           "qty": "3479735.907570082679059504",
           "costBasisEth": "1",
-          "costBasisUsd": 2096.3101
+          "costBasisUsd": 2088.14
         },
         {
-          "txHash": "unattributed",
-          "blockNumber": 0,
-          "entryDate": null,
-          "qty": "7708640.238143759855562976",
+          "txHash": "0x395f91395e6ebfc34fccbfc90f5afdcaa09ce06d9cfca8a590f408c2bbad19a7",
+          "blockNumber": 41905369,
+          "entryDate": "2026-02-09",
+          "qty": "4039746.515573589567802523",
+          "costBasisEth": "0",
+          "costBasisUsd": 0
+        },
+        {
+          "txHash": "0x288fe16eaca9351d5e9e1a6bf44cbba212a7edcd9572af72d048503cdf63afda",
+          "blockNumber": 41905421,
+          "entryDate": "2026-02-09",
+          "qty": "3631572.537044553035101042",
           "costBasisEth": "0",
           "costBasisUsd": 0
         }
@@ -67,10 +83,10 @@
       "token": "0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07",
       "balance": "721643923.967929189632132706",
       "entryDate": "2026-02-07",
-      "costBasisUsd": 2103.37898239,
+      "costBasisUsd": 2088.14,
       "costBasisEth": "1",
-      "fmvUsd": 6232.838571311006,
-      "pnlUsd": 4129.459588921005,
+      "fmvUsd": 6335.312008514451,
+      "pnlUsd": 4247.172008514452,
       "lots": [
         {
           "txHash": "0x5f5569cc2124d314a30846db0bf93a1d6f42e4d0bb9c284afaeb9f4898ab8445",
@@ -81,9 +97,9 @@
           "costBasisUsd": 2103.37898239
         },
         {
-          "txHash": "unattributed",
-          "blockNumber": 0,
-          "entryDate": null,
+          "txHash": "0x6c277fcbf065377dd5ce341506cf69bb834efbb3553c7149042a360fd1342ca0",
+          "blockNumber": 41905779,
+          "entryDate": "2026-02-09",
           "qty": "230026263.166155434114484164",
           "costBasisEth": "0",
           "costBasisUsd": 0
@@ -95,10 +111,10 @@
       "token": "0xf30bf00edd0c22db54c9274b90d2a4c21fc09b07",
       "balance": "234565737.063334765213666609",
       "entryDate": "2026-02-07",
-      "costBasisUsd": 4192.6202,
+      "costBasisUsd": 4176.28,
       "costBasisEth": "2",
-      "fmvUsd": 3333.179123669987,
-      "pnlUsd": -859.4410763300134,
+      "fmvUsd": 3652.188526076122,
+      "pnlUsd": -524.0914739238779,
       "lots": [
         {
           "txHash": "0x3183990234fa8a320bb8c2d3047d90f4c00fc4f886833dc859502fd476dc23e0",
@@ -106,7 +122,7 @@
           "entryDate": "2026-02-07",
           "qty": "118381417.584962961690798475",
           "costBasisEth": "1",
-          "costBasisUsd": 2096.3101
+          "costBasisUsd": 2088.14
         },
         {
           "txHash": "0xf2092a1273d0d6051e039d5c07840bfc530ef86d499c93cba41e6c4fead92d9f",
@@ -123,13 +139,13 @@
       "token": null,
       "balance": "0.9973581413337396",
       "entryDate": "2026-02-07",
-      "costBasisUsd": 2070.6,
+      "costBasisUsd": 2088.14,
       "costBasisEth": "1",
-      "fmvUsd": 2065.129767445641,
-      "pnlUsd": -5.470232554358972
+      "fmvUsd": 2082.6234292446347,
+      "pnlUsd": -5.516570755365137
     }
   ],
-  "totalUsd": 191866.28174724933,
+  "totalUsd": 193025.46242398486,
   "notes": [
     "Cost basis is inferred from on-chain ERC20 Transfer logs by pairing token in/out with WETH in/out within the same transaction.",
     "Native ETH swaps are partially inferred via tx.value only (internal ETH transfers are not captured).",

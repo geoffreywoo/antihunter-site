@@ -25,7 +25,9 @@ function looksRateLimited(msg: string) {
 	const m = msg.toLowerCase();
 	return m.includes('429') || m.includes('rate limit') || m.includes('over rate limit');
 }
-const TREASURY_START_BLOCK = Number(process.env.TREASURY_START_BLOCK ?? '0');
+// Start block for log-based lot attribution / cost basis.
+// Default is set to cover the earliest known BNKR/BIO receipts into the treasury wallet.
+const TREASURY_START_BLOCK = Number(process.env.TREASURY_START_BLOCK ?? '41805000');
 
 // Canonical allowlist (Base)
 const TOKEN_ALLOWLIST = [
@@ -188,12 +190,7 @@ async function main() {
 	let startBlock = TREASURY_START_BLOCK;
 	if (!Number.isFinite(startBlock) || startBlock < 0) throw new Error('TREASURY_START_BLOCK must be a non-negative integer');
 
-	// If unset, scan a recent window (fast). For full cost basis, set TREASURY_START_BLOCK explicitly.
-	if (startBlock === 0) {
-		const latestHex = await rpcCall('eth_blockNumber', []);
-		const latest = latestHex ? Number(BigInt(latestHex)) : 0;
-		startBlock = Math.max(0, latest - 200_000);
-	}
+	// startBlock defaults to a fixed value; override via TREASURY_START_BLOCK as needed.
 
 	const projectRoot = process.cwd();
 	const rpcUrl = BASE_RPCS[0] ?? 'https://mainnet.base.org';
@@ -235,6 +232,7 @@ async function main() {
 
 	// Build rows (apply hard-coded rules for fee-derived assets)
 	let rows = (snapshot.positions ?? [])
+		.filter((p: any) => (p.token ?? '').toLowerCase() !== '0x4200000000000000000000000000000000000006') // avoid duplicate WETH row
 		.filter((p: any) => (p.fmvUsd ?? 0) >= 100)
 		.map((p: any) => {
 			const token = (p.token ?? '').toLowerCase();

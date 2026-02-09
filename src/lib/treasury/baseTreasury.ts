@@ -349,6 +349,23 @@ async function processTransferLogs(state: TreasuryCacheState, logs: RpcLog[]) {
 			}
 		}
 
+		// Zero-cost acquisitions (transfers/airdrops) where we receive tokens but there is no WETH/ETH spent.
+		// These should still be represented as lots so balances can be fully attributed to dates.
+		if (hasBuy && ethSpentWei === 0n && txValueWei === 0n) {
+			const received = tokenDeltas.filter((t) => t.delta > 0n);
+			for (const r of received) {
+				const st = state.positions[r.token]!;
+				const prevQty = BigInt(st.qtyRaw);
+				st.qtyRaw = (prevQty + r.delta).toString();
+				st.lots ??= [];
+				st.lots.push({ txHash, blockNumber: blockNum, timestamp: ts, qtyRaw: r.delta.toString(), costEthWei: '0' } satisfies LotState);
+				if (!st.entryTimestamp && ts) {
+					st.entryTimestamp = ts;
+					st.entryBlock = blockNum;
+				}
+			}
+		}
+
 		if (ethReceivedWei > 0n && hasSell) {
 			// Allocate proceeds across tokens sold by proportional normalized sold amount, but we only need to reduce cost basis.
 			for (const s of tokenDeltas.filter((t) => t.delta < 0n)) {
@@ -481,9 +498,9 @@ export async function getTreasurySnapshot({
 	const now = Date.now();
 	let state = await loadCache(cachePath);
 
-	if (!state || state.version !== 2 || state.chainId !== chainId || state.wallet.toLowerCase() !== wallet.toLowerCase() || state.rpcUrl !== rpcUrl) {
+	if (!state || state.version !== 3 || state.chainId !== chainId || state.wallet.toLowerCase() !== wallet.toLowerCase() || state.rpcUrl !== rpcUrl) {
 		state = {
-			version: 2,
+			version: 3,
 			chainId,
 			wallet: wallet.toLowerCase(),
 			rpcUrl,
@@ -567,11 +584,17 @@ async function buildResponseFromState(state: TreasuryCacheState): Promise<Treasu
 
 		// Build lots (tranches). Note: lots are derived from scanned logs (cost-basis attribution).
 		// If live balance exceeds scanned lots (e.g. scan window missed early transfers), we add an unattributed tranche.
-		const lots: TokenPosition['lots'] = (st.lots ?? []).map((lot) => {
+		const lots: TokenPosition['lots'] = [];
+		for (const lot of st.lots ?? []) {
 			const lotQty = BigInt(lot.qtyRaw);
 			const lotCostWei = BigInt(lot.costEthWei);
 			const lotCostEth = formatUnits(lotCostWei, 18);
-			return {
+			let lotEthUsd = ethPriceUsd;
+			if (lot.blockNumber) {
+				const atLot = await getEthUsdFromChainlinkAtBlock(state.rpcUrl, lot.blockNumber);
+				if (atLot !== undefined) lotEthUsd = atLot;
+			}
+			lots.push({
 				txHash: lot.txHash,
 				blockNumber: lot.blockNumber,
 				timestamp: lot.timestamp,
@@ -579,9 +602,9 @@ async function buildResponseFromState(state: TreasuryCacheState): Promise<Treasu
 				qtyRaw: lot.qtyRaw,
 				costEth: lotCostEth,
 				costEthWei: lot.costEthWei,
-				costUsd: costEthUsd !== undefined ? toNumberSafe(lotCostEth) * costEthUsd : undefined,
-			};
-		});
+				costUsd: lotEthUsd !== undefined ? toNumberSafe(lotCostEth) * lotEthUsd : undefined,
+			});
+		}
 		const lotsQty = (st.lots ?? []).reduce((s, l) => s + BigInt(l.qtyRaw), 0n);
 		const liveQty = qty;
 		if (liveQty > lotsQty) {
