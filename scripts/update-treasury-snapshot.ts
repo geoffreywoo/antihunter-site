@@ -186,6 +186,117 @@ function fmtDateFromSec(ts?: number) {
 	return new Date(ts * 1000).toISOString().slice(0, 10);
 }
 
+type ArkhamAllTxArtifact = {
+	updatedAt?: string;
+	updatedAtMs?: number;
+	source?: string;
+	address?: string;
+	view?: string;
+	notes?: string;
+	txs?: Array<{
+		timestamp?: string; // as displayed by Arkham (human / ISO)
+		timestampMs?: number;
+		from?: string;
+		to?: string;
+		token?: string;
+		amount?: string | number;
+		usd?: string | number;
+		txHash?: string;
+	}>;
+};
+
+function parseLooseUsd(x: unknown): number | null {
+	if (x == null) return null;
+	if (typeof x === 'number') return Number.isFinite(x) ? x : null;
+	const s = String(x).trim();
+	if (!s) return null;
+	// Accept "$1,234.56" or "-123.4".
+	const n = Number(s.replace(/[^0-9.+-]/g, ''));
+	return Number.isFinite(n) ? n : null;
+}
+
+function looksLikeTxHash(x: unknown): x is string {
+	if (typeof x !== 'string') return false;
+	return /^0x[0-9a-fA-F]{64}$/.test(x);
+}
+
+async function readArkhamAllTxArtifact(projectRoot: string): Promise<ArkhamAllTxArtifact | null> {
+	const p = path.join(projectRoot, 'public', 'treasury.arkham.alltx.json');
+	try {
+		const raw = await fs.readFile(p, 'utf8');
+		return JSON.parse(raw) as ArkhamAllTxArtifact;
+	} catch {
+		return null;
+	}
+}
+
+async function applyArkhamLotCostBasisOverrides(projectRoot: string, wallet: string, rows: any[]) {
+	const artifact = await readArkhamAllTxArtifact(projectRoot);
+	const txs = artifact?.txs ?? [];
+	if (!Array.isArray(txs) || txs.length === 0) return;
+
+	const walletLc = wallet.toLowerCase();
+	// Map txHash -> total USD outflow from the treasury wallet (Arkham row-level USD).
+	const outUsdByHash = new Map<string, number>();
+	for (const tx of txs) {
+		const txHash = tx?.txHash;
+		if (!looksLikeTxHash(txHash)) continue;
+		const from = String(tx?.from ?? '').toLowerCase();
+		if (from !== walletLc) continue;
+		const token = String(tx?.token ?? '');
+		// Only use outflows in the funding tokens we care about for cost-basis attribution.
+		if (!/(^|\b)(weth|antihunter)(\b|$)/i.test(token)) continue;
+		const usd = parseLooseUsd(tx?.usd);
+		if (usd == null || !Number.isFinite(usd) || usd === 0) continue;
+		const prev = outUsdByHash.get(txHash) ?? 0;
+		outUsdByHash.set(txHash, prev + Math.abs(usd));
+	}
+	if (outUsdByHash.size === 0) return;
+
+	// Build index: txHash -> the lots (across all tokens) that claim that txHash.
+	const usage = new Map<string, Array<{ rowIdx: number; lotIdx: number; qty: number }>>();
+	for (let rowIdx = 0; rowIdx < rows.length; rowIdx++) {
+		const row = rows[rowIdx];
+		const lots = row?.lots;
+		if (!Array.isArray(lots) || lots.length === 0) continue;
+		for (let lotIdx = 0; lotIdx < lots.length; lotIdx++) {
+			const lot = lots[lotIdx];
+			const txHash = lot?.txHash;
+			if (!looksLikeTxHash(txHash)) continue;
+			const qty = Number(lot?.qty);
+			if (!Number.isFinite(qty) || qty <= 0) continue;
+			const arr = usage.get(txHash) ?? [];
+			arr.push({ rowIdx, lotIdx, qty });
+			usage.set(txHash, arr);
+		}
+	}
+
+	for (const [txHash, outUsd] of outUsdByHash.entries()) {
+		const u = usage.get(txHash);
+		if (!u || u.length === 0) continue;
+		// Avoid double-counting ambiguous txs that mint multiple tokens in our lots view.
+		const distinctRows = new Set(u.map((x) => x.rowIdx));
+		if (distinctRows.size !== 1) continue;
+		const sumQty = u.reduce((s, x) => s + x.qty, 0);
+		if (!Number.isFinite(sumQty) || sumQty <= 0) continue;
+		for (const { rowIdx, lotIdx, qty } of u) {
+			const row = rows[rowIdx];
+			const lot = row?.lots?.[lotIdx];
+			if (!lot) continue;
+			lot.costBasisUsd = (outUsd * (qty / sumQty));
+		}
+		// If the row doesn't have a total cost basis, fill it from the lots.
+		const rowIdx = u[0].rowIdx;
+		const row = rows[rowIdx];
+		if (row && (row.costBasisUsd == null || row.costBasisUsd === 0) && Array.isArray(row.lots)) {
+			const all = row.lots.map((l: any) => (typeof l.costBasisUsd === 'number' ? l.costBasisUsd : null));
+			if (all.every((x: any) => typeof x === 'number' && Number.isFinite(x))) {
+				row.costBasisUsd = all.reduce((s: number, n: number) => s + n, 0);
+			}
+		}
+	}
+}
+
 async function main() {
 	let startBlock = TREASURY_START_BLOCK;
 	if (!Number.isFinite(startBlock) || startBlock < 0) throw new Error('TREASURY_START_BLOCK must be a non-negative integer');
@@ -264,6 +375,9 @@ async function main() {
 			};
 		});
 
+	// Optional: override lot-level cost basis using Arkham's per-transaction USD outflows.
+	await applyArkhamLotCostBasisOverrides(projectRoot, TREASURY_WALLET, rows);
+
 	// Ensure WETH is always computed from a reliable ETH/USD source
 	const WETH = '0x4200000000000000000000000000000000000006';
 	let wethBalRaw = await erc20Balance(WETH, TREASURY_WALLET);
@@ -326,7 +440,8 @@ async function main() {
 		totalUsd,
 		notes: snapshot.notes,
 		method: {
-			entryAndCostBasis: 'derived-from-onchain-transfer-logs (token<->WETH pairing) with token allowlist; fee-derived $ANTIHUNTER and $WETH are hard-coded as entry=2026-02-06 and cost basis $0; ETH is hard-coded as entry=2026-02-07 with cost basis 1 ETH.',
+			entryAndCostBasis:
+				'derived-from-onchain-transfer-logs (token<->WETH pairing) with token allowlist; fee-derived $ANTIHUNTER and $WETH are hard-coded as entry=2026-02-06 and cost basis $0; ETH is hard-coded as entry=2026-02-07 with cost basis 1 ETH. Optional override: if public/treasury.arkham.alltx.json exists, lot-level costBasisUsd may be replaced using Arkham per-tx USD outflows (WETH/ANTIHUNTER) when the txHash maps unambiguously to a single token row.',
 		},
 	};
 
