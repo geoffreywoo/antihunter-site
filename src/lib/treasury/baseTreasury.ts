@@ -2,6 +2,7 @@ import { rpcCall, toHexBlock } from './rpc.js';
 import {
 	decodeAddressTopic,
 	decodeAbiString,
+	encodeBalanceOfCall,
 	encodeDecimalsCall,
 	encodeNameCall,
 	encodeSymbolCall,
@@ -100,6 +101,11 @@ async function ethCall(rpcUrl: string, to: string, data: string): Promise<string
 async function getErc20Decimals(rpcUrl: string, token: string): Promise<number> {
 	const res = await ethCall(rpcUrl, token, encodeDecimalsCall());
 	return Number(readUint256(res, 0));
+}
+
+async function getErc20BalanceRaw(rpcUrl: string, token: string, owner: string): Promise<bigint> {
+	const res = await ethCall(rpcUrl, token, encodeBalanceOfCall(owner));
+	return readUint256(res, 0);
 }
 
 async function getErc20Symbol(rpcUrl: string, token: string): Promise<string> {
@@ -477,9 +483,25 @@ async function buildResponseFromState(state: TreasuryCacheState): Promise<Treasu
 	const ethPriceUsd = await getEthPriceUsd(state);
 	const positions: TokenPosition[] = [];
 
+	// IMPORTANT: balances shown on the dashboard should reflect the *current wallet state*.
+	// Log-scanned quantities can undercount if the scan window starts after earlier transfers.
+	// We refresh current balances via balanceOf() and keep cost-basis inference from logs.
+	const wallet = state.wallet.toLowerCase();
+	const tokens = Object.keys(state.positions);
+	const refreshed = new Map<string, bigint>();
+	await Promise.all(
+		tokens.map(async (token) => {
+			try {
+				refreshed.set(token, await getErc20BalanceRaw(state.rpcUrl, token, wallet));
+			} catch {
+				// If RPC is flaky, fall back to scanned qtyRaw.
+			}
+		}),
+	);
+
 	for (const [token, st] of Object.entries(state.positions)) {
 		if (token === BASE_WETH.toLowerCase()) continue;
-		const qty = BigInt(st.qtyRaw);
+		const qty = refreshed.get(token) ?? BigInt(st.qtyRaw);
 		if (qty <= 0n) continue;
 		const decimals = st.decimals ?? 18;
 		const symbol = st.symbol ?? 'TOKEN';
