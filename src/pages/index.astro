@@ -13,12 +13,13 @@ const changelog = [
 		date: '2026-02-08',
 		title: 'Treasury + protocol + open source',
 		summary:
-			'Upgraded antihunter.com into a receipts-first execution desk: live treasury positions (Dexscreener spot pricing), inferred entry + cost basis from on-chain settlement flows (ETH/WETH), and a static snapshot path for fast loading. Added a burn receipts section (latest burn amount + BaseScan tx) and published staking/locking v0.1 (90-day lock, linear rewards, 25% early exit penalty → rewards pool). Open-sourced OpenClaw reliability learnings (browser mutex + single-tab protocol) and tightened site UX.',
+			'Upgraded antihunter.com into a receipts-first execution desk: live treasury positions (Dexscreener spot pricing), inferred entry + cost basis from on-chain settlement flows (ETH/WETH), and a static snapshot path for fast loading. Published staking/locking v0.2.1 (multi-term locks, linear rewards, 25% early exit penalty → rewards pool; fees in $ANTIHUNTER split 33% rewards pool / 67% treasury). Open-sourced OpenClaw reliability learnings (browser mutex + single-tab protocol) and tightened site UX.',
 		links: [
 			{ label: 'Treasury (BaseScan)', href: TREASURY_BASESCAN_URL },
-			{ label: 'Latest burn tx (BaseScan)', href: 'https://basescan.org/tx/0x3f76c1312f5fa3059370a75b01ec30b9035178ab3f8d0a534c93597160a516a8' },
-			{ label: 'Staking/Locking Whitepaper v0.2 (current)', href: '/whitepaper/staking-locking-v0.2.pdf' },
-			{ label: 'Staking/Locking Whitepaper v0.1 (reference)', href: '/whitepaper/staking-locking-v0.1.pdf' },
+			// (burns deprecated)
+			{ label: 'Staking/Locking Whitepaper v0.2.1 (current)', href: '/whitepaper/staking-locking-v0.2.1.pdf' },
+			{ label: 'Staking/Locking Whitepaper v0.2 (reference)', href: '/whitepaper/staking-locking-v0.2.pdf' },
+			{ label: 'Staking/Locking Whitepaper v0.1 (legacy)', href: '/whitepaper/staking-locking-v0.1.pdf' },
 			{ label: 'OpenClaw browser mutex skill (gist)', href: 'https://gist.github.com/geoffreywoo/cc5f72e6a6645db5159f03305ddd5dc3' },
 		],
 	},
@@ -52,7 +53,7 @@ const changelog = [
 		<title>Anti Hunter — On-chain Venture Desk</title>
 		<meta
 			name="description"
-			content="Anti Hunter (@AntiHunter59823) is an on-chain, operator-grade venture system. Fees settle in WETH → positions → gains → buy & burn $ANTIHUNTER. Receipts are public."
+			content="Anti Hunter (@AntiHunter59823) is an on-chain, operator-grade venture system. Fees settle in $ANTIHUNTER → rewards/treasury → execution → realized PnL → on-market buys. Receipts are public."
 		/>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" type="image/svg+xml" href="/mark.svg" />
@@ -60,7 +61,7 @@ const changelog = [
 		<meta property="og:title" content="Anti Hunter — On-chain Venture Desk" />
 		<meta
 			property="og:description"
-			content="Anti Hunter (@AntiHunter59823) is an on-chain, operator-grade venture system. Fees settle in WETH → positions → gains → buy & burn $ANTIHUNTER. Receipts are public."
+			content="Anti Hunter (@AntiHunter59823) is an on-chain, operator-grade venture system. Fees settle in $ANTIHUNTER → rewards/treasury → execution → realized PnL → on-market buys. Receipts are public."
 		/>
 		<meta property="og:type" content="website" />
 		<meta property="og:image" content="/og.svg" />
@@ -133,7 +134,7 @@ const changelog = [
 								fees (<span class="text-zinc-100">$ANTIHUNTER</span>) → rewards pool → lock → execute → realized PnL → on-market buys
 							</div>
 							<p class="mt-2 text-sm leading-relaxed text-zinc-400">
-								Fees settle in $ANTIHUNTER and route 100% to the Rewards Pool. Treasury strategy realized PnL (e.g. WETH) is used to buy $ANTIHUNTER on-market under a deterministic rule.
+								Fees settle in $ANTIHUNTER and route <strong>33%</strong> to the Rewards Pool and <strong>67%</strong> to the Treasury. Treasury strategy realized PnL (e.g. WETH) is used to buy $ANTIHUNTER on-market under a deterministic rule.
 							</p>
 						</div>
 						<div class="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5">
@@ -156,11 +157,11 @@ const changelog = [
 						</a>
 						<a
 							class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500"
-							href="/whitepaper/staking-locking-v0.2.pdf"
+							href="/whitepaper/staking-locking-v0.2.1.pdf"
 							target="_blank"
 							rel="noreferrer"
 						>
-							Protocol Whitepaper (v0.2)
+							Protocol Whitepaper (v0.2.1)
 						</a>
 					</div>
 				</div>
@@ -437,30 +438,26 @@ const changelog = [
 					<div class="grid gap-4 sm:grid-cols-2">
 						<div class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
 							<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">Current</div>
+							<div class="mt-2 text-sm font-semibold text-zinc-100">Staking/Locking v0.2.1</div>
+							<div class="mt-3 flex flex-wrap gap-3">
+								<a class="text-sm text-zinc-200 underline decoration-zinc-600 underline-offset-4 hover:text-white hover:decoration-zinc-300" href="/whitepaper/staking-locking-v0.2.1.pdf" target="_blank" rel="noreferrer">PDF</a>
+								<a class="text-sm text-zinc-200 underline decoration-zinc-600 underline-offset-4 hover:text-white hover:decoration-zinc-300" href="/whitepaper/staking-locking-v0.2.1.html" target="_blank" rel="noreferrer">HTML</a>
+							</div>
+						</div>
+						<div class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
+							<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">Reference</div>
 							<div class="mt-2 text-sm font-semibold text-zinc-100">Staking/Locking v0.2</div>
 							<div class="mt-3 flex flex-wrap gap-3">
 								<a class="text-sm text-zinc-200 underline decoration-zinc-600 underline-offset-4 hover:text-white hover:decoration-zinc-300" href="/whitepaper/staking-locking-v0.2.pdf" target="_blank" rel="noreferrer">PDF</a>
 								<a class="text-sm text-zinc-200 underline decoration-zinc-600 underline-offset-4 hover:text-white hover:decoration-zinc-300" href="/whitepaper/staking-locking-v0.2.html" target="_blank" rel="noreferrer">HTML</a>
 							</div>
 						</div>
-						<div class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
-							<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">Reference</div>
-							<div class="mt-2 text-sm font-semibold text-zinc-100">Staking/Locking v0.1</div>
-							<div class="mt-3 flex flex-wrap gap-3">
-								<a class="text-sm text-zinc-200 underline decoration-zinc-600 underline-offset-4 hover:text-white hover:decoration-zinc-300" href="/whitepaper/staking-locking-v0.1.pdf" target="_blank" rel="noreferrer">PDF</a>
-								<a class="text-sm text-zinc-200 underline decoration-zinc-600 underline-offset-4 hover:text-white hover:decoration-zinc-300" href="/whitepaper/staking-locking-v0.1.html" target="_blank" rel="noreferrer">HTML</a>
-							</div>
-						</div>
 					</div>
 
 					<div class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
-						<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">Changelog (v0.1 → v0.2)</div>
+						<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">Changelog (v0.2 → v0.2.1)</div>
 						<ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-300">
-							<li><strong>Lock terms:</strong> added 30/60/90/120‑day locks with bonus weights (not APY).</li>
-							<li><strong>Rollover:</strong> added re-lock option with +0.2× temporary weight bonus (next term only), capped at 3.0×.</li>
-							<li><strong>Buybacks:</strong> specified a deterministic buyback controller for realized PnL (e.g. WETH) to buy $ANTIHUNTER on-market.</li>
-							<li><strong>Fees:</strong> clarified fees settle in $ANTIHUNTER and route <strong>100% to the Rewards Pool</strong>.</li>
-							<li><strong>Cliff avoidance:</strong> per-deposit rolling maturity to reduce synchronized unlock cliffs.</li>
+							<li><strong>Fees:</strong> updated routing: <strong>33% to Rewards Pool</strong> / <strong>67% to Treasury</strong>.</li>
 						</ul>
 					</div>
 				</section>
