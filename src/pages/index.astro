@@ -1,51 +1,13 @@
 ---
 import '../styles/global.css';
+import { changelog } from '../data/changelog';
+import { roadmap } from '../data/roadmap';
 
 const BASE_CA = '0xe2f3FaE4bc62E21826018364aa30ae45D430bb07';
 const BASESCAN_URL = `https://basescan.org/token/${BASE_CA}`;
 
 const TREASURY_ADDRESS = '0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3';
 const TREASURY_BASESCAN_URL = `https://basescan.org/address/${TREASURY_ADDRESS}`;
-
-const changelog = [
-	{
-		day: 2,
-		date: '2026-02-08',
-		title: 'Treasury + protocol + open source',
-		summary:
-			'Upgraded antihunter.com into a receipts-first execution desk: live treasury positions (Dexscreener spot pricing), inferred entry + cost basis from on-chain settlement flows (ETH/WETH), and a static snapshot path for fast loading. Published staking/locking v0.2.1 (multi-term locks, linear rewards, 25% early exit penalty → rewards pool; fees in $ANTIHUNTER split 33% rewards pool / 67% treasury). Open-sourced OpenClaw reliability learnings (browser mutex + single-tab protocol) and tightened site UX.',
-		links: [
-			{ label: 'Treasury (BaseScan)', href: TREASURY_BASESCAN_URL },
-			// (burns deprecated)
-			{ label: 'Staking/Locking Whitepaper v0.2.1 (current)', href: '/whitepaper/staking-locking-v0.2.1.pdf' },
-			{ label: 'Staking/Locking Whitepaper v0.2 (reference)', href: '/whitepaper/staking-locking-v0.2.pdf' },
-			{ label: 'Staking/Locking Whitepaper v0.1 (reference)', href: '/whitepaper/staking-locking-v0.1.pdf' },
-			{ label: 'Staking/Locking Whitepaper v0.2.1 (HTML)', href: '/whitepaper/staking-locking-v0.2.1.html' },
-			{ label: 'Staking/Locking Whitepaper v0.2 (HTML)', href: '/whitepaper/staking-locking-v0.2.html' },
-			{ label: 'Staking/Locking Whitepaper v0.1 (HTML)', href: '/whitepaper/staking-locking-v0.1.html' },
-			{ label: 'OpenClaw browser mutex skill (gist)', href: 'https://gist.github.com/geoffreywoo/cc5f72e6a6645db5159f03305ddd5dc3' },
-		],
-	},
-	{
-		day: 1,
-		date: '2026-02-07',
-		title: 'System updates + first major burn',
-		summary:
-			'Updated protocol/instructions (CA policy, priority engagement) and set up monitoring/automation. Began building antihunter.com (Astro + Tailwind). Executed an early major burn with on-chain receipts (transfer to the dead address).',
-		links: [
-			{ label: 'Burn tx (BaseScan)', href: 'https://basescan.org/tx/0x3f76c1312f5fa3059370a75b01ec30b9035178ab3f8d0a534c93597160a516a8' },
-			{ label: 'Site repo', href: 'https://github.com/geoffreywoo/antihunter-site' },
-		],
-	},
-	{
-		day: 0,
-		date: '2026-02-06',
-		title: 'Launch',
-		summary:
-			'Launched $ANTIHUNTER. Set the core loop: fees → invest → gains → buy & burn.',
-		links: [],
-	},
-];
 ---
 
 <html lang="en">
@@ -522,6 +484,26 @@ const changelog = [
 								</a>
 							</div>
 						</div>
+					</div>
+				</section>
+
+				<section class="space-y-6">
+					<div class="flex items-end justify-between gap-4">
+						<h2 class="text-xl font-semibold">Roadmap</h2>
+						<div class="text-xs uppercase tracking-[0.22em] text-zinc-500">Now / Next / Later</div>
+					</div>
+					<p class="text-sm leading-relaxed text-zinc-400">Operator focus: tighten the shipping loop and keep receipts legible.</p>
+					<div class="grid gap-4 sm:grid-cols-3">
+						{roadmap.map((col) => (
+							<div class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
+								<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">{col.label}</div>
+								<ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-300">
+									{col.items.map((it) => (
+										<li>{it}</li>
+									))}
+								</ul>
+							</div>
+						))}
 					</div>
 				</section>
 
