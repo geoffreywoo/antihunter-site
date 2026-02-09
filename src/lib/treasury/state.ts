@@ -1,18 +1,27 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
+export type LotState = {
+	txHash: string;
+	blockNumber: number;
+	timestamp?: number;
+	qtyRaw: string; // bigint serialized
+	costEthWei: string; // bigint serialized
+};
+
 export type TokenPositionState = {
 	decimals?: number;
 	symbol?: string;
 	name?: string;
-	qtyRaw: string; // bigint serialized
+	qtyRaw: string; // bigint serialized (remaining qty inferred from scanned logs)
 	costEthWei: string; // bigint serialized (remaining cost basis, ETH/WETH)
 	entryBlock?: number;
 	entryTimestamp?: number;
+	lots?: LotState[]; // acquisition tranches (FIFO reduced on sells)
 };
 
 export type TreasuryCacheState = {
-	version: 1;
+	version: 2;
 	chainId: number;
 	wallet: string;
 	rpcUrl: string;

@@ -243,6 +243,16 @@ async function main() {
 			const costBasisUsd = hardZero ? 0 : (p.costUsd ?? null);
 			const costBasisEth = hardZero ? '0' : (p.costEth ?? null);
 			const pnlUsd = (p.fmvUsd ?? null) != null && costBasisUsd != null ? (p.fmvUsd - costBasisUsd) : (p.pnlUsd ?? null);
+			const lots = !hardZero && Array.isArray(p.lots)
+				? p.lots.map((l: any) => ({
+					txHash: l.txHash,
+					blockNumber: l.blockNumber,
+					entryDate: l.timestamp ? fmtDateFromSec(l.timestamp) : null,
+					qty: l.qty,
+					costBasisEth: l.costEth ?? null,
+					costBasisUsd: l.costUsd ?? null,
+				}))
+				: null;
 			return {
 				symbol: p.symbol,
 				token: p.token,
@@ -252,6 +262,7 @@ async function main() {
 				costBasisEth,
 				fmvUsd: p.fmvUsd ?? null,
 				pnlUsd,
+				lots,
 			};
 		});
 

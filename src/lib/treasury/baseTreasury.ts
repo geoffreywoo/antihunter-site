@@ -10,7 +10,7 @@ import {
 	padAddressTopic,
 	readUint256,
 } from './abi.js';
-import { defaultCachePath, loadCache, saveCache, type TreasuryCacheState } from './state.js';
+import { defaultCachePath, loadCache, saveCache, type LotState, type TreasuryCacheState } from './state.js';
 import { fetchDexPairsForToken, parseUsdPrice, pickBestBasePair } from './dexscreener.js';
 
 // Base canonical WETH address
@@ -49,6 +49,16 @@ type TokenPosition = {
 	priceUsd?: number;
 	fmvUsd?: number;
 	pnlUsd?: number;
+	lots?: {
+		txHash: string;
+		blockNumber: number;
+		timestamp?: number;
+		qty: string;
+		qtyRaw: string;
+		costEth: string;
+		costEthWei: string;
+		costUsd?: number;
+	}[];
 };
 
 export type TreasuryResponse = {
@@ -261,10 +271,11 @@ async function processTransferLogs(state: TreasuryCacheState, logs: RpcLog[]) {
 				const symbol = await getErc20Symbol(state.rpcUrl, t.token);
 				const name = await getErc20Name(state.rpcUrl, t.token);
 				state.positions[t.token] = {
-					...(p ?? { qtyRaw: '0', costEthWei: '0' }),
+					...(p ?? { qtyRaw: '0', costEthWei: '0', lots: [] }),
 					decimals,
 					symbol,
 					name,
+					lots: p?.lots ?? [],
 				};
 			}
 		}
@@ -303,6 +314,8 @@ async function processTransferLogs(state: TreasuryCacheState, logs: RpcLog[]) {
 				const prevCost = BigInt(st.costEthWei);
 				st.qtyRaw = (prevQty + r.delta).toString();
 				st.costEthWei = (prevCost + alloc).toString();
+				st.lots ??= [];
+				st.lots.push({ txHash, blockNumber: blockNum, timestamp: ts, qtyRaw: r.delta.toString(), costEthWei: alloc.toString() } satisfies LotState);
 				if (!st.entryTimestamp && ts) {
 					st.entryTimestamp = ts;
 					st.entryBlock = blockNum;
@@ -327,6 +340,8 @@ async function processTransferLogs(state: TreasuryCacheState, logs: RpcLog[]) {
 				const prevCost = BigInt(st.costEthWei);
 				st.qtyRaw = (prevQty + r.delta).toString();
 				st.costEthWei = (prevCost + alloc).toString();
+				st.lots ??= [];
+				st.lots.push({ txHash, blockNumber: blockNum, timestamp: ts, qtyRaw: r.delta.toString(), costEthWei: alloc.toString() } satisfies LotState);
 				if (!st.entryTimestamp && ts) {
 					st.entryTimestamp = ts;
 					st.entryBlock = blockNum;
@@ -348,10 +363,38 @@ async function processTransferLogs(state: TreasuryCacheState, logs: RpcLog[]) {
 				const newCost = prevCost - costReduction;
 				st.qtyRaw = (newQty < 0n ? 0n : newQty).toString();
 				st.costEthWei = (newCost < 0n ? 0n : newCost).toString();
+
+				// Also reduce lots FIFO for auditability.
+				if (st.lots?.length) {
+					let remaining = soldAbs;
+					const nextLots: LotState[] = [];
+					for (const lot of st.lots) {
+						if (remaining <= 0n) {
+							nextLots.push(lot);
+							continue;
+						}
+						const lotQty = BigInt(lot.qtyRaw);
+						if (lotQty <= 0n) continue;
+						if (remaining >= lotQty) {
+							// fully consume this lot
+							remaining -= lotQty;
+							continue;
+						}
+						// partially consume; reduce qty and cost proportionally
+						const keepQty = lotQty - remaining;
+						const lotCost = BigInt(lot.costEthWei);
+						const keepCost = lotQty > 0n ? (lotCost * keepQty) / lotQty : 0n;
+						nextLots.push({ ...lot, qtyRaw: keepQty.toString(), costEthWei: keepCost.toString() });
+						remaining = 0n;
+					}
+					st.lots = nextLots;
+				}
+
 				// If fully exited, reset entry markers (optional)
 				if (newQty <= 0n) {
 					st.entryTimestamp = undefined;
 					st.entryBlock = undefined;
+					st.lots = [];
 				}
 			}
 		}
@@ -438,9 +481,9 @@ export async function getTreasurySnapshot({
 	const now = Date.now();
 	let state = await loadCache(cachePath);
 
-	if (!state || state.version !== 1 || state.chainId !== chainId || state.wallet.toLowerCase() !== wallet.toLowerCase() || state.rpcUrl !== rpcUrl) {
+	if (!state || state.version !== 2 || state.chainId !== chainId || state.wallet.toLowerCase() !== wallet.toLowerCase() || state.rpcUrl !== rpcUrl) {
 		state = {
-			version: 1,
+			version: 2,
 			chainId,
 			wallet: wallet.toLowerCase(),
 			rpcUrl,
@@ -522,6 +565,39 @@ async function buildResponseFromState(state: TreasuryCacheState): Promise<Treasu
 		const costUsd = costEthUsd !== undefined ? toNumberSafe(costEth) * costEthUsd : undefined;
 		const pnlUsd = fmvUsd !== undefined && costUsd !== undefined ? fmvUsd - costUsd : undefined;
 
+		// Build lots (tranches). Note: lots are derived from scanned logs (cost-basis attribution).
+		// If live balance exceeds scanned lots (e.g. scan window missed early transfers), we add an unattributed tranche.
+		const lots: TokenPosition['lots'] = (st.lots ?? []).map((lot) => {
+			const lotQty = BigInt(lot.qtyRaw);
+			const lotCostWei = BigInt(lot.costEthWei);
+			const lotCostEth = formatUnits(lotCostWei, 18);
+			return {
+				txHash: lot.txHash,
+				blockNumber: lot.blockNumber,
+				timestamp: lot.timestamp,
+				qty: formatUnits(lotQty, decimals),
+				qtyRaw: lot.qtyRaw,
+				costEth: lotCostEth,
+				costEthWei: lot.costEthWei,
+				costUsd: costEthUsd !== undefined ? toNumberSafe(lotCostEth) * costEthUsd : undefined,
+			};
+		});
+		const lotsQty = (st.lots ?? []).reduce((s, l) => s + BigInt(l.qtyRaw), 0n);
+		const liveQty = qty;
+		if (liveQty > lotsQty) {
+			const diff = liveQty - lotsQty;
+			lots.push({
+				txHash: 'unattributed',
+				blockNumber: 0,
+				timestamp: undefined,
+				qty: formatUnits(diff, decimals),
+				qtyRaw: diff.toString(),
+				costEth: '0',
+				costEthWei: '0',
+				costUsd: 0,
+			});
+		}
+
 		positions.push({
 			token,
 			symbol,
@@ -536,6 +612,7 @@ async function buildResponseFromState(state: TreasuryCacheState): Promise<Treasu
 			priceUsd,
 			fmvUsd,
 			pnlUsd,
+			lots: lots.length ? lots : undefined,
 		});
 	}
 
