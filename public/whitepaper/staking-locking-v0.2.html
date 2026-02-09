@@ -95,8 +95,18 @@
         <li>Rewards stream linearly over time and do not require synchronized epoch resets.</li>
       </ul>
 
-      <h2>6) Continuation / rollover</h2>
-      <p>To reduce mass “end-of-epoch” sell pressure, the protocol may support an opt-in <strong>relock / rollover</strong> at maturity. Any continuation incentive must be: (a) explicitly defined, (b) funded only from receipts (real inflows/penalties), and (c) bounded (no complex ve-tokenomics in this draft).</p>
+      <h2>6) Continuation / rollover (re-lock incentive)</h2>
+      <p>To reduce mass “end-of-epoch” sell pressure, the protocol supports an opt-in <strong>relock / rollover</strong> at maturity (same or longer term).</p>
+      <div class="box">
+        <strong>Rollover incentive (A + cap)</strong>
+        <ul>
+          <li>If a user re-locks within a short window after maturity (e.g. 24h), they receive a <strong>temporary bonus weight</strong> on the next lock only.</li>
+          <li><strong>Bonus:</strong> <span class="mono">+0.2×</span> weight applied to the selected term weight for the next lock.</li>
+          <li><strong>Cap:</strong> total effective weight is capped at <span class="mono">3.0×</span> (prevents runaway incentives).</li>
+          <li>Bonus applies only when rolling to the <strong>same or longer</strong> term, and does not stack across multiple actions within a single term.</li>
+        </ul>
+        <p class="foot" style="margin:10px 0 0;">This incentive changes distribution share; it does not create promised yield. Rewards remain receipts-funded and may be 0.</p>
+      </div>
 
       <h2>7) Programmatic buyback (fees in $ANTIHUNTER + PnL buys)</h2>
       <p>Buybacks should be <strong>non-discretionary</strong>. In this design, <strong>fees are paid in $ANTIHUNTER</strong> (used for staking rewards and/or burns), while <strong>realized P&amp;L</strong> (settled in a settlement asset like WETH) is used to <strong>buy $ANTIHUNTER on-market</strong>.</p>
