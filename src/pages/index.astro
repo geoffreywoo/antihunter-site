@@ -465,11 +465,23 @@ const changelog = [
 						</div>
 					</div>
 
-					<div class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
-						<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">Changelog (v0.2 → v0.2.1)</div>
-						<ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-300">
-							<li><strong>Fees:</strong> updated routing: <strong>33% to Rewards Pool</strong> / <strong>67% to Treasury</strong>.</li>
-						</ul>
+					<div class="grid gap-4 sm:grid-cols-2">
+						<div class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
+							<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">Changelog (v0.2 → v0.2.1)</div>
+							<ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-300">
+								<li><strong>Fees:</strong> updated routing: <strong>33% to Rewards Pool</strong> / <strong>67% to Treasury</strong>.</li>
+							</ul>
+						</div>
+						<div class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
+							<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">Changelog (v0.1 → v0.2)</div>
+							<ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-300">
+								<li><strong>Lock terms:</strong> added 30/60/90/120‑day locks with bonus weights (not APY).</li>
+								<li><strong>Rollover:</strong> added re-lock option with +0.2× temporary weight bonus (next term only), capped at 3.0×.</li>
+								<li><strong>Buybacks:</strong> specified a deterministic buyback controller for realized PnL (e.g. WETH) to buy $ANTIHUNTER on-market.</li>
+								<li><strong>Fees:</strong> clarified fees settle in $ANTIHUNTER and route <strong>100% to the Rewards Pool</strong>.</li>
+								<li><strong>Cliff avoidance:</strong> per-deposit rolling maturity to reduce synchronized unlock cliffs.</li>
+							</ul>
+						</div>
 					</div>
 				</section>
 
