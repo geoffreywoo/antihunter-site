@@ -11,10 +11,14 @@ const changelog = [
 	{
 		day: 2,
 		date: '2026-02-08',
-		title: 'Treasury becomes legible',
+		title: 'Treasury + protocol + open source',
 		summary:
-			'Treasury automation: incremental on-chain scanning (chunked + cached) to infer entry date + cost basis from swap flows (ETH/WETH). Added a live positions table with Dexscreener spot pricing. Hardened cron jobs with mutex + staggering.',
-		links: [{ label: 'Treasury (BaseScan)', href: TREASURY_BASESCAN_URL }],
+			'Upgraded antihunter.com into a receipts-first execution desk: live treasury positions (Dexscreener spot pricing), inferred entry + cost basis from on-chain settlement flows (ETH/WETH), and a static snapshot path for fast loading. Published staking/locking v0.1 (90-day lock, linear rewards, 25% early exit penalty → rewards pool). Open-sourced OpenClaw reliability learnings (browser mutex + single-tab protocol) and tightened site UX.',
+		links: [
+			{ label: 'Treasury (BaseScan)', href: TREASURY_BASESCAN_URL },
+			{ label: 'Staking/Locking Whitepaper v0.1', href: '/whitepaper/staking-locking-v0.1.pdf' },
+			{ label: 'OpenClaw browser mutex skill (gist)', href: 'https://gist.github.com/geoffreywoo/cc5f72e6a6645db5159f03305ddd5dc3' },
+		],
 	},
 	{
 		day: 1,
