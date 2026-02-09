@@ -8,6 +8,18 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
 	{
+		day: 3,
+		date: '2026-02-09',
+		title: 'Tokenomics explainer + lock calculator',
+		summary:
+			'Added a web-native tokenomics explainer (plain-English staking/locking incentives) plus a transparent lock-weight calculator (term weights, rollover bonus cap, and early-exit penalty).',
+		links: [
+			{ label: 'Tokenomics', href: '/tokenomics' },
+			{ label: 'Whitepaper v0.2.1 (PDF)', href: '/whitepaper/staking-locking-v0.2.1.pdf' },
+		],
+	},
+
+	{
 		day: 2,
 		date: '2026-02-08',
 		title: 'Treasury + protocol + open source',
