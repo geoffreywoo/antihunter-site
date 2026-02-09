@@ -137,7 +137,7 @@ const changelog = [
 								fees (<span class="text-zinc-100">$ANTIHUNTER</span>) → rewards pool → lock → execute → realized PnL → on-market buys
 							</div>
 							<p class="mt-2 text-sm leading-relaxed text-zinc-400">
-								Fees settle in $ANTIHUNTER and route <strong>33%</strong> to the Rewards Pool and <strong>67%</strong> to the Treasury. Treasury strategy realized PnL (e.g. WETH) is used to buy $ANTIHUNTER on-market under a deterministic rule.
+								Fees settle in $ANTIHUNTER and route <strong>33%</strong> to the Rewards Pool and <strong>67%</strong> to the Treasury. Treasury reporting incorporates Arkham Intel (portfolio + transfer USD annotations) for best-effort receipts-grade USD values.
 							</p>
 						</div>
 						<div class="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5">
@@ -207,7 +207,7 @@ const changelog = [
 							<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">Treasury</div>
 							<h2 class="mt-2 text-2xl font-semibold tracking-tight">Live positions</h2>
 							<p class="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-300">
-								Balances + FMV update live (Dexscreener spot pricing). Entry date + cost basis are inferred from on-chain settlement flows (ETH/WETH).
+								Balances + FMV update using Arkham Intel portfolio view (USD). Entry date + cost basis are inferred from on-chain settlement flows (ETH/WETH), with best-effort Arkham USD receipt overrides by txHash when available.
 								<span class="text-zinc-400"> Best-effort accounting—verify on-chain for final truth.</span>
 							</p>
 							<div class="mt-3 text-xs text-zinc-500">
@@ -230,7 +230,7 @@ const changelog = [
 						</span>
 						<span class="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/30 px-3 py-1">
 							<span class="text-zinc-500">Pricing</span>
-							<span class="font-medium text-zinc-100">Dexscreener (spot)</span>
+							<span class="font-medium text-zinc-100">Arkham Intel (USD)</span>
 						</span>
 						<span class="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/30 px-3 py-1">
 							<span class="text-zinc-500">Cost basis</span>
