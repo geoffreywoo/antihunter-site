@@ -29,12 +29,12 @@
   <body>
     <main class="page">
       <h1>Anti Hunter Staking &amp; Locking Whitepaper (Draft v0.2)</h1>
-      <p class="sub">Receipts-funded staking for $ANTIHUNTER: 90-day lock, linear streaming, explicit reward sources, and deterministic control rules.</p>
+      <p class="sub">Receipts-funded staking for $ANTIHUNTER: 30/60/90/120-day locks, linear streaming, explicit reward sources, and deterministic control rules.</p>
 
       <div class="box">
         <strong>TL;DR</strong>
         <ul>
-          <li><strong>Minimum lock:</strong> 90 days</li>
+          <li><strong>Lock terms:</strong> 30 / 60 / 90 / 120 days (bonus weight for longer locks)</li>
           <li><strong>Rewards:</strong> streamed <strong>linearly</strong> (per-deposit schedule)</li>
           <li><strong>Early exit:</strong> allowed with <strong>25% principal penalty</strong></li>
           <li><strong>Penalty routing:</strong> <strong>100% to rewards pool</strong> (paper hands subsidize diamond hands)</li>
@@ -52,16 +52,28 @@
       <h2>2) System overview</h2>
       <p>The staking system is a single on-chain vault coordinating three flows:</p>
       <ul>
-        <li><strong>Stakers deposit</strong> $ANTIHUNTER and lock for 90 days.</li>
+        <li><strong>Stakers deposit</strong> $ANTIHUNTER and choose a lock term: 30 / 60 / 90 / 120 days.</li>
         <li><strong>Rewards stream</strong> from a funded Rewards Pool over time (linear).</li>
         <li><strong>Early exits pay a 25% penalty</strong> on withdrawn principal; penalties are routed into the Rewards Pool for remaining stakers.</li>
       </ul>
 
-      <h2>3) Core parameters</h2>
+      <h2>3) Lock terms &amp; bonus weights</h2>
+      <p>Stakers choose a lock term. Longer terms receive a higher <strong>staking weight</strong> (a bonus share of any rewards that are distributed). This is a simple way to reward longer commitment without promising yield.</p>
+      <div class="box">
+        <strong>Lock terms (v0.2)</strong>
+        <ul>
+          <li><strong>30 days</strong> — weight <span class="mono">1.00×</span></li>
+          <li><strong>60 days</strong> — weight <span class="mono">1.20×</span></li>
+          <li><strong>90 days</strong> — weight <span class="mono">1.40×</span></li>
+          <li><strong>120 days</strong> — weight <span class="mono">1.60×</span></li>
+        </ul>
+        <p class="foot" style="margin:10px 0 0;">Weights are parameters (auditable on-chain) and may be revised in future drafts; any change must be disclosed and timelocked.</p>
+      </div>
+
+      <h3>Other core parameters</h3>
       <ul>
-        <li><strong>Lock duration:</strong> 90 days</li>
         <li><strong>Reward duration:</strong> linear streaming (per-deposit schedule)</li>
-        <li><strong>Early unstake penalty:</strong> 25% (2500 bps) on principal withdrawn early</li>
+        <li><strong>Early unstake penalty:</strong> 25% (2500 bps) on principal withdrawn before maturity</li>
         <li><strong>Penalty destination:</strong> Rewards Pool (100%)</li>
         <li><strong>Reward token:</strong> $ANTIHUNTER (initial)</li>
       </ul>
@@ -76,9 +88,9 @@
       <p>Any yield shown in UI/docs must be labeled as either: (a) <strong>realized historical</strong> yield over a stated window, or (b) a <strong>mechanical estimate derived from on-chain inflows</strong>. It must never be presented as guaranteed.</p>
 
       <h2>5) Locking mechanics (avoid synchronized cliffs)</h2>
-      <p>To avoid a single “epoch unlock day,” v0.2 assumes a <strong>per-deposit rolling schedule</strong>:</p>
+      <p>To avoid a single “epoch unlock day,” v0.2 uses a <strong>per-deposit rolling schedule</strong> tied to the selected term:</p>
       <ul>
-        <li>Each deposit has its own 90-day maturity timestamp.</li>
+        <li>Each deposit has its own maturity timestamp (now + 30/60/90/120 days).</li>
         <li>Rewards stream linearly over time and do not require synchronized epoch resets.</li>
       </ul>
 
