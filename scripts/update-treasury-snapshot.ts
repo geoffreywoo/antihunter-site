@@ -186,7 +186,7 @@ function fmtDateFromSec(ts?: number) {
 	return new Date(ts * 1000).toISOString().slice(0, 10);
 }
 
-type ArkhamAllTxArtifact = {
+type ArkhamTxArtifact = {
 	updatedAt?: string;
 	updatedAtMs?: number;
 	source?: string;
@@ -220,18 +220,22 @@ function looksLikeTxHash(x: unknown): x is string {
 	return /^0x[0-9a-fA-F]{64}$/.test(x);
 }
 
-async function readArkhamAllTxArtifact(projectRoot: string): Promise<ArkhamAllTxArtifact | null> {
-	const p = path.join(projectRoot, 'public', 'treasury.arkham.alltx.json');
-	try {
-		const raw = await fs.readFile(p, 'utf8');
-		return JSON.parse(raw) as ArkhamAllTxArtifact;
-	} catch {
-		return null;
+async function readArkhamTxArtifact(projectRoot: string): Promise<ArkhamTxArtifact | null> {
+	// Prefer transfers/inflow/outflow scrape (more likely to be accessible without API).
+	for (const filename of ['treasury.arkham.transfers.json', 'treasury.arkham.alltx.json']) {
+		const p = path.join(projectRoot, 'public', filename);
+		try {
+			const raw = await fs.readFile(p, 'utf8');
+			return JSON.parse(raw) as ArkhamTxArtifact;
+		} catch {
+			// keep trying
+		}
 	}
+	return null;
 }
 
 async function applyArkhamLotCostBasisOverrides(projectRoot: string, wallet: string, rows: any[]) {
-	const artifact = await readArkhamAllTxArtifact(projectRoot);
+	const artifact = await readArkhamTxArtifact(projectRoot);
 	const txs = artifact?.txs ?? [];
 	if (!Array.isArray(txs) || txs.length === 0) return;
 
@@ -441,7 +445,7 @@ async function main() {
 		notes: snapshot.notes,
 		method: {
 			entryAndCostBasis:
-				'derived-from-onchain-transfer-logs (token<->WETH pairing) with token allowlist; fee-derived $ANTIHUNTER and $WETH are hard-coded as entry=2026-02-06 and cost basis $0; ETH is hard-coded as entry=2026-02-07 with cost basis 1 ETH. Optional override: if public/treasury.arkham.alltx.json exists, lot-level costBasisUsd may be replaced using Arkham per-tx USD outflows (WETH/ANTIHUNTER) when the txHash maps unambiguously to a single token row.',
+				'derived-from-onchain-transfer-logs (token<->WETH pairing) with token allowlist; fee-derived $ANTIHUNTER and $WETH are hard-coded as entry=2026-02-06 and cost basis $0; ETH is hard-coded as entry=2026-02-07 with cost basis 1 ETH. Optional override: if public/treasury.arkham.alltx.json OR public/treasury.arkham.transfers.json exists, lot-level costBasisUsd may be replaced using Arkham per-tx USD outflows (WETH/ANTIHUNTER) when the txHash maps unambiguously to a single token row.',
 		},
 	};
 

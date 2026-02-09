@@ -1,0 +1,9 @@
+{
+  "updatedAt": null,
+  "updatedAtMs": null,
+  "source": "https://intel.arkm.com/explorer/address/0xa668DDf22a4C0Ecbb31c89b16f355B26AE7703c3",
+  "address": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+  "view": "TRANSFERS_INFLOW_OUTFLOW",
+  "notes": "Scaffold file. Nightly browser scrape overwrites with structured txs[].",
+  "txs": []
+}
