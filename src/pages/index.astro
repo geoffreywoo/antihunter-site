@@ -218,9 +218,17 @@ const changelog = [
 								<span id="treasury-meta" class="ml-2"></span>
 							</div>
 						</div>
-						<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">
-							View on BaseScan
-						</a>
+						<div class="flex flex-wrap items-center gap-2">
+							<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="/treasury-methodology">
+								Methodology
+							</a>
+							<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="/treasury.snapshot.json" target="_blank" rel="noreferrer">
+								Snapshot JSON
+							</a>
+							<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">
+								View on BaseScan
+							</a>
+						</div>
 					</div>
 
 					<div class="mt-5 flex flex-wrap gap-2 text-xs text-zinc-300">
