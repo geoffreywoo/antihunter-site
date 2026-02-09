@@ -21,7 +21,7 @@ export type TokenPositionState = {
 };
 
 export type TreasuryCacheState = {
-	version: 3;
+	version: 4;
 	chainId: number;
 	wallet: string;
 	rpcUrl: string;

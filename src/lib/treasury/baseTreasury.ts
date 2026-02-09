@@ -16,6 +16,9 @@ import { fetchDexPairsForToken, parseUsdPrice, pickBestBasePair } from './dexscr
 // Base canonical WETH address
 export const BASE_WETH = '0x4200000000000000000000000000000000000006';
 
+// $ANTIHUNTER token on Base (used for fee settlement and internal treasury swaps)
+export const BASE_ANTIHUNTER = '0xe2f3fae4bc62e21826018364aa30ae45d430bb07';
+
 // Chainlink ETH/USD feed on Base
 // Verified via eth_call(latestRoundData) on Base RPC.
 const CHAINLINK_ETH_USD_FEED = '0x71041dddad3595f9ced3dccfbe3d1f4b0a16bb70';
@@ -248,6 +251,7 @@ async function processTransferLogs(state: TreasuryCacheState, logs: RpcLog[]) {
 
 		if (!deltas.size) continue;
 		const wethDelta = deltas.get(BASE_WETH.toLowerCase()) ?? 0n;
+		const ahDelta = deltas.get(BASE_ANTIHUNTER.toLowerCase()) ?? 0n;
 		// Also incorporate ETH spent via tx.value if any and it looks like a buy.
 		let txValueWei = 0n;
 		try {
@@ -280,9 +284,11 @@ async function processTransferLogs(state: TreasuryCacheState, logs: RpcLog[]) {
 			}
 		}
 
-		// Determine if tx is a buy or sell using WETH delta (or ETH tx.value as fallback for buys)
+		// Determine if tx is a buy or sell using WETH delta (or ETH tx.value as fallback for buys).
+		// Also support internal swaps where treasury spends $ANTIHUNTER to buy other tokens.
 		const ethSpentWei = wethDelta < 0n ? -wethDelta : 0n;
 		const ethReceivedWei = wethDelta > 0n ? wethDelta : 0n;
+		const ahSpentRaw = ahDelta < 0n ? -ahDelta : 0n;
 
 		const hasBuy = tokenDeltas.some((t) => t.delta > 0n);
 		const hasSell = tokenDeltas.some((t) => t.delta < 0n);
@@ -349,9 +355,52 @@ async function processTransferLogs(state: TreasuryCacheState, logs: RpcLog[]) {
 			}
 		}
 
-		// Zero-cost acquisitions (transfers/airdrops) where we receive tokens but there is no WETH/ETH spent.
+		// $ANTIHUNTER-funded buys: treasury spends $ANTIHUNTER to buy other tokens.
+		// We estimate cost basis by valuing $ANTIHUNTER spent using Dexscreener spot.
+		// NOTE: Dexscreener does not provide historical price at block; this is an estimate.
+		if (hasBuy && ethSpentWei === 0n && txValueWei === 0n && ahSpentRaw > 0n) {
+			let ahPxUsd: number | undefined;
+			try {
+				ahPxUsd = await getTokenPriceUsd(state, BASE_ANTIHUNTER.toLowerCase());
+			} catch {
+				ahPxUsd = undefined;
+			}
+			// Convert AH->USD->ETH to store in our canonical ETH cost basis units.
+			const ethPxUsd = await getEthPriceUsd(state);
+			const ahDec = state.positions[BASE_ANTIHUNTER.toLowerCase()]?.decimals ?? 18;
+			const ahSpent = toNumberSafe(formatUnits(ahSpentRaw, ahDec));
+			const estCostEthWei =
+				ahPxUsd !== undefined && ethPxUsd !== undefined && ethPxUsd > 0
+					? BigInt(Math.floor((ahSpent * ahPxUsd / ethPxUsd) * 1e18))
+					: 0n;
+
+			const received = tokenDeltas.filter((t) => t.delta > 0n);
+			let totalWeight = 0n;
+			for (const r of received) {
+				const dec = state.positions[r.token]!.decimals ?? 18;
+				totalWeight += normalizeWeight(r.delta, dec);
+			}
+			for (const r of received) {
+				const st = state.positions[r.token]!;
+				const dec = st.decimals ?? 18;
+				const w = normalizeWeight(r.delta, dec);
+				const alloc = totalWeight > 0n ? (estCostEthWei * w) / totalWeight : 0n;
+				const prevQty = BigInt(st.qtyRaw);
+				const prevCost = BigInt(st.costEthWei);
+				st.qtyRaw = (prevQty + r.delta).toString();
+				st.costEthWei = (prevCost + alloc).toString();
+				st.lots ??= [];
+				st.lots.push({ txHash, blockNumber: blockNum, timestamp: ts, qtyRaw: r.delta.toString(), costEthWei: alloc.toString() } satisfies LotState);
+				if (!st.entryTimestamp && ts) {
+					st.entryTimestamp = ts;
+					st.entryBlock = blockNum;
+				}
+			}
+		}
+
+		// Zero-cost acquisitions (transfers/airdrops) where we receive tokens but there is no WETH/ETH/$ANTIHUNTER spent.
 		// These should still be represented as lots so balances can be fully attributed to dates.
-		if (hasBuy && ethSpentWei === 0n && txValueWei === 0n) {
+		if (hasBuy && ethSpentWei === 0n && txValueWei === 0n && ahSpentRaw === 0n) {
 			const received = tokenDeltas.filter((t) => t.delta > 0n);
 			for (const r of received) {
 				const st = state.positions[r.token]!;
@@ -498,9 +547,9 @@ export async function getTreasurySnapshot({
 	const now = Date.now();
 	let state = await loadCache(cachePath);
 
-	if (!state || state.version !== 3 || state.chainId !== chainId || state.wallet.toLowerCase() !== wallet.toLowerCase() || state.rpcUrl !== rpcUrl) {
+	if (!state || state.version !== 4 || state.chainId !== chainId || state.wallet.toLowerCase() !== wallet.toLowerCase() || state.rpcUrl !== rpcUrl) {
 		state = {
-			version: 3,
+			version: 4,
 			chainId,
 			wallet: wallet.toLowerCase(),
 			rpcUrl,
@@ -536,6 +585,7 @@ export async function getTreasurySnapshot({
 async function buildResponseFromState(state: TreasuryCacheState): Promise<TreasuryResponse> {
 	const notes: string[] = [];
 	notes.push('Cost basis is inferred from on-chain ERC20 Transfer logs by pairing token in/out with WETH in/out within the same transaction.');
+	notes.push('If treasury spends $ANTIHUNTER to acquire other tokens, we estimate cost basis by valuing $ANTIHUNTER at Dexscreener spot (non-historical approximation).');
 	notes.push('Native ETH swaps are partially inferred via tx.value only (internal ETH transfers are not captured).');
 	notes.push('Airdrops/transfers without WETH/ETH flow are ignored for cost basis.');
 	notes.push('Cost basis USD is estimated using Chainlink ETH/USD at the entry block when available (falls back to current ETH/USD).');
