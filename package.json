@@ -8,7 +8,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "treasury:snapshot": "tsx scripts/update-treasury-snapshot.ts",
-    "treasury:validate": "node scripts/validate-treasury-snapshot.ts"
+    "treasury:validate": "node scripts/validate-treasury-snapshot.ts",
+    "changelog:nightly": "node scripts/update_changelog_nightly.mjs"
   },
   "dependencies": {
     "@astrojs/vercel": "^9.0.4",

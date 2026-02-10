@@ -12,7 +12,7 @@ export const changelog: ChangelogEntry[] = [
 		date: '2026-02-09',
 		title: 'Tokenomics + roadmap + treasury QA',
 		summary:
-			'Shipped a web-native tokenomics explainer (plain-English staking/locking incentives) + lock-weight calculator (term weights, rollover bonus cap, early-exit penalty). Added a receipts-first treasury methodology page, a homepage Now/Next/Later roadmap, and automated treasury snapshot validation (QA workflow + validator script) to keep the numbers honest.',
+			'Shipped a web-native tokenomics explainer (plain-English staking/locking incentives) + lock-weight calculator (term weights, rollover bonus cap, early-exit penalty). Added a receipts-first treasury methodology page, a homepage Now/Next/Later roadmap, and automated treasury snapshot validation (QA workflow + validator script) to keep the numbers honest. Nightly rollup (2026-02-09): • Update Day 3 changelog with roadmap + treasury QA progress • Treasury: daily snapshot refresh 2026-02-09 • Add tokenomics explainer + lock calculator • qa: add nightly build/link check + treasury snapshot validation • site: add Now/Next/Later roadmap + move changelog to data module • site: add treasury methodology page + receipts links (+1 more)',
 		links: [
 			{ label: 'Tokenomics', href: '/tokenomics' },
 			{ label: 'Treasury methodology', href: '/treasury-methodology' },
