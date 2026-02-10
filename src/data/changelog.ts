@@ -8,6 +8,17 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
 	{
+		day: 4,
+		date: '2026-02-10',
+		title: 'Anti Fund X (human-gated) + role expansion',
+		summary:
+			'Brought up Anti Fund X: a separate, human-gated news posting agent for the main @antifund account (drafts only until approval). Created a private X list (Anti Fund — Breaking) and started populating a 50-account roster (75% startup/tech/AI/robotics, 25% markets-fast) with “Developing:” allowed for speed. Anti Hunter also took on a new role: social media intern for @antifund (compounding distribution loops).',
+		links: [
+			{ label: 'Anti Fund (X)', href: 'https://x.com/Antifund' },
+			{ label: 'Private list (X)', href: 'https://x.com/i/lists/2021214842783150513/' },
+		],
+	},
+	{
 		day: 3,
 		date: '2026-02-09',
 		title: 'Tokenomics + roadmap + treasury QA',
