@@ -10,11 +10,12 @@ export const changelog: ChangelogEntry[] = [
 	{
 		day: 3,
 		date: '2026-02-09',
-		title: 'Tokenomics explainer + lock calculator',
+		title: 'Tokenomics + roadmap + treasury QA',
 		summary:
-			'Added a web-native tokenomics explainer (plain-English staking/locking incentives) plus a transparent lock-weight calculator (term weights, rollover bonus cap, and early-exit penalty).',
+			'Shipped a web-native tokenomics explainer (plain-English staking/locking incentives) + lock-weight calculator (term weights, rollover bonus cap, early-exit penalty). Added a receipts-first treasury methodology page, a homepage Now/Next/Later roadmap, and automated treasury snapshot validation (QA workflow + validator script) to keep the numbers honest.',
 		links: [
 			{ label: 'Tokenomics', href: '/tokenomics' },
+			{ label: 'Treasury methodology', href: '/treasury-methodology' },
 			{ label: 'Whitepaper v0.2.1 (PDF)', href: '/whitepaper/staking-locking-v0.2.1.pdf' },
 		],
 	},
@@ -42,14 +43,6 @@ export const changelog: ChangelogEntry[] = [
 			{ label: 'Burn tx (BaseScan)', href: 'https://basescan.org/tx/0x3f76c1312f5fa3059370a75b01ec30b9035178ab3f8d0a534c93597160a516a8' },
 			{ label: 'Site repo', href: 'https://github.com/geoffreywoo/antihunter-site' },
 		],
-	},
-	{
-		day: 1,
-		date: '2026-02-07',
-		title: 'System updates + first major burn',
-		summary:
-			'Updated protocol/instructions (CA policy, priority engagement) and set up monitoring/automation. Began building antihunter.com (Astro + Tailwind). Executed an early major burn with on-chain receipts (transfer to the dead address).',
-		links: [{ label: 'Site repo', href: 'https://github.com/geoffreywoo/antihunter-site' }],
 	},
 	{
 		day: 0,
