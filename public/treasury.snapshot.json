@@ -1,6 +1,6 @@
 {
-  "updatedAtMs": 1770859609673,
-  "updatedAt": "2026-02-12T01:26:49.673Z",
+  "updatedAtMs": 1770901301652,
+  "updatedAt": "2026-02-12T13:01:41.652Z",
   "date": "2026-02-12",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "basescan": "https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
@@ -12,8 +12,8 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 172409.86372925466,
-      "pnlUsd": 172409.86372925466,
+      "fmvUsd": 209518.30785050069,
+      "pnlUsd": 209518.30785050069,
       "lots": null
     },
     {
@@ -23,8 +23,36 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 49874.125696720694,
-      "pnlUsd": 49874.125696720694
+      "fmvUsd": 50247.6424254186,
+      "pnlUsd": 50247.6424254186
+    },
+    {
+      "symbol": "bio",
+      "token": "0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07",
+      "balance": "721643923.967929189632132706",
+      "entryDate": "2026-02-07",
+      "costBasisUsd": 3936.7908826627004,
+      "costBasisEth": "1.98805732830831936",
+      "fmvUsd": 15868.949888054765,
+      "pnlUsd": 11932.159005392065,
+      "lots": [
+        {
+          "txHash": "0x5f5569cc2124d314a30846db0bf93a1d6f42e4d0bb9c284afaeb9f4898ab8445",
+          "blockNumber": 41856410,
+          "entryDate": "2026-02-07",
+          "qty": "491617660.801773755517648542",
+          "costBasisEth": "1",
+          "costBasisUsd": 2100
+        },
+        {
+          "txHash": "0x6c277fcbf065377dd5ce341506cf69bb834efbb3553c7149042a360fd1342ca0",
+          "blockNumber": 41905779,
+          "entryDate": "2026-02-09",
+          "qty": "230026263.166155434114484164",
+          "costBasisEth": "0.98805732830831936",
+          "costBasisUsd": 2010
+        }
+      ]
     },
     {
       "symbol": "BNKR",
@@ -33,8 +61,8 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 13086.501372269808,
       "costBasisEth": "6.372567267594853888",
-      "fmvUsd": 14651.544955103662,
-      "pnlUsd": 1565.043582833854,
+      "fmvUsd": 14801.807697742734,
+      "pnlUsd": 1715.306325472926,
       "lots": [
         {
           "txHash": "0x6e27de06d278883617e89b17eecb8dddf113c5e6a68406d4520f84e5adafa843",
@@ -79,42 +107,14 @@
       ]
     },
     {
-      "symbol": "bio",
-      "token": "0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07",
-      "balance": "721643923.967929189632132706",
-      "entryDate": "2026-02-07",
-      "costBasisUsd": 3907.506798216719,
-      "costBasisEth": "1.98805732830831936",
-      "fmvUsd": 10745.278027882467,
-      "pnlUsd": 6837.771229665748,
-      "lots": [
-        {
-          "txHash": "0x5f5569cc2124d314a30846db0bf93a1d6f42e4d0bb9c284afaeb9f4898ab8445",
-          "blockNumber": 41856410,
-          "entryDate": "2026-02-07",
-          "qty": "491617660.801773755517648542",
-          "costBasisEth": "1",
-          "costBasisUsd": 2100
-        },
-        {
-          "txHash": "0x6c277fcbf065377dd5ce341506cf69bb834efbb3553c7149042a360fd1342ca0",
-          "blockNumber": 41905779,
-          "entryDate": "2026-02-09",
-          "qty": "230026263.166155434114484164",
-          "costBasisEth": "0.98805732830831936",
-          "costBasisUsd": 2010
-        }
-      ]
-    },
-    {
       "symbol": "FELIX",
       "token": "0xf30bf00edd0c22db54c9274b90d2a4c21fc09b07",
       "balance": "234565737.063334765213666609",
       "entryDate": "2026-02-07",
-      "costBasisUsd": 4192.6202,
+      "costBasisUsd": 3960.44,
       "costBasisEth": "2",
-      "fmvUsd": 4344.157450412959,
-      "pnlUsd": 151.5372504129591,
+      "fmvUsd": 5789.082390723102,
+      "pnlUsd": 1828.6423907231024,
       "lots": [
         {
           "txHash": "0x3183990234fa8a320bb8c2d3047d90f4c00fc4f886833dc859502fd476dc23e0",
@@ -139,13 +139,13 @@
       "token": null,
       "balance": "0.9973581413337396",
       "entryDate": "2026-02-07",
-      "costBasisUsd": 1965.5,
+      "costBasisUsd": 1980.22,
       "costBasisEth": "1",
-      "fmvUsd": 1960.307426791465,
-      "pnlUsd": -5.1925732085348955
+      "fmvUsd": 1974.9885386318979,
+      "pnlUsd": -5.231461368102146
     }
   ],
-  "totalUsd": 253985.27728616592,
+  "totalUsd": 298200.77879107173,
   "notes": [
     "Cost basis is inferred from on-chain ERC20 Transfer logs by pairing token in/out with WETH in/out within the same transaction.",
     "If treasury spends $ANTIHUNTER to acquire other tokens, we estimate cost basis by valuing $ANTIHUNTER at Dexscreener spot (non-historical approximation).",
