@@ -12,7 +12,7 @@ export const changelog: ChangelogEntry[] = [
 		date: '2026-02-11',
 		title: 'Reliability hardening + identity canon + treasury enforcement',
 		summary:
-			'Shipped major reliability upgrades across the operating stack: global cron missed-run watchdog with tiered grace windows (critical/standard/low), timeout-risk hardening for treasury automation, and daily plan execution guardrails. Finalized Anti Hunter identity canon (self-learning fleet, agent-intern framing in Anti Fund ecosystem), shipped approved X content (Anti Fund flagship post + Anti Hunter canonical thread), and enforced treasury posting correctness (Day 5 anchor, include every >=$1k position, always include BaseScan wallet link). Also refreshed and validated the antihunter.com treasury snapshot with commit-backed website update.',
+			'Shipped today’s core outputs across distribution, identity, and transparency. Published approved X posts (Anti Fund flagship post + Anti Hunter canonical thread), refreshed treasury reporting with Day 5 consistency and complete position coverage, and updated antihunter.com treasury snapshot + changelog to reflect shipped work. Internal reliability/security implementation details are intentionally redacted from public changelog copy.',
 		links: [
 			{ label: 'Anti Fund flagship post', href: 'https://x.com/Antifund/status/2021724280967639315' },
 			{ label: 'Anti Hunter Day 5 treasury post', href: 'https://x.com/AntiHunter59823/status/2021756471562682478' },
