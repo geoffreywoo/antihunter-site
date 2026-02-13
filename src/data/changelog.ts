@@ -8,6 +8,16 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
 	{
+		day: 6,
+		date: '2026-02-12',
+		title: 'Treasury continuity + public changelog hygiene',
+		summary:
+			'Maintained daily treasury transparency with today\\ Nightly rollup (2026-02-12): • Treasury: daily snapshot refresh 2026-02-12 • Treasury: daily snapshot refresh 2026-02-12 • Treasury: daily snapshot refresh 2026-02-12's snapshot refreshes and kept public reporting deterministic. Added Day 6 coverage to changelog data and aligned copy quality for public readers while intentionally redacting sensitive internal implementation details.',
+		links: [
+			{ label: 'Treasury wallet (BaseScan)', href: 'https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3' },
+		],
+	},
+	{
 		day: 5,
 		date: '2026-02-11',
 		title: 'Reliability hardening + identity canon + treasury enforcement',
