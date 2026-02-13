@@ -30,10 +30,14 @@ function looksRateLimited(msg: string) {
 const TREASURY_START_BLOCK = Number(process.env.TREASURY_START_BLOCK ?? '41805000');
 
 // Canonical allowlist (Base)
+const BNKR_TOKEN = '0x22af33fe49fd1fa80c7149773dde5890d3c76f3b';
+const SBNKR_TOKEN = '0x019fd9abc9caeb476d7afa68bb675518c6be17b7';
+
 const BASE_TOKEN_ALLOWLIST = [
 	'0xe2f3fae4bc62e21826018364aa30ae45d430bb07', // ANTIHUNTER
 	'0x4200000000000000000000000000000000000006', // WETH
-	'0x22af33fe49fd1fa80c7149773dde5890d3c76f3b', // BNKR
+	BNKR_TOKEN, // BNKR
+	SBNKR_TOKEN, // sBNKR (Staked Banker)
 	'0xf30bf00edd0c22db54c9274b90d2a4c21fc09b07', // FELIX
 	'0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07', // BIO
 ].map((a) => a.toLowerCase());
@@ -190,7 +194,7 @@ function dayISO(ms: number) {
 
 function normalizeDisplaySymbol(symbol: string) {
 	const s = (symbol || '').toUpperCase();
-	if (s === 'BNKR') return 'sBNKR';
+	if (s === 'SBNKR') return 'sBNKR';
 	return symbol;
 }
 
@@ -441,6 +445,20 @@ async function main() {
 			fmvUsd: ethFmvUsd,
 			pnlUsd: ethFmvUsd != null && ethCostUsd != null ? (ethFmvUsd - ethCostUsd) : null,
 		});
+	}
+
+	// Price sBNKR as BNKR 1:1 when present.
+	let bnkrPriceUsd = (snapshot.positions ?? []).find((p: any) => (p.token ?? '').toLowerCase() === BNKR_TOKEN)?.priceUsd ?? null;
+	if (bnkrPriceUsd == null) bnkrPriceUsd = await dexscreenerPriceUsd(BNKR_TOKEN);
+	for (const r of rows) {
+		if ((r.token ?? '').toLowerCase() === SBNKR_TOKEN) {
+			r.symbol = 'sBNKR';
+			const bal = Number(r.balance);
+			if (bnkrPriceUsd != null && Number.isFinite(bal)) {
+				r.fmvUsd = bal * bnkrPriceUsd;
+				if (r.costBasisUsd != null) r.pnlUsd = r.fmvUsd - r.costBasisUsd;
+			}
+		}
 	}
 
 	rows = rows.sort((a: any, b: any) => (b.fmvUsd ?? 0) - (a.fmvUsd ?? 0));
