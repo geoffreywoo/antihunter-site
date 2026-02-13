@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Anti Hunter — Staking & Locking Whitepaper (Draft v0.2)</title>
+    <style>
+      :root { --fg:#0a0a0a; --muted:#4b5563; --border:#e5e7eb; --bg:#ffffff; }
+      html, body { background: var(--bg); color: var(--fg); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+      body { margin: 0; }
+      .page { max-width: 860px; margin: 0 auto; padding: 48px 44px; }
+      h1 { font-size: 28px; margin: 0 0 8px; letter-spacing: -0.02em; }
+      .sub { color: var(--muted); margin: 0 0 24px; }
+      h2 { font-size: 15px; margin: 26px 0 10px; letter-spacing: 0.06em; text-transform: uppercase; color: #111827; }
+      h3 { font-size: 14px; margin: 18px 0 8px; }
+      p, li { font-size: 13.5px; line-height: 1.65; }
+      ul { padding-left: 18px; }
+      code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 12.5px; }
+      .box { border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; background: #fafafa; }
+      .hr { height: 1px; background: var(--border); margin: 22px 0; }
+      .foot { margin-top: 30px; color: var(--muted); font-size: 12px; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+      @media print {
+        .page { padding: 36px; }
+        a { color: inherit; text-decoration: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <h1>Anti Hunter Staking &amp; Locking Whitepaper (Draft v0.2)</h1>
+      <p class="sub">Receipts-funded staking for $ANTIHUNTER: 30/60/90/120-day locks, linear streaming, explicit reward sources, and deterministic control rules.</p>
+
+      <div class="box">
+        <strong>TL;DR</strong>
+        <ul>
+          <li><strong>Lock terms:</strong> 30 / 60 / 90 / 120 days (bonus weight for longer locks)</li>
+          <li><strong>Rewards:</strong> streamed <strong>linearly</strong> (per-deposit schedule)</li>
+          <li><strong>Early exit:</strong> allowed with <strong>25% principal penalty</strong></li>
+          <li><strong>Penalty routing:</strong> <strong>100% to rewards pool</strong> (paper hands subsidize diamond hands)</li>
+          <li><strong>No fake APY:</strong> rewards are <strong>not promised</strong>; yields are receipts-funded and can go to <strong>0</strong></li>
+          <li><strong>Dynamic buyback:</strong> deterministic rule tied to <strong>moving average of net inflows</strong> (no discretion)</li>
+        </ul>
+      </div>
+
+      <h2>0) Scope &amp; principles</h2>
+      <p>This document specifies staking/locking mechanics and the control rules that govern rewards and buyback behavior. The design goal is boring, auditable tokenomics: <strong>if you can’t point to a dashboard + a transaction + a diff, it didn’t happen.</strong></p>
+
+      <h2>1) Motivation</h2>
+      <p>$ANTIHUNTER is a receipts-first, on-chain venture desk token. Tokenomics should be driven by <strong>real inflows</strong> and <strong>verifiable on-chain receipts</strong>—not narrative APY. This staking design aims to: (a) reward commitment, (b) reduce reflexive dumping, and (c) keep the mechanism simple enough to audit.</p>
+
+      <h2>2) System overview</h2>
+      <p>The staking system is a single on-chain vault coordinating three flows:</p>
+      <ul>
+        <li><strong>Stakers deposit</strong> $ANTIHUNTER and choose a lock term: 30 / 60 / 90 / 120 days.</li>
+        <li><strong>Rewards stream</strong> from a funded Rewards Pool over time (linear).</li>
+        <li><strong>Early exits pay a 25% penalty</strong> on withdrawn principal; penalties are routed into the Rewards Pool for remaining stakers.</li>
+      </ul>
+
+      <h2>3) Lock terms &amp; bonus weights</h2>
+      <p>Stakers choose a lock term. Longer terms receive a higher <strong>staking weight</strong> (a bonus share of any rewards that are distributed). This is a simple way to reward longer commitment without promising yield.</p>
+      <div class="box">
+        <strong>Lock terms (v0.2)</strong>
+        <ul>
+          <li><strong>30 days</strong> — weight <span class="mono">1.0×</span></li>
+          <li><strong>60 days</strong> — weight <span class="mono">1.4×</span></li>
+          <li><strong>90 days</strong> — weight <span class="mono">1.9×</span></li>
+          <li><strong>120 days</strong> — weight <span class="mono">2.5×</span></li>
+        </ul>
+        <p class="foot" style="margin:10px 0 0;">Weights are parameters (auditable on-chain) and may be revised in future drafts; any change must be disclosed and timelocked.</p>
+      </div>
+
+      <h3>Other core parameters</h3>
+      <ul>
+        <li><strong>Reward duration:</strong> linear streaming (per-deposit schedule)</li>
+        <li><strong>Early unstake penalty:</strong> 25% (2500 bps) on principal withdrawn before maturity</li>
+        <li><strong>Penalty destination:</strong> Rewards Pool (100%)</li>
+        <li><strong>Reward token:</strong> $ANTIHUNTER (initial)</li>
+      </ul>
+
+      <h2>4) Reward source hierarchy (and no fake APY)</h2>
+      <p><strong>Rewards are not promised.</strong> There is no fixed or target APY. Rewards are funded in this order:</p>
+      <ol>
+        <li><strong>Fees paid in $ANTIHUNTER</strong> (primary): protocol fees settle directly in $ANTIHUNTER and are routed <strong>100% to the Rewards Pool</strong>.</li>
+        <li><strong>Early-exit penalties</strong> paid by exiting stakers (routed 100% to the Rewards Pool).</li>
+        <li><strong>Optional emissions</strong> only if explicitly enabled and within a hard cap (bootstrapping, not permanent).</li>
+      </ol>
+      <p><strong>Separately:</strong> realized P&amp;L (e.g. WETH settled to treasury) is used for <strong>on-market buybacks of $ANTIHUNTER</strong> under the deterministic rule in Section 7.</p>
+      <p>Any yield shown in UI/docs must be labeled as either: (a) <strong>realized historical</strong> yield over a stated window, or (b) a <strong>mechanical estimate derived from on-chain inflows</strong>. It must never be presented as guaranteed.</p>
+
+      <h2>5) Locking mechanics (avoid synchronized cliffs)</h2>
+      <p>To avoid a single “epoch unlock day,” v0.2 uses a <strong>per-deposit rolling schedule</strong> tied to the selected term:</p>
+      <ul>
+        <li>Each deposit has its own maturity timestamp (now + 30/60/90/120 days).</li>
+        <li>Rewards stream linearly over time and do not require synchronized epoch resets.</li>
+      </ul>
+
+      <h2>6) Continuation / rollover (re-lock incentive)</h2>
+      <p>To reduce mass “end-of-epoch” sell pressure, the protocol supports an opt-in <strong>relock / rollover</strong> at maturity (same or longer term).</p>
+      <div class="box">
+        <strong>Rollover incentive (A + cap)</strong>
+        <ul>
+          <li>If a user re-locks within a short window after maturity (e.g. 24h), they receive a <strong>temporary bonus weight</strong> on the next lock only.</li>
+          <li><strong>Bonus:</strong> <span class="mono">+0.2×</span> weight applied to the selected term weight for the next lock.</li>
+          <li><strong>Cap:</strong> total effective weight is capped at <span class="mono">3.0×</span> (prevents runaway incentives).</li>
+          <li>Bonus applies only when rolling to the <strong>same or longer</strong> term, and does not stack across multiple actions within a single term.</li>
+        </ul>
+        <p class="foot" style="margin:10px 0 0;">This incentive changes distribution share; it does not create promised yield. Rewards remain receipts-funded and may be 0.</p>
+      </div>
+
+      <h2>7) Programmatic buyback (fees in $ANTIHUNTER + PnL buys)</h2>
+      <p>Buybacks should be <strong>non-discretionary</strong>. In this design, <strong>fees are paid in $ANTIHUNTER</strong> (used for staking rewards and/or burns), while <strong>realized P&amp;L</strong> (settled in a settlement asset like WETH) is used to <strong>buy $ANTIHUNTER on-market</strong>.</p>
+
+      <h3>Inputs (daily)</h3>
+      <ul>
+        <li><strong>Fee inflow:</strong> <span class="mono">fee_AH_t</span> = $ANTIHUNTER fees received on day <span class="mono">t</span>.</li>
+        <li><strong>Realized PnL:</strong> <span class="mono">pnl_WETH_t</span> = WETH (or WETH-equivalent) realized PnL settled to treasury on day <span class="mono">t</span>.</li>
+      </ul>
+
+      <div class="box">
+        <strong>Buyback controller (deterministic)</strong>
+        <ul>
+          <li>Signal: compute <span class="mono">MA_t</span> = N‑day moving average of <span class="mono">pnl_WETH</span> (and optionally fee value converted to WETH via an on-chain price oracle / TWAP).</li>
+          <li>Set <span class="mono">buyback_bps_target = clamp(BPS_MIN, BPS_MAX, BPS_MAX * MA_t / (MA_t + K))</span>.</li>
+          <li>Rate-limit: <span class="mono">buyback_bps</span> can change by at most <span class="mono">Δ</span> bps per day.</li>
+          <li>Daily spend (WETH): <span class="mono">Budget_t = min((buyback_bps/10,000) * pnl_WETH_t, Free_t, BUDGET_MAX_PER_DAY)</span>.</li>
+          <li>Execution: swap <span class="mono">Budget_t</span> WETH for $ANTIHUNTER on a whitelisted DEX path, enforce max slippage, emit events.</li>
+        </ul>
+      </div>
+
+      <p><strong>Important:</strong> this algorithm controls <em>how much</em> realized PnL gets converted into $ANTIHUNTER on-market. It does not guarantee buybacks (if <span class="mono">pnl_WETH_t</span> is 0, buyback spend is 0).</p>
+
+      <h2>8) Emissions cap, runway, and inflows = 0</h2>
+      <p>If emissions are enabled, they must be bounded by a hard cap (e.g., <span class="mono">EMISSIONS_MAX_PER_DAY</span> and/or <span class="mono">EMISSIONS_MAX_TOTAL</span>). The protocol should publish “reward runway” under (i) current inflows and (ii) a conservative stress case where inflows drop to zero.</p>
+      <p>In the inflows = 0 case, rewards can only be paid from existing reserves and any remaining emissions budget; if those are exhausted, rewards necessarily decline and may pause. This is an explicit design constraint, not a hidden assumption.</p>
+
+      <h2>9) Early exit penalty accounting</h2>
+      <ul>
+        <li><strong>Penalty base:</strong> principal only (not on accrued rewards).</li>
+        <li><strong>Routing:</strong> penalty is transferred to Rewards Pool on-chain.</li>
+        <li><strong>Disclosure:</strong> UI must show “effective cost of exit” at the time of withdrawal.</li>
+      </ul>
+
+      <h2>10) On-chain receipts &amp; verification</h2>
+      <p>Auditability is part of the spec. At minimum, the protocol should expose:</p>
+      <ul>
+        <li>Canonical contract addresses and treasury addresses.</li>
+        <li>Events for: fees received, rewards streamed, penalties collected, buybacks executed.</li>
+        <li>Public verification links (e.g., explorer + dashboard) that reconcile to those events.</li>
+      </ul>
+
+      <h2>11) Risks</h2>
+      <ul>
+        <li><strong>Low inflows → low rewards:</strong> rewards may be small or zero.</li>
+        <li><strong>Strategy risk:</strong> realized PnL can be negative.</li>
+        <li><strong>Smart contract risk:</strong> bugs, exploits, upgrades.</li>
+        <li><strong>Liquidity/market risk:</strong> slippage, volatility, LP dynamics.</li>
+        <li><strong>Penalty severity:</strong> early exit is expensive by design.</li>
+      </ul>
+
+      <div class="hr"></div>
+
+      <p class="foot">
+        Draft v0.2 — for discussion. This is not financial advice.
+      </p>
+    </main>
+  </body>
+</html>

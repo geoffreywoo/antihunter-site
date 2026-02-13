@@ -1,0 +1,154 @@
+{
+  "updatedAt": "2026-02-09T04:00:00.000Z",
+  "updatedAtMs": 1770619200000,
+  "source": "https://intel.arkm.com/explorer/address/0xa668DDf22a4C0Ecbb31c89b16f355B26AE7703c3",
+  "address": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+  "view": "TRANSFERS_INFLOW_OUTFLOW",
+  "notes": "Best-effort UI scrape (ad-hoc). Contains OUTFLOW and some INFLOW rows with Arkham USD annotations. Pagination/backfill is not yet fully automated.",
+  "txs": [
+    {
+      "timestamp": "3 hours ago",
+      "from": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+      "to": null,
+      "token": "ANTIHUNTER",
+      "amount": 51300000,
+      "usd": 2460,
+      "txHash": "0x5f62f8f210dc7525e460058f600f29bd4b2c0372f633e1b8da2770c81b6b042a"
+    },
+    {
+      "timestamp": "3 hours ago",
+      "from": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+      "to": null,
+      "token": "ANTIHUNTER",
+      "amount": 40000000,
+      "usd": 2010,
+      "txHash": "0x6c277fcbf065377dd5ce341506cf69bb834efbb3553c7149042a360fd1342ca0"
+    },
+    {
+      "timestamp": "4 hours ago",
+      "from": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+      "to": null,
+      "token": "ANTIHUNTER",
+      "amount": 68700000,
+      "usd": 3770,
+      "txHash": "0x6d9a1563ea68c486344706bb358df4d76761925ecd26e90251f84490f58c53ca"
+    },
+    {
+      "timestamp": "4 hours ago",
+      "from": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+      "to": null,
+      "token": "ANTIHUNTER",
+      "amount": 68700000,
+      "usd": 3900,
+      "txHash": "0x675f1a102c02452d78a5af528f341593483c6c34956478f86f33ee7c41ca9a25"
+    },
+    {
+      "timestamp": "4 hours ago",
+      "from": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+      "to": null,
+      "token": "ANTIHUNTER",
+      "amount": 67403000,
+      "usd": 3740,
+      "txHash": "0x288fe16eaca9351d5e9e1a6bf44cbba212a7edcd9572af72d048503cdf63afda"
+    },
+    {
+      "timestamp": "4 hours ago",
+      "from": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+      "to": null,
+      "token": "ANTIHUNTER",
+      "amount": 69131000,
+      "usd": 3780,
+      "txHash": "0x395f91395e6ebfc34fccbfc90f5afdcaa09ce06d9cfca8a590f408c2bbad19a7"
+    },
+    {
+      "timestamp": "1 day ago",
+      "from": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+      "to": null,
+      "token": "WETH",
+      "amount": 1,
+      "usd": 2090,
+      "txHash": "0x6fceacabccffe3e2a364f56bd993c3b9ffa3466bb902b401925395357935dbf2"
+    },
+    {
+      "timestamp": "1 day ago",
+      "from": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+      "to": null,
+      "token": "CLANKER",
+      "amount": 71.679,
+      "usd": 2070,
+      "txHash": "0xc4e71c95ceb91704128cf3901329c2bf14f750a241903a91789237a95db07315"
+    },
+    {
+      "timestamp": "1 day ago",
+      "from": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+      "to": null,
+      "token": "WETH",
+      "amount": 1,
+      "usd": 2100,
+      "txHash": "0x0bc6b62fbed108bd86f412ac77d2dd80f86c2f09ffde9b9c7920815e272e91b3"
+    },
+    {
+      "timestamp": "1 day ago",
+      "from": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+      "to": null,
+      "token": "WETH",
+      "amount": 1,
+      "usd": 2100,
+      "txHash": "0xf2092a1273d0d6051e039d5c07840bfc530ef86d499c93cba41e6c4fead92d9f"
+    },
+    {
+      "timestamp": "1 day ago",
+      "from": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+      "to": null,
+      "token": "WETH",
+      "amount": 1,
+      "usd": 2100,
+      "txHash": "0x3183990234fa8a320bb8c2d3047d90f4c00fc4f886833dc859502fd476dc23e0"
+    },
+    {
+      "timestamp": "1 day ago",
+      "from": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+      "to": null,
+      "token": "WETH",
+      "amount": 2,
+      "usd": 4200,
+      "txHash": "0x870c62a9cc2e852b5b342d86a3b0f08455ab256849c65aef7201c00f60b27170"
+    },
+    {
+      "timestamp": "1 day ago",
+      "from": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+      "to": null,
+      "token": "WETH",
+      "amount": 1,
+      "usd": 2100,
+      "txHash": "0x5f5569cc2124d314a30846db0bf93a1d6f42e4d0bb9c284afaeb9f4898ab8445"
+    },
+    {
+      "timestamp": "1 day ago",
+      "from": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+      "to": null,
+      "token": "ANTIHUNTER",
+      "amount": 266323000,
+      "usd": 5330,
+      "txHash": "0x3f76c1312f5fa3059370a75b01ec30b9035178ab3f8d0a534c93597160a516a8"
+    },
+    {
+      "timestamp": "2 days ago",
+      "from": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+      "to": null,
+      "token": "WETH",
+      "amount": 2,
+      "usd": 4130,
+      "txHash": "0x331120212622d46a01c8a1a622fbe62a421ed04f455016f3f0f52f0b498355ef"
+    },
+    {
+      "timestamp": "2 days ago",
+      "from": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+      "to": null,
+      "token": "BNKR",
+      "amount": 36471,
+      "usd": 19.87,
+      "txHash": "0xb7fd08400872c2503368e80de92aa3e9e38278aa28c10ca7c5476873a0923c4b"
+    }
+  ]
+}

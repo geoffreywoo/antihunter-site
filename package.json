@@ -6,11 +6,18 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "treasury:snapshot": "tsx scripts/update-treasury-snapshot.ts",
+    "treasury:validate": "node scripts/validate-treasury-snapshot.ts",
+    "changelog:nightly": "node scripts/update_changelog_nightly.mjs"
   },
   "dependencies": {
+    "@astrojs/vercel": "^9.0.4",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.17.1",
     "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0"
   }
 }
