@@ -30,13 +30,20 @@ function looksRateLimited(msg: string) {
 const TREASURY_START_BLOCK = Number(process.env.TREASURY_START_BLOCK ?? '41805000');
 
 // Canonical allowlist (Base)
-const TOKEN_ALLOWLIST = [
+const BASE_TOKEN_ALLOWLIST = [
 	'0xe2f3fae4bc62e21826018364aa30ae45d430bb07', // ANTIHUNTER
 	'0x4200000000000000000000000000000000000006', // WETH
 	'0x22af33fe49fd1fa80c7149773dde5890d3c76f3b', // BNKR
 	'0xf30bf00edd0c22db54c9274b90d2a4c21fc09b07', // FELIX
 	'0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07', // BIO
 ].map((a) => a.toLowerCase());
+
+const EXTRA_TOKENS = String(process.env.TREASURY_EXTRA_TOKENS ?? '')
+	.split(',')
+	.map((s) => s.trim().toLowerCase())
+	.filter((s) => /^0x[a-f0-9]{40}$/.test(s));
+
+const TOKEN_ALLOWLIST = Array.from(new Set([...BASE_TOKEN_ALLOWLIST, ...EXTRA_TOKENS]));
 
 const FEE_ENTRY_DATE = '2026-02-06';
 const ETH_ENTRY_DATE = '2026-02-07';
