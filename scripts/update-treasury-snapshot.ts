@@ -181,6 +181,12 @@ function dayISO(ms: number) {
 	return new Date(ms).toISOString().slice(0, 10);
 }
 
+function normalizeDisplaySymbol(symbol: string) {
+	const s = (symbol || '').toUpperCase();
+	if (s === 'BNKR') return 'sBNKR';
+	return symbol;
+}
+
 function fmtDateFromSec(ts?: number) {
 	if (!ts) return null;
 	return new Date(ts * 1000).toISOString().slice(0, 10);
@@ -329,7 +335,7 @@ async function main() {
 		const fmvUsd = px != null && Number.isFinite(balanceNum) ? balanceNum * px : undefined;
 		snapshot.positions.push({
 			token,
-			symbol: meta.symbol,
+			symbol: normalizeDisplaySymbol(meta.symbol),
 			name: meta.name,
 			decimals: meta.decimals,
 			balance,
@@ -367,7 +373,7 @@ async function main() {
 				}))
 				: null;
 			return {
-				symbol: p.symbol,
+				symbol: normalizeDisplaySymbol(p.symbol),
 				token: p.token,
 				balance: p.balance,
 				entryDate,
@@ -402,7 +408,7 @@ async function main() {
 	if (wethBalRaw > 0n) {
 		const wethFmvUsd = ethPx != null && Number.isFinite(wethBalNum) ? wethBalNum * ethPx : null;
 		rows.push({
-			symbol: 'WETH',
+			symbol: normalizeDisplaySymbol('WETH'),
 			token: WETH,
 			balance: wethBal,
 			entryDate: FEE_ENTRY_DATE,
