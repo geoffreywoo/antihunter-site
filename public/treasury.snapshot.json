@@ -1,6 +1,6 @@
 {
-  "updatedAtMs": 1770990195182,
-  "updatedAt": "2026-02-13T13:43:15.182Z",
+  "updatedAtMs": 1770990315238,
+  "updatedAt": "2026-02-13T13:45:15.238Z",
   "date": "2026-02-13",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "basescan": "https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
@@ -12,8 +12,8 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 325970.2872054707,
-      "pnlUsd": 325970.2872054707,
+      "fmvUsd": 327124.164328322,
+      "pnlUsd": 327124.164328322,
       "lots": null
     },
     {
@@ -31,10 +31,10 @@
       "token": "0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07",
       "balance": "721643923.967929189632132706",
       "entryDate": "2026-02-07",
-      "costBasisUsd": 4181.638000150136,
+      "costBasisUsd": 3919.335739320153,
       "costBasisEth": "1.98805732830831936",
-      "fmvUsd": 19996.75313315132,
-      "pnlUsd": 15815.115133001185,
+      "fmvUsd": 20025.618890110036,
+      "pnlUsd": 16106.283150789883,
       "lots": [
         {
           "txHash": "0x5f5569cc2124d314a30846db0bf93a1d6f42e4d0bb9c284afaeb9f4898ab8445",
@@ -93,7 +93,7 @@
       "pnlUsd": -5.208265849012378
     }
   ],
-  "totalUsd": 415592.7967891715,
+  "totalUsd": 416775.5396689815,
   "notes": [
     "Cost basis is inferred from on-chain ERC20 Transfer logs by pairing token in/out with WETH in/out within the same transaction.",
     "If treasury spends $ANTIHUNTER to acquire other tokens, we estimate cost basis by valuing $ANTIHUNTER at Dexscreener spot (non-historical approximation).",
