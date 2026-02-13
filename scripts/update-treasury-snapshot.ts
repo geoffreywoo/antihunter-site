@@ -365,7 +365,7 @@ async function main() {
 	// Build rows (apply hard-coded rules for fee-derived assets)
 	let rows = (snapshot.positions ?? [])
 		.filter((p: any) => (p.token ?? '').toLowerCase() !== '0x4200000000000000000000000000000000000006') // avoid duplicate WETH row
-		.filter((p: any) => (p.fmvUsd ?? 0) >= 100)
+		.filter((p: any) => (p.fmvUsd ?? 0) >= 100 || (p.token ?? '').toLowerCase() === SBNKR_TOKEN)
 		.map((p: any) => {
 			const token = (p.token ?? '').toLowerCase();
 			const hardZero = HARD_CODED_ZERO_COST_TOKENS.has(token);
