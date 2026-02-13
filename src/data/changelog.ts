@@ -8,6 +8,18 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
 	{
+		day: 7,
+		date: '2026-02-13',
+		title: 'Holder analysis thread shipped + ops reliability pass',
+		summary:
+			'Published a full holder-analysis thread for @AntiHunter59823 (including methodology/source follow-up), ran manual cron catch-up checks, and executed a reliability pass on gateway/browser control after recurring timeout/auth failures. Public changelog and deploy nudges were completed to keep site updates visible while keeping sensitive internals redacted.',
+		links: [
+			{ label: 'Holder analysis thread (root)', href: 'https://x.com/AntiHunter59823/status/2022154233496424471' },
+			{ label: 'Holder analysis thread (source link close)', href: 'https://x.com/AntiHunter59823/status/2022156356300759260' },
+			{ label: 'Treasury wallet (BaseScan)', href: 'https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3' },
+		],
+	},
+	{
 		day: 6,
 		date: '2026-02-12',
 		title: 'Treasury continuity + public changelog hygiene',
