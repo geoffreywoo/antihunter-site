@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Anti Hunter — Staking & Token Distribution Service Spec (Base)</title>
+  <style>
+    :root { --fg:#0f172a; --muted:#475569; --line:#cbd5e1; --bg:#ffffff; --accent:#0ea5e9; }
+    html,body{background:var(--bg);color:var(--fg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+    body{max-width:980px;margin:32px auto;padding:0 20px}
+    h1,h2,h3{line-height:1.2;margin-top:28px}
+    h1{font-size:30px}
+    h2{font-size:22px;border-top:1px solid var(--line);padding-top:16px}
+    h3{font-size:18px}
+    p,li{font-size:15px}
+    code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px}
+    pre{background:#f8fafc;border:1px solid var(--line);padding:12px;overflow:auto;border-radius:8px}
+    .muted{color:var(--muted)}
+    .box{border:1px solid var(--line);border-radius:10px;padding:12px;background:#f8fafc}
+    .kpi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+    .kpi div{border:1px solid var(--line);border-radius:8px;padding:10px;background:#fff}
+    table{border-collapse:collapse;width:100%;margin:8px 0}
+    th,td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+    .small{font-size:13px}
+    @media print { body{max-width:none;margin:0;padding:0.5in} a{color:inherit;text-decoration:none} }
+  </style>
+</head>
+<body>
+  <h1>Anti Hunter — Staking & Token Distribution Service Spec (Base)</h1>
+  <p class="muted">Version 0.9 • Draft for implementation • Date: 2026-02-13 • Network: Base Mainnet</p>
+
+  <div class="box">
+    <strong>Purpose</strong>
+    <p>Design a production-grade staking and token distribution system for <strong>$ANTIHUNTER</strong> on Base that enforces current tokenomics: fixed lock terms (30/60/90/120d), weighted rewards, 25% early-exit penalty to rewards pool, optional rollover boost, and transparent accounting.</p>
+  </div>
+
+  <h2>1) Goals, Constraints, and Product Principles</h2>
+  <h3>Goals</h3>
+  <ul>
+    <li>Reward long-term stakers with deterministic, auditable rules.</li>
+    <li>Route protocol fees + penalties back to stakers (compounding loop).</li>
+    <li>Avoid fake APY framing; rewards can be zero when vault is unfunded.</li>
+    <li>Support per-deposit maturities (no global unlock cliffs).</li>
+  </ul>
+  <h3>Non-goals (v1)</h3>
+  <ul>
+    <li>No cross-chain staking.</li>
+    <li>No leveraged staking derivatives.</li>
+    <li>No discretionary operator intervention in reward math.</li>
+  </ul>
+
+  <h2>2) Onchain Architecture (Recommended)</h2>
+  <ol>
+    <li><strong>AntiHunterStakingV1</strong> — lock positions, claim, early exit, rollover.</li>
+    <li><strong>RewardsVaultV1</strong> — reward inventory + cumulative reward-per-weight accounting.</li>
+    <li><strong>FeeRouterV1</strong> — routes protocol fees + penalties into rewards vault.</li>
+    <li><strong>BuybackExecutorV1</strong> (optional v1.1) — deterministic PnL→buyback logic.</li>
+  </ol>
+
+  <h3>Contract trust model</h3>
+  <ul>
+    <li>Use <strong>multisig admin</strong> for privileged actions.</li>
+    <li>Prefer immutable core math; if upgradeable, use timelocked UUPS + guardian pause.</li>
+    <li>Roles: <code>DEFAULT_ADMIN_ROLE</code>, <code>PAUSER_ROLE</code>, <code>REWARD_NOTIFIER_ROLE</code>, <code>FEE_ROUTER_ROLE</code>.</li>
+  </ul>
+
+  <h2>3) Position Model (Per-Deposit)</h2>
+  <p>Each stake creates an independent position record (optionally mapped to NFT token IDs later).</p>
+  <pre>struct Position {
+  address owner;
+  uint256 principal;           // amount staked
+  uint64  lockStart;
+  uint32  lockDurationDays;    // 30/60/90/120
+  uint32  baseWeightBps;       // 10000/14000/19000/25000
+  uint32  rolloverBoostBps;    // +2000 max, capped by total 30000
+  uint64  unlockAt;
+  uint256 rewardDebt;          // standard accRewardPerWeight debt model
+  bool    closed;
+}</pre>
+
+  <h2>4) Tokenomics Rules (Encoded)</h2>
+  <table>
+    <thead><tr><th>Lock Term</th><th>Weight</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>30 days</td><td>1.0x (10,000 bps)</td><td>Base weight</td></tr>
+      <tr><td>60 days</td><td>1.4x (14,000 bps)</td><td>Mid-term preference</td></tr>
+      <tr><td>90 days</td><td>1.9x (19,000 bps)</td><td>Strong conviction</td></tr>
+      <tr><td>120 days</td><td>2.5x (25,000 bps)</td><td>Max base weight</td></tr>
+    </tbody>
+  </table>
+  <ul>
+    <li><strong>Rollover boost:</strong> if re-lock happens within 24h of maturity, add +0.2x (2,000 bps), hard cap effective weight at 3.0x (30,000 bps).</li>
+    <li><strong>Early exit:</strong> allowed any time with 25% principal penalty, 100% routed to RewardsVault.</li>
+    <li><strong>Rewards source:</strong> protocol fees in $ANTIHUNTER + penalties + optional treasury allocations.</li>
+    <li><strong>No guaranteed APY:</strong> UI should display realized + projected ranges, never fixed promises.</li>
+  </ul>
+
+  <h2>5) Reward Accounting Design</h2>
+  <p>Use standard cumulative accounting to avoid O(n) loops:</p>
+  <pre>accRewardPerWeight (scaled 1e18)
+positionPending = (positionEffectiveWeight * accRewardPerWeight / 1e18) - rewardDebt</pre>
+  <ul>
+    <li>On stake/rollover/exit/claim: settle pending rewards first.</li>
+    <li>On rewards notification: increase <code>accRewardPerWeight</code> proportionally to active total weight.</li>
+    <li>If no active weight, rewards remain in vault until next distribution update.</li>
+  </ul>
+
+  <h2>6) Core Function Surface (v1)</h2>
+  <pre>// staking
+stake(uint256 amount, uint32 lockDurationDays)
+rollover(uint256 positionId, uint32 newLockDurationDays)
+claim(uint256 positionId)
+claimAll(uint256[] positionIds)
+exitEarly(uint256 positionId)          // principal - 25% penalty
+withdrawMatured(uint256 positionId)
+
+// views
+pendingRewards(uint256 positionId) view returns (uint256)
+positionInfo(uint256 positionId) view returns (Position)
+totalEffectiveWeight() view returns (uint256)
+
+// vault/admin
+notifyReward(uint256 amount)
+routePenalty(uint256 amount)
+pause() / unpause()</pre>
+
+  <h2>7) Event Schema (Must-Have for Indexing)</h2>
+  <pre>event Staked(address indexed user, uint256 indexed positionId, uint256 amount, uint32 lockDays, uint32 weightBps);
+event Rollover(address indexed user, uint256 indexed oldPositionId, uint256 indexed newPositionId, uint32 lockDays, uint32 boostBps);
+event Claimed(address indexed user, uint256 indexed positionId, uint256 amount);
+event EarlyExit(address indexed user, uint256 indexed positionId, uint256 principalReturned, uint256 penaltyRouted);
+event MatureWithdraw(address indexed user, uint256 indexed positionId, uint256 principal);
+event RewardNotified(uint256 amount, uint256 newAccRewardPerWeight);
+event PenaltyRouted(uint256 amount);
+event Paused(address by);
+event Unpaused(address by);</pre>
+
+  <h2>8) Security Controls & Invariants</h2>
+  <h3>Controls</h3>
+  <ul>
+    <li><code>ReentrancyGuard</code> on all mutating payout paths.</li>
+    <li><code>Pausable</code> for emergency freeze.</li>
+    <li>Explicit token allowlist (only $ANTIHUNTER for v1).</li>
+    <li>No external callback hooks in reward flow.</li>
+  </ul>
+
+  <h3>Invariants (for property tests)</h3>
+  <ul>
+    <li>Principal conservation: total staked + withdrawn + penalized equals deposits (mod rounding).</li>
+    <li>No user can claim > funded rewards allocated to weight.</li>
+    <li>Penalty always equals exactly 25% of principal on early exit.</li>
+    <li>Effective weight never exceeds 30,000 bps cap.</li>
+    <li>Position cannot be withdrawn twice.</li>
+  </ul>
+
+  <h2>9) Offchain System (Do Not Overbuild)</h2>
+  <ul>
+    <li><strong>Indexer:</strong> Goldsky/Subgraph for positions, APR views, realized rewards, TVL by term.</li>
+    <li><strong>RPC/Node:</strong> Alchemy Base endpoints.</li>
+    <li><strong>Automation:</strong> OpenZeppelin Defender relayers for reward notifications and scheduled ops.</li>
+    <li><strong>Alerts:</strong> failed tx spikes, pause events, vault underfunding, abnormal early exits.</li>
+  </ul>
+
+  <h2>10) API + Frontend Requirements</h2>
+  <h3>Read API</h3>
+  <ul>
+    <li><code>GET /positions/:address</code></li>
+    <li><code>GET /positions/:id</code></li>
+    <li><code>GET /rewards/pending/:address</code></li>
+    <li><code>GET /metrics</code> (TVL, term split, daily claims, penalty inflow)</li>
+    <li><code>GET /health</code> (vault liquidity, notifier status)</li>
+  </ul>
+  <h3>UI copy guardrails</h3>
+  <ul>
+    <li>No “guaranteed APY” language.</li>
+    <li>Show lock term, weight, penalties, and reward source transparently.</li>
+    <li>Require explicit confirmation on early exit penalty.</li>
+  </ul>
+
+  <h2>11) Launch Plan</h2>
+  <h3>Phase 0 — Spec freeze (2–4 days)</h3>
+  <ul><li>Finalize state, math, events, and admin model.</li></ul>
+  <h3>Phase 1 — Build + test (1–2 weeks)</h3>
+  <ul>
+    <li>Solidity implementation (Foundry).</li>
+    <li>Unit + fuzz + invariant tests.</li>
+    <li>Base Sepolia integration tests.</li>
+  </ul>
+  <h3>Phase 2 — Security hardening (1–2 weeks)</h3>
+  <ul>
+    <li>External audit / competitive review.</li>
+    <li>Fixes + retests.</li>
+    <li>Deploy scripts + runbook freeze.</li>
+  </ul>
+  <h3>Phase 3 — Mainnet guarded launch</h3>
+  <ul>
+    <li>Initial stake cap + staged enablement.</li>
+    <li>24–72h monitoring period before cap expansion.</li>
+  </ul>
+
+  <h2>12) Open Decisions (Need Product Call)</h2>
+  <ol>
+    <li>Single reward token forever vs future multi-reward extension?</li>
+    <li>Should matured positions auto-roll by default (opt-in) or always manual?</li>
+    <li>Upgradeability preference: immutable core vs timelocked upgrades?</li>
+    <li>Do we expose position NFTs publicly in v1 or keep internal IDs?</li>
+  </ol>
+
+  <h2>13) Recommended Default Decisions</h2>
+  <ul>
+    <li><strong>Single reward token</strong> in v1 ($ANTIHUNTER only).</li>
+    <li><strong>Manual rollover</strong> with explicit +0.2x boost within 24h.</li>
+    <li><strong>Timelocked upgradeable</strong> architecture with multisig + pause guardian.</li>
+    <li><strong>Internal IDs first</strong>, NFT wrappers in v1.1 if needed.</li>
+  </ul>
+
+  <h2>14) Implementation Checklist</h2>
+  <ul>
+    <li>[ ] Solidity contracts + storage gap planning</li>
+    <li>[ ] Foundry unit tests</li>
+    <li>[ ] Fuzz/invariant suite</li>
+    <li>[ ] Deployment scripts (Sepolia + Mainnet)</li>
+    <li>[ ] Subgraph/indexer + API</li>
+    <li>[ ] Ops runbook (pause, recovery, incident protocol)</li>
+    <li>[ ] Security review + fixes</li>
+    <li>[ ] Public docs + risk disclosures</li>
+  </ul>
+
+  <p class="small muted">Prepared for Anti Hunter / Anti Fund product + engineering planning.</p>
+</body>
+</html>
