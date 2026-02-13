@@ -1,6 +1,6 @@
 {
-  "updatedAtMs": 1770990072711,
-  "updatedAt": "2026-02-13T13:41:12.711Z",
+  "updatedAtMs": 1770990195182,
+  "updatedAt": "2026-02-13T13:43:15.182Z",
   "date": "2026-02-13",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "basescan": "https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
@@ -23,18 +23,18 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 62699.14319790618,
-      "pnlUsd": 62699.14319790618
+      "fmvUsd": 62656.2375448376,
+      "pnlUsd": 62656.2375448376
     },
     {
       "symbol": "bio",
       "token": "0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07",
       "balance": "721643923.967929189632132706",
       "entryDate": "2026-02-07",
-      "costBasisUsd": 3923.57030142945,
+      "costBasisUsd": 4181.638000150136,
       "costBasisEth": "1.98805732830831936",
-      "fmvUsd": 20537.986076127265,
-      "pnlUsd": 16614.415774697816,
+      "fmvUsd": 19996.75313315132,
+      "pnlUsd": 15815.115133001185,
       "lots": [
         {
           "txHash": "0x5f5569cc2124d314a30846db0bf93a1d6f42e4d0bb9c284afaeb9f4898ab8445",
@@ -59,10 +59,10 @@
       "token": "0xf30bf00edd0c22db54c9274b90d2a4c21fc09b07",
       "balance": "234565737.063334765213666609",
       "entryDate": "2026-02-07",
-      "costBasisUsd": 3947.14,
+      "costBasisUsd": 3942.88,
       "costBasisEth": "2",
-      "fmvUsd": 5031.435060008531,
-      "pnlUsd": 1084.295060008531,
+      "fmvUsd": 5003.287171560931,
+      "pnlUsd": 1060.4071715609307,
       "lots": [
         {
           "txHash": "0x3183990234fa8a320bb8c2d3047d90f4c00fc4f886833dc859502fd476dc23e0",
@@ -87,13 +87,13 @@
       "token": null,
       "balance": "0.9973581413337396",
       "entryDate": "2026-02-07",
-      "costBasisUsd": 1972.79,
+      "costBasisUsd": 1971.44,
       "costBasisEth": "1",
-      "fmvUsd": 1967.578167641788,
-      "pnlUsd": -5.21183235821195
+      "fmvUsd": 1966.2317341509877,
+      "pnlUsd": -5.208265849012378
     }
   ],
-  "totalUsd": 416206.4297071545,
+  "totalUsd": 415592.7967891715,
   "notes": [
     "Cost basis is inferred from on-chain ERC20 Transfer logs by pairing token in/out with WETH in/out within the same transaction.",
     "If treasury spends $ANTIHUNTER to acquire other tokens, we estimate cost basis by valuing $ANTIHUNTER at Dexscreener spot (non-historical approximation).",
