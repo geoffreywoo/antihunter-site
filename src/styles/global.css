@@ -4,20 +4,10 @@
   color-scheme: dark;
 }
 
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 body {
   font-feature-settings: "ss01";
 }
 
-/* Better looking underline + selection */
-a {
-  text-underline-offset: 3px;
-}
-
 ::selection {
-  background: rgba(244, 244, 245, 0.18);
+  background: rgba(244, 244, 245, 0.2);
 }
