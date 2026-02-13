@@ -1,6 +1,6 @@
 {
-  "updatedAtMs": 1770991909513,
-  "updatedAt": "2026-02-13T14:11:49.513Z",
+  "updatedAtMs": 1770992256047,
+  "updatedAt": "2026-02-13T14:17:36.047Z",
   "date": "2026-02-13",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "basescan": "https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
@@ -97,14 +97,14 @@
       "token": "0x019fd9abc9caeb476d7afa68bb675518c6be17b7",
       "balance": "18004.77383705277380844",
       "entryDate": null,
-      "costBasisUsd": null,
+      "costBasisUsd": 12028.232651798236,
       "costBasisEth": "0",
-      "fmvUsd": 14.774717410685506,
-      "pnlUsd": null,
+      "fmvUsd": 14774.717410685505,
+      "pnlUsd": 2746.484758887269,
       "lots": null
     }
   ],
-  "totalUsd": 418304.2346107166,
+  "totalUsd": 433064.1773039914,
   "notes": [
     "Cost basis is inferred from on-chain ERC20 Transfer logs by pairing token in/out with WETH in/out within the same transaction.",
     "If treasury spends $ANTIHUNTER to acquire other tokens, we estimate cost basis by valuing $ANTIHUNTER at Dexscreener spot (non-historical approximation).",

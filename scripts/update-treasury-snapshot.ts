@@ -32,6 +32,8 @@ const TREASURY_START_BLOCK = Number(process.env.TREASURY_START_BLOCK ?? '4180500
 // Canonical allowlist (Base)
 const BNKR_TOKEN = '0x22af33fe49fd1fa80c7149773dde5890d3c76f3b';
 const SBNKR_TOKEN = '0x019fd9abc9caeb476d7afa68bb675518c6be17b7';
+const BNKR_PER_SBNKR = 1000;
+const ORIGINAL_BNKR_SWAP_PRICE_USD = 0.0006680579695505442;
 
 const BASE_TOKEN_ALLOWLIST = [
 	'0xe2f3fae4bc62e21826018364aa30ae45d430bb07', // ANTIHUNTER
@@ -475,17 +477,29 @@ async function main() {
 		});
 	}
 
-	// Price sBNKR as BNKR 1:1 when present.
+	// Price sBNKR as BNKR with a 1000:1 split (1 sBNKR = 1000 BNKR).
 	let bnkrPriceUsd = (snapshot.positions ?? []).find((p: any) => (p.token ?? '').toLowerCase() === BNKR_TOKEN)?.priceUsd ?? null;
 	if (bnkrPriceUsd == null) bnkrPriceUsd = await dexscreenerPriceUsd(BNKR_TOKEN);
+	const bnkrUnitCostUsdFromRows = (() => {
+		const bnkrRow = rows.find((r: any) => (r.token ?? '').toLowerCase() === BNKR_TOKEN);
+		if (!bnkrRow) return null;
+		const bal = Number(bnkrRow.balance);
+		const cb = Number(bnkrRow.costBasisUsd);
+		if (!Number.isFinite(bal) || bal <= 0 || !Number.isFinite(cb) || cb <= 0) return null;
+		return cb / bal;
+	})();
+	const sbnkrUnitCostUsd = (bnkrUnitCostUsdFromRows ?? ORIGINAL_BNKR_SWAP_PRICE_USD) * BNKR_PER_SBNKR;
 	for (const r of rows) {
 		if ((r.token ?? '').toLowerCase() === SBNKR_TOKEN) {
 			r.symbol = 'sBNKR';
 			const bal = Number(r.balance);
 			if (bnkrPriceUsd != null && Number.isFinite(bal)) {
-				r.fmvUsd = bal * bnkrPriceUsd;
-				if (r.costBasisUsd != null) r.pnlUsd = r.fmvUsd - r.costBasisUsd;
+				r.fmvUsd = (bal * BNKR_PER_SBNKR) * bnkrPriceUsd;
 			}
+			if ((r.costBasisUsd == null) && Number.isFinite(bal)) {
+				r.costBasisUsd = bal * sbnkrUnitCostUsd;
+			}
+			if (r.fmvUsd != null && r.costBasisUsd != null) r.pnlUsd = r.fmvUsd - r.costBasisUsd;
 		}
 	}
 
