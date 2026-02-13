@@ -56,6 +56,12 @@ const HARD_CODED_ZERO_COST_TOKENS = new Set([
 	'0x4200000000000000000000000000000000000006', // WETH
 ].map((a) => a.toLowerCase()));
 
+// Tokens where entry/cost/lot accounting should not silently disappear due transient RPC/log issues.
+const ACCOUNTING_CRITICAL_TOKENS = new Set([
+	'0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07', // BIO
+	'0xf30bf00edd0c22db54c9274b90d2a4c21fc09b07', // FELIX
+]);
+
 async function rpcCall(method: string, params: unknown[]) {
 	let lastErr: any = null;
 	for (const rpcUrl of BASE_RPCS) {
@@ -318,6 +324,28 @@ async function applyArkhamLotCostBasisOverrides(projectRoot: string, wallet: str
 	}
 }
 
+function applyPriorAccountingFallback(rows: any[], priorRows: any[]) {
+	const priorByToken = new Map<string, any>();
+	for (const r of priorRows ?? []) {
+		const t = (r?.token ?? '').toLowerCase();
+		if (t) priorByToken.set(t, r);
+	}
+
+	for (const r of rows) {
+		const token = (r?.token ?? '').toLowerCase();
+		if (!ACCOUNTING_CRITICAL_TOKENS.has(token)) continue;
+		const prior = priorByToken.get(token);
+		if (!prior) continue;
+		const missingAccounting = (r.entryDate == null) && (r.costBasisUsd == null) && (!Array.isArray(r.lots) || r.lots.length === 0);
+		if (!missingAccounting) continue;
+		if (prior.entryDate != null) r.entryDate = prior.entryDate;
+		if (prior.costBasisUsd != null) r.costBasisUsd = prior.costBasisUsd;
+		if (prior.costBasisEth != null) r.costBasisEth = prior.costBasisEth;
+		if (Array.isArray(prior.lots) && prior.lots.length > 0) r.lots = prior.lots;
+		if (r.fmvUsd != null && r.costBasisUsd != null) r.pnlUsd = r.fmvUsd - r.costBasisUsd;
+	}
+}
+
 async function main() {
 	let startBlock = TREASURY_START_BLOCK;
 	if (!Number.isFinite(startBlock) || startBlock < 0) throw new Error('TREASURY_START_BLOCK must be a non-negative integer');
@@ -459,6 +487,16 @@ async function main() {
 				if (r.costBasisUsd != null) r.pnlUsd = r.fmvUsd - r.costBasisUsd;
 			}
 		}
+	}
+
+	// Guard against transient inference regressions by inheriting prior accounting fields
+	// for critical tokens when current run drops them.
+	try {
+		const priorRaw = await fs.readFile(path.join(projectRoot, 'public', 'treasury.snapshot.json'), 'utf8');
+		const prior = JSON.parse(priorRaw) as any;
+		applyPriorAccountingFallback(rows, Array.isArray(prior?.rows) ? prior.rows : []);
+	} catch {
+		// no prior snapshot available; continue
 	}
 
 	rows = rows.sort((a: any, b: any) => (b.fmvUsd ?? 0) - (a.fmvUsd ?? 0));

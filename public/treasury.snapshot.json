@@ -1,6 +1,6 @@
 {
-  "updatedAtMs": 1770991552492,
-  "updatedAt": "2026-02-13T14:05:52.492Z",
+  "updatedAtMs": 1770991909513,
+  "updatedAt": "2026-02-13T14:11:49.513Z",
   "date": "2026-02-13",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "basescan": "https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
@@ -12,51 +12,85 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 327124.164328322,
-      "pnlUsd": 327124.164328322,
+      "fmvUsd": 329143.4492933116,
+      "pnlUsd": 329143.4492933116,
       "lots": null
     },
     {
       "symbol": "WETH",
       "token": "0x4200000000000000000000000000000000000006",
-      "balance": "31.781965235988718847",
+      "balance": "31.781965235988718",
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 62616.51008829261,
-      "pnlUsd": 62616.51008829261
+      "fmvUsd": 62618.73482585913,
+      "pnlUsd": 62618.73482585913
     },
     {
       "symbol": "bio",
       "token": "0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07",
       "balance": "721643923.967929189632132706",
-      "entryDate": null,
-      "costBasisUsd": null,
-      "costBasisEth": "0",
+      "entryDate": "2026-02-07",
+      "costBasisUsd": 3916.9898316727495,
+      "costBasisEth": "1.98805732830831936",
       "fmvUsd": 19275.10920918339,
-      "pnlUsd": null,
-      "lots": null
+      "pnlUsd": 15358.11937751064,
+      "lots": [
+        {
+          "txHash": "0x5f5569cc2124d314a30846db0bf93a1d6f42e4d0bb9c284afaeb9f4898ab8445",
+          "blockNumber": 41856410,
+          "entryDate": "2026-02-07",
+          "qty": "491617660.801773755517648542",
+          "costBasisEth": "1",
+          "costBasisUsd": 2100
+        },
+        {
+          "txHash": "0x6c277fcbf065377dd5ce341506cf69bb834efbb3553c7149042a360fd1342ca0",
+          "blockNumber": 41905779,
+          "entryDate": "2026-02-09",
+          "qty": "230026263.166155434114484164",
+          "costBasisEth": "0.98805732830831936",
+          "costBasisUsd": 2010
+        }
+      ]
     },
     {
       "symbol": "FELIX",
       "token": "0xf30bf00edd0c22db54c9274b90d2a4c21fc09b07",
       "balance": "234565737.063334765213666609",
-      "entryDate": null,
-      "costBasisUsd": null,
-      "costBasisEth": "0",
-      "fmvUsd": 5289.457370778198,
-      "pnlUsd": null,
-      "lots": null
+      "entryDate": "2026-02-07",
+      "costBasisUsd": 3940.52,
+      "costBasisEth": "2",
+      "fmvUsd": 5287.111713407566,
+      "pnlUsd": 1346.5917134075657,
+      "lots": [
+        {
+          "txHash": "0x3183990234fa8a320bb8c2d3047d90f4c00fc4f886833dc859502fd476dc23e0",
+          "blockNumber": 41856649,
+          "entryDate": "2026-02-07",
+          "qty": "118381417.584962961690798475",
+          "costBasisEth": "1",
+          "costBasisUsd": 2100
+        },
+        {
+          "txHash": "0xf2092a1273d0d6051e039d5c07840bfc530ef86d499c93cba41e6c4fead92d9f",
+          "blockNumber": 41856703,
+          "entryDate": "2026-02-07",
+          "qty": "116184319.478371803522868134",
+          "costBasisEth": "1",
+          "costBasisUsd": 2100
+        }
+      ]
     },
     {
       "symbol": "ETH",
       "token": null,
       "balance": "0.9973581413337396",
       "entryDate": "2026-02-07",
-      "costBasisUsd": 1970.19,
+      "costBasisUsd": 1970.26,
       "costBasisEth": "1",
-      "fmvUsd": 1964.9850364743204,
-      "pnlUsd": -5.204963525679659
+      "fmvUsd": 1965.0548515442138,
+      "pnlUsd": -5.2051484557862295
     },
     {
       "symbol": "sBNKR",
@@ -70,7 +104,7 @@
       "lots": null
     }
   ],
-  "totalUsd": 416285.0007504611,
+  "totalUsd": 418304.2346107166,
   "notes": [
     "Cost basis is inferred from on-chain ERC20 Transfer logs by pairing token in/out with WETH in/out within the same transaction.",
     "If treasury spends $ANTIHUNTER to acquire other tokens, we estimate cost basis by valuing $ANTIHUNTER at Dexscreener spot (non-historical approximation).",
