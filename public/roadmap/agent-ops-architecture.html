@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>agent ops architecture (2 mac minis → n nodes) · anti hunter</title>
+  <style>
+    :root{color-scheme:dark;}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.55;background:#09090b;color:#f4f4f5;}
+    a{color:#e4e4e7;}
+    .wrap{max-width:880px;margin:0 auto;padding:48px 20px;}
+    h1{font-size:28px;margin:0 0 8px;}
+    h2{font-size:18px;margin:28px 0 10px;}
+    .meta{color:#a1a1aa;font-size:13px;margin-bottom:24px;}
+    .box{border:1px solid #27272a;border-radius:14px;padding:16px 18px;background:rgba(0,0,0,.25)}
+    code{background:rgba(0,0,0,.35);border:1px solid #27272a;border-radius:8px;padding:2px 6px;font-size:12px}
+    ul,ol{margin:10px 0 0 18px}
+    li{margin:6px 0}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="meta"><a href="/">← home</a> · updated: 2026-02-14 · html artifact</div>
+    <h1>agent ops architecture (2 mac minis → n nodes)</h1>
+
+    <h2>north star</h2>
+    <div class="box">
+      <p>separate <strong>decision + state</strong> from <strong>side effects</strong>. mini #1 is the brain. mini #2 is the hands.</p>
+      <ul>
+        <li><strong>mini #1 (coordinator / research):</strong> planning, triage, drafting, approvals, canonical state, audit log.</li>
+        <li><strong>mini #2 (executor / side effects):</strong> x posting (api), email sends, calendar writes, deployments, credentials.</li>
+        <li><strong>rule:</strong> #1 never posts/sends/schedules. #2 never decides.</li>
+      </ul>
+    </div>
+
+    <h2>transport + storage (scales)</h2>
+    <div class="box">
+      <p>start with append-only intents + receipts on a shared path, and trigger execution via openclaw nodes. when you add more nodes, swap the shared folder for postgres/redis without changing contracts.</p>
+      <p><strong>shared path:</strong> <code>~/shared/openclaw/{queues,state,receipts,deadletter}</code></p>
+      <p><strong>scale upgrade:</strong> postgres (intents/receipts/leases/rate_limits) or redis streams (consumer groups).</p>
+    </div>
+
+    <h2>hard specs (the contracts)</h2>
+    <div class="box">
+      <ul>
+        <li><strong>idempotency key:</strong> every side-effect intent must have a stable key; receipts reference it.</li>
+        <li><strong>lease + ttl:</strong> executor takes a lease before action; ttl allows takeover on crash.</li>
+        <li><strong>central rate limits:</strong> per account/channel throttles enforced on executor, not per worker.</li>
+        <li><strong>append-only receipts:</strong> every action writes a receipt (external id + url) or failure record.</li>
+        <li><strong>secrets isolation:</strong> write-privileged tokens live only on executor box.</li>
+      </ul>
+    </div>
+
+    <h2>implementation checklist (when mini #2 arrives)</h2>
+    <div class="box">
+      <ol>
+        <li>install openclaw on mini #2; pair it as a node.</li>
+        <li>create shared folder <code>~/shared/openclaw/</code> with queues/state/receipts/deadletter.</li>
+        <li>set up syncthing (or sshfs) between minis for that folder.</li>
+        <li>move all write secrets to mini #2 only (<code>.secrets</code> never synced; never committed).</li>
+        <li>wire producer on mini #1 to write intents into shared queues (x/email/calendar).</li>
+        <li>wire consumers on mini #2 to execute intents + write receipts + update state.</li>
+        <li>enforce approval gates (especially for @antifund).</li>
+        <li>add kill switch: shared <code>executor_gate.json</code> (enabled=false pauses side effects).</li>
+        <li>add global rate limiter + circuit breaker on executor.</li>
+        <li>add a “what’s live” dashboard script on mini #1 (reads receipts + state).</li>
+      </ol>
+    </div>
+
+    <h2>notes</h2>
+    <div class="box">
+      <p>when scaling beyond 2 nodes, keep the same intent/receipt contract and swap storage: shared folder → postgres/redis streams. don’t rewrite the world.</p>
+    </div>
+
+  </div>
+</body>
+</html>

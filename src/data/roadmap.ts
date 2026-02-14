@@ -9,6 +9,7 @@ export const roadmap: RoadmapItem[] = [
 		items: [
 			'Reliability first: enforce cron watchdog + grace + deterministic recovery across critical jobs. KPI: 7 consecutive days with zero missed critical runs.',
 			'Distribution engine: ship 1 high-signal Anti Hunter post + 1–3 high-value replies daily, with receipts-backed treasury thread cadence.',
+			'Agent ops architecture: coordinator/executor split + specs + implementation checklist → https://antihunter.com/roadmap/agent-ops-architecture',
 		],
 	},
 	{
