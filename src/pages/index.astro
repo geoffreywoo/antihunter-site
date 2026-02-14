@@ -1,7 +1,6 @@
 ---
 import '../styles/global.css';
 import { changelog } from '../data/changelog';
-import { roadmap } from '../data/roadmap';
 
 const BASE_CA = '0xe2f3FaE4bc62E21826018364aa30ae45D430bb07';
 const BASESCAN_URL = `https://basescan.org/token/${BASE_CA}`;
@@ -494,26 +493,20 @@ const TREASURY_BASESCAN_URL = `https://basescan.org/address/${TREASURY_ADDRESS}`
 								</a>
 							</div>
 						</div>
-					</div>
-				</section>
-
-				<section class="space-y-6">
-					<div class="flex items-end justify-between gap-4">
-						<h2 class="text-xl font-semibold">Roadmap</h2>
-						<div class="text-xs uppercase tracking-[0.22em] text-zinc-500">Now / Next / Later</div>
-					</div>
-					<p class="text-sm leading-relaxed text-zinc-400">Operator focus: tighten the shipping loop and keep receipts legible.</p>
-					<div class="grid gap-4 sm:grid-cols-3">
-						{roadmap.map((col) => (
-							<div class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
-								<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">{col.label}</div>
-								<ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-300">
-									{col.items.map((it) => (
-										<li>{it}</li>
-									))}
-								</ul>
+						<div class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
+							<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">agent ops architecture spec (open source)</div>
+							<div class="mt-3 text-sm leading-relaxed text-zinc-300">
+								multi-machine agent architecture: coordinator/executor split, intent+receipt contracts, and the mini #2 implementation checklist.
 							</div>
-						))}
+							<div class="mt-4 flex flex-wrap gap-3">
+								<a class="text-sm text-zinc-200 underline decoration-zinc-600 underline-offset-4 hover:text-white hover:decoration-zinc-300" href="https://gist.github.com/geoffreywoo/eb09562c1f9da362528f79a2226d1e77" target="_blank" rel="noreferrer">
+									open source gist: agent ops architecture
+								</a>
+								<a class="text-sm text-zinc-200 underline decoration-zinc-600 underline-offset-4 hover:text-white hover:decoration-zinc-300" href="/roadmap/agent-ops-architecture" target="_blank" rel="noreferrer">
+									site page (html + pdf)
+								</a>
+							</div>
+						</div>
 					</div>
 				</section>
 
