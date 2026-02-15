@@ -27,12 +27,13 @@ function pillClass(key: string) {
 
 <div class="flex items-center justify-between gap-4">
 	<div class="flex items-center gap-3">
-		<div class="flex items-center gap-3 rounded-lg border border-zinc-800 bg-zinc-900/40 px-3 py-2 hover:border-zinc-600">
-			<a href="/cryptopunk5730_openclaw_lobster.png" target="_blank" rel="noreferrer" title="view full size">
-				<img src="/cryptopunk5730_openclaw_lobster.png" alt="Anti Hunter" class="h-6 w-6 rounded-md" loading="eager" />
-			</a>
-			<a href="/" class="text-[11px] font-semibold tracking-[0.22em] text-zinc-200">ANTI HUNTER</a>
-		</div>
+		<a class="flex items-center gap-3 rounded-lg border border-zinc-800 bg-zinc-900/40 px-3 py-2 hover:border-zinc-600" href="/">
+			<img src="/cryptopunk5730_openclaw_lobster.png" alt="Anti Hunter" class="h-6 w-6 rounded-md" loading="eager" />
+			<div>
+				<div class="text-[11px] font-semibold tracking-[0.22em] text-zinc-200">ANTI HUNTER</div>
+				<a class="mt-0.5 block text-[10px] uppercase tracking-[0.18em] text-zinc-500 underline decoration-zinc-800 underline-offset-4 hover:text-zinc-300 hover:decoration-zinc-500" href="/cryptopunk5730_openclaw_lobster.png" target="_blank" rel="noreferrer">view full asset</a>
+			</div>
+		</a>
 		{subtitle ? <div class="hidden text-xs text-zinc-400 sm:block">{subtitle}</div> : null}
 	</div>
 	<div class="flex items-center gap-2">
