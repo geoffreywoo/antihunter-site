@@ -172,7 +172,10 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 							</div>
 						</div>
 						<div class="flex flex-wrap items-center gap-2">
-							<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="/treasury-methodology">
+							<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="/treasury">
+								Full Treasury
+							</a>
+						<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="/treasury-methodology">
 								Methodology
 							</a>
 							<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="/treasury.snapshot.json" target="_blank" rel="noreferrer">
@@ -235,7 +238,8 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 				
 				<script type="module">
 					const fmtUsd = (n) => (n == null || !Number.isFinite(n) ? '—' : n.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }));
-					const fmtQty = (n) => (n == null || !Number.isFinite(n) ? '—' : n.toLocaleString(undefined, { maximumFractionDigits: 2 }));
+					const fmtUsdCompact = (n) => (n == null || !Number.isFinite(n) ? '—' : n.toLocaleString(undefined, { style: 'currency', currency: 'USD', notation: 'compact', maximumFractionDigits: 1 }));
+					const fmtQty = (n) => (n == null || !Number.isFinite(n) ? '—' : n.toLocaleString(undefined, { maximumFractionDigits: 4 }));
 					const rowsEl = document.getElementById('treasury-rows');
 					const footEl = document.getElementById('treasury-footnote');
 					const walletLinkEl = document.getElementById('treasury-wallet-link');
@@ -300,7 +304,7 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 							<tr class="text-zinc-200 hover:bg-white/[0.03]">
 								<td class="px-5 py-3 font-medium">${tokenCell}</td>
 								<td class="px-5 py-3">${chainPill}</td>
-								<td class="px-5 py-3 text-right tabular-nums">${fmtQty(Number(p.balance))}</td>
+								<td class="px-5 py-3 text-right tabular-nums text-zinc-200">${fmtQty(Number(p.balance))}</td>
 								<td class="px-5 py-3 text-zinc-300">${entryDate(p.entryTimestamp)}</td>
 								<td class="px-5 py-3 text-right tabular-nums">${costCell}</td>
 								<td class="px-5 py-3 text-right tabular-nums">${fmvCell}</td>
@@ -354,18 +358,23 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 							const totalFmv = pos.reduce((s, p) => s + (Number.isFinite(p.fmvUsd) ? p.fmvUsd : 0), 0);
 							const totalCost = pos.reduce((s, p) => s + (Number.isFinite(p.costUsd) ? p.costUsd : 0), 0);
 							const totalPnl = totalFmv - totalCost;
+							const totalBase = pos.reduce((s, p) => s + ((p.chainId ?? 8453) === 8453 && Number.isFinite(p.fmvUsd) ? p.fmvUsd : 0), 0);
+							const totalEth = pos.reduce((s, p) => s + ((p.chainId ?? 0) === 1 && Number.isFinite(p.fmvUsd) ? p.fmvUsd : 0), 0);
 							const totalsClass = totalPnl >= 0 ? 'text-emerald-300' : 'text-rose-300';
 							rowsEl.innerHTML = [
-								...pos.map(rowHTML),
-								`<tr class="border-t border-zinc-800/80">
-									<td class="py-3 pr-4 font-semibold text-zinc-100">Total</td>
-									<td class="py-3 pr-4"></td>
-									<td class="py-3 pr-4"></td>
-									<td class="py-3 pr-4 font-semibold">${fmtUsd(totalCost)}</td>
-									<td class="py-3 pr-4 font-semibold">${fmtUsd(totalFmv)}</td>
-									<td class="py-3 ${totalsClass} font-semibold">${fmtUsd(totalPnl)}</td>
+								...pos.map((p, i) => rowHTML(p, i)),
+								`<tr class="border-t border-zinc-800/80 bg-zinc-950/40">
+									<td class="px-5 py-3 font-semibold text-zinc-100">total</td>
+									<td class="px-5 py-3"><span class="text-xs text-zinc-500">all chains</span></td>
+									<td class="px-5 py-3 text-right tabular-nums"></td>
+									<td class="px-5 py-3 text-right tabular-nums font-semibold">${fmtUsd(totalCost)}</td>
+									<td class="px-5 py-3 text-right tabular-nums font-semibold">${fmtUsd(totalFmv)}</td>
+									<td class="px-5 py-3 text-right tabular-nums ${totalsClass} font-semibold">${fmtUsd(totalPnl)}</td>
 								</tr>`,
 							].join('');
+							if (footEl) {
+								footEl.innerHTML = `total: <span class=\"text-zinc-200\">${fmtUsdCompact(totalFmv)}</span> <span class=\"text-zinc-600\">·</span> base: <span class=\"text-zinc-300\">${fmtUsdCompact(totalBase)}</span> <span class=\"text-zinc-600\">·</span> ethereum: <span class=\"text-zinc-300\">${fmtUsdCompact(totalEth)}</span>`;
+							}
 						}
 						footEl.textContent = Array.isArray(data?.notes) ? data.notes.join(' ') : '';
 					} catch (err) {
