@@ -173,7 +173,21 @@ const TREASURY_BASESCAN_URL = `https://basescan.org/address/${TREASURY_ADDRESS}`
 						</div>
 					</div>
 
-					
+					<div class="mt-6 overflow-x-auto rounded-2xl border border-zinc-800 bg-black/20">
+						<table class="min-w-full text-sm">
+							<thead>
+								<tr class="text-left text-xs text-zinc-500">
+									<th class="px-4 py-3">Asset</th>
+									<th class="px-4 py-3">Balance</th>
+									<th class="px-4 py-3">Entry</th>
+									<th class="px-4 py-3">Cost</th>
+									<th class="px-4 py-3">FMV</th>
+									<th class="px-4 py-3">PnL</th>
+								</tr>
+							</thead>
+							<tbody id="treasury-rows" class="divide-y divide-zinc-900/60"></tbody>
+						</table>
+					</div>
 
 					<div id="treasury-footnote" class="mt-4 text-xs leading-relaxed text-zinc-500"></div>
 				</section>
