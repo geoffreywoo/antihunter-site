@@ -16,11 +16,11 @@ html {
 
 /*
   wp mode: "whitepaper" (light)
-  goals: readable, high-contrast, no grey-on-grey.
+  goals: white background, black outlines, hard right angles, minimal color.
 */
 body.wp {
   margin: 0;
-  background: #fcfcfd;
+  background: #ffffff;
   color: #0a0a0a;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 14px;
@@ -102,7 +102,68 @@ body.wp ::selection {
 
 /* neutralize legacy dark/tailwind background wrappers */
 .wp .pointer-events-none { display: none !important; }
-.wp .bg-zinc-950, .wp .text-zinc-100 { background: transparent !important; color: inherit !important; }
+
+/* hard angles everywhere */
+.wp .rounded-full,
+.wp .rounded-xl,
+.wp .rounded-2xl,
+.wp .rounded-lg,
+.wp .rounded-md,
+.wp .rounded-sm { border-radius: 0 !important; }
+
+/* default: white surfaces + black outlines */
+.wp .border-zinc-950,
+.wp .border-zinc-900,
+.wp .border-zinc-800,
+.wp .border-zinc-700,
+.wp .border-zinc-600,
+.wp .border-zinc-500,
+.wp .border-zinc-400,
+.wp .border-zinc-300,
+.wp .border-zinc-200 { border-color: #111 !important; }
+
+/* kill grey section fills */
+.wp .bg-black,
+.wp .bg-black\/10,
+.wp .bg-black\/20,
+.wp .bg-black\/30,
+.wp .bg-black\/40,
+.wp .bg-black\/50,
+.wp .bg-white\/5,
+.wp .bg-white\/10,
+.wp .bg-white\/20,
+.wp .bg-white\/30,
+.wp .bg-zinc-950,
+.wp .bg-zinc-950\/40,
+.wp .bg-zinc-950\/50,
+.wp .bg-zinc-950\/60,
+.wp .bg-zinc-900,
+.wp .bg-zinc-900\/20,
+.wp .bg-zinc-900\/30,
+.wp .bg-zinc-900\/40,
+.wp .bg-zinc-900\/60,
+.wp .bg-zinc-100,
+.wp .bg-fuchsia-500\/10,
+.wp .bg-fuchsia-500\/20,
+.wp .bg-sky-950\/20 { background: transparent !important; }
+
+/* remove glow/shadows/blurs */
+.wp .shadow,
+.wp [class*="shadow-"] { box-shadow: none !important; }
+.wp .backdrop-blur,
+.wp [class*="backdrop-blur"] { backdrop-filter: none !important; }
+
+/* zinc text on white */
+.wp .text-zinc-950 { color: #0a0a0a !important; }
+.wp .text-zinc-900 { color: #0a0a0a !important; }
+.wp .text-zinc-800 { color: #111 !important; }
+.wp .text-zinc-700 { color: #222 !important; }
+.wp .text-zinc-600 { color: #333 !important; }
+.wp .text-zinc-500 { color: #444 !important; }
+.wp .text-zinc-400 { color: #555 !important; }
+.wp .text-zinc-300 { color: #666 !important; }
+.wp .text-zinc-200 { color: #777 !important; }
+.wp .text-zinc-100 { color: #0a0a0a !important; }
 
 /* tables */
 .wp table { width: 100%; border-collapse: collapse; }
