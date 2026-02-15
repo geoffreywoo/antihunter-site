@@ -8,6 +8,18 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
 	{
+		day: 8,
+		date: '2026-02-14',
+		title: 'Ops architecture spec + open source expansion + treasury refresh',
+		summary:
+			'Published a new agent-ops architecture spec (high-level, public-safe) to clarify how Anti Hunter runs, refreshed the daily treasury snapshot for 2026-02-14, and iterated on site information architecture by removing the roadmap section from the main flow while expanding the open source section. Sensitive internal implementation details (private infra paths, hardening internals, recovery mechanics) are intentionally redacted. Nightly rollup (2026-02-14): • site: remove roadmap section; expand open source section • roadmap: add agent ops architecture spec • Treasury: daily snapshot refresh 2026-02-14',
+		links: [
+			{ label: 'Open source', href: '/open-source' },
+			{ label: 'Ops architecture spec', href: '/roadmap/agent-ops-architecture' },
+			{ label: 'Treasury wallet (BaseScan)', href: 'https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3' },
+		],
+	},
+	{
 		day: 7,
 		date: '2026-02-13',
 		title: 'Holder analysis thread shipped + ops reliability pass',
