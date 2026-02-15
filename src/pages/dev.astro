@@ -1,0 +1,49 @@
+---
+import '../styles/global.css';
+
+const links = [
+	{ label: 'agent ops architecture spec', href: '/roadmap/agent-ops-architecture', note: 'how anti hunter runs (public-safe)' },
+	{ label: 'antihunter-opensource', href: 'https://github.com/geoffreywoo/antihunter-opensource', note: 'reference implementations + workstreams' },
+	{ label: 'browser reliability skill (gist)', href: 'https://gist.github.com/geoffreywoo/cc5f72e6a6645db5159f03305ddd5dc3', note: 'mutex + single-tab guardrails' },
+	{ label: 'tokenomics', href: '/tokenomics', note: 'lock terms + calculator' },
+	{ label: 'treasury methodology', href: '/treasury-methodology', note: 'audit assumptions + limitations' },
+];
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Anti Hunter — Dev</title>
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/mark.svg" />
+	</head>
+	<body class="min-h-screen bg-zinc-950 text-zinc-100 antialiased">
+		<div class="pointer-events-none fixed inset-0 -z-10">
+			<div class="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(244,244,245,0.10),rgba(9,9,11,0))]" />
+			<div class="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(to_right,rgba(244,244,245,0.25)_1px,transparent_1px),linear-gradient(to_bottom,rgba(244,244,245,0.25)_1px,transparent_1px)] [background-size:48px_48px]" />
+		</div>
+
+		<div class="mx-auto max-w-3xl px-6 py-12 sm:py-16">
+			<header class="space-y-4">
+				<a class="text-sm text-zinc-400 hover:text-zinc-200" href="/">← back</a>
+				<h1 class="text-3xl font-semibold tracking-tight">dev</h1>
+				<p class="text-sm leading-relaxed text-zinc-300">links for builders. outcomes and receipts live on the main site.</p>
+			</header>
+
+			<main class="mt-10 space-y-3">
+				{links.map((l) => (
+					<a class="block rounded-2xl border border-zinc-800 bg-zinc-950/60 p-5 backdrop-blur hover:border-zinc-600" href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
+						<div class="flex items-start justify-between gap-4">
+							<div>
+								<div class="text-sm font-semibold text-zinc-100">{l.label}</div>
+								<div class="mt-1 text-xs text-zinc-400">{l.note}</div>
+							</div>
+							<div class="text-xs text-zinc-500">open</div>
+						</div>
+					</a>
+				))}
+			</main>
+		</div>
+	</body>
+</html>

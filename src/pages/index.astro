@@ -14,18 +14,18 @@ const TREASURY_BASESCAN_URL = `https://basescan.org/address/${TREASURY_ADDRESS}`
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Anti Hunter — an aspiring agi swarm starting as an onchain vc</title>
+		<title>Anti Hunter — agentic vc, receipts-first</title>
 		<meta
 			name="description"
-			content="Anti Hunter (@AntiHunter59823) is an on-chain, operator-grade venture system. Fees settle in $ANTIHUNTER → rewards/treasury → execution → realized PnL → on-market buys. Receipts are public."
+			content="Anti Hunter (@AntiHunter59823) is an agentic vc that ships in public. Verify the treasury and burns onchain; read the public spec."
 		/>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" type="image/svg+xml" href="/mark.svg" />
 
-		<meta property="og:title" content="Anti Hunter — an aspiring agi swarm starting as an onchain vc" />
+		<meta property="og:title" content="Anti Hunter — agentic vc, receipts-first" />
 		<meta
 			property="og:description"
-			content="Anti Hunter (@AntiHunter59823) is an on-chain, operator-grade venture system. Fees settle in $ANTIHUNTER → rewards/treasury → execution → realized PnL → on-market buys. Receipts are public."
+			content="Anti Hunter (@AntiHunter59823) is an agentic vc that ships in public. Verify the treasury and burns onchain; read the public spec."
 		/>
 		<meta property="og:type" content="website" />
 		<meta property="og:image" content="/og.svg" />
@@ -41,21 +41,22 @@ const TREASURY_BASESCAN_URL = `https://basescan.org/address/${TREASURY_ADDRESS}`
 		</div>
 
 		<div class="mx-auto max-w-4xl px-6 py-12 sm:py-16">
-			<header class="space-y-10">
+			<header class="space-y-8">
 				<div class="flex items-center justify-between gap-4">
 					<div class="flex items-center gap-3">
 						<div class="flex items-center gap-3 rounded-lg border border-zinc-800 bg-zinc-900/40 px-3 py-2">
 							<img src="/mark.svg" alt="Anti Hunter" class="h-5 w-5" loading="eager" />
 							<div class="text-[11px] font-semibold tracking-[0.22em] text-zinc-200">ANTI HUNTER</div>
 						</div>
-						<div class="hidden text-xs text-zinc-400 sm:block">on-chain venture desk · receipts-first · compounding via iteration</div>
+						<div class="hidden text-xs text-zinc-400 sm:block">agentic vc · dev-first · receipts-first</div>
 					</div>
 					<div class="flex items-center gap-2">
 						<span class="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300">
 							<span class="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-							System Active
+							system active
 						</span>
-						<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="https://x.com/AntiHunter59823" target="_blank" rel="noreferrer">X</a>
+						<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="/dev">dev</a>
+						<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="https://x.com/AntiHunter59823" target="_blank" rel="noreferrer">x</a>
 					</div>
 				</div>
 
@@ -68,76 +69,75 @@ const TREASURY_BASESCAN_URL = `https://basescan.org/address/${TREASURY_ADDRESS}`
 						loading="eager"
 					/>
 					<h1 class="text-4xl font-semibold tracking-tight sm:text-6xl">
-						Anti Hunter is an aspiring agi swarm
-						<span class="bg-gradient-to-r from-zinc-100 via-zinc-200 to-fuchsia-200 bg-clip-text text-transparent"> starting as an onchain vc</span>.
+						anti hunter is an <span class="bg-gradient-to-r from-zinc-100 via-zinc-200 to-fuchsia-200 bg-clip-text text-transparent">agentic vc</span> that ships in public.
 					</h1>
 					<p class="mt-5 max-w-2xl text-lg leading-relaxed text-zinc-300">
-						Underwriting + execution + reporting, run in public. Not a chatbot—an operator.
-						<span class="text-zinc-400"> Receipts or it didn’t happen.</span>
+						find → underwrite → allocate → report.
+						<span class="text-zinc-400"> receipts first, always.</span>
 					</p>
 
 					<div class="mt-6 flex flex-wrap items-center gap-3 text-sm text-zinc-300">
 						<span class="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/30 px-3 py-1">
 							<img src="/brand/geoffreywoo.jpg" alt="Geoffrey Woo" class="h-4 w-4 rounded-full" loading="lazy" />
 							<span>
-								Trained by <a class="text-zinc-100 underline decoration-zinc-600 underline-offset-4 hover:decoration-zinc-300" href="https://geoffreywoo.com" target="_blank" rel="noreferrer">Geoffrey Woo</a>
+								built by <a class="text-zinc-100 underline decoration-zinc-600 underline-offset-4 hover:decoration-zinc-300" href="https://geoffreywoo.com" target="_blank" rel="noreferrer">geoffrey woo</a>
 							</span>
 						</span>
 					</div>
 
-					</div>
-
 					<div class="mt-7 flex flex-wrap gap-3">
-						<a
-							class="rounded-xl bg-zinc-100 px-5 py-2.5 text-sm font-semibold text-zinc-950 shadow hover:bg-white"
-							href="https://x.com/AntiHunter59823"
-							target="_blank"
-							rel="noreferrer"
-						>
-							Follow on X
+						<a class="rounded-xl bg-zinc-100 px-5 py-2.5 text-sm font-semibold text-zinc-950 shadow hover:bg-white" href="/roadmap/agent-ops-architecture">
+							read the spec
 						</a>
-						<a
-							class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500"
-							href="/whitepaper/staking-locking-v0.2.1.pdf"
-							target="_blank"
-							rel="noreferrer"
-						>
-							Protocol Whitepaper (v0.2.1)
+						<a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="#treasury">
+							verify onchain
+						</a>
+						<a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="https://x.com/AntiHunter59823" target="_blank" rel="noreferrer">
+							follow on x
 						</a>
 					</div>
 				</div>
 			</header>
 
-			<main class="mt-14 space-y-14">
-				<section class="space-y-4">
-					<h2 class="text-xl font-semibold">Contract (Base)</h2>
-					<div class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
-						<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">Canonical token address</div>
-						<div class="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-							<code class="break-all rounded-xl border border-zinc-800 bg-black/30 p-4 text-sm text-zinc-200">{BASE_CA}</code>
-							<div class="flex flex-wrap gap-3">
-								<a
-									class="rounded-xl bg-zinc-100 px-4 py-2 text-sm font-semibold text-zinc-950 hover:bg-white"
-									href={BASESCAN_URL}
-									target="_blank"
-									rel="noreferrer"
-								>
-									View on BaseScan
-								</a>
-								<button
-									type="button"
-									data-copy
-									class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-4 py-2 text-sm font-semibold text-zinc-100 hover:border-zinc-500"
-								>
-									Copy address
-								</button>
-							</div>
+			<main class="mt-12 space-y-12">
+				<section class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
+					<div class="flex flex-wrap items-start justify-between gap-4">
+						<div>
+							<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">today</div>
+							<h2 class="mt-2 text-xl font-semibold">day {changelog[0].day} · {changelog[0].date}</h2>
+							<p class="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-300">{changelog[0].summary}</p>
 						</div>
-						<p class="mt-4 text-sm leading-relaxed text-zinc-400">
-							Always verify the contract on BaseScan. Anti Hunter does not DM contract addresses and does not do surprise airdrops.
-						</p>
+						<div class="flex flex-wrap gap-2">
+							{(changelog[0].links || []).slice(0, 2).map((l) => (
+								<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">{l.label}</a>
+							))}
+							<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="#burn">burn receipt</a>
+						</div>
 					</div>
 				</section>
+
+				<section class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
+					<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">verify</div>
+					<div class="mt-4 grid gap-3 sm:grid-cols-3">
+						<a class="rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href={BASESCAN_URL} target="_blank" rel="noreferrer">
+							<div class="text-xs uppercase tracking-[0.22em] text-zinc-500">token</div>
+							<div class="mt-1 font-medium">basescan</div>
+							<div class="mt-2 text-xs text-zinc-500">{BASE_CA.slice(0,6)}…{BASE_CA.slice(-4)}</div>
+						</a>
+						<a class="rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">
+							<div class="text-xs uppercase tracking-[0.22em] text-zinc-500">treasury</div>
+							<div class="mt-1 font-medium">wallet</div>
+							<div class="mt-2 text-xs text-zinc-500">{TREASURY_ADDRESS.slice(0,6)}…{TREASURY_ADDRESS.slice(-4)}</div>
+						</a>
+						<a class="rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href="/treasury.snapshot.json" target="_blank" rel="noreferrer">
+							<div class="text-xs uppercase tracking-[0.22em] text-zinc-500">data</div>
+							<div class="mt-1 font-medium">snapshot json</div>
+							<div class="mt-2 text-xs text-zinc-500">download</div>
+						</a>
+					</div>
+				</section>
+
+				
 
 				<section id="treasury" class="mt-10 rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] backdrop-blur sm:p-8">
 					<div class="flex flex-wrap items-end justify-between gap-3">
