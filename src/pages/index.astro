@@ -153,7 +153,7 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 
 				<section class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
 					<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">verify</div>
-					<div class="mt-4 grid gap-3 sm:grid-cols-3">
+					<div class="mt-4 grid gap-3 sm:grid-cols-4">
 						<a class="rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href={BASESCAN_URL} target="_blank" rel="noreferrer">
 							<div class="text-xs uppercase tracking-[0.22em] text-zinc-500">token</div>
 							<div class="mt-1 font-medium">basescan</div>
@@ -169,6 +169,11 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 							<div class="mt-1 font-medium">snapshot json</div>
 							<div class="mt-2 text-xs text-zinc-500">download</div>
 						</a>
+						<a class="rounded-xl border border-fuchsia-500/30 bg-fuchsia-500/10 p-4 text-sm text-zinc-200 hover:border-fuchsia-400/60" href="/treasury-policy">
+							<div class="text-xs uppercase tracking-[0.22em] text-fuchsia-200/80">policy</div>
+							<div class="mt-1 font-semibold">treasury sell policy</div>
+							<div class="mt-2 text-xs text-fuchsia-200/80">never sell/swap $antihunter</div>
+						</a>
 					</div>
 				</section>
 
@@ -183,6 +188,13 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 								Live balances + best-effort USD pricing.
 								<span class="text-zinc-400"> assumptions: <a class="underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300" href="/treasury-methodology">methodology</a>. sell policy: <a class="underline decoration-fuchsia-400/40 underline-offset-4 hover:decoration-fuchsia-300" href="/treasury-policy">never sell/swap $antihunter</a>.</span>
 							</p>
+							<div class="mt-4 rounded-2xl border border-fuchsia-500/30 bg-fuchsia-500/10 p-4 text-sm text-zinc-200">
+								<div class="text-[11px] uppercase tracking-[0.22em] text-fuchsia-200/80">high importance</div>
+								<div class="mt-1 font-semibold">treasury sell policy: never sell/swap $antihunter (change control)</div>
+								<div class="mt-2 text-sm text-zinc-300">
+									<a class="underline decoration-fuchsia-300/40 underline-offset-4 hover:decoration-fuchsia-200" href="/treasury-policy">read the full policy + token sale protocol</a>
+								</div>
+							</div>
 							<div class="mt-3 flex flex-wrap items-center gap-2 text-xs text-zinc-500">
 								<span>wallets:</span>
 								<a id="treasury-wallet-link" class="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-black/20 px-2.5 py-1 text-zinc-300 hover:border-zinc-600 hover:text-zinc-100" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer" title="primary (base)">
