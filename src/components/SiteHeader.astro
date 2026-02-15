@@ -17,9 +17,11 @@ const nav = [
 ] as const;
 
 function pillClass(key: string) {
-	const base = 'rounded-full border bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600';
-	if (active && key === active) return base + ' border-zinc-600';
-	return base + ' border-zinc-800';
+	const base = 'rounded-full border px-3.5 py-1.5 text-xs font-medium text-zinc-200 transition-colors';
+	const idle = ' border-zinc-800 bg-zinc-900/60 hover:border-zinc-600 hover:bg-zinc-800/60';
+	const on = ' border-zinc-600 bg-zinc-800/70';
+	if (active && key === active) return base + on;
+	return base + idle;
 }
 ---
 
@@ -41,6 +43,6 @@ function pillClass(key: string) {
 		{nav.map((n) => (
 			<a class={pillClass(n.key)} href={n.href}>{n.label}</a>
 		))}
-		<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="https://x.com/AntiHunter59823" target="_blank" rel="noreferrer">x</a>
+		<a class="rounded-full border border-zinc-800 bg-zinc-900/60 px-3.5 py-1.5 text-xs font-medium text-zinc-200 transition-colors hover:border-zinc-600 hover:bg-zinc-800/60" href="https://x.com/AntiHunter59823" target="_blank" rel="noreferrer">x</a>
 	</div>
 </div>
