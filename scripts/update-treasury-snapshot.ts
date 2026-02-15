@@ -425,28 +425,7 @@ async function main() {
 	} else {
 		console.log(`[treasury:snapshot] fast_mode=1 (skip log scan; balances only)`);
 		snapshot = { wallet: TREASURY_WALLET, positions: [], notes: ['fast_mode: balances-only (log scan skipped)'] };
-		const ethQtyFastBase = (await Promise.all(TREASURY_WALLETS.map((w) => ethBalanceBase(w)))).reduce((a, b) => a + b, 0);
-		const ethPxFast = await dexscreenerPriceUsd('0x4200000000000000000000000000000000000006');
-		const ethFmvFastBase = ethPxFast != null ? ethQtyFastBase * ethPxFast : undefined;
-		if ((ethFmvFastBase ?? 0) >= 100) {
-			snapshot.positions.push({
-				chain: 'base',
-				chainId: 8453,
-				token: null,
-				symbol: 'ETH',
-				name: 'Ethereum',
-				decimals: 18,
-				balance: String(ethQtyFastBase),
-				balanceRaw: '',
-				entryTimestamp: Math.floor(new Date(ETH_ENTRY_DATE).getTime() / 1000),
-				costEth: '1',
-				costEthWei: '1000000000000000000',
-				costUsd: ethPxFast != null ? ethPxFast * 1 : undefined,
-				priceUsd: ethPxFast ?? undefined,
-				fmvUsd: ethFmvFastBase,
-				pnlUsd: ethPxFast != null ? ethFmvFastBase - ethPxFast : undefined,
-			});
-		}
+		// note: we add native ETH rows later in the pipeline (by chain), so we don’t double-count here.
 	}
 	(snapshot as any).wallets = TREASURY_WALLETS;
 	console.log(`[treasury:snapshot] fast mode init done, positions=${(snapshot.positions ?? []).length} (${Date.now() - t0}ms)`);
