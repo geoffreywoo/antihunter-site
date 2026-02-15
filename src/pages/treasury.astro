@@ -87,9 +87,9 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 									<th class="bg-zinc-950/60 px-5 py-3 backdrop-blur first:rounded-tl-xl">asset</th>
 									<th class="bg-zinc-950/60 px-5 py-3 backdrop-blur">chain</th>
 									<th class="bg-zinc-950/60 px-5 py-3 text-right backdrop-blur">balance</th>
+									<th class="bg-zinc-950/60 px-5 py-3 text-right backdrop-blur">fmv</th>
 									<th class="bg-zinc-950/60 px-5 py-3 backdrop-blur">entry</th>
 									<th class="bg-zinc-950/60 px-5 py-3 text-right backdrop-blur">cost</th>
-									<th class="bg-zinc-950/60 px-5 py-3 text-right backdrop-blur">fmv</th>
 									<th class="bg-zinc-950/60 px-5 py-3 text-right backdrop-blur last:rounded-tr-xl">pnl</th>
 								</tr>
 							</thead>
@@ -147,9 +147,9 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 							<td class=\"px-4 py-2.5 font-medium\">${tokenCell}</td>
 							<td class=\"px-4 py-2.5\">${chainPill}</td>
 							<td class=\"px-4 py-2.5 text-right tabular-nums\">${fmtQty(Number(p.balance))}</td>
+							<td class=\"px-4 py-2.5 text-right tabular-nums font-semibold text-zinc-100\">${fmvCell}</td>
 							<td class=\"px-4 py-2.5 text-zinc-300\">${entryDate(p.entryTimestamp)}</td>
 							<td class=\"px-4 py-2.5 text-right tabular-nums\">${costCell}</td>
-							<td class=\"px-4 py-2.5 text-right tabular-nums\">${fmvCell}</td>
 							<td class=\"px-4 py-2.5 text-right tabular-nums ${pnlClass}\">${pnlTxt}</td>
 						</tr>`;
 				}
