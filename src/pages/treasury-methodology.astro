@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import SiteFooter from '../components/SiteFooter.astro';
 
 const TREASURY_ADDRESS = '0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3';
 const TREASURY_BASESCAN_URL = `https://basescan.org/address/${TREASURY_ADDRESS}`;
@@ -132,6 +133,7 @@ const LIVE_JSON_PATH = '/api/treasury.json';
 					<a class="hover:text-zinc-300" href="/">Home</a>
 				</div>
 			</footer>
+			<SiteFooter />
 		</div>
 	</body>
 </html>

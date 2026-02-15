@@ -1,0 +1,21 @@
+---
+const links = [
+	{ label: 'home', href: '/' },
+	{ label: 'roadmap', href: '/roadmap' },
+	{ label: 'specs', href: '/specs' },
+	{ label: 'treasury', href: '/treasury' },
+	{ label: 'dev', href: '/dev' },
+];
+---
+
+<footer class="mt-14 border-t border-zinc-900/60 pt-8 text-xs text-zinc-500">
+	<div class="flex flex-wrap items-center justify-between gap-3">
+		<div class="text-zinc-500">anti hunter · receipts-first</div>
+		<nav class="flex flex-wrap items-center gap-3">
+			{links.map((l) => (
+				<a class="text-zinc-400 hover:text-zinc-200" href={l.href}>{l.label}</a>
+			))}
+			<a class="text-zinc-400 hover:text-zinc-200" href="https://x.com/AntiHunter59823" target="_blank" rel="noreferrer">x</a>
+		</nav>
+	</div>
+</footer>

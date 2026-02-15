@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import SiteFooter from '../components/SiteFooter.astro';
 
 const specs = [
 	{
@@ -28,8 +29,8 @@ const specs = [
 		artifacts: [],
 	},
 	{
-		label: 'tokenomics',
-		note: 'staking/locking whitepaper + calculator',
+		label: 'tokenomics (optional)',
+		note: 'legacy crypto rails: staking/locking whitepaper + calculator',
 		href: '/tokenomics',
 		artifacts: [],
 	},
@@ -92,6 +93,7 @@ const specs = [
 					</div>
 				))}
 			</main>
+			<SiteFooter />
 		</div>
 	</body>
 </html>

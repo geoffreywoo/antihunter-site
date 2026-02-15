@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import SiteFooter from '../components/SiteFooter.astro';
 
 const BASE_CA = '0xe2f3FaE4bc62E21826018364aa30ae45D430bb07';
 const BASESCAN_URL = `https://basescan.org/token/${BASE_CA}`;
@@ -197,6 +198,7 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 					if (footEl) footEl.textContent = String(e?.message ?? e);
 				}
 			</script>
+			<SiteFooter />
 		</div>
 	</body>
 </html>
