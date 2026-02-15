@@ -720,45 +720,63 @@ async function main() {
 			}
 			if (r.fmvUsd != null && r.costBasisUsd != null) r.pnlUsd = r.fmvUsd - r.costBasisUsd;
 
-			// Lots: sBNKR was staked in multiple lots; derive from inbound Transfer logs (best-effort),
-			// or fall back to manual override file.
+			// Lots: sBNKR was staked in multiple lots. In fast_mode we intentionally skip large log scans.
+			// Prefer (1) manual override, (2) prior snapshot lots, and only then (3) best-effort onchain log scan.
 			if (!Array.isArray(r.lots) || r.lots.length === 0) {
 				let derivedLots: any[] | null = null;
+
+				// 1) Manual override file (cheap, deterministic)
 				try {
-					const latestHex = await rpcCall('eth_blockNumber', []);
-					const latest = Number(BigInt(latestHex));
-					const meta = await erc20Meta(SBNKR_TOKEN);
-					const rawLots = await inboundErc20Lots(SBNKR_TOKEN, TREASURY_WALLET, { fromBlock: TREASURY_START_BLOCK, toBlock: latest });
-					const qtys = rawLots.map((l) => ({ ...l, qtyDec: Number(formatUnits(BigInt(l.qty), meta.decimals)) }));
-					const sumQty = qtys.reduce((s, l) => s + (Number.isFinite(l.qtyDec) ? l.qtyDec : 0), 0);
-					const totalCb = typeof r.costBasisUsd === 'number' ? r.costBasisUsd : null;
-					derivedLots = qtys
-						.filter((l) => l.qtyDec > 0)
-						.sort((a, b) => a.blockNumber - b.blockNumber)
-						.map((l) => ({
-							txHash: l.txHash,
-							blockNumber: l.blockNumber,
-							entryDate: l.entryDate,
-							qty: String(l.qtyDec),
-							costBasisUsd: totalCb != null && sumQty > 0 ? (totalCb * (l.qtyDec / sumQty)) : null,
-							costBasisEth: null,
-						}));
+					const overridePath = path.join(projectRoot, 'public', 'treasury.sbnkr-lots.json');
+					const overrideRaw = await fs.readFile(overridePath, 'utf8');
+					const override = JSON.parse(overrideRaw);
+					if (Array.isArray(override.lots) && override.lots.length > 0) {
+						console.log('sBNKR lots: using manual override');
+						derivedLots = override.lots;
+					}
 				} catch {
-					// ignore log scan errors
+					// no override file
 				}
 
-				// Fallback: read manual override file if log scan failed or found nothing
+				// 2) Prior snapshot lots (avoid transient RPC/log issues)
 				if (!derivedLots || derivedLots.length === 0) {
 					try {
-						const overridePath = path.join(projectRoot, 'public', 'treasury.sbnkr-lots.json');
-						const overrideRaw = await fs.readFile(overridePath, 'utf8');
-						const override = JSON.parse(overrideRaw);
-						if (Array.isArray(override.lots) && override.lots.length > 0) {
-							console.log('sBNKR lots: using manual override');
-							derivedLots = override.lots;
+						const priorRaw = await fs.readFile(path.join(projectRoot, 'public', 'treasury.snapshot.json'), 'utf8');
+						const prior = JSON.parse(priorRaw) as any;
+						const priorRow = (prior?.rows ?? []).find((x: any) => (x?.token ?? '').toLowerCase() === SBNKR_TOKEN);
+						if (Array.isArray(priorRow?.lots) && priorRow.lots.length > 0) {
+							console.log('sBNKR lots: inherited from prior snapshot');
+							derivedLots = priorRow.lots;
 						}
 					} catch {
-						// no override file
+						// no prior snapshot
+					}
+				}
+
+				// 3) Onchain log scan (expensive). Skip when TREASURY_FAST_MODE=1.
+				const fastModeNow = String(process.env.TREASURY_FAST_MODE ?? '1') === '1';
+				if ((!derivedLots || derivedLots.length === 0) && !fastModeNow) {
+					try {
+						const latestHex = await rpcCall('eth_blockNumber', []);
+						const latest = Number(BigInt(latestHex));
+						const meta = await erc20Meta(SBNKR_TOKEN);
+						const rawLots = await inboundErc20Lots(SBNKR_TOKEN, TREASURY_WALLET, { fromBlock: TREASURY_START_BLOCK, toBlock: latest });
+						const qtys = rawLots.map((l) => ({ ...l, qtyDec: Number(formatUnits(BigInt(l.qty), meta.decimals)) }));
+						const sumQty = qtys.reduce((s, l) => s + (Number.isFinite(l.qtyDec) ? l.qtyDec : 0), 0);
+						const totalCb = typeof r.costBasisUsd === 'number' ? r.costBasisUsd : null;
+						derivedLots = qtys
+							.filter((l) => l.qtyDec > 0)
+							.sort((a, b) => a.blockNumber - b.blockNumber)
+							.map((l) => ({
+								txHash: l.txHash,
+								blockNumber: l.blockNumber,
+								entryDate: l.entryDate,
+								qty: String(l.qtyDec),
+								costBasisUsd: totalCb != null && sumQty > 0 ? (totalCb * (l.qtyDec / sumQty)) : null,
+								costBasisEth: null,
+							}));
+					} catch {
+						// ignore log scan errors
 					}
 				}
 
