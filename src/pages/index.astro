@@ -251,11 +251,19 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 						const u = sym.toUpperCase();
 						const noDollar = u === 'ETH' || u === 'WETH' || sym.toLowerCase().startsWith('cryptopunk');
 						const label = noDollar ? sym : `$${sym}`;
-						const tokenCell = p.link
-							? `<a class=\"text-zinc-100 underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300\" href=\"${p.link}\" target=\"_blank\" rel=\"noreferrer\">${label}</a>`
-							: (p.token && String(p.chainId ?? 8453) === '8453')
-								? `<a class=\"text-zinc-100 underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300\" href=\"https://dexscreener.com/base/${p.token}\" target=\"_blank\" rel=\"noreferrer\">${label}</a>`
-								: `<span>${label}</span>`;
+						const isSbnkr = u === 'SBNKR';
+						const sbnkrHref = 'https://dexscreener.com/base/0x603945433c00c71382d4db98bb166b8119ec7595';
+						const tokenHref = isSbnkr
+							? sbnkrHref
+							: (p.link
+								? p.link
+								: (p.token && String(p.chainId ?? 8453) === '8453')
+									? `https://dexscreener.com/base/${p.token}`
+									: null);
+						const subtitle = isSbnkr ? '<div class=\"mt-0.5 text-[10px] uppercase tracking-[0.18em] text-zinc-500\">staked bnkr</div>' : '';
+						const tokenCell = tokenHref
+							? `<a class=\"text-zinc-100 underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300\" href=\"${tokenHref}\" target=\"_blank\" rel=\"noreferrer\">${label}</a>${subtitle}`
+							: `<span>${label}</span>${subtitle}`;
 
 						const lots = Array.isArray(p.lots) ? p.lots.filter(Boolean) : [];
 						const lotsInline = lots.length
