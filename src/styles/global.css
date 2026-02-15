@@ -6,7 +6,7 @@
 */
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 html {
@@ -16,11 +16,11 @@ html {
 
 body.wp {
   margin: 0;
-  background: #fcfcfc;
-  color: #0a0a0a;
+  background: #09090b;
+  color: #f4f4f5;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 14px;
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 body.wp a {
@@ -28,16 +28,17 @@ body.wp a {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
+  text-decoration-color: rgba(244,244,245,0.35);
 }
 
 body.wp a:hover {
-  background: #111;
+  background: rgba(244,244,245,0.08);
   color: #fff;
-  text-decoration: none;
+  text-decoration-color: rgba(244,244,245,0.8);
 }
 
 body.wp ::selection {
-  background: #111;
+  background: rgba(244,244,245,0.18);
   color: #fff;
 }
 
@@ -50,12 +51,12 @@ body.wp ::selection {
 
 .wp .rule {
   border: 0;
-  border-top: 1px solid #111;
+  border-top: 1px solid rgba(244,244,245,0.16);
   margin: 16px 0;
 }
 
-.wp .muted { color: #555; }
-.wp .tiny { font-size: 12px; }
+.wp .muted { color: rgba(244,244,245,0.68); }
+.wp .tiny { font-size: 12px; letter-spacing: .02em; }
 
 /* header */
 .wp .site-header {
@@ -100,22 +101,13 @@ body.wp ::selection {
 
 /* tables */
 .wp table { width: 100%; border-collapse: collapse; }
-.wp th, .wp td { border-top: 1px solid #111; padding: 6px 8px; vertical-align: top; }
-.wp thead th { border-top: 1px solid #111; border-bottom: 1px solid #111; text-align: left; }
+.wp th, .wp td { border-top: 1px solid rgba(244,244,245,0.16); padding: 6px 8px; vertical-align: top; }
+.wp thead th { border-top: 1px solid rgba(244,244,245,0.16); border-bottom: 1px solid rgba(244,244,245,0.16); text-align: left; }
 .wp .tabular-nums { font-variant-numeric: tabular-nums; }
 
-/* legacy pill backgrounds become simple */
-.wp .rounded-full, .wp .rounded-xl, .wp .rounded-2xl, .wp .rounded-lg, .wp .rounded-md { border-radius: 0 !important; }
-.wp .border-zinc-800, .wp .border-zinc-700 { border-color: #111 !important; }
-.wp .bg-zinc-900\/30, .wp .bg-zinc-900\/40, .wp .bg-zinc-900\/60, .wp .bg-zinc-950\/60, .wp .bg-black\/20 { background: transparent !important; }
-.wp .text-zinc-500, .wp .text-zinc-400, .wp .text-zinc-300, .wp .text-zinc-200 { color: #555 !important; }
-.wp .text-zinc-100 { color: #0a0a0a !important; }
-
-/* keep key semantic colors for pnl */
-.wp .text-emerald-300 { color: #0a7a0a !important; }
-.wp .text-rose-300 { color: #a00000 !important; }
-.wp .bg-zinc-100 { background: #111 !important; color: #fff !important; }
-.wp .text-zinc-950 { color: #fff !important; }
+/* keep key semantic colors for pnl (override tailwind if present) */
+.wp .text-emerald-300 { color: #34d399 !important; }
+.wp .text-rose-300 { color: #fb7185 !important; }
 
 /* make big marketing headings look like docs */
 .wp h1, .wp h2, .wp h3 { font-family: inherit; letter-spacing: 0; }
@@ -131,7 +123,8 @@ body.wp ::selection {
 
 /* blocks */
 .wp .box {
-  border: 1px solid #111;
+  border: 1px solid rgba(244,244,245,0.14);
+  background: rgba(244,244,245,0.04);
   padding: 14px;
 }
 
@@ -139,8 +132,21 @@ body.wp ::selection {
   font-family: inherit;
 }
 
+.wp code {
+  padding: 1px 4px;
+  border: 1px solid rgba(244,244,245,0.14);
+  background: rgba(0,0,0,0.35);
+}
+
 .wp pre {
-  border: 1px solid #111;
+  border: 1px solid rgba(244,244,245,0.14);
+  background: rgba(0,0,0,0.45);
   padding: 12px;
   overflow: auto;
+}
+
+.wp pre code {
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
