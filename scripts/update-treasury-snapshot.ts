@@ -12,7 +12,17 @@ import {
 } from '../src/lib/treasury/abi';
 import { fetchDexPairsForToken, parseUsdPrice, pickBestBasePair } from '../src/lib/treasury/dexscreener';
 
-const TREASURY_WALLET = (process.env.TREASURY_WALLET ?? '0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3').toLowerCase();
+const TREASURY_WALLETS = String(
+	process.env.TREASURY_WALLETS ??
+		process.env.TREASURY_WALLET ??
+		// default: primary hot + secondary hard wallet
+		'0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3,0x30d8c9f8955e6453f6b471fb950ffd49c2e843d3',
+)
+	.split(',')
+	.map((s) => s.trim().toLowerCase())
+	.filter(Boolean);
+
+const TREASURY_WALLET = TREASURY_WALLETS[0];
 const BASE_RPCS = [
 	process.env.BASE_RPC_URL,
 	process.env.BASE_RPC,
@@ -364,8 +374,9 @@ async function main() {
 		cacheTtlMs: 0,
 		tokenAllowlist: TOKEN_ALLOWLIST,
 	});
+	(snapshot as any).wallets = TREASURY_WALLETS;
 
-	// Ensure current balances are present even if acquired before the scan window
+	// Ensure current balances are present even if acquired before the scan window (primary wallet)
 	const existing = new Set((snapshot.positions ?? []).map((p) => (p.token ?? '').toLowerCase()));
 	for (const token of TOKEN_ALLOWLIST) {
 		if (existing.has(token)) continue;
@@ -389,6 +400,41 @@ async function main() {
 			fmvUsd,
 			pnlUsd: undefined,
 		});
+	}
+
+	// Add secondary wallets as balance-only overlays (keeps the primary wallet lot/accounting logic intact)
+	const secondaryWallets = TREASURY_WALLETS.slice(1);
+	for (const w of secondaryWallets) {
+		for (const token of TOKEN_ALLOWLIST) {
+			const [meta, balRaw, px] = await Promise.all([erc20Meta(token), erc20Balance(token, w), dexscreenerPriceUsd(token)]);
+			if (balRaw <= 0n) continue;
+			const bal = formatUnits(balRaw, meta.decimals);
+			const balNum = Number(bal);
+			const addFmv = px != null && Number.isFinite(balNum) ? balNum * px : undefined;
+			const cur = (snapshot.positions ?? []).find((p: any) => (p.token ?? '').toLowerCase() === token.toLowerCase());
+			if (cur) {
+				try {
+					cur.balance = String(Number(cur.balance ?? 0) + balNum);
+				} catch {}
+				if (typeof addFmv === 'number') cur.fmvUsd = (cur.fmvUsd ?? 0) + addFmv;
+			} else {
+				snapshot.positions.push({
+					token,
+					symbol: normalizeDisplaySymbol(meta.symbol),
+					name: meta.name,
+					decimals: meta.decimals,
+					balance: bal,
+					balanceRaw: balRaw.toString(),
+					entryTimestamp: undefined,
+					costEth: '0',
+					costEthWei: '0',
+					costUsd: undefined,
+					priceUsd: px ?? undefined,
+					fmvUsd: addFmv,
+					pnlUsd: undefined,
+				});
+			}
+		}
 	}
 	(snapshot.positions ?? []).sort((a: any, b: any) => (b.fmvUsd ?? 0) - (a.fmvUsd ?? 0));
 
@@ -431,12 +477,21 @@ async function main() {
 
 	// Ensure WETH is always computed from a reliable ETH/USD source
 	const WETH = '0x4200000000000000000000000000000000000006';
-	let wethBalRaw = await erc20Balance(WETH, TREASURY_WALLET);
+	let wethBalRaw = 0n;
+	for (const w of TREASURY_WALLETS) {
+		wethBalRaw += await erc20Balance(WETH, w);
+	}
 	const wethMeta = await erc20Meta(WETH);
 	let wethBal = wethBalRaw > 0n ? formatUnits(wethBalRaw, wethMeta.decimals) : '0';
 	// Some public RPCs incorrectly return 0 for balanceOf under load; BaseScan is the fallback source of truth.
 	if (wethBalRaw === 0n) {
-		const bs = await basescanTokenBalance(WETH, TREASURY_WALLET, 'WETH');
+		// fallback: sum balances across wallets via BaseScan
+		let bsSum = 0;
+		for (const w of TREASURY_WALLETS) {
+			const bs = await basescanTokenBalance(WETH, w, 'WETH');
+			if (bs != null) bsSum += bs;
+		}
+		const bs = bsSum;
 		if (bs != null && bs > 0) {
 			wethBal = String(bs);
 			wethBalRaw = BigInt(Math.floor(bs * 1e6)) * 10n ** 12n; // approximate to 18 decimals
@@ -461,7 +516,7 @@ async function main() {
 	}
 
 	// Add native ETH as a row (FMV from current ETH/USD)
-	const ethQty = await ethBalance(TREASURY_WALLET);
+	const ethQty = (await Promise.all(TREASURY_WALLETS.map((w) => ethBalance(w)))).reduce((a, b) => a + b, 0);
 	const ethFmvUsd = ethPx != null ? ethQty * ethPx : null;
 	if ((ethFmvUsd ?? 0) >= 100) {
 		const ethCostUsd = ethPx != null ? ethPx * 1 : null;
@@ -522,7 +577,10 @@ async function main() {
 		updatedAt: new Date().toISOString(),
 		date: dayISO(Date.now()),
 		wallet: TREASURY_WALLET,
+		wallets: TREASURY_WALLETS,
 		basescan: `https://basescan.org/address/${TREASURY_WALLET}`,
+		basescans: TREASURY_WALLETS.map((w) => `https://basescan.org/address/${w}`),
+		etherscan: `https://etherscan.io/address/${TREASURY_WALLETS[TREASURY_WALLETS.length - 1]}`,
 		rows,
 		totalUsd,
 		notes: snapshot.notes,
