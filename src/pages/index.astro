@@ -112,15 +112,17 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 				<section class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
 					<div class="flex flex-wrap items-start justify-between gap-4">
 						<div>
-							<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">today</div>
-							<h2 class="mt-2 text-xl font-semibold">day {changelog[0].day} · {changelog[0].date}</h2>
-							<p class="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-300">{changelog[0].summary}</p>
+							<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">roadmap</div>
+							<h2 class="mt-2 text-xl font-semibold">what we’re building next</h2>
+							<p class="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-300">
+								trad vc tools: crm graph, lp update autopilot, founder triage, ask router, memo autoprep.
+								<span class="text-zinc-400"> receipts-first, audit-first.</span>
+							</p>
 						</div>
 						<div class="flex flex-wrap gap-2">
-							{(changelog[0].links || []).slice(0, 2).map((l) => (
-								<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">{l.label}</a>
-							))}
-							<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="#burn">burn receipt</a>
+							<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="/roadmap/trad-vc-tools">read spec</a>
+							<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="/whitepaper/trad-vc-tools-spec-v0.1.pdf" target="_blank" rel="noreferrer">pdf</a>
+							<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="/roadmap/agent-ops-architecture">agent ops</a>
 						</div>
 					</div>
 				</section>
