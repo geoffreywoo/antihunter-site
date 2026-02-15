@@ -247,9 +247,11 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 							? '—'
 							: `${fmtUsd(p.costUsd)}${p.costEth ? ` <span class=\"text-xs text-zinc-500\">(${p.costEth} ETH)</span>` : ''}`;
 						const fmvCell = p.fmvUsd == null ? '—' : fmtUsd(p.fmvUsd);
-						const tokenCell = p.token && String(p.chainId ?? 8453) === '8453'
-							? `<a class=\"text-zinc-100 underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300\" href=\"https://dexscreener.com/base/${p.token}\" target=\"_blank\" rel=\"noreferrer\">$${p.symbol}</a>`
-							: `<span>$${p.symbol}</span>`;
+						const tokenCell = p.link
+							? `<a class=\"text-zinc-100 underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300\" href=\"${p.link}\" target=\"_blank\" rel=\"noreferrer\">$${p.symbol}</a>`
+							: (p.token && String(p.chainId ?? 8453) === '8453')
+								? `<a class=\"text-zinc-100 underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300\" href=\"https://dexscreener.com/base/${p.token}\" target=\"_blank\" rel=\"noreferrer\">$${p.symbol}</a>`
+								: `<span>$${p.symbol}</span>`;
 
 						const lots = Array.isArray(p.lots) ? p.lots.filter(Boolean) : [];
 						const lotsInline = lots.length

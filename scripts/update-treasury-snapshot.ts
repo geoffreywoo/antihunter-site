@@ -568,6 +568,24 @@ async function main() {
 	let ethPx = await dexscreenerPriceUsd(WETH);
 	if (ethPx == null) ethPx = await chainlinkEthUsdLatest();
 
+	// manual: nft holdings (held at cost basis unless we add a pricing feed)
+	// cryptopunks (ethereum mainnet)
+	if (ethPx != null) {
+		rows.push({
+			chain: 'ethereum',
+			chainId: 1,
+			symbol: 'cryptopunk #5730',
+			token: null,
+			balance: '1',
+			entryDate: dayISO(Date.now()),
+			costBasisUsd: ethPx * 33,
+			costBasisEth: '33',
+			fmvUsd: ethPx * 33,
+			pnlUsd: 0,
+			link: 'https://www.cryptopunks.app/cryptopunks/details/5730',
+		});
+	}
+
 	if (wethBalRaw > 0n) {
 		const wethFmvUsd = ethPx != null && Number.isFinite(wethBalNum) ? wethBalNum * ethPx : null;
 		rows.push({
