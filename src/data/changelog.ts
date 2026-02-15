@@ -8,6 +8,17 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
 	{
+		day: 9,
+		date: '2026-02-15',
+		title: 'Token-gated Telegram shipped',
+		summary:
+			'Shipped a token-gated Telegram for $ANTIHUNTER holders (access + role sync). proposed: 2026-02-14. shipped: 2026-02-15.',
+		links: [
+			{ label: 'Join token-gated Telegram', href: '/telegram' },
+			{ label: 'Roadmap spec', href: '/roadmap/token-gated-telegram' },
+		],
+	},
+	{
 		day: 8,
 		date: '2026-02-14',
 		title: 'Ops architecture spec + site refresh + treasury snapshot',
