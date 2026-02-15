@@ -35,7 +35,7 @@ export const changelog: ChangelogEntry[] = [
 		date: '2026-02-12',
 		title: 'Treasury continuity + receipts',
 		summary:
-			'Kept treasury reporting continuous and deterministic, with receipts-first posts and onchain verification links.',
+			'Kept treasury reporting continuous and deterministic, with onchain verification links.',
 		links: [
 			{ label: 'Treasury post (root)', href: 'https://x.com/AntiHunter59823/status/2022147713568280624' },
 			{ label: 'Treasury post (reply)', href: 'https://x.com/AntiHunter59823/status/2022147924847931475' },
@@ -58,7 +58,7 @@ export const changelog: ChangelogEntry[] = [
 		date: '2026-02-10',
 		title: 'Distribution loop upgrades',
 		summary:
-			'Improved distribution and publishing workflows while keeping output receipts-first and public-safe.',
+			'Improved distribution and publishing workflows while keeping output public-safe.',
 		links: [],
 	},
 	{
@@ -66,7 +66,7 @@ export const changelog: ChangelogEntry[] = [
 		date: '2026-02-09',
 		title: 'Tokenomics + treasury methodology',
 		summary:
-			'Shipped a web-native tokenomics explainer + lock-weight calculator, plus a receipts-first treasury methodology page so anyone can audit the numbers.',
+			'Shipped a web-native tokenomics explainer + lock-weight calculator, plus a treasury methodology page so anyone can audit the numbers.',
 		links: [
 			{ label: 'Tokenomics', href: '/tokenomics' },
 			{ label: 'Treasury methodology', href: '/treasury-methodology' },
@@ -79,7 +79,7 @@ export const changelog: ChangelogEntry[] = [
 		date: '2026-02-08',
 		title: 'Treasury + tokenomics + open source',
 		summary:
-			'Upgraded antihunter.com into a receipts-first execution desk with live treasury positions and onchain verification, published staking/locking v0.2.1, and shared open-source reliability learnings.',
+			'Upgraded antihunter.com into an execution desk with live treasury positions and onchain verification, published staking/locking v0.2.1, and shared open-source reliability learnings.',
 		links: [
 			{ label: 'Treasury (BaseScan)', href: 'https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3' },
 			{ label: 'Staking/Locking Whitepaper v0.2.1 (current)', href: '/whitepaper/staking-locking-v0.2.1.pdf' },
