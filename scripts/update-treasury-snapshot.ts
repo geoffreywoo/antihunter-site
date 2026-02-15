@@ -72,7 +72,9 @@ const EXTRA_TOKENS = String(process.env.TREASURY_EXTRA_TOKENS ?? '')
 const TOKEN_ALLOWLIST = Array.from(new Set([...BASE_TOKEN_ALLOWLIST, ...EXTRA_TOKENS]));
 
 const FEE_ENTRY_DATE = '2026-02-06';
-const ETH_ENTRY_DATE = '2026-02-07';
+// ETH entry date + cost basis are not safely inferable without explicit transfer attribution.
+// Keep entryDate null and cost basis null unless/until we implement lot attribution for native ETH.
+const ETH_ENTRY_DATE: string | null = null;
 const HARD_CODED_ZERO_COST_TOKENS = new Set([
 	'0xe2f3fae4bc62e21826018364aa30ae45d430bb07', // ANTIHUNTER
 	'0x4200000000000000000000000000000000000006', // WETH
@@ -663,7 +665,6 @@ async function main() {
 	const ethQtyBase = (await Promise.all(TREASURY_WALLETS.map((w) => ethBalanceBase(w)))).reduce((a, b) => a + b, 0);
 	const ethFmvUsdBase = ethPx != null ? ethQtyBase * ethPx : null;
 	if ((ethFmvUsdBase ?? 0) >= 100) {
-		const ethCostUsd = ethPx != null ? ethPx * 1 : null;
 		rows.push({
 			chain: 'base',
 			chainId: 8453,
@@ -671,17 +672,16 @@ async function main() {
 			token: null,
 			balance: String(ethQtyBase),
 			entryDate: ETH_ENTRY_DATE,
-			costBasisUsd: ethCostUsd,
-			costBasisEth: '1',
+			costBasisUsd: null,
+			costBasisEth: null,
 			fmvUsd: ethFmvUsdBase,
-			pnlUsd: ethFmvUsdBase != null && ethCostUsd != null ? (ethFmvUsdBase - ethCostUsd) : null,
+			pnlUsd: null,
 		});
 	}
 
 	const ethQtyEthereum = (await Promise.all(TREASURY_WALLETS.map((w) => ethBalanceEthereum(w)))).reduce((a, b) => a + b, 0);
 	const ethFmvUsdEthereum = ethPx != null ? ethQtyEthereum * ethPx : null;
 	if ((ethFmvUsdEthereum ?? 0) >= 100) {
-		const ethCostUsd = ethPx != null ? ethPx * 1 : null;
 		rows.push({
 			chain: 'ethereum',
 			chainId: 1,
@@ -689,10 +689,10 @@ async function main() {
 			token: null,
 			balance: String(ethQtyEthereum),
 			entryDate: ETH_ENTRY_DATE,
-			costBasisUsd: ethCostUsd,
-			costBasisEth: '1',
+			costBasisUsd: null,
+			costBasisEth: null,
 			fmvUsd: ethFmvUsdEthereum,
-			pnlUsd: ethFmvUsdEthereum != null && ethCostUsd != null ? (ethFmvUsdEthereum - ethCostUsd) : null,
+			pnlUsd: null,
 		});
 	}
 
@@ -797,7 +797,7 @@ async function main() {
 		notes: snapshot.notes,
 		method: {
 			entryAndCostBasis:
-				'derived-from-onchain-transfer-logs (token<->WETH pairing) with token allowlist; fee-derived $ANTIHUNTER and $WETH are hard-coded as entry=2026-02-06 and cost basis $0; ETH is hard-coded as entry=2026-02-07 with cost basis 1 ETH. Optional override: if public/treasury.arkham.alltx.json OR public/treasury.arkham.transfers.json exists, lot-level costBasisUsd may be replaced using Arkham per-tx USD outflows (WETH/ANTIHUNTER) when the txHash maps unambiguously to a single token row.',
+				'derived-from-onchain-transfer-logs (token<->WETH pairing) with token allowlist; fee-derived $ANTIHUNTER and $WETH are hard-coded as entry=2026-02-06 and cost basis $0. Native ETH rows are balance-only (entry/cost basis not inferred) until we implement attribution. Optional override: if public/treasury.arkham.alltx.json OR public/treasury.arkham.transfers.json exists, lot-level costBasisUsd may be replaced using Arkham per-tx USD outflows (WETH/ANTIHUNTER) when the txHash maps unambiguously to a single token row.',
 		},
 	};
 

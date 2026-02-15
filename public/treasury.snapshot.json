@@ -1,6 +1,6 @@
 {
-  "updatedAtMs": 1771138723924,
-  "updatedAt": "2026-02-15T06:58:43.924Z",
+  "updatedAtMs": 1771142440743,
+  "updatedAt": "2026-02-15T08:00:40.743Z",
   "date": "2026-02-15",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "wallets": [
@@ -23,8 +23,8 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 196690.17879244906,
-      "pnlUsd": 196690.17879244906,
+      "fmvUsd": 207554.4908737249,
+      "pnlUsd": 207554.4908737249,
       "lots": null
     },
     {
@@ -34,9 +34,9 @@
       "token": null,
       "balance": "1",
       "entryDate": "2026-02-15",
-      "costBasisUsd": 68919.18000000001,
+      "costBasisUsd": 69105.3,
       "costBasisEth": "33",
-      "fmvUsd": 68919.18000000001,
+      "fmvUsd": 69105.3,
       "pnlUsd": 0,
       "link": "https://www.cryptopunks.app/cryptopunks/details/5730"
     },
@@ -49,8 +49,8 @@
       "entryDate": null,
       "costBasisUsd": 14805.571144388097,
       "costBasisEth": "0",
-      "fmvUsd": 14507.314204539533,
-      "pnlUsd": -298.2569398485648,
+      "fmvUsd": 14540.557362661759,
+      "pnlUsd": -265.0137817263385,
       "lots": [
         {
           "txHash": "0x96e23121c777d968322f32ef91605b8e45efaed19d06d16b2ce6e9c0210966f8",
@@ -79,8 +79,8 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 6909.455244548275,
-      "pnlUsd": 6909.455244548275
+      "fmvUsd": 6928.114604832528,
+      "pnlUsd": 6928.114604832528
     },
     {
       "chain": "base",
@@ -91,8 +91,8 @@
       "entryDate": "2026-02-07",
       "costBasisUsd": 4157.04,
       "costBasisEth": "2",
-      "fmvUsd": 6061.17864571657,
-      "pnlUsd": 1904.13864571657,
+      "fmvUsd": 6328.583585968771,
+      "pnlUsd": 2171.5435859687714,
       "lots": [
         {
           "txHash": "0x3183990234fa8a320bb8c2d3047d90f4c00fc4f886833dc859502fd476dc23e0",
@@ -121,8 +121,8 @@
       "entryDate": "2026-02-07",
       "costBasisUsd": 6292.645333701491,
       "costBasisEth": "3.027464413958726144",
-      "fmvUsd": 5172.022003078149,
-      "pnlUsd": -1120.6233306233416,
+      "fmvUsd": 5304.804485088248,
+      "pnlUsd": -987.840848613243,
       "lots": [
         {
           "txHash": "0x5f5569cc2124d314a30846db0bf93a1d6f42e4d0bb9c284afaeb9f4898ab8445",
@@ -148,11 +148,11 @@
       "symbol": "ETH",
       "token": null,
       "balance": "1.0424651773557052",
-      "entryDate": "2026-02-07",
-      "costBasisUsd": 2088.46,
-      "costBasisEth": "1",
-      "fmvUsd": 2177.146824300296,
-      "pnlUsd": 88.68682430029594
+      "entryDate": null,
+      "costBasisUsd": null,
+      "costBasisEth": null,
+      "fmvUsd": 2183.026327900582,
+      "pnlUsd": null
     },
     {
       "chain": "ethereum",
@@ -160,18 +160,18 @@
       "symbol": "ETH",
       "token": null,
       "balance": "0.12609239291603722",
-      "entryDate": "2026-02-07",
-      "costBasisUsd": 2088.46,
-      "costBasisEth": "1",
-      "fmvUsd": 263.3389189094271,
-      "pnlUsd": -1825.121081090573
+      "entryDate": null,
+      "costBasisUsd": null,
+      "costBasisEth": null,
+      "fmvUsd": 264.05008000547355,
+      "pnlUsd": null
     }
   ],
-  "totalUsd": 300699.8146335413,
+  "totalUsd": 312208.9273201823,
   "notes": [
     "fast_mode: balances-only (log scan skipped)"
   ],
   "method": {
-    "entryAndCostBasis": "derived-from-onchain-transfer-logs (token<->WETH pairing) with token allowlist; fee-derived $ANTIHUNTER and $WETH are hard-coded as entry=2026-02-06 and cost basis $0; ETH is hard-coded as entry=2026-02-07 with cost basis 1 ETH. Optional override: if public/treasury.arkham.alltx.json OR public/treasury.arkham.transfers.json exists, lot-level costBasisUsd may be replaced using Arkham per-tx USD outflows (WETH/ANTIHUNTER) when the txHash maps unambiguously to a single token row."
+    "entryAndCostBasis": "derived-from-onchain-transfer-logs (token<->WETH pairing) with token allowlist; fee-derived $ANTIHUNTER and $WETH are hard-coded as entry=2026-02-06 and cost basis $0. Native ETH rows are balance-only (entry/cost basis not inferred) until we implement attribution. Optional override: if public/treasury.arkham.alltx.json OR public/treasury.arkham.transfers.json exists, lot-level costBasisUsd may be replaced using Arkham per-tx USD outflows (WETH/ANTIHUNTER) when the txHash maps unambiguously to a single token row."
   }
 }
