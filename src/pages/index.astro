@@ -7,6 +7,11 @@ const BASESCAN_URL = `https://basescan.org/token/${BASE_CA}`;
 
 const TREASURY_ADDRESS = '0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3';
 const TREASURY_BASESCAN_URL = `https://basescan.org/address/${TREASURY_ADDRESS}`;
+
+// secondary hard wallet (same address on base + ethereum mainnet)
+const TREASURY_HARD_WALLET = '0x30D8c9f8955E6453f6B471Fb950FFd49C2E843D3';
+const TREASURY_HARD_WALLET_BASESCAN_URL = `https://basescan.org/address/${TREASURY_HARD_WALLET}`;
+const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREASURY_HARD_WALLET}`;
 ---
 
 <html lang="en">
@@ -153,10 +158,15 @@ const TREASURY_BASESCAN_URL = `https://basescan.org/address/${TREASURY_ADDRESS}`
 								<span class="text-zinc-400"> assumptions: <a class="underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300" href="/treasury-methodology">methodology</a>.</span>
 							</p>
 							<div class="mt-3 text-xs text-zinc-500">
-								Wallet:
+								wallets:
 								<a id="treasury-wallet-link" class="ml-2 inline-flex items-center gap-2 text-zinc-300 hover:text-zinc-100" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">
 									<code id="treasury-wallet-code" class="rounded-md border border-zinc-800 bg-black/30 px-2 py-1">{TREASURY_ADDRESS}</code>
 								</a>
+								<span class="text-zinc-700">·</span>
+								<a class="inline-flex items-center gap-2 text-zinc-300 hover:text-zinc-100" href={TREASURY_HARD_WALLET_BASESCAN_URL} target="_blank" rel="noreferrer" title="secondary hard wallet (base)">
+									<code class="rounded-md border border-zinc-800 bg-black/30 px-2 py-1">{TREASURY_HARD_WALLET}</code>
+								</a>
+								<a class="ml-2 text-zinc-400 underline decoration-zinc-800 underline-offset-4 hover:text-zinc-200 hover:decoration-zinc-500" href={TREASURY_HARD_WALLET_ETHERSCAN_URL} target="_blank" rel="noreferrer">etherscan</a>
 								<span id="treasury-meta" class="ml-2"></span>
 							</div>
 						</div>

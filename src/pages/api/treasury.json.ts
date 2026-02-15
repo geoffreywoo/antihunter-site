@@ -12,6 +12,15 @@ const BASE_RPCS = [
 	'https://base-rpc.publicnode.com',
 ].filter(Boolean) as string[];
 
+// Ethereum mainnet RPC fallbacks (override with ETH_RPC_URL)
+const ETH_RPCS = [
+	process.env.ETH_RPC_URL,
+	process.env.ETH_RPC,
+	'https://cloudflare-eth.com',
+	'https://eth.llamarpc.com',
+	'https://rpc.ankr.com/eth',
+].filter(Boolean) as string[];
+
 async function rpcCall(rpcUrl: string, method: string, params: unknown[]) {
 	const res = await fetch(rpcUrl, {
 		method: 'POST',
@@ -62,8 +71,14 @@ async function dexscreenerPriceUsd(token: string): Promise<number | null> {
 
 export const GET: APIRoute = async ({ url }) => {
 	try {
-		// Canonical wallet (override via env)
-		const wallet = (process.env.TREASURY_WALLET ?? '0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3').toLowerCase();
+		// Canonical wallet(s) (override via env)
+		// TREASURY_WALLETS supports comma-separated wallets; the first is treated as the primary.
+		const wallets = String(process.env.TREASURY_WALLETS ?? process.env.TREASURY_WALLET ?? '0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3')
+			.split(',')
+			.map((s) => s.trim())
+			.filter(Boolean)
+			.map((w) => w.toLowerCase());
+		const wallet = wallets[0];
 
 		// Optional knobs
 		// Default startBlock chosen to cover earliest known BNKR/BIO receipts; override via env.
@@ -97,8 +112,8 @@ export const GET: APIRoute = async ({ url }) => {
 				].map((a) => a.toLowerCase()));
 
 				// helper: add native ETH pseudo-position
-				async function ethBalance(): Promise<number> {
-					const hex = await rpcCall(rpcUrl, 'eth_getBalance', [wallet, 'latest']);
+				async function ethBalance(owner: string): Promise<number> {
+					const hex = await rpcCall(rpcUrl, 'eth_getBalance', [owner, 'latest']);
 					try {
 						return Number(BigInt(hex)) / 1e18;
 					} catch {
@@ -106,14 +121,50 @@ export const GET: APIRoute = async ({ url }) => {
 					}
 				}
 
-				const snapshot = await getTreasurySnapshot({
-					projectRoot,
-					wallet,
-					rpcUrl,
-					startBlock: effectiveStartBlock,
-					cacheTtlMs: refresh ? 0 : cacheTtlMs,
-					tokenAllowlist,
-				});
+				// Fetch per-wallet snapshots and merge so the UI reflects the *total* treasury.
+				const snaps = await Promise.all(
+					wallets.map((w) =>
+						getTreasurySnapshot({
+							projectRoot,
+							wallet: w,
+							rpcUrl,
+							startBlock: effectiveStartBlock,
+							cacheTtlMs: refresh ? 0 : cacheTtlMs,
+							tokenAllowlist,
+						}),
+					),
+				);
+
+				const snapshot = snaps[0];
+				(snapshot as any).wallets = wallets;
+				snapshot.wallet = wallet;
+
+				// Merge positions by token across wallets (append lots).
+				const byToken = new Map<string, any>();
+				for (const s of snaps) {
+					for (const p of (s.positions ?? [])) {
+						const key = (p.token ?? 'NATIVE_BASE_ETH').toLowerCase();
+						const cur = byToken.get(key);
+						if (!cur) {
+							byToken.set(key, { ...p, lots: Array.isArray(p.lots) ? [...p.lots] : [] });
+							continue;
+						}
+						// sum numeric-ish fields
+						for (const f of ['costUsd', 'fmvUsd', 'pnlUsd']) {
+							if (typeof (p as any)[f] === 'number') (cur as any)[f] = ((cur as any)[f] ?? 0) + (p as any)[f];
+						}
+						// sum balances (best-effort)
+						try {
+							const a = Number(cur.balance ?? 0);
+							const b = Number(p.balance ?? 0);
+							cur.balance = String(a + b);
+						} catch {}
+						// keep earliest entry
+						if (p.entryTimestamp && (!cur.entryTimestamp || p.entryTimestamp < cur.entryTimestamp)) cur.entryTimestamp = p.entryTimestamp;
+						if (Array.isArray(p.lots) && p.lots.length) cur.lots = [...(cur.lots ?? []), ...p.lots];
+					}
+				}
+				snapshot.positions = Array.from(byToken.values());
 
 				// Ensure we show *current holdings* even if they were acquired before the scan window.
 				// Cost basis/entry will be null until the scan range covers acquisition history.
@@ -147,7 +198,7 @@ export const GET: APIRoute = async ({ url }) => {
 					});
 				}
 				// Add native ETH pseudo-position (FMV derived from ETH price = WETH price)
-				const ethQty = await ethBalance();
+				const ethQty = (await Promise.all(wallets.map((w) => ethBalance(w)))).reduce((a, b) => a + b, 0);
 				const ethPx = await dexscreenerPriceUsd('0x4200000000000000000000000000000000000006');
 				const ethFmvUsd = ethPx != null ? ethQty * ethPx : undefined;
 				if ((ethFmvUsd ?? 0) >= 100) {
@@ -166,6 +217,44 @@ export const GET: APIRoute = async ({ url }) => {
 						priceUsd: ethPx ?? undefined,
 						fmvUsd: ethFmvUsd,
 						pnlUsd: ethCostUsd != null ? (ethFmvUsd - ethCostUsd) : undefined,
+					});
+				}
+
+				// Add Ethereum mainnet native ETH from the same wallets (hard wallet accounting)
+				let mainnetEthQty = 0;
+				for (const ethRpc of ETH_RPCS) {
+					try {
+						const bals = await Promise.all(wallets.map((w) => rpcCall(ethRpc, 'eth_getBalance', [w, 'latest'])));
+						mainnetEthQty = bals.reduce((s, hx) => {
+							try {
+								return s + Number(BigInt(hx)) / 1e18;
+							} catch {
+								return s;
+							}
+						}, 0);
+						break;
+					} catch {
+						continue;
+					}
+				}
+				if (mainnetEthQty > 0.0001) {
+					const ethPxMainnet = await dexscreenerPriceUsd('0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2');
+					const ethFmvUsdMainnet = ethPxMainnet != null ? mainnetEthQty * ethPxMainnet : undefined;
+					snapshot.positions.push({
+						token: 'ethereum:eth',
+						symbol: 'ETH',
+						name: 'Ethereum (mainnet)',
+						decimals: 18,
+						balance: String(mainnetEthQty),
+						balanceRaw: '',
+						entryTimestamp: Math.floor(new Date(ETH_ENTRY_DATE).getTime() / 1000),
+						costEth: '1',
+						costEthWei: '1000000000000000000',
+						costUsd: ethPxMainnet != null ? ethPxMainnet * 1 : undefined,
+						priceUsd: ethPxMainnet ?? undefined,
+						fmvUsd: ethFmvUsdMainnet,
+						pnlUsd:
+							ethPxMainnet != null && ethFmvUsdMainnet != null ? ethFmvUsdMainnet - ethPxMainnet : undefined,
 					});
 				}
 
