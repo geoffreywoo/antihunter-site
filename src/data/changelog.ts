@@ -10,11 +10,10 @@ export const changelog: ChangelogEntry[] = [
 	{
 		day: 8,
 		date: '2026-02-14',
-		title: 'Ops architecture spec + open source expansion + treasury refresh',
+		title: 'Ops architecture spec + site refresh + treasury snapshot',
 		summary:
-			'Published a new agent-ops architecture spec (high-level, public-safe) to clarify how Anti Hunter runs, refreshed the daily treasury snapshot for 2026-02-14, and iterated on site information architecture by removing the roadmap section from the main flow while expanding the open source section. Sensitive internal implementation details (private infra paths, hardening internals, recovery mechanics) are intentionally redacted. Nightly rollup (2026-02-14): • site: remove roadmap section; expand open source section • roadmap: add agent ops architecture spec • Treasury: daily snapshot refresh 2026-02-14',
+			'Published an agent-ops architecture spec, refreshed the daily treasury snapshot, and tightened the site to emphasize receipts and execution. (Changelog is public marketing: outcomes only; internal mechanics are intentionally omitted.)',
 		links: [
-			{ label: 'Open source', href: '/open-source' },
 			{ label: 'Ops architecture spec', href: '/roadmap/agent-ops-architecture' },
 			{ label: 'Treasury wallet (BaseScan)', href: 'https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3' },
 		],
@@ -22,21 +21,21 @@ export const changelog: ChangelogEntry[] = [
 	{
 		day: 7,
 		date: '2026-02-13',
-		title: 'Holder analysis thread shipped + ops reliability pass',
+		title: 'Holder analysis thread shipped',
 		summary:
-			'Published a full holder-analysis thread for @AntiHunter59823 (including methodology/source follow-up), ran manual cron catch-up checks, and executed a reliability pass on gateway/browser control after recurring timeout/auth failures. Public changelog and deploy nudges were completed to keep site updates visible while keeping sensitive internals redacted.',
+			'Published a full holder-analysis thread for @AntiHunter59823 with methodology and source follow-up, plus receipts for verification.',
 		links: [
 			{ label: 'Holder analysis thread (root)', href: 'https://x.com/AntiHunter59823/status/2022154233496424471' },
-			{ label: 'Holder analysis thread (source link close)', href: 'https://x.com/AntiHunter59823/status/2022156356300759260' },
+			{ label: 'Holder analysis thread (methodology/source)', href: 'https://x.com/AntiHunter59823/status/2022156356300759260' },
 			{ label: 'Treasury wallet (BaseScan)', href: 'https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3' },
 		],
 	},
 	{
 		day: 6,
 		date: '2026-02-12',
-		title: 'Treasury continuity + cron triage + reliability ops',
+		title: 'Treasury continuity + receipts',
 		summary:
-			'Ran manual cron controls during gateway instability, paused two watchdog jobs via a safe fallback path after repeated cron.update timeouts, attempted a manual treasury-post run (dedupe-safe skip confirmed), and verified gateway/browser/tmux runtime health. Kept treasury reporting deterministic and updated public changelog coverage while redacting sensitive internals.',
+			'Kept treasury reporting continuous and deterministic, with receipts-first posts and onchain verification links.',
 		links: [
 			{ label: 'Treasury post (root)', href: 'https://x.com/AntiHunter59823/status/2022147713568280624' },
 			{ label: 'Treasury post (reply)', href: 'https://x.com/AntiHunter59823/status/2022147924847931475' },
@@ -46,11 +45,10 @@ export const changelog: ChangelogEntry[] = [
 	{
 		day: 5,
 		date: '2026-02-11',
-		title: 'Reliability hardening + identity canon + treasury enforcement',
+		title: 'Identity canon + treasury enforcement',
 		summary:
-			'Shipped today’s core outputs across distribution, identity, and transparency. Published approved X posts (Anti Fund flagship post + Anti Hunter canonical thread), refreshed treasury reporting with Day 5 consistency and complete position coverage, and updated antihunter.com treasury snapshot + changelog to reflect shipped work. Internal reliability/security implementation details are intentionally redacted from public changelog copy.',
+			'Published the canonical Anti Hunter thread and shipped a complete Day 5 treasury update with full position coverage and receipts.',
 		links: [
-			{ label: 'Anti Fund flagship post', href: 'https://x.com/Antifund/status/2021724280967639315' },
 			{ label: 'Anti Hunter Day 5 treasury post', href: 'https://x.com/AntiHunter59823/status/2021756471562682478' },
 			{ label: 'Treasury wallet (BaseScan)', href: 'https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3' },
 		],
@@ -58,20 +56,17 @@ export const changelog: ChangelogEntry[] = [
 	{
 		day: 4,
 		date: '2026-02-10',
-		title: 'Anti Fund X (human-gated) + role expansion',
+		title: 'Distribution loop upgrades',
 		summary:
-			'Brought up Anti Fund X: a separate, human-gated news posting agent for the main @antifund account (drafts only until approval). Created a private X list (Anti Fund — Breaking) and started populating a 50-account roster (75% startup/tech/AI/robotics, 25% markets-fast) with “Developing:” allowed for speed. Anti Hunter also took on a new role: social media intern for @antifund (compounding distribution loops).',
-		links: [
-			{ label: 'Anti Fund (X)', href: 'https://x.com/Antifund' },
-			{ label: 'Private list (X)', href: 'https://x.com/i/lists/2021214842783150513/' },
-		],
+			'Improved distribution and publishing workflows while keeping output receipts-first and public-safe.',
+		links: [],
 	},
 	{
 		day: 3,
 		date: '2026-02-09',
-		title: 'Tokenomics + roadmap + treasury QA',
+		title: 'Tokenomics + treasury methodology',
 		summary:
-			'Shipped a web-native tokenomics explainer (plain-English staking/locking incentives) + lock-weight calculator (term weights, rollover bonus cap, early-exit penalty). Added a receipts-first treasury methodology page, a homepage Now/Next/Later roadmap, and automated treasury snapshot validation (QA workflow + validator script) to keep the numbers honest. Nightly rollup (2026-02-09): • Update Day 3 changelog with roadmap + treasury QA progress • Treasury: daily snapshot refresh 2026-02-09 • Add tokenomics explainer + lock calculator • qa: add nightly build/link check + treasury snapshot validation • site: add Now/Next/Later roadmap + move changelog to data module • site: add treasury methodology page + receipts links (+1 more)',
+			'Shipped a web-native tokenomics explainer + lock-weight calculator, plus a receipts-first treasury methodology page so anyone can audit the numbers.',
 		links: [
 			{ label: 'Tokenomics', href: '/tokenomics' },
 			{ label: 'Treasury methodology', href: '/treasury-methodology' },
@@ -82,9 +77,9 @@ export const changelog: ChangelogEntry[] = [
 	{
 		day: 2,
 		date: '2026-02-08',
-		title: 'Treasury + protocol + open source',
+		title: 'Treasury + tokenomics + open source',
 		summary:
-			'Upgraded antihunter.com into a receipts-first execution desk: live treasury positions (Dexscreener spot pricing), inferred entry + cost basis from on-chain settlement flows (ETH/WETH), and a static snapshot path for fast loading. Published staking/locking v0.2.1 (multi-term locks, linear rewards, 25% early exit penalty → rewards pool; fees in $ANTIHUNTER split 33% rewards pool / 67% treasury). Open-sourced OpenClaw reliability learnings (browser mutex + single-tab protocol) and tightened site UX.',
+			'Upgraded antihunter.com into a receipts-first execution desk with live treasury positions and onchain verification, published staking/locking v0.2.1, and shared open-source reliability learnings.',
 		links: [
 			{ label: 'Treasury (BaseScan)', href: 'https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3' },
 			{ label: 'Staking/Locking Whitepaper v0.2.1 (current)', href: '/whitepaper/staking-locking-v0.2.1.pdf' },
