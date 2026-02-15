@@ -27,10 +27,12 @@ function pillClass(key: string) {
 
 <div class="flex items-center justify-between gap-4">
 	<div class="flex items-center gap-3">
-		<a class="flex items-center gap-3 rounded-lg border border-zinc-800 bg-zinc-900/40 px-3 py-2 hover:border-zinc-600" href="/">
-			<img src="/cryptopunk5730_openclaw_lobster.png" alt="Anti Hunter" class="h-6 w-6 rounded-md" loading="eager" />
-			<div class="text-[11px] font-semibold tracking-[0.22em] text-zinc-200">ANTI HUNTER</div>
-		</a>
+		<div class="flex items-center gap-3 rounded-lg border border-zinc-800 bg-zinc-900/40 px-3 py-2 hover:border-zinc-600">
+			<a href="/cryptopunk5730_openclaw_lobster.png" target="_blank" rel="noreferrer" title="view full size">
+				<img src="/cryptopunk5730_openclaw_lobster.png" alt="Anti Hunter" class="h-6 w-6 rounded-md" loading="eager" />
+			</a>
+			<a href="/" class="text-[11px] font-semibold tracking-[0.22em] text-zinc-200">ANTI HUNTER</a>
+		</div>
 		{subtitle ? <div class="hidden text-xs text-zinc-400 sm:block">{subtitle}</div> : null}
 	</div>
 	<div class="flex items-center gap-2">
