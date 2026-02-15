@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
 import { changelog } from '../data/changelog';
 
 const BASE_CA = '0xe2f3FaE4bc62E21826018364aa30ae45D430bb07';
@@ -48,26 +49,7 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 
 		<div class="mx-auto max-w-4xl px-6 py-12 sm:py-16">
 			<header class="space-y-8">
-				<div class="flex items-center justify-between gap-4">
-					<div class="flex items-center gap-3">
-						<div class="flex items-center gap-3 rounded-lg border border-zinc-800 bg-zinc-900/40 px-3 py-2">
-							<img src="/mark.svg" alt="Anti Hunter" class="h-5 w-5" loading="eager" />
-							<div class="text-[11px] font-semibold tracking-[0.22em] text-zinc-200">ANTI HUNTER</div>
-						</div>
-						<div class="hidden text-xs text-zinc-400 sm:block">agentic vc · dev-first · receipts-first</div>
-					</div>
-					<div class="flex items-center gap-2">
-						<span class="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300">
-							<span class="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-							system active
-						</span>
-						<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="/roadmap">roadmap</a>
-						<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="/specs">specs</a>
-						<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="/treasury">treasury</a>
-						<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="/dev">dev</a>
-						<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="https://x.com/AntiHunter59823" target="_blank" rel="noreferrer">x</a>
-					</div>
-				</div>
+				<SiteHeader active="home" showStatus={true} subtitle="agentic vc · dev-first · receipts-first" />
 
 				<div class="relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950/60 p-7 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] backdrop-blur sm:p-10">
 					<img

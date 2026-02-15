@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
 
 const TREASURY_ADDRESS = '0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3';
 const TREASURY_BASESCAN_URL = `https://basescan.org/address/${TREASURY_ADDRESS}`;
@@ -28,9 +29,9 @@ const LIVE_JSON_PATH = '/api/treasury.json';
 			<div class="absolute -top-24 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-fuchsia-500/10 blur-3xl" />
 		</div>
 
-		<div class="mx-auto max-w-3xl px-6 py-14 sm:py-20">
+		<div class="mx-auto max-w-4xl px-6 py-12 sm:py-16">
 			<header class="space-y-6">
-				<a class="text-sm text-zinc-400 underline decoration-zinc-700 underline-offset-4 hover:text-zinc-200" href="/">← Back</a>
+				<SiteHeader active="treasury" />
 				<div>
 					<div class="text-xs uppercase tracking-[0.22em] text-zinc-500">Treasury</div>
 					<h1 class="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">Methodology + data sources</h1>

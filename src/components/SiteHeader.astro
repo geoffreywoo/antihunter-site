@@ -1,0 +1,46 @@
+---
+const {
+	active = '',
+	showStatus = false,
+	subtitle = '',
+} = Astro.props as {
+	active?: 'home' | 'roadmap' | 'specs' | 'treasury' | 'dev' | '';
+	showStatus?: boolean;
+	subtitle?: string;
+};
+
+const nav = [
+	{ label: 'roadmap', href: '/roadmap', key: 'roadmap' },
+	{ label: 'specs', href: '/specs', key: 'specs' },
+	{ label: 'treasury', href: '/treasury', key: 'treasury' },
+	{ label: 'dev', href: '/dev', key: 'dev' },
+] as const;
+
+function pillClass(key: string) {
+	const base = 'rounded-full border bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600';
+	if (active && key === active) return base + ' border-zinc-600';
+	return base + ' border-zinc-800';
+}
+---
+
+<div class="flex items-center justify-between gap-4">
+	<div class="flex items-center gap-3">
+		<a class="flex items-center gap-3 rounded-lg border border-zinc-800 bg-zinc-900/40 px-3 py-2 hover:border-zinc-600" href="/">
+			<img src="/mark.svg" alt="Anti Hunter" class="h-5 w-5" loading="eager" />
+			<div class="text-[11px] font-semibold tracking-[0.22em] text-zinc-200">ANTI HUNTER</div>
+		</a>
+		{subtitle ? <div class="hidden text-xs text-zinc-400 sm:block">{subtitle}</div> : null}
+	</div>
+	<div class="flex items-center gap-2">
+		{showStatus ? (
+			<span class="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300">
+				<span class="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+				system active
+			</span>
+		) : null}
+		{nav.map((n) => (
+			<a class={pillClass(n.key)} href={n.href}>{n.label}</a>
+		))}
+		<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="https://x.com/AntiHunter59823" target="_blank" rel="noreferrer">x</a>
+	</div>
+</div>

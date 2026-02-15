@@ -1,6 +1,7 @@
 ---
 import '../../styles/global.css';
 import SiteFooter from '../../components/SiteFooter.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
 import { roadmap } from '../../data/roadmap';
 ---
 
@@ -22,18 +23,7 @@ import { roadmap } from '../../data/roadmap';
 
 		<div class="mx-auto max-w-4xl px-6 py-12 sm:py-16">
 			<header class="space-y-6">
-				<div class="flex items-center justify-between gap-4">
-					<a class="flex items-center gap-3 rounded-lg border border-zinc-800 bg-zinc-900/40 px-3 py-2 hover:border-zinc-600" href="/">
-						<img src="/mark.svg" alt="Anti Hunter" class="h-5 w-5" loading="eager" />
-						<div class="text-[11px] font-semibold tracking-[0.22em] text-zinc-200">ANTI HUNTER</div>
-					</a>
-					<nav class="flex items-center gap-2">
-						<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="/roadmap">roadmap</a>
-						<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="/specs">specs</a>
-						<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="/treasury">treasury</a>
-						<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href="/dev">dev</a>
-					</nav>
-				</div>
+				<SiteHeader active="roadmap" />
 
 				<div class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] backdrop-blur sm:p-8">
 					<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">roadmap</div>

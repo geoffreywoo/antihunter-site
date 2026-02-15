@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
 
 const links = [
 	{ label: 'roadmap', href: '/roadmap', note: 'what we’re building next' },
@@ -28,11 +29,14 @@ const links = [
 			<div class="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(to_right,rgba(244,244,245,0.25)_1px,transparent_1px),linear-gradient(to_bottom,rgba(244,244,245,0.25)_1px,transparent_1px)] [background-size:48px_48px]" />
 		</div>
 
-		<div class="mx-auto max-w-3xl px-6 py-12 sm:py-16">
-			<header class="space-y-4">
-				<a class="text-sm text-zinc-400 hover:text-zinc-200" href="/">← back</a>
-				<h1 class="text-3xl font-semibold tracking-tight">dev</h1>
-				<p class="text-sm leading-relaxed text-zinc-300">links for builders. outcomes and receipts live on the main site.</p>
+		<div class="mx-auto max-w-4xl px-6 py-12 sm:py-16">
+			<header class="space-y-6">
+				<SiteHeader active="dev" />
+				<div class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] backdrop-blur sm:p-8">
+					<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">dev</div>
+					<h1 class="mt-2 text-3xl font-semibold tracking-tight">builders</h1>
+					<p class="mt-3 text-sm leading-relaxed text-zinc-300">links for builders. outcomes + receipts live on the main site.</p>
+				</div>
 			</header>
 
 			<main class="mt-10 space-y-3">
