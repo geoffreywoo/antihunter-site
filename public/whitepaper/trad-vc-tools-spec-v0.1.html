@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>anti hunter — trad vc tools roadmap (spec v0.1)</title>
+  <meta name="description" content="spec v0.1: lp update autopilot, crm graph, founder triage, ask router, memo autoprep." />
+  <style>
+    :root { color-scheme: dark; }
+    body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; background: #09090b; color: #f4f4f5; }
+    a { color: #e4e4e7; text-underline-offset: 3px; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 0.95em; color: #e4e4e7; }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 48px 24px; }
+    .card { border: 1px solid rgba(63,63,70,0.9); background: rgba(9,9,11,0.65); border-radius: 18px; padding: 24px; }
+    h1 { margin: 0; font-size: 34px; letter-spacing: -0.02em; }
+    h2 { margin: 28px 0 10px; font-size: 18px; }
+    p, li { color: #d4d4d8; line-height: 1.6; }
+    .meta { font-size: 12px; text-transform: uppercase; letter-spacing: 0.18em; color: #a1a1aa; }
+    .pill a { display: inline-block; border: 1px solid rgba(63,63,70,0.9); background: rgba(0,0,0,0.25); border-radius: 999px; padding: 6px 10px; font-size: 12px; color: #d4d4d8; text-decoration: none; margin-right: 8px; }
+    hr { border: 0; border-top: 1px solid rgba(39,39,42,1); margin: 22px 0; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="meta">whitepaper spec</div>
+      <h1>trad vc tools roadmap (spec v0.1)</h1>
+      <p>anti hunter is evolving beyond crypto vc: we’re building the software + automations required to become a fully agentic trad vc. if these tools are valuable, we may sell them to other vcs / angels and turn ops into revenue.</p>
+      <div class="pill">
+        <a href="/roadmap/trad-vc-tools">site page</a>
+        <a href="/whitepaper/trad-vc-tools-spec-v0.1.md">md</a>
+      </div>
+      <hr />
+
+      <h2>principles</h2>
+      <ul>
+        <li><b>auditability:</b> every output links back to sources (emails, notes, docs).</li>
+        <li><b>append-only truth:</b> events are immutable; views are derived.</li>
+        <li><b>human approval for side effects:</b> drafts first; sends/schedules only after approve.</li>
+        <li><b>build once, reuse:</b> same ingestion + entity graph powers all tools.</li>
+      </ul>
+
+      <hr />
+
+      <h2>feature 1 — lp update autopilot (monthly + ad-hoc)</h2>
+      <p><b>outcome:</b> lp updates get written from reality (portfolio emails + calls + notes), not from memory; consistent format; auditable sources.</p>
+      <p><b>inputs:</b> gmail label <code>portfolio/update</code>; meeting notes; optional portfolio roster sheet.</p>
+      <p><b>outputs:</b> google doc <code>LP Update — YYYY-MM</code> + appendix of source links; optional asks + intros tasks.</p>
+      <p><b>gate:</b> every company mentioned must have ≥1 source link.</p>
+
+      <h2>feature 2 — co-investor + prospect crm graph</h2>
+      <p><b>outcome:</b> instant answers to “who can lead this?”, “who owes me a call?”, “who wrote checks into x?”, “who’s warm?”</p>
+      <p><b>inputs:</b> email + calendar participants; optional csv imports; deal notes.</p>
+      <p><b>outputs:</b> “today list”, “round map”, per-person timeline.</p>
+      <p><b>gate:</b> no new entity without provenance pointer.</p>
+
+      <h2>feature 3 — founder pipeline triage + follow-up automation</h2>
+      <p><b>outcome:</b> deterministic next steps for every inbound; nothing falls through cracks.</p>
+      <p><b>inputs:</b> gmail labels <code>founder/inbound</code>, <code>intro</code>, <code>follow-up</code>.</p>
+      <p><b>outputs:</b> daily triage queue + reminders + weekly summary.</p>
+      <p><b>gate:</b> untriaged threads cannot exceed 24h.</p>
+
+      <h2>feature 4 — portfolio ask router</h2>
+      <p><b>outcome:</b> extract asks, match to connectors, draft intros, and track closure.</p>
+      <p><b>outputs:</b> open asks board + intro drafts + wins log.</p>
+      <p><b>gate:</b> every ask has owner + status; escalation at 7/14 days.</p>
+
+      <h2>feature 5 — investment memo autoprep</h2>
+      <p><b>outcome:</b> standardized diligence pack from messy sources; unknowns called out.</p>
+      <p><b>outputs:</b> memo doc + diligence checklist + assumption registry.</p>
+      <p><b>gate:</b> every key claim has a citation or <code>unverified</code> tag.</p>
+
+    </div>
+  </div>
+</body>
+</html>
