@@ -1,0 +1,19 @@
+{
+  "description": "manual override for sBNKR lots. fill in the staking transaction details.",
+  "lots": [
+    {
+      "txHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "blockNumber": 0,
+      "entryDate": "2026-02-08",
+      "qty": "11081.05",
+      "costBasisUsd": 7402.79
+    },
+    {
+      "txHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "blockNumber": 0,
+      "entryDate": "2026-02-09",
+      "qty": "11081.05",
+      "costBasisUsd": 7402.79
+    }
+  ]
+}

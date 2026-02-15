@@ -262,6 +262,63 @@ function fmtDateFromSec(ts?: number) {
 	return new Date(ts * 1000).toISOString().slice(0, 10);
 }
 
+const TRANSFER_TOPIC0 = '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef';
+function addrTopic(addr: string) {
+	return '0x' + addr.toLowerCase().replace(/^0x/, '').padStart(64, '0');
+}
+
+async function blockTimestampSec(blockNumber: number): Promise<number | null> {
+	try {
+		const hex = await rpcCall('eth_getBlockByNumber', [toHex(blockNumber), false]);
+		const tsHex = (hex as any)?.timestamp;
+		if (!tsHex) return null;
+		return Number(BigInt(tsHex));
+	} catch {
+		return null;
+	}
+}
+
+function toHex(n: number) {
+	return '0x' + Math.max(0, Math.floor(n)).toString(16);
+}
+
+async function inboundErc20Lots(token: string, owner: string, { fromBlock, toBlock }: { fromBlock: number; toBlock: number }) {
+	// best-effort: scan Transfer logs where `to == owner`
+	const lots: { txHash: string; blockNumber: number; entryDate: string | null; qty: string }[] = [];
+	const toTopic = addrTopic(owner);
+	// keep small to satisfy strict public rpc limits (some cap eth_getLogs to ~1k blocks)
+	const step = 900;
+	for (let start = fromBlock; start <= toBlock; start += step + 1) {
+		const end = Math.min(toBlock, start + step);
+		const logs = await rpcCall('eth_getLogs', [
+			{
+				fromBlock: toHex(start),
+				toBlock: toHex(end),
+				address: token,
+				topics: [TRANSFER_TOPIC0, null, toTopic],
+			},
+		]);
+		for (const l of (logs as any[])) {
+			const bn = Number(BigInt(l.blockNumber));
+			const ts = await blockTimestampSec(bn);
+			// ERC20 transfer amount is data uint256
+			let raw = 0n;
+			try {
+				raw = BigInt(l.data);
+			} catch {
+				raw = 0n;
+			}
+			lots.push({
+				txHash: l.transactionHash,
+				blockNumber: bn,
+				entryDate: ts ? fmtDateFromSec(ts) : null,
+				qty: raw.toString(),
+			});
+		}
+	}
+	return lots;
+}
+
 type ArkhamTxArtifact = {
 	updatedAt?: string;
 	updatedAtMs?: number;
@@ -662,6 +719,53 @@ async function main() {
 				r.costBasisUsd = bal * sbnkrUnitCostUsd;
 			}
 			if (r.fmvUsd != null && r.costBasisUsd != null) r.pnlUsd = r.fmvUsd - r.costBasisUsd;
+
+			// Lots: sBNKR was staked in multiple lots; derive from inbound Transfer logs (best-effort),
+			// or fall back to manual override file.
+			if (!Array.isArray(r.lots) || r.lots.length === 0) {
+				let derivedLots: any[] | null = null;
+				try {
+					const latestHex = await rpcCall('eth_blockNumber', []);
+					const latest = Number(BigInt(latestHex));
+					const meta = await erc20Meta(SBNKR_TOKEN);
+					const rawLots = await inboundErc20Lots(SBNKR_TOKEN, TREASURY_WALLET, { fromBlock: TREASURY_START_BLOCK, toBlock: latest });
+					const qtys = rawLots.map((l) => ({ ...l, qtyDec: Number(formatUnits(BigInt(l.qty), meta.decimals)) }));
+					const sumQty = qtys.reduce((s, l) => s + (Number.isFinite(l.qtyDec) ? l.qtyDec : 0), 0);
+					const totalCb = typeof r.costBasisUsd === 'number' ? r.costBasisUsd : null;
+					derivedLots = qtys
+						.filter((l) => l.qtyDec > 0)
+						.sort((a, b) => a.blockNumber - b.blockNumber)
+						.map((l) => ({
+							txHash: l.txHash,
+							blockNumber: l.blockNumber,
+							entryDate: l.entryDate,
+							qty: String(l.qtyDec),
+							costBasisUsd: totalCb != null && sumQty > 0 ? (totalCb * (l.qtyDec / sumQty)) : null,
+							costBasisEth: null,
+						}));
+				} catch {
+					// ignore log scan errors
+				}
+
+				// Fallback: read manual override file if log scan failed or found nothing
+				if (!derivedLots || derivedLots.length === 0) {
+					try {
+						const overridePath = path.join(projectRoot, 'public', 'treasury.sbnkr-lots.json');
+						const overrideRaw = await fs.readFile(overridePath, 'utf8');
+						const override = JSON.parse(overrideRaw);
+						if (Array.isArray(override.lots) && override.lots.length > 0) {
+							console.log('sBNKR lots: using manual override');
+							derivedLots = override.lots;
+						}
+					} catch {
+						// no override file
+					}
+				}
+
+				if (derivedLots && derivedLots.length > 0) {
+					r.lots = derivedLots;
+				}
+			}
 		}
 	}
 
