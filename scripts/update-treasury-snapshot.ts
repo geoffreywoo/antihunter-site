@@ -74,19 +74,30 @@ const ACCOUNTING_CRITICAL_TOKENS = new Set([
 	'0xf30bf00edd0c22db54c9274b90d2a4c21fc09b07', // FELIX
 ]);
 
+function withTimeout<T>(ms: number, fn: (signal: AbortSignal) => Promise<T>): Promise<T> {
+	const ctrl = new AbortController();
+	const t = setTimeout(() => ctrl.abort(new Error(`timeout after ${ms}ms`)), ms);
+	return fn(ctrl.signal).finally(() => clearTimeout(t));
+}
+
+const RPC_TIMEOUT_MS = Number(process.env.TREASURY_RPC_TIMEOUT_MS ?? '20000');
+const HTTP_TIMEOUT_MS = Number(process.env.TREASURY_HTTP_TIMEOUT_MS ?? '20000');
+
 async function rpcCall(method: string, params: unknown[]) {
 	let lastErr: any = null;
 	for (const rpcUrl of BASE_RPCS) {
 		try {
-			const res = await fetch(rpcUrl, {
-				method: 'POST',
-				headers: { 'content-type': 'application/json' },
-				body: JSON.stringify({ jsonrpc: '2.0', id: 1, method, params }),
-			});
+			const res = await withTimeout(RPC_TIMEOUT_MS, (signal) =>
+				fetch(rpcUrl, {
+					method: 'POST',
+					signal,
+					headers: { 'content-type': 'application/json' },
+					body: JSON.stringify({ jsonrpc: '2.0', id: 1, method, params }),
+				}),
+			);
 			const j = (await res.json()) as any;
 			if (!res.ok) throw new Error(`rpc http ${res.status}: ${JSON.stringify(j)}`);
 			if (j?.error) throw new Error(JSON.stringify(j));
-			// Some public RPCs return `0x` for eth_call under load; treat as failure so we can fail over.
 			if (method === 'eth_call' && (j.result == null || j.result === '0x' || j.result === '0x0')) {
 				throw new Error(`rpc eth_call returned empty result`);
 			}
@@ -156,12 +167,15 @@ const CHAINLINK_LATEST_ROUND_DATA = '0xfeaf968c';
 async function basescanTokenBalance(token: string, wallet: string, symbol: string): Promise<number | null> {
 	try {
 		const url = `https://basescan.org/token/${token}?a=${wallet}`;
-		const res = await fetch(url, {
-			headers: {
-				'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-				'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36',
-			},
-		});
+		const res = await withTimeout(HTTP_TIMEOUT_MS, (signal) =>
+			fetch(url, {
+				signal,
+				headers: {
+					'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+					'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36',
+				},
+			}),
+		);
 		if (!res.ok) return null;
 		const html = await res.text();
 		// Heuristic: prefer the token-holder filtered section to avoid matching unrelated "Balance" occurrences.
@@ -366,20 +380,55 @@ async function main() {
 
 	const projectRoot = process.cwd();
 	const rpcUrl = BASE_RPCS[0] ?? 'https://mainnet.base.org';
-	const snapshot = await getTreasurySnapshot({
-		projectRoot,
-		wallet: TREASURY_WALLET,
-		rpcUrl,
-		startBlock,
-		cacheTtlMs: 0,
-		tokenAllowlist: TOKEN_ALLOWLIST,
-	});
+	console.log(`[treasury:snapshot] wallets=${TREASURY_WALLETS.join(',')}`);
+	console.log(`[treasury:snapshot] startBlock=${startBlock} rpc=${rpcUrl}`);
+	const fastMode = String(process.env.TREASURY_FAST_MODE ?? '1') === '1';
+	const t0 = Date.now();
+	let snapshot: any;
+	if (!fastMode) {
+		snapshot = await getTreasurySnapshot({
+			projectRoot,
+			wallet: TREASURY_WALLET,
+			rpcUrl,
+			startBlock,
+			cacheTtlMs: 0,
+			tokenAllowlist: TOKEN_ALLOWLIST,
+		});
+		console.log(`[treasury:snapshot] log-scan positions=${(snapshot.positions ?? []).length} notes=${(snapshot.notes ?? []).length} (${Date.now() - t0}ms)`);
+	} else {
+		console.log(`[treasury:snapshot] fast_mode=1 (skip log scan; balances only)`);
+		snapshot = { wallet: TREASURY_WALLET, positions: [], notes: ['fast_mode: balances-only (log scan skipped)'] };
+		const ethQtyFast = (await Promise.all(TREASURY_WALLETS.map((w) => ethBalance(w)))).reduce((a, b) => a + b, 0);
+		const ethPxFast = await dexscreenerPriceUsd('0x4200000000000000000000000000000000000006');
+		const ethFmvFast = ethPxFast != null ? ethQtyFast * ethPxFast : undefined;
+		if ((ethFmvFast ?? 0) >= 100) {
+			snapshot.positions.push({
+				token: null,
+				symbol: 'ETH',
+				name: 'Ethereum',
+				decimals: 18,
+				balance: String(ethQtyFast),
+				balanceRaw: '',
+				entryTimestamp: Math.floor(new Date(ETH_ENTRY_DATE).getTime() / 1000),
+				costEth: '1',
+				costEthWei: '1000000000000000000',
+				costUsd: ethPxFast != null ? ethPxFast * 1 : undefined,
+				priceUsd: ethPxFast ?? undefined,
+				fmvUsd: ethFmvFast,
+				pnlUsd: ethPxFast != null ? ethFmvFast - ethPxFast : undefined,
+			});
+		}
+	}
 	(snapshot as any).wallets = TREASURY_WALLETS;
+	console.log(`[treasury:snapshot] fast mode init done, positions=${(snapshot.positions ?? []).length} (${Date.now() - t0}ms)`);
 
 	// Ensure current balances are present even if acquired before the scan window (primary wallet)
 	const existing = new Set((snapshot.positions ?? []).map((p) => (p.token ?? '').toLowerCase()));
+	let primaryCount = 0;
 	for (const token of TOKEN_ALLOWLIST) {
 		if (existing.has(token)) continue;
+		primaryCount++;
+		console.log(`[treasury:snapshot] primary token ${primaryCount}/${TOKEN_ALLOWLIST.length}: ${token}`);
 		const [meta, balRaw, px] = await Promise.all([erc20Meta(token), erc20Balance(token, TREASURY_WALLET), dexscreenerPriceUsd(token)]);
 		if (balRaw <= 0n) continue;
 		const balance = formatUnits(balRaw, meta.decimals);
@@ -404,8 +453,14 @@ async function main() {
 
 	// Add secondary wallets as balance-only overlays (keeps the primary wallet lot/accounting logic intact)
 	const secondaryWallets = TREASURY_WALLETS.slice(1);
+	console.log(`[treasury:snapshot] primary balances done, starting secondary overlay (${secondaryWallets.length} wallets)`);
+	if (secondaryWallets.length) console.log(`[treasury:snapshot] overlay secondary wallets=${secondaryWallets.join(',')}`);
+	let overlayCount = 0;
 	for (const w of secondaryWallets) {
+		console.log(`[treasury:snapshot] overlay wallet=${w}`);
 		for (const token of TOKEN_ALLOWLIST) {
+			overlayCount++;
+			if (overlayCount % 5 === 0) console.log(`[treasury:snapshot] overlay progress ${overlayCount}/${secondaryWallets.length * TOKEN_ALLOWLIST.length}`);
 			const [meta, balRaw, px] = await Promise.all([erc20Meta(token), erc20Balance(token, w), dexscreenerPriceUsd(token)]);
 			if (balRaw <= 0n) continue;
 			const bal = formatUnits(balRaw, meta.decimals);

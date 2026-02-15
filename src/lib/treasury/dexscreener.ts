@@ -10,12 +10,20 @@ export type DexPair = {
 	quoteToken?: { address?: string; symbol?: string; name?: string };
 };
 
+const DEX_TIMEOUT_MS = Number(process.env.TREASURY_DEX_TIMEOUT_MS ?? '15000');
+
 export async function fetchDexPairsForToken(tokenAddress: string): Promise<DexPair[]> {
 	const url = `${DEX_TOKEN_URL}${tokenAddress}`;
-	const res = await fetch(url, { headers: { accept: 'application/json' } });
-	if (!res.ok) throw new Error(`dexscreener http ${res.status}: ${await res.text()}`);
-	const json = (await res.json()) as { pairs?: DexPair[] };
-	return json.pairs ?? [];
+	const ctrl = new AbortController();
+	const t = setTimeout(() => ctrl.abort(new Error(`timeout after ${DEX_TIMEOUT_MS}ms`)), DEX_TIMEOUT_MS);
+	try {
+		const res = await fetch(url, { headers: { accept: 'application/json' }, signal: ctrl.signal });
+		if (!res.ok) throw new Error(`dexscreener http ${res.status}: ${await res.text()}`);
+		const json = (await res.json()) as { pairs?: DexPair[] };
+		return json.pairs ?? [];
+	} finally {
+		clearTimeout(t);
+	}
 }
 
 export function pickBestBasePair(pairs: DexPair[]): DexPair | null {

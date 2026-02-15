@@ -1,78 +1,71 @@
 {
-  "updatedAtMs": 1771117347173,
-  "updatedAt": "2026-02-15T01:02:27.173Z",
+  "updatedAtMs": 1771134131502,
+  "updatedAt": "2026-02-15T05:42:11.502Z",
   "date": "2026-02-15",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+  "wallets": [
+    "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+    "0x30d8c9f8955e6453f6b471fb950ffd49c2e843d3"
+  ],
   "basescan": "https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+  "basescans": [
+    "https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
+    "https://basescan.org/address/0x30d8c9f8955e6453f6b471fb950ffd49c2e843d3"
+  ],
+  "etherscan": "https://etherscan.io/address/0x30d8c9f8955e6453f6b471fb950ffd49c2e843d3",
   "rows": [
     {
       "symbol": "AntiHunter",
       "token": "0xe2f3fae4bc62e21826018364aa30ae45d430bb07",
-      "balance": "3022908230.848756798863143617",
+      "balance": "3030811923.9078703",
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 209124.791410117,
-      "pnlUsd": 209124.791410117,
+      "fmvUsd": 171514.68072035117,
+      "pnlUsd": 171514.68072035117,
       "lots": null
     },
     {
-      "symbol": "WETH",
-      "token": "0x4200000000000000000000000000000000000006",
-      "balance": "37.068028778437501272",
-      "entryDate": "2026-02-06",
-      "costBasisUsd": 0,
-      "costBasisEth": "0",
-      "fmvUsd": 77046.63917655792,
-      "pnlUsd": 77046.63917655792
+      "symbol": "ETH",
+      "token": null,
+      "balance": "34.04246544134592",
+      "entryDate": "2026-02-07",
+      "costBasisUsd": 2087.88,
+      "costBasisEth": "1",
+      "fmvUsd": 71076.58274567733,
+      "pnlUsd": 68988.70274567732,
+      "lots": null
+    },
+    {
+      "symbol": "ETH",
+      "token": null,
+      "balance": "34.04246544134592",
+      "entryDate": "2026-02-07",
+      "costBasisUsd": 2087.88,
+      "costBasisEth": "1",
+      "fmvUsd": 71076.58274567733,
+      "pnlUsd": 68988.70274567732
     },
     {
       "symbol": "sBNKR",
       "token": "0x019fd9abc9caeb476d7afa68bb675518c6be17b7",
       "balance": "18004.77383705277380844",
-      "entryDate": "2026-02-13",
-      "costBasisUsd": 0,
+      "entryDate": null,
+      "costBasisUsd": 12028.232651798236,
       "costBasisEth": "0",
-      "fmvUsd": 11870.547390768894,
-      "pnlUsd": 11870.547390768894,
-      "lots": [
-        {
-          "txHash": "0x96e23121c777d968322f32ef91605b8e45efaed19d06d16b2ce6e9c0210966f8",
-          "blockNumber": 42082674,
-          "entryDate": "2026-02-13",
-          "qty": "18004.77383705277380844",
-          "costBasisEth": "0",
-          "costBasisUsd": 0
-        }
-      ]
+      "fmvUsd": 11494.24761757449,
+      "pnlUsd": -533.985034223746,
+      "lots": null
     },
     {
-      "symbol": "bio",
-      "token": "0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07",
-      "balance": "721643923.967929189632132706",
-      "entryDate": "2026-02-07",
-      "costBasisUsd": 6292.645333701491,
-      "costBasisEth": "3.027464413958726144",
-      "fmvUsd": 7353.551585233199,
-      "pnlUsd": 1060.9062515317082,
-      "lots": [
-        {
-          "txHash": "0x5f5569cc2124d314a30846db0bf93a1d6f42e4d0bb9c284afaeb9f4898ab8445",
-          "blockNumber": 41856410,
-          "entryDate": "2026-02-07",
-          "qty": "491617660.801773755517648542",
-          "costBasisEth": "1",
-          "costBasisUsd": 2100
-        },
-        {
-          "txHash": "0x6c277fcbf065377dd5ce341506cf69bb834efbb3553c7149042a360fd1342ca0",
-          "blockNumber": 41905779,
-          "entryDate": "2026-02-09",
-          "qty": "230026263.166155434114484164",
-          "costBasisEth": "2.027464413958726144",
-          "costBasisUsd": 2010
-        }
-      ]
+      "symbol": "WETH",
+      "token": "0x4200000000000000000000000000000000000006",
+      "balance": "4.353647563472480994",
+      "entryDate": "2026-02-06",
+      "costBasisUsd": 0,
+      "costBasisEth": "0",
+      "fmvUsd": 9089.893674822924,
+      "pnlUsd": 9089.893674822924
     },
     {
       "symbol": "FELIX",
@@ -81,8 +74,8 @@
       "entryDate": "2026-02-07",
       "costBasisUsd": 4157.04,
       "costBasisEth": "2",
-      "fmvUsd": 6077.598247311004,
-      "pnlUsd": 1920.5582473110044,
+      "fmvUsd": 6614.753785186041,
+      "pnlUsd": 2457.7137851860407,
       "lots": [
         {
           "txHash": "0x3183990234fa8a320bb8c2d3047d90f4c00fc4f886833dc859502fd476dc23e0",
@@ -103,23 +96,37 @@
       ]
     },
     {
-      "symbol": "ETH",
-      "token": null,
-      "balance": "0.9973581413337396",
+      "symbol": "bio",
+      "token": "0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07",
+      "balance": "721643923.967929189632132706",
       "entryDate": "2026-02-07",
-      "costBasisUsd": 2078.52,
-      "costBasisEth": "1",
-      "fmvUsd": 2073.0288439250044,
-      "pnlUsd": -5.491156074995615
+      "costBasisUsd": 6292.645333701491,
+      "costBasisEth": "3.027464413958726144",
+      "fmvUsd": 5389.236824192496,
+      "pnlUsd": -903.4085095089949,
+      "lots": [
+        {
+          "txHash": "0x5f5569cc2124d314a30846db0bf93a1d6f42e4d0bb9c284afaeb9f4898ab8445",
+          "blockNumber": 41856410,
+          "entryDate": "2026-02-07",
+          "qty": "491617660.801773755517648542",
+          "costBasisEth": "1",
+          "costBasisUsd": 2100
+        },
+        {
+          "txHash": "0x6c277fcbf065377dd5ce341506cf69bb834efbb3553c7149042a360fd1342ca0",
+          "blockNumber": 41905779,
+          "entryDate": "2026-02-09",
+          "qty": "230026263.166155434114484164",
+          "costBasisEth": "2.027464413958726144",
+          "costBasisUsd": 2010
+        }
+      ]
     }
   ],
-  "totalUsd": 313546.156653913,
+  "totalUsd": 346255.9781134818,
   "notes": [
-    "Cost basis is inferred from on-chain ERC20 Transfer logs by pairing token in/out with WETH in/out within the same transaction.",
-    "If treasury spends $ANTIHUNTER to acquire other tokens, we estimate cost basis by valuing $ANTIHUNTER at Dexscreener spot (non-historical approximation).",
-    "Native ETH swaps are partially inferred via tx.value only (internal ETH transfers are not captured).",
-    "Airdrops/transfers without WETH/ETH flow are ignored for cost basis.",
-    "Cost basis USD is estimated using Chainlink ETH/USD at the entry block when available (falls back to current ETH/USD)."
+    "fast_mode: balances-only (log scan skipped)"
   ],
   "method": {
     "entryAndCostBasis": "derived-from-onchain-transfer-logs (token<->WETH pairing) with token allowlist; fee-derived $ANTIHUNTER and $WETH are hard-coded as entry=2026-02-06 and cost basis $0; ETH is hard-coded as entry=2026-02-07 with cost basis 1 ETH. Optional override: if public/treasury.arkham.alltx.json OR public/treasury.arkham.transfers.json exists, lot-level costBasisUsd may be replaced using Arkham per-tx USD outflows (WETH/ANTIHUNTER) when the txHash maps unambiguously to a single token row."
