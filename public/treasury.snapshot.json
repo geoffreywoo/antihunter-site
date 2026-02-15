@@ -1,6 +1,6 @@
 {
-  "updatedAtMs": 1771134131502,
-  "updatedAt": "2026-02-15T05:42:11.502Z",
+  "updatedAtMs": 1771135366858,
+  "updatedAt": "2026-02-15T06:02:46.858Z",
   "date": "2026-02-15",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "wallets": [
@@ -15,67 +15,66 @@
   "etherscan": "https://etherscan.io/address/0x30d8c9f8955e6453f6b471fb950ffd49c2e843d3",
   "rows": [
     {
+      "chain": "base",
+      "chainId": 8453,
       "symbol": "AntiHunter",
       "token": "0xe2f3fae4bc62e21826018364aa30ae45d430bb07",
-      "balance": "3030811923.9078703",
+      "balance": "3043320343.1745844",
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 171514.68072035117,
-      "pnlUsd": 171514.68072035117,
+      "fmvUsd": 189112.02548308173,
+      "pnlUsd": 189112.02548308173,
       "lots": null
     },
     {
+      "chain": "ethereum",
+      "chainId": 1,
       "symbol": "ETH",
       "token": null,
-      "balance": "34.04246544134592",
+      "balance": "33.12609639807915",
       "entryDate": "2026-02-07",
-      "costBasisUsd": 2087.88,
+      "costBasisUsd": 2089.37,
       "costBasisEth": "1",
-      "fmvUsd": 71076.58274567733,
-      "pnlUsd": 68988.70274567732,
-      "lots": null
+      "fmvUsd": 69212.67203125462,
+      "pnlUsd": 67123.30203125463
     },
     {
-      "symbol": "ETH",
-      "token": null,
-      "balance": "34.04246544134592",
-      "entryDate": "2026-02-07",
-      "costBasisUsd": 2087.88,
-      "costBasisEth": "1",
-      "fmvUsd": 71076.58274567733,
-      "pnlUsd": 68988.70274567732
-    },
-    {
+      "chain": "base",
+      "chainId": 8453,
       "symbol": "sBNKR",
       "token": "0x019fd9abc9caeb476d7afa68bb675518c6be17b7",
       "balance": "18004.77383705277380844",
       "entryDate": null,
       "costBasisUsd": 12028.232651798236,
       "costBasisEth": "0",
-      "fmvUsd": 11494.24761757449,
-      "pnlUsd": -533.985034223746,
+      "fmvUsd": 11760.718270362873,
+      "pnlUsd": -267.51438143536325,
       "lots": null
     },
     {
+      "chain": "base",
+      "chainId": 8453,
       "symbol": "WETH",
       "token": "0x4200000000000000000000000000000000000006",
-      "balance": "4.353647563472480994",
+      "balance": "3.308397213520141458",
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 9089.893674822924,
-      "pnlUsd": 9089.893674822924
+      "fmvUsd": 6912.465886012577,
+      "pnlUsd": 6912.465886012577
     },
     {
+      "chain": "base",
+      "chainId": 8453,
       "symbol": "FELIX",
       "token": "0xf30bf00edd0c22db54c9274b90d2a4c21fc09b07",
       "balance": "234565737.063334765213666609",
       "entryDate": "2026-02-07",
       "costBasisUsd": 4157.04,
       "costBasisEth": "2",
-      "fmvUsd": 6614.753785186041,
-      "pnlUsd": 2457.7137851860407,
+      "fmvUsd": 6248.831235367238,
+      "pnlUsd": 2091.791235367238,
       "lots": [
         {
           "txHash": "0x3183990234fa8a320bb8c2d3047d90f4c00fc4f886833dc859502fd476dc23e0",
@@ -96,14 +95,16 @@
       ]
     },
     {
+      "chain": "base",
+      "chainId": 8453,
       "symbol": "bio",
       "token": "0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07",
       "balance": "721643923.967929189632132706",
       "entryDate": "2026-02-07",
       "costBasisUsd": 6292.645333701491,
       "costBasisEth": "3.027464413958726144",
-      "fmvUsd": 5389.236824192496,
-      "pnlUsd": -903.4085095089949,
+      "fmvUsd": 5199.44447218893,
+      "pnlUsd": -1093.2008615125606,
       "lots": [
         {
           "txHash": "0x5f5569cc2124d314a30846db0bf93a1d6f42e4d0bb9c284afaeb9f4898ab8445",
@@ -122,9 +123,47 @@
           "costBasisUsd": 2010
         }
       ]
+    },
+    {
+      "chain": "base",
+      "chainId": 8453,
+      "symbol": "BNKR",
+      "token": "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b",
+      "balance": "4289993.466678677",
+      "entryDate": null,
+      "costBasisUsd": null,
+      "costBasisEth": "0",
+      "fmvUsd": 2802.2237324345124,
+      "pnlUsd": null,
+      "lots": null
+    },
+    {
+      "chain": "base",
+      "chainId": 8453,
+      "symbol": "ETH",
+      "token": null,
+      "balance": "1.0424651773557052",
+      "entryDate": "2026-02-07",
+      "costBasisUsd": 2089.37,
+      "costBasisEth": "1",
+      "fmvUsd": 2178.09546761169,
+      "pnlUsd": 88.72546761168996
+    },
+    {
+      "chain": "base",
+      "chainId": 8453,
+      "symbol": "ETH",
+      "token": null,
+      "balance": "1.0424651773557052",
+      "entryDate": "2026-02-07",
+      "costBasisUsd": 2089.36,
+      "costBasisEth": "1",
+      "fmvUsd": 2178.0850429599163,
+      "pnlUsd": 88.72504295991621,
+      "lots": null
     }
   ],
-  "totalUsd": 346255.9781134818,
+  "totalUsd": 295604.56162127404,
   "notes": [
     "fast_mode: balances-only (log scan skipped)"
   ],

@@ -31,6 +31,16 @@ const BASE_RPCS = [
 	'https://base-rpc.publicnode.com',
 ].filter(Boolean) as string[];
 
+const ETHEREUM_RPCS = [
+	process.env.ETHEREUM_RPC_URL,
+	process.env.ETH_RPC_URL,
+	process.env.ETHEREUM_RPC,
+	process.env.ETH_RPC,
+	'https://eth.llamarpc.com',
+	'https://ethereum-rpc.publicnode.com',
+	'https://cloudflare-eth.com',
+].filter(Boolean) as string[];
+
 function looksRateLimited(msg: string) {
 	const m = msg.toLowerCase();
 	return m.includes('429') || m.includes('rate limit') || m.includes('over rate limit');
@@ -83,9 +93,9 @@ function withTimeout<T>(ms: number, fn: (signal: AbortSignal) => Promise<T>): Pr
 const RPC_TIMEOUT_MS = Number(process.env.TREASURY_RPC_TIMEOUT_MS ?? '20000');
 const HTTP_TIMEOUT_MS = Number(process.env.TREASURY_HTTP_TIMEOUT_MS ?? '20000');
 
-async function rpcCall(method: string, params: unknown[]) {
+async function rpcCallFrom(rpcs: string[], method: string, params: unknown[]) {
 	let lastErr: any = null;
-	for (const rpcUrl of BASE_RPCS) {
+	for (const rpcUrl of rpcs) {
 		try {
 			const res = await withTimeout(RPC_TIMEOUT_MS, (signal) =>
 				fetch(rpcUrl, {
@@ -110,6 +120,14 @@ async function rpcCall(method: string, params: unknown[]) {
 		}
 	}
 	throw lastErr ?? new Error('All RPC fallbacks failed');
+}
+
+async function rpcCall(method: string, params: unknown[]) {
+	return rpcCallFrom(BASE_RPCS, method, params);
+}
+
+async function rpcCallEth(method: string, params: unknown[]) {
+	return rpcCallFrom(ETHEREUM_RPCS, method, params);
 }
 
 function formatUnits(raw: bigint, decimals: number): string {
@@ -211,8 +229,17 @@ async function chainlinkEthUsdLatest(): Promise<number | null> {
 	}
 }
 
-async function ethBalance(owner: string): Promise<number> {
+async function ethBalanceBase(owner: string): Promise<number> {
 	const hex = await rpcCall('eth_getBalance', [owner, 'latest']);
+	try {
+		return Number(BigInt(hex)) / 1e18;
+	} catch {
+		return 0;
+	}
+}
+
+async function ethBalanceEthereum(owner: string): Promise<number> {
+	const hex = await rpcCallEth('eth_getBalance', [owner, 'latest']);
 	try {
 		return Number(BigInt(hex)) / 1e18;
 	} catch {
@@ -398,24 +425,26 @@ async function main() {
 	} else {
 		console.log(`[treasury:snapshot] fast_mode=1 (skip log scan; balances only)`);
 		snapshot = { wallet: TREASURY_WALLET, positions: [], notes: ['fast_mode: balances-only (log scan skipped)'] };
-		const ethQtyFast = (await Promise.all(TREASURY_WALLETS.map((w) => ethBalance(w)))).reduce((a, b) => a + b, 0);
+		const ethQtyFastBase = (await Promise.all(TREASURY_WALLETS.map((w) => ethBalanceBase(w)))).reduce((a, b) => a + b, 0);
 		const ethPxFast = await dexscreenerPriceUsd('0x4200000000000000000000000000000000000006');
-		const ethFmvFast = ethPxFast != null ? ethQtyFast * ethPxFast : undefined;
-		if ((ethFmvFast ?? 0) >= 100) {
+		const ethFmvFastBase = ethPxFast != null ? ethQtyFastBase * ethPxFast : undefined;
+		if ((ethFmvFastBase ?? 0) >= 100) {
 			snapshot.positions.push({
+				chain: 'base',
+				chainId: 8453,
 				token: null,
 				symbol: 'ETH',
 				name: 'Ethereum',
 				decimals: 18,
-				balance: String(ethQtyFast),
+				balance: String(ethQtyFastBase),
 				balanceRaw: '',
 				entryTimestamp: Math.floor(new Date(ETH_ENTRY_DATE).getTime() / 1000),
 				costEth: '1',
 				costEthWei: '1000000000000000000',
 				costUsd: ethPxFast != null ? ethPxFast * 1 : undefined,
 				priceUsd: ethPxFast ?? undefined,
-				fmvUsd: ethFmvFast,
-				pnlUsd: ethPxFast != null ? ethFmvFast - ethPxFast : undefined,
+				fmvUsd: ethFmvFastBase,
+				pnlUsd: ethPxFast != null ? ethFmvFastBase - ethPxFast : undefined,
 			});
 		}
 	}
@@ -499,6 +528,8 @@ async function main() {
 		.filter((p: any) => (p.fmvUsd ?? 0) >= 100 || (p.token ?? '').toLowerCase() === SBNKR_TOKEN)
 		.map((p: any) => {
 			const token = (p.token ?? '').toLowerCase();
+			p.chain = 'base';
+			p.chainId = 8453;
 			const hardZero = HARD_CODED_ZERO_COST_TOKENS.has(token);
 			const entryDate = hardZero ? FEE_ENTRY_DATE : fmtDateFromSec(p.entryTimestamp);
 			const costBasisUsd = hardZero ? 0 : (p.costUsd ?? null);
@@ -515,6 +546,8 @@ async function main() {
 				}))
 				: null;
 			return {
+				chain: p.chain ?? 'base',
+				chainId: p.chainId ?? 8453,
 				symbol: normalizeDisplaySymbol(p.symbol),
 				token: p.token,
 				balance: p.balance,
@@ -559,6 +592,8 @@ async function main() {
 	if (wethBalRaw > 0n) {
 		const wethFmvUsd = ethPx != null && Number.isFinite(wethBalNum) ? wethBalNum * ethPx : null;
 		rows.push({
+			chain: 'base',
+			chainId: 8453,
 			symbol: normalizeDisplaySymbol('WETH'),
 			token: WETH,
 			balance: wethBal,
@@ -570,20 +605,40 @@ async function main() {
 		});
 	}
 
-	// Add native ETH as a row (FMV from current ETH/USD)
-	const ethQty = (await Promise.all(TREASURY_WALLETS.map((w) => ethBalance(w)))).reduce((a, b) => a + b, 0);
-	const ethFmvUsd = ethPx != null ? ethQty * ethPx : null;
-	if ((ethFmvUsd ?? 0) >= 100) {
+	// Add native ETH rows by chain (FMV from current ETH/USD)
+	const ethQtyBase = (await Promise.all(TREASURY_WALLETS.map((w) => ethBalanceBase(w)))).reduce((a, b) => a + b, 0);
+	const ethFmvUsdBase = ethPx != null ? ethQtyBase * ethPx : null;
+	if ((ethFmvUsdBase ?? 0) >= 100) {
 		const ethCostUsd = ethPx != null ? ethPx * 1 : null;
 		rows.push({
+			chain: 'base',
+			chainId: 8453,
 			symbol: 'ETH',
 			token: null,
-			balance: String(ethQty),
+			balance: String(ethQtyBase),
 			entryDate: ETH_ENTRY_DATE,
 			costBasisUsd: ethCostUsd,
 			costBasisEth: '1',
-			fmvUsd: ethFmvUsd,
-			pnlUsd: ethFmvUsd != null && ethCostUsd != null ? (ethFmvUsd - ethCostUsd) : null,
+			fmvUsd: ethFmvUsdBase,
+			pnlUsd: ethFmvUsdBase != null && ethCostUsd != null ? (ethFmvUsdBase - ethCostUsd) : null,
+		});
+	}
+
+	const ethQtyEthereum = (await Promise.all(TREASURY_WALLETS.map((w) => ethBalanceEthereum(w)))).reduce((a, b) => a + b, 0);
+	const ethFmvUsdEthereum = ethPx != null ? ethQtyEthereum * ethPx : null;
+	if ((ethFmvUsdEthereum ?? 0) >= 100) {
+		const ethCostUsd = ethPx != null ? ethPx * 1 : null;
+		rows.push({
+			chain: 'ethereum',
+			chainId: 1,
+			symbol: 'ETH',
+			token: null,
+			balance: String(ethQtyEthereum),
+			entryDate: ETH_ENTRY_DATE,
+			costBasisUsd: ethCostUsd,
+			costBasisEth: '1',
+			fmvUsd: ethFmvUsdEthereum,
+			pnlUsd: ethFmvUsdEthereum != null && ethCostUsd != null ? (ethFmvUsdEthereum - ethCostUsd) : null,
 		});
 	}
 
