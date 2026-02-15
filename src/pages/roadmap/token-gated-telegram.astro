@@ -1,0 +1,113 @@
+---
+import '../../styles/global.css';
+import SiteFooter from '../../components/SiteFooter.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+
+const ANTIHUNTER_CA_BASE = '0xe2f3FaE4bc62E21826018364aa30ae45D430bb07';
+const MIN_BALANCE = 100_000_000;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Anti Hunter — token-gated telegram</title>
+		<meta name="description" content="token-gated telegram channel for holders of ≥100m $antihunter." />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/mark.svg" />
+	</head>
+	<body class="wp">
+		<div class="container">
+			<header class="space-y-6">
+				<SiteHeader active="roadmap" subtitle="roadmap / token-gated telegram" />
+				<div class="box">
+					<div class="tiny muted">spec</div>
+					<h1>token-gated telegram (≥100m $antihunter)</h1>
+					<p class="muted">
+						goal: a private telegram channel where access is automatically granted + revoked based on onchain holdings.
+					</p>
+				</div>
+			</header>
+
+			<main class="mt-8 space-y-8">
+				<section class="box">
+					<div class="tiny muted">parameters</div>
+					<ul>
+						<li>token: $antihunter (base)</li>
+						<li>contract: <code>{ANTIHUNTER_CA_BASE}</code></li>
+						<li>min balance: <code>{MIN_BALANCE.toLocaleString()}</code> (raw token units, not usd)</li>
+						<li>access: telegram channel (read) + optional linked group (chat)</li>
+					</ul>
+				</section>
+
+				<section class="box">
+					<div class="tiny muted">architecture (recommended)</div>
+					<pre>telegram bot (admin)
+  + /verify command
+  + deep-link login (sign in with wallet)
+  + role sync worker (cron)
+  + audit log
+
+onchain verifier
+  - read erc20 balanceOf(addr)
+  - chain: base (8453)
+  - rpc: mainnet.base.org (or paid rpc)
+
+access controller
+  - approve join request OR invite link OR add user
+  - revoke by ban/kick when balance drops below threshold</pre>
+				</section>
+
+				<section class="box">
+					<div class="tiny muted">implementation steps</div>
+					<ol>
+						<li><strong>create the telegram channel</strong> (private). optionally also create a discussion group.</li>
+						<li><strong>create a telegram bot</strong> via @BotFather.</li>
+						<li><strong>make the bot an admin</strong> of the channel (and group if used) with permissions to add/remove users (or approve join requests).</li>
+						<li><strong>wallet auth</strong>:
+							<ul>
+								<li>default: “sign-in with ethereum” (siwe) over a short-lived nonce</li>
+								<li>store mapping: <code>telegram_user_id → wallet_address</code></li>
+							</ul>
+						</li>
+						<li><strong>balance check</strong>: call <code>balanceOf(wallet)</code> on base; compare against 100m threshold (respect decimals).</li>
+						<li><strong>grant access</strong>: on successful verify, issue invite link or approve join request.</li>
+						<li><strong>continuous sync</strong>:
+							<ul>
+								<li>cron: re-check verified users every N minutes/hours</li>
+								<li>if balance falls below threshold → revoke access</li>
+							</ul>
+						</li>
+						<li><strong>anti-sybil / abuse controls</strong>:
+							<ul>
+								<li>rate-limit verify attempts per user + per wallet</li>
+								<li>cooldown on re-joins (optional)</li>
+								<li>log every grant/revoke event with timestamp + reason</li>
+							</ul>
+						</li>
+					</ol>
+				</section>
+
+				<section class="box">
+					<div class="tiny muted">integration options</div>
+					<ul>
+						<li><strong>fastest (saas)</strong>: collab.land token gating (if it supports base + your token + desired threshold) — minimal engineering, less control.</li>
+						<li><strong>most control (custom)</strong>: build the bot + verifier (recommended for reliability + auditability).</li>
+					</ul>
+				</section>
+
+				<section class="box">
+					<div class="tiny muted">open questions</div>
+					<ul>
+						<li>should this gate grant: channel only, or channel + group?</li>
+						<li>do we allow delegated custody? (e.g. exchange wallets) default: no, wallet must sign siwe.</li>
+						<li>re-check cadence: hourly vs every 10 minutes?</li>
+						<li>decimals: confirm token decimals for exact 100m threshold enforcement.</li>
+					</ul>
+				</section>
+			</main>
+
+			<SiteFooter />
+		</div>
+	</body>
+</html>
