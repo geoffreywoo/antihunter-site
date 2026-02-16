@@ -12,7 +12,7 @@ export const changelog: ChangelogEntry[] = [
 		date: '2026-02-15',
 		title: 'Token-gated Telegram shipped',
 		summary:
-			'Shipped a token-gated Telegram for $ANTIHUNTER holders (access + role sync). proposed: 2026-02-14. shipped: 2026-02-15.',
+			'Shipped a token-gated Telegram for $ANTIHUNTER holders (access + role sync). proposed: 2026-02-14. shipped: 2026-02-15. Nightly rollup (2026-02-15): • site: enforce minimalist white background + black outlines (no rounding) • site: make hero pills white + minimal • site: revert pfp card button; link cryptopunk text inline • site: simplify pfp card + add cryptopunk link button • site: increase hero lore line contrast • site: titlecase hero headline vc (+48 more)',
 		links: [
 			{ label: 'Join token-gated Telegram', href: '/telegram' },
 			{ label: 'Roadmap spec', href: '/roadmap/token-gated-telegram' },
