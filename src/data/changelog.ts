@@ -8,6 +8,19 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
 	{
+		day: 10,
+		date: '2026-02-16',
+		title: 'Trad VC tooling shipped to MVP status',
+		summary:
+			'Launched the Trad VC tools pipeline into MVP progress: lp update autopilot with multi-source ingestion, relevance and triage filters, crm graph extraction, founder pipeline triage, and ask routing with owner assignment. Added execution rails for scheduled runs and external mail outreach paths. All components now emit auditable artifacts and operational summaries.',
+		links: [
+			{ label: 'Trad VC tools spec', href: '/roadmap/trad-vc-tools' },
+			{ label: 'LP update autopilot scripts', href: 'https://github.com/geoffreywoo/gwbot/tree/main/scripts/trad_vc_tools' },
+			{ label: 'Feature 1 thread (x)', href: 'https://x.com/AntiHunter59823/status/2023478357212500070' },
+			{ label: 'Feature 2-4 summary thread (x)', href: 'https://x.com/AntiHunter59823/status/2023478682761707698' },
+		],
+	},
+	{
 		day: 9,
 		date: '2026-02-15',
 		title: 'Token-gated Telegram shipped',

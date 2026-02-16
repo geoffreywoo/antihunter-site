@@ -54,6 +54,8 @@ const BNKR_TOKEN = '0x22af33fe49fd1fa80c7149773dde5890d3c76f3b';
 const SBNKR_TOKEN = '0x019fd9abc9caeb476d7afa68bb675518c6be17b7';
 const BNKR_PER_SBNKR = 1000;
 const ORIGINAL_BNKR_SWAP_PRICE_USD = 0.0006680579695505442;
+const CRYPTOPUNK_PURCHASE_TX = '0x897f01a5eedc7f6bcd580cbe1304d9e5f43d8e78784889a7dff448da49a25ca4';
+const CRYPTOPUNK_ENTRY_DATE = '2026-02-15';
 
 const BASE_TOKEN_ALLOWLIST = [
 	'0xe2f3fae4bc62e21826018364aa30ae45d430bb07', // ANTIHUNTER
@@ -226,6 +228,37 @@ async function chainlinkEthUsdLatest(): Promise<number | null> {
 		const answer = readUint256(roundHex, 32);
 		const px = Number(answer) / 10 ** decimals;
 		return Number.isFinite(px) ? px : null;
+	} catch {
+		return null;
+	}
+}
+
+async function chainlinkEthUsdAtBlock(blockNumber: number): Promise<number | null> {
+	try {
+		const [decHex, roundHex] = await Promise.all([
+			rpcCall('eth_call', [{ to: CHAINLINK_ETH_USD_FEED, data: CHAINLINK_DECIMALS }, toHex(blockNumber)]),
+			rpcCall('eth_call', [{ to: CHAINLINK_ETH_USD_FEED, data: CHAINLINK_LATEST_ROUND_DATA }, toHex(blockNumber)]),
+		]);
+		let decimals = 8;
+		try {
+			decimals = Number(readUint256(decHex, 0));
+			if (!Number.isFinite(decimals) || decimals <= 0 || decimals > 255) decimals = 8;
+		} catch {
+			decimals = 8;
+		}
+		const answer = readUint256(roundHex, 32);
+		const px = Number(answer) / 10 ** decimals;
+		return Number.isFinite(px) ? px : null;
+	} catch {
+		return null;
+	}
+}
+
+async function txBlockNumberByHash(txHash: string): Promise<number | null> {
+	try {
+		const tx = await rpcCall('eth_getTransactionByHash', [txHash]);
+		if (!tx?.blockNumber) return null;
+		return Number(BigInt(tx.blockNumber));
 	} catch {
 		return null;
 	}
@@ -630,18 +663,23 @@ async function main() {
 	// manual: nft holdings (held at cost basis unless we add a pricing feed)
 	// cryptopunks (ethereum mainnet)
 	if (ethPx != null) {
+		const cryptopunkTxBlock = await txBlockNumberByHash(CRYPTOPUNK_PURCHASE_TX);
+		const cryptopunkEntryEthPx = cryptopunkTxBlock != null ? await chainlinkEthUsdAtBlock(cryptopunkTxBlock) : null;
+		const cryptopunkEntryDate = CRYPTOPUNK_ENTRY_DATE;
+		const cryptopunkCostBasisUsd = (cryptopunkEntryEthPx ?? ethPx) * 33;
 		rows.push({
 			chain: 'ethereum',
 			chainId: 1,
 			symbol: 'cryptopunk #5730',
 			token: null,
 			balance: '1',
-			entryDate: dayISO(Date.now()),
-			costBasisUsd: ethPx * 33,
+			entryDate: cryptopunkEntryDate,
+			costBasisUsd: cryptopunkCostBasisUsd,
 			costBasisEth: '33',
 			fmvUsd: ethPx * 33,
-			pnlUsd: 0,
+			pnlUsd: ethPx != null ? ethPx * 33 - cryptopunkCostBasisUsd : 0,
 			link: 'https://www.cryptopunks.app/cryptopunks/details/5730',
+			entryLink: `https://etherscan.io/tx/${CRYPTOPUNK_PURCHASE_TX}`,
 		});
 	}
 

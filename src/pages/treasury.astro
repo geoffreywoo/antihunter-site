@@ -22,8 +22,7 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 		<meta name="generator" content={Astro.generator} />
 		<title>Anti Hunter — Treasury</title>
 		<meta name="description" content="Anti Hunter treasury: live balances + pricing with receipts." />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" type="image/svg+xml" href="/mark.svg" />
+		<link rel="icon" type="image/png" href="/cryptopunk5730_openclaw_lobster.png" />
 	</head>
 	<body class="wp">
 		<div class="pointer-events-none fixed inset-0 -z-10">
@@ -119,7 +118,10 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 					const pnlClass = p.pnlUsd == null ? 'text-zinc-400' : (p.pnlUsd >= 0 ? 'text-emerald-300' : 'text-rose-300');
 					const costCell = p.costUsd == null
 						? '—'
-						: `${fmtUsd(p.costUsd)}${p.costEth ? ` <span class=\"text-[10px] text-zinc-500\">(${p.costEth} eth)</span>` : ''}`;
+						: `${fmtUsd(p.costUsd)}${p.costEth ? ` <span class="text-[10px] text-zinc-500">(${p.costEth} eth)</span>` : ''}`;
+					const entryCell = p.entryLink
+						? `<a class="text-zinc-400 underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300" href="${p.entryLink}" target="_blank" rel="noreferrer">${entryDate(p.entryTimestamp)}</a>`
+						: entryDate(p.entryTimestamp);
 					const fmvCell = p.fmvUsd == null ? '—' : fmtUsd(p.fmvUsd);
 					const sym = String(p.symbol || '').trim();
 					const u = sym.toUpperCase();
@@ -148,7 +150,7 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 							<td class=\"px-4 py-2.5\">${chainPill}</td>
 							<td class=\"px-4 py-2.5 text-right tabular-nums\">${fmtQty(Number(p.balance))}</td>
 							<td class=\"px-4 py-2.5 text-right tabular-nums font-semibold text-zinc-100\">${fmvCell}</td>
-							<td class=\"px-4 py-2.5 text-zinc-300\">${entryDate(p.entryTimestamp)}</td>
+							<td class=\"px-4 py-2.5 text-zinc-300\">${entryCell}</td>
 							<td class=\"px-4 py-2.5 text-right tabular-nums\">${costCell}</td>
 							<td class=\"px-4 py-2.5 text-right tabular-nums ${pnlClass}\">${pnlTxt}</td>
 						</tr>`;
@@ -178,17 +180,18 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 						? data.positions
 						: Array.isArray(data?.rows)
 							? data.rows.map((r) => ({
-								...r,
-								chain: r.chain,
-								chainId: r.chainId,
-								balance: r.balance,
-								entryTimestamp: r.entryDate ? Math.floor(new Date(r.entryDate).getTime() / 1000) : undefined,
-								costUsd: r.costBasisUsd,
-								costEth: r.costBasisEth,
-								fmvUsd: r.fmvUsd,
-								pnlUsd: r.pnlUsd,
-								lots: r.lots,
-							}))
+							...r,
+							chain: r.chain,
+							chainId: r.chainId,
+							balance: r.balance,
+							entryTimestamp: r.entryDate ? Math.floor(new Date(r.entryDate).getTime() / 1000) : undefined,
+							entryLink: r.entryLink ?? (r.entryTx ? `https://etherscan.io/tx/${r.entryTx}` : undefined),
+							costUsd: r.costBasisUsd,
+							costEth: r.costBasisEth,
+							fmvUsd: r.fmvUsd,
+							pnlUsd: r.pnlUsd,
+							lots: r.lots,
+						}))
 							: [];
 
 					if (!pos.length) {
