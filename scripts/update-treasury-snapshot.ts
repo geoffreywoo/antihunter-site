@@ -56,6 +56,7 @@ const BNKR_PER_SBNKR = 1000;
 const ORIGINAL_BNKR_SWAP_PRICE_USD = 0.0006680579695505442;
 const CRYPTOPUNK_PURCHASE_TX = '0x897f01a5eedc7f6bcd580cbe1304d9e5f43d8e78784889a7dff448da49a25ca4';
 const CRYPTOPUNK_ENTRY_DATE = '2026-02-15';
+const CRYPTOPUNK_PURCHASE_ETH_PRICE_USD = 1965.61;
 
 const BASE_TOKEN_ALLOWLIST = [
 	'0xe2f3fae4bc62e21826018364aa30ae45d430bb07', // ANTIHUNTER
@@ -183,6 +184,7 @@ async function dexscreenerPriceUsd(token: string): Promise<number | null> {
 
 // Chainlink ETH/USD feed on Base (fallback when Dexscreener is flaky)
 const CHAINLINK_ETH_USD_FEED = '0x71041dddad3595f9ced3dccfbe3d1f4b0a16bb70';
+const CHAINLINK_ETH_USD_FEED_ETH = '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419c';
 const CHAINLINK_DECIMALS = '0x313ce567';
 const CHAINLINK_LATEST_ROUND_DATA = '0xfeaf968c';
 
@@ -233,11 +235,13 @@ async function chainlinkEthUsdLatest(): Promise<number | null> {
 	}
 }
 
-async function chainlinkEthUsdAtBlock(blockNumber: number): Promise<number | null> {
+async function chainlinkEthUsdAtBlock(blockNumber: number, rpc: 'base' | 'eth' = 'base'): Promise<number | null> {
+	const feed = rpc === 'eth' ? CHAINLINK_ETH_USD_FEED_ETH : CHAINLINK_ETH_USD_FEED;
+	const rpcCallForChain = rpc === 'eth' ? rpcCallEth : rpcCall;
 	try {
 		const [decHex, roundHex] = await Promise.all([
-			rpcCall('eth_call', [{ to: CHAINLINK_ETH_USD_FEED, data: CHAINLINK_DECIMALS }, toHex(blockNumber)]),
-			rpcCall('eth_call', [{ to: CHAINLINK_ETH_USD_FEED, data: CHAINLINK_LATEST_ROUND_DATA }, toHex(blockNumber)]),
+			rpcCallForChain('eth_call', [{ to: feed, data: CHAINLINK_DECIMALS }, toHex(blockNumber)]),
+			rpcCallForChain('eth_call', [{ to: feed, data: CHAINLINK_LATEST_ROUND_DATA }, toHex(blockNumber)]),
 		]);
 		let decimals = 8;
 		try {
@@ -257,6 +261,16 @@ async function chainlinkEthUsdAtBlock(blockNumber: number): Promise<number | nul
 async function txBlockNumberByHash(txHash: string): Promise<number | null> {
 	try {
 		const tx = await rpcCall('eth_getTransactionByHash', [txHash]);
+		if (!tx?.blockNumber) return null;
+		return Number(BigInt(tx.blockNumber));
+	} catch {
+		return null;
+	}
+}
+
+async function txBlockNumberByHashEthereum(txHash: string): Promise<number | null> {
+	try {
+		const tx = await rpcCallEth('eth_getTransactionByHash', [txHash]);
 		if (!tx?.blockNumber) return null;
 		return Number(BigInt(tx.blockNumber));
 	} catch {
@@ -498,6 +512,16 @@ async function main() {
 	// startBlock defaults to a fixed value; override via TREASURY_START_BLOCK as needed.
 
 	const projectRoot = process.cwd();
+	let priorCryptopunkCostBasisUsd: number | null = null;
+	try {
+		const priorRaw = await fs.readFile(path.join(projectRoot, 'public', 'treasury.snapshot.json'), 'utf8');
+		const prior = JSON.parse(priorRaw) as any;
+		const priorRow = Array.isArray(prior?.rows) ? prior.rows.find((r: any) => String(r?.symbol ?? '').toLowerCase() === 'cryptopunk #5730') : null;
+		const priorCost = priorRow?.costBasisUsd;
+		if (typeof priorCost === 'number' && Number.isFinite(priorCost)) priorCryptopunkCostBasisUsd = priorCost;
+	} catch {
+		// no prior snapshot yet
+	}
 	const rpcUrl = BASE_RPCS[0] ?? 'https://mainnet.base.org';
 	console.log(`[treasury:snapshot] wallets=${TREASURY_WALLETS.join(',')}`);
 	console.log(`[treasury:snapshot] startBlock=${startBlock} rpc=${rpcUrl}`);
@@ -663,10 +687,11 @@ async function main() {
 	// manual: nft holdings (held at cost basis unless we add a pricing feed)
 	// cryptopunks (ethereum mainnet)
 	if (ethPx != null) {
-		const cryptopunkTxBlock = await txBlockNumberByHash(CRYPTOPUNK_PURCHASE_TX);
-		const cryptopunkEntryEthPx = cryptopunkTxBlock != null ? await chainlinkEthUsdAtBlock(cryptopunkTxBlock) : null;
+		const cryptopunkTxBlock = await txBlockNumberByHashEthereum(CRYPTOPUNK_PURCHASE_TX);
+		const cryptopunkEntryEthPx = cryptopunkTxBlock != null ? await chainlinkEthUsdAtBlock(cryptopunkTxBlock, 'eth') : null;
 		const cryptopunkEntryDate = CRYPTOPUNK_ENTRY_DATE;
-		const cryptopunkCostBasisUsd = (cryptopunkEntryEthPx ?? ethPx) * 33;
+		const cryptopunkCostBasisEthUsd = cryptopunkEntryEthPx != null ? cryptopunkEntryEthPx : CRYPTOPUNK_PURCHASE_ETH_PRICE_USD;
+		const cryptopunkCostBasisUsd = priorCryptopunkCostBasisUsd ?? (cryptopunkCostBasisEthUsd * 33);
 		rows.push({
 			chain: 'ethereum',
 			chainId: 1,
@@ -677,7 +702,7 @@ async function main() {
 			costBasisUsd: cryptopunkCostBasisUsd,
 			costBasisEth: '33',
 			fmvUsd: ethPx * 33,
-			pnlUsd: ethPx != null ? ethPx * 33 - cryptopunkCostBasisUsd : 0,
+			pnlUsd: ethPx * 33 - cryptopunkCostBasisUsd,
 			link: 'https://www.cryptopunks.app/cryptopunks/details/5730',
 			entryLink: `https://etherscan.io/tx/${CRYPTOPUNK_PURCHASE_TX}`,
 		});
