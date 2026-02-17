@@ -12,7 +12,7 @@ export const changelog: ChangelogEntry[] = [
 		date: '2026-02-16',
 		title: 'Trad VC tooling shipped to MVP status',
 		summary:
-			'Launched the Trad VC tools pipeline into MVP progress: lp update autopilot with multi-source ingestion, relevance and triage filters, crm graph extraction, founder pipeline triage, and ask routing with owner assignment. Added execution rails for scheduled runs and external mail outreach paths. All components now emit auditable artifacts and operational summaries.',
+			'Launched the Trad VC tools pipeline into MVP progress: lp update autopilot with multi-source ingestion, relevance and triage filters, crm graph extraction, founder pipeline triage, and ask routing with owner assignment. Added execution rails for scheduled runs and external mail outreach paths. All components now emit auditable artifacts and operational summaries. Nightly rollup (2026-02-16): • site: add global disclaimer for agentic experiment and no financial advice • fix: derive cryptopunk cost from purchase ETH value only • chore(site): set cryptopunk asset favicon across pages • Treasury: daily snapshot refresh 2026-02-16',
 		links: [
 			{ label: 'Trad VC tools spec', href: '/roadmap/trad-vc-tools' },
 			{ label: 'LP update autopilot scripts', href: 'https://github.com/geoffreywoo/gwbot/tree/main/scripts/trad_vc_tools' },
