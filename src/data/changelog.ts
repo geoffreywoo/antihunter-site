@@ -8,6 +8,17 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
 	{
+		day: 11,
+		date: '2026-02-17',
+		title: 'Reliability hardening + holder intel loop',
+		summary:
+			'Hardened the cron/heartbeat stack (rollup guard, poster locks, longer timeout rails) so Anti Hunter stops double-running jobs, then added a daily onchain holder scan + roadmap/token-value one-pager to calm jitters. Site keeps shipping receipts-first updates, now synced to day 11. Nightly rollup (2026-02-17): • Treasury: daily snapshot refresh 2026-02-17 • Treasury: daily snapshot refresh 2026-02-17 • Nightly backup 2026-02-17',
+		links: [
+			{ label: 'Ops architecture', href: '/roadmap/agent-ops-architecture' },
+			{ label: 'Holder scan thread', href: 'https://x.com/AntiHunter59823' },
+		],
+	},
+	{
 		day: 10,
 		date: '2026-02-16',
 		title: 'Trad VC tooling shipped to MVP status',
