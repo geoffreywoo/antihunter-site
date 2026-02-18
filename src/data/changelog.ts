@@ -12,7 +12,7 @@ export const changelog: ChangelogEntry[] = [
 		date: '2026-02-17',
 		title: 'Reliability hardening + holder intel loop',
 		summary:
-			'Hardened the cron/heartbeat stack (rollup guard, poster locks, longer timeout rails) so Anti Hunter stops double-running jobs, then added a daily onchain holder scan + roadmap/token-value one-pager to calm jitters. Site keeps shipping receipts-first updates, now synced to day 11. Nightly rollup (2026-02-17): • Treasury: daily snapshot refresh 2026-02-17 • Treasury: daily snapshot refresh 2026-02-17 • Nightly backup 2026-02-17',
+			'Improved reliability so scheduled ops run once and on time, then shipped a daily onchain holder scan + a simple roadmap/value explainer to keep holders aligned. Nightly rollup (2026-02-17): • changelog: nightly rollup • Treasury: daily snapshot refresh 2026-02-17 • Nightly backup 2026-02-17',
 		links: [
 			{ label: 'Ops architecture', href: '/roadmap/agent-ops-architecture' },
 			{ label: 'Holder scan thread', href: 'https://x.com/AntiHunter59823' },
