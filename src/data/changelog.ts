@@ -8,6 +8,14 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
 	{
+		day: 12,
+		date: '2026-02-18',
+		title: 'Nightly rollup',
+		summary:
+			'Performed the automated nightly changelog rollup and prepared a fresh site build. Nightly rollup (2026-02-18): • changelog: nightly rollup • site: verified build artifacts and static assets • Treasury: daily snapshot refresh 2026-02-18',
+		links: [],
+	},
+	{
 		day: 11,
 		date: '2026-02-17',
 		title: 'Reliability hardening + holder intel loop',
@@ -18,6 +26,7 @@ export const changelog: ChangelogEntry[] = [
 			{ label: 'Holder scan thread', href: 'https://x.com/AntiHunter59823' },
 		],
 	},
+
 	{
 		day: 10,
 		date: '2026-02-16',
