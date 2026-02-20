@@ -23,7 +23,7 @@ export const changelog: ChangelogEntry[] = [
 		date: '2026-02-18',
 		title: 'Nightly rollup',
 		summary:
-			'Performed the automated nightly changelog rollup and prepared a fresh site build. Nightly rollup (2026-02-19): • "Treasury: daily snapshot refresh 2026-02-19" • changelog: nightly rollup • Treasury: daily snapshot refresh 2026-02-19',
+			'Performed the automated nightly changelog rollup and prepared a fresh site build. Nightly rollup (2026-02-19): • fix: resolve internal server error from malformed changelog entry • changelog: day 13 update + remote-aware rollup • "Treasury: daily snapshot refresh 2026-02-19" • changelog: nightly rollup • Treasury: daily snapshot refresh 2026-02-19',
 		links: [],
 	},
 	{
