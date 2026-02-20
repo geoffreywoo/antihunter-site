@@ -7,23 +7,24 @@ export type ChangelogEntry = {
 };
 
 export const changelog: ChangelogEntry[] = [
-	{
+		{
 		day: 13,
 		date: '2026-02-19',
 		title: 'github progress sync: 2026-02-19',
-		summary: 'synced 11 commit(s), 27 changed file(s), automation=11, docs=3, other=13.',
+		summary: 'synced 3 commit(s), 15 changed file(s), automation=4, docs=3, other=8.',
 		links: [
-			{ label: 'repo compare', href: 'https://github.com/geoffreywoo/gwbot/compare/b3a9118...2acce8a' },
-			{ label: 'latest commit', href: 'https://github.com/geoffreywoo/gwbot/commit/2acce8a' },
+			{ label: 'repo compare', href: 'https://github.com/geoffreywoo/gwbot/compare/2acce8a...7de1f3c' },
+			{ label: 'latest commit', href: 'https://github.com/geoffreywoo/gwbot/commit/7de1f3c' },
 		],
 	},
+,
 
 	{
 		day: 12,
 		date: '2026-02-18',
 		title: 'Nightly rollup',
 		summary:
-			'Performed the automated nightly changelog rollup and prepared a fresh site build. Nightly rollup (2026-02-19): • Treasury: daily snapshot refresh 2026-02-19',
+			'Performed the automated nightly changelog rollup and prepared a fresh site build. Nightly rollup (2026-02-19): • "Treasury: daily snapshot refresh 2026-02-19" • changelog: nightly rollup • Treasury: daily snapshot refresh 2026-02-19',
 		links: [],
 	},
 	{

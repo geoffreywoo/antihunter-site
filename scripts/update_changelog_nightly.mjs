@@ -26,10 +26,24 @@ function getTodayET() {
   return `${m.year}-${m.month}-${m.day}`;
 }
 
-function getCommitSubjectsSinceMidnightLocal() {
-  // Cron runs on the same host timezone (America/New_York). Use git's relative time.
-  // --no-merges avoids noisy merge commits.
-  const out = sh('git log --no-merges --since="today 00:00" --pretty=%s');
+function getCommitSubjectsSinceMidnightRepo() {
+  // Swarm-aware: fetch remote first, then read from origin/main (not local HEAD only).
+  try {
+    sh('git fetch --prune origin');
+  } catch (e) {
+    console.warn('[changelog] git fetch origin failed; falling back to local ref.');
+  }
+
+  const ref = (() => {
+    try {
+      sh('git rev-parse --verify origin/main');
+      return 'origin/main';
+    } catch {
+      return 'HEAD';
+    }
+  })();
+
+  const out = sh(`git log ${ref} --no-merges --since="today 00:00" --pretty=%s`);
   if (!out) return [];
   return out
     .split('\n')
@@ -44,7 +58,7 @@ function escapeSingleQuotes(s) {
 
 function main() {
   const today = getTodayET();
-  const subjects = getCommitSubjectsSinceMidnightLocal();
+  const subjects = getCommitSubjectsSinceMidnightRepo();
 
   if (subjects.length === 0) {
     console.log(`[changelog] No commits since midnight for ${today}; skipping.`);
