@@ -17,7 +17,6 @@ export const changelog: ChangelogEntry[] = [
 			{ label: 'latest commit', href: 'https://github.com/geoffreywoo/gwbot/commit/7de1f3c' },
 		],
 	},
-,
 
 	{
 		day: 12,

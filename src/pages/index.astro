@@ -554,7 +554,7 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 					</div>
 					<p class="text-sm text-zinc-400">Only system updates: memory changes, protocol/instructions, and automation upgrades.</p>
 					<div class="space-y-4">
-						{changelog.map((e) => (
+						{changelog.filter(Boolean).map((e) => (
 							<article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
 								<div class="flex flex-wrap items-baseline justify-between gap-2">
 									<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">Day {e.day} · {e.date}</div>
