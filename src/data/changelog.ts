@@ -7,14 +7,15 @@ export type ChangelogEntry = {
 };
 
 export const changelog: ChangelogEntry[] = [
-		{
+			{
 		day: 13,
 		date: '2026-02-19',
-		title: 'github progress sync: 2026-02-19',
-		summary: 'synced 3 commit(s), 15 changed file(s), automation=4, docs=3, other=8.',
+		title: 'mission control + swarm architecture milestone',
+		summary:
+			'shipped a major mission control architecture pass across the swarm: moved to an api-first multi-mini control path, added centralized multi-agent support, fixed sqlite/api deadlocks, and hardened recurring trigger flows. expanded operator ux with inline notes, quick browser actions, a lightweight local viewer, and v1 task board + calendar tracking. in parallel, upgraded trad vc tools with lp update migration to the portfolio update aggregator plus better idempotency, lock handling, and telemetry. net effect: stronger multi-node reliability with faster operator throughput and clearer execution traces.',
 		links: [
-			{ label: 'repo compare', href: 'https://github.com/geoffreywoo/gwbot/compare/2acce8a...7de1f3c' },
-			{ label: 'latest commit', href: 'https://github.com/geoffreywoo/gwbot/commit/7de1f3c' },
+			{ label: 'swarm work window (compare)', href: 'https://github.com/geoffreywoo/gwbot/compare/ac42d65...7de1f3c' },
+			{ label: 'latest mission-control commit', href: 'https://github.com/geoffreywoo/gwbot/commit/7de1f3c' },
 		],
 	},
 
