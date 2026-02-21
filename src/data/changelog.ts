@@ -7,6 +7,15 @@ export type ChangelogEntry = {
 };
 
 export const changelog: ChangelogEntry[] = [
+		{
+			day: 14,
+			date: '2026-02-20',
+			title: 'daily rollout + operations pulse',
+			summary:
+			'throughput and reliability work continued across the site and agent stack. public-facing updates focus on transparency, execution continuity, and operator trust. key shipped items are captured in the nightly rollup below. Nightly rollup (2026-02-20): • Treasury: daily snapshot refresh 2026-02-20',
+			links: [],
+		},
+
 			{
 		day: 13,
 		date: '2026-02-19',
