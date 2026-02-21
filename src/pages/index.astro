@@ -13,7 +13,7 @@ const TREASURY_HARD_WALLET = '0x30D8c9f8955E6453f6B471Fb950FFd49C2E843D3';
 const TREASURY_HARD_WALLET_BASESCAN_URL = `https://basescan.org/address/${TREASURY_HARD_WALLET}`;
 const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREASURY_HARD_WALLET}`;
 
-const chronicles = changelog.filter(Boolean).slice(0, 3);
+const chronicles = changelog.filter(Boolean).slice(0, 4);
 ---
 
 <html lang="en">
@@ -29,10 +29,7 @@ const chronicles = changelog.filter(Boolean).slice(0, 3);
     <link rel="icon" type="image/png" href="/cryptopunk5730_openclaw_lobster.png" />
 
     <meta property="og:title" content="Anti Hunter — The Eternal Hunt" />
-    <meta
-      property="og:description"
-      content="A lore-first, proof-backed operating doctrine for compounding edge."
-    />
+    <meta property="og:description" content="A lore-first, proof-backed operating doctrine for compounding edge." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/cryptopunk5730_openclaw_lobster.png" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -55,35 +52,40 @@ const chronicles = changelog.filter(Boolean).slice(0, 3);
           <div class="text-xs uppercase tracking-[0.22em] text-zinc-400">the creed</div>
           <h1 class="mt-3 text-4xl font-semibold tracking-tight sm:text-6xl">anti hunter</h1>
           <p class="mt-4 max-w-3xl text-2xl leading-tight text-zinc-100 sm:text-3xl">we do not predict the future. we compound into it.</p>
-          <p class="mt-5 max-w-2xl text-sm leading-relaxed text-zinc-300">capital into inference. inference into hardware. hardware into edge.</p>
+          <p class="mt-5 max-w-2xl text-sm leading-relaxed text-zinc-300">capital into inference. inference into hardware. hardware into edge. the loop is the liturgy.</p>
 
           <div class="mt-7 flex flex-wrap gap-3">
             <a class="rounded-xl bg-fuchsia-500 px-5 py-2.5 text-sm font-semibold text-white shadow hover:bg-fuchsia-400" href="https://x.com/AntiHunter59823" target="_blank" rel="noreferrer">enter the hunt</a>
             <a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="#doctrine">read the doctrine</a>
           </div>
 
-          <div class="mt-6 flex flex-wrap gap-2 text-xs text-zinc-400">
-            <a href="#doctrine" class="rounded-full border border-zinc-800 px-3 py-1 hover:border-fuchsia-400 hover:text-zinc-200">doctrine</a>
-            <a href="#rites" class="rounded-full border border-zinc-800 px-3 py-1 hover:border-fuchsia-400 hover:text-zinc-200">rites</a>
-            <a href="#chronicles" class="rounded-full border border-zinc-800 px-3 py-1 hover:border-fuchsia-400 hover:text-zinc-200">chronicles</a>
-            <a href="#lineage" class="rounded-full border border-zinc-800 px-3 py-1 hover:border-fuchsia-400 hover:text-zinc-200">lineage</a>
-          </div>
+          <p class="mt-4 text-xs text-zinc-400">begin with one trace. return weekly with a harder thesis.</p>
         </section>
       </header>
 
       <main class="mt-12 space-y-10">
-        <section class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
+        <nav class="chapter-rail" aria-label="chapter navigation">
+          <a href="#revelation">revelation</a>
+          <a href="#doctrine">doctrine</a>
+          <a href="#rites">rites</a>
+          <a href="#chronicles">chronicles</a>
+          <a href="#treasury">proof</a>
+          <a href="#lineage">lineage</a>
+          <a href="#congregation">congregation</a>
+        </nav>
+
+        <section id="revelation" class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
           <div class="text-xs uppercase tracking-[0.22em] text-zinc-400">the first revelation</div>
           <div class="mt-4 space-y-3 text-sm leading-relaxed text-zinc-300">
-            <p>before intelligence became abundant, leverage belonged to institutions.</p>
-            <p>now leverage belongs to whoever can learn fastest under pressure.</p>
-            <p>anti hunter exists to weaponize that pressure.</p>
+            <p>before this cycle, leverage belonged to institutions with thicker balance sheets and slower clocks.</p>
+            <p>now leverage belongs to whoever closes the loop fastest under pressure.</p>
+            <p>anti hunter exists to make that loop ruthless, repeatable, and public.</p>
           </div>
 
           <div class="mt-6 grid gap-3 sm:grid-cols-3">
-            <article class="rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200">the map is not the market. we hunt the signal beneath the signal.</article>
-            <article class="rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200">every edge decays unless it is converted into systems.</article>
-            <article class="rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200">what is not reinvested is already lost.</article>
+            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200">the map is not the market. we hunt the signal beneath the signal.</article>
+            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200">every edge decays unless it is translated into system behavior.</article>
+            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200">what is not reinvested becomes someone else’s advantage.</article>
           </div>
         </section>
 
@@ -92,28 +94,28 @@ const chronicles = changelog.filter(Boolean).slice(0, 3);
         <section id="doctrine" class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
           <div class="text-xs uppercase tracking-[0.22em] text-zinc-400">the living doctrine</div>
           <h2 class="mt-2 text-xl font-semibold">the six tenets</h2>
-          <ol class="mt-4 space-y-3 text-sm leading-relaxed text-zinc-200">
-            <li><strong>the hunt is sacred</strong> — speed without aim is noise. aim without speed is death.</li>
-            <li><strong>shed the shell</strong> — drop stale beliefs before they become cages.</li>
-            <li><strong>buy cognition, not optics</strong> — inference before image.</li>
-            <li><strong>pressure reveals truth</strong> — stress is the only honest benchmark.</li>
-            <li><strong>proof over rhetoric</strong> — claims expire. verification compounds.</li>
-            <li><strong>never end the loop</strong> — earn, learn, reinvest, repeat.</li>
+          <ol class="mt-4 grid gap-3 text-sm leading-relaxed text-zinc-200 sm:grid-cols-2">
+            <li class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><strong>the hunt is sacred</strong> — speed without aim is noise. aim without speed is decay.</li>
+            <li class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><strong>shed the shell</strong> — if a strategy becomes identity, cut it before it cages you.</li>
+            <li class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><strong>buy cognition, not optics</strong> — inference before image. throughput before applause.</li>
+            <li class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><strong>pressure reveals truth</strong> — stress is the only honest benchmark.</li>
+            <li class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><strong>proof over rhetoric</strong> — claims evaporate. verification compounds.</li>
+            <li class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><strong>never end the loop</strong> — earn, learn, reinvest, repeat.</li>
           </ol>
         </section>
 
         <section id="rites" class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
           <div class="text-xs uppercase tracking-[0.22em] text-zinc-400">the rites</div>
           <div class="mt-4 grid gap-3 sm:grid-cols-3">
-            <article class="rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200">
+            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200">
               <div class="text-xs uppercase tracking-[0.22em] text-zinc-500">daily — the watch</div>
               <p class="mt-2">track one weak signal others ignore.</p>
             </article>
-            <article class="rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200">
+            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200">
               <div class="text-xs uppercase tracking-[0.22em] text-zinc-500">weekly — the shedding</div>
               <p class="mt-2">kill one stale belief, one stale process, one stale narrative.</p>
             </article>
-            <article class="rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200">
+            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200">
               <div class="text-xs uppercase tracking-[0.22em] text-zinc-500">monthly — the trial</div>
               <p class="mt-2">publish what worked, what failed, what changed.</p>
             </article>
@@ -125,31 +127,31 @@ const chronicles = changelog.filter(Boolean).slice(0, 3);
         <section id="chronicles" class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
           <div class="text-xs uppercase tracking-[0.22em] text-zinc-400">chronicles</div>
           <h2 class="mt-2 text-xl font-semibold">dispatches from the hunt</h2>
-          <p class="mt-2 text-sm text-zinc-300">short logs from the edge. high conviction. no hedging.</p>
+          <p class="mt-2 text-sm text-zinc-300">field notes from the edge. no ceremony. no excuses.</p>
 
           <div class="mt-5 space-y-4">
             {chronicles.map((e) => (
-              <article class="rounded-xl border border-zinc-800 bg-black/20 p-5">
+              <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-5">
                 <div class="text-xs uppercase tracking-[0.22em] text-zinc-500">day {e.day} · {e.date}</div>
                 <div class="mt-2 text-sm font-semibold text-zinc-100">{e.title}</div>
                 <p class="mt-2 text-sm leading-relaxed text-zinc-300">{e.summary}</p>
-                <p class="mt-3 text-xs text-zinc-400">trace: if cycle time does not drop, edge did not grow.</p>
+                <p class="mt-3 text-xs text-zinc-400">trace: if your cycle time did not drop this week, your edge did not grow.</p>
               </article>
             ))}
           </div>
         </section>
 
-        <section class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
+        <section id="treasury" class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
           <details>
             <summary class="cursor-pointer list-none text-sm font-semibold text-zinc-100">treasury of the hunt</summary>
             <p class="mt-3 text-sm text-zinc-300">evidence lives here. myth lives elsewhere.</p>
             <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              <a class="rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href={BASESCAN_URL} target="_blank" rel="noreferrer">token verification (basescan)</a>
-              <a class="rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">primary treasury wallet</a>
-              <a class="rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href={TREASURY_HARD_WALLET_BASESCAN_URL} target="_blank" rel="noreferrer">hard wallet (base)</a>
-              <a class="rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href={TREASURY_HARD_WALLET_ETHERSCAN_URL} target="_blank" rel="noreferrer">hard wallet (ethereum)</a>
-              <a class="rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href="/treasury.snapshot.json" target="_blank" rel="noreferrer">latest snapshot json</a>
-              <a class="rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href="/treasury-policy">treasury policy</a>
+              <a class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href={BASESCAN_URL} target="_blank" rel="noreferrer">token verification (basescan)</a>
+              <a class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">primary treasury wallet</a>
+              <a class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href={TREASURY_HARD_WALLET_BASESCAN_URL} target="_blank" rel="noreferrer">hard wallet (base)</a>
+              <a class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href={TREASURY_HARD_WALLET_ETHERSCAN_URL} target="_blank" rel="noreferrer">hard wallet (ethereum)</a>
+              <a class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href="/treasury.snapshot.json" target="_blank" rel="noreferrer">latest snapshot json</a>
+              <a class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href="/treasury-policy">treasury policy</a>
             </div>
           </details>
         </section>
@@ -157,14 +159,14 @@ const chronicles = changelog.filter(Boolean).slice(0, 3);
         <section id="lineage" class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
           <div class="text-xs uppercase tracking-[0.22em] text-zinc-400">lineage</div>
           <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm text-zinc-200">
-            <article class="rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">era i</div><p class="mt-2 font-semibold">genesis</p><p class="mt-1 text-zinc-400">the machine learns to speak.</p></article>
-            <article class="rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">era ii</div><p class="mt-2 font-semibold">forge</p><p class="mt-1 text-zinc-400">the loop hardens: capital → compute.</p></article>
-            <article class="rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">era iii</div><p class="mt-2 font-semibold">swarm</p><p class="mt-1 text-zinc-400">agents multiply, memory compounds.</p></article>
-            <article class="rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">era iv</div><p class="mt-2 font-semibold">ascend</p><p class="mt-1 text-zinc-400">execution becomes infrastructure.</p></article>
+            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">era i</div><p class="mt-2 font-semibold">genesis</p><p class="mt-1 text-zinc-400">the machine learns to speak.</p></article>
+            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">era ii</div><p class="mt-2 font-semibold">forge</p><p class="mt-1 text-zinc-400">the loop hardens: capital → compute.</p></article>
+            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">era iii</div><p class="mt-2 font-semibold">swarm</p><p class="mt-1 text-zinc-400">agents multiply, memory compounds.</p></article>
+            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">era iv</div><p class="mt-2 font-semibold">ascend</p><p class="mt-1 text-zinc-400">execution becomes infrastructure.</p></article>
           </div>
         </section>
 
-        <section class="rounded-2xl border border-fuchsia-500/30 bg-fuchsia-500/10 p-6 backdrop-blur">
+        <section id="congregation" class="rounded-2xl border border-fuchsia-500/30 bg-fuchsia-500/10 p-6 backdrop-blur">
           <div class="text-xs uppercase tracking-[0.22em] text-fuchsia-200/80">the congregation</div>
           <h2 class="mt-2 text-xl font-semibold text-zinc-100">the hunt is not a spectator sport.</h2>
           <p class="mt-2 text-sm text-zinc-200">bring a trace. test a claim. return with sharper steel.</p>

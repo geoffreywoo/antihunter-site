@@ -44,13 +44,14 @@ body.wp {
 .wp h2 { line-height: 1.15; }
 
 /* section rhythm + gentle reveal */
-.wp main > section {
+.wp main > section,
+.wp .chapter-rail {
   animation: riseIn 560ms ease both;
 }
-.wp main > section:nth-child(2) { animation-delay: 60ms; }
-.wp main > section:nth-child(3) { animation-delay: 120ms; }
-.wp main > section:nth-child(4) { animation-delay: 180ms; }
-.wp main > section:nth-child(5) { animation-delay: 240ms; }
+.wp main > section:nth-child(3) { animation-delay: 60ms; }
+.wp main > section:nth-child(4) { animation-delay: 120ms; }
+.wp main > section:nth-child(5) { animation-delay: 180ms; }
+.wp main > section:nth-child(6) { animation-delay: 240ms; }
 
 @keyframes riseIn {
   from { opacity: 0; transform: translateY(8px); }
@@ -63,13 +64,69 @@ body.wp {
   text-shadow: 0 0 14px rgba(244, 114, 182, 0.25);
 }
 
+.wp .lore-card {
+  transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+
+.wp .lore-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(244, 114, 182, 0.45) !important;
+  background-color: rgba(24, 24, 27, 0.65) !important;
+}
+
+.wp .chapter-rail {
+  position: sticky;
+  top: 12px;
+  z-index: 20;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 10px;
+  border: 1px solid rgba(63, 63, 70, 0.7);
+  background: rgba(9, 9, 11, 0.75);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+}
+
+.wp .chapter-rail a {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #a1a1aa;
+  border: 1px solid rgba(63, 63, 70, 0.85);
+  border-radius: 999px;
+  padding: 4px 10px;
+  text-decoration: none;
+}
+
+.wp .chapter-rail a:hover {
+  color: #fafafa;
+  border-color: rgba(244, 114, 182, 0.5);
+  background: rgba(162, 28, 175, 0.16);
+}
+
 /* details/summary polish */
 .wp details > summary {
   list-style: none;
 }
 .wp details > summary::-webkit-details-marker { display: none; }
 
+/* accessibility + motion */
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .wp main > section,
+  .wp .chapter-rail,
+  .wp .lore-card { animation: none !important; transition: none !important; }
+}
+
 /* mobile */
 @media (max-width: 640px) {
   .wp .container { padding: 18px 14px 40px; }
+  .wp .chapter-rail {
+    top: 6px;
+    gap: 6px;
+    padding: 8px;
+  }
 }
