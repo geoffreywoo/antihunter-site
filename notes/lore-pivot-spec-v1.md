@@ -1,12 +1,12 @@
 # Anti Hunter Lore Pivot Spec v1
 
 ## Goal
-Reposition antihunter.com as a **myth engine** (attention + identity + community gravity), while preserving enough receipts to remain credible.
+Reposition antihunter.com as a **myth engine** (attention + identity + community gravity), while preserving enough proof to remain credible.
 
 Target ratio:
 - 70% lore / narrative / symbols
 - 20% doctrine (short memorable rules)
-- 10% hard proof (receipts, links, data)
+- 10% hard proof (proof, links, data)
 
 ## Product Intent
 The site should feel like entering a living book, not reading an investor memo.
@@ -23,7 +23,7 @@ Primary outcomes:
 3. **The Six Tenets** (doctrine)
 4. **The Rites** (participation loop)
 5. **Chronicles** (recent dispatches)
-6. **Treasury of the Hunt** (collapsed receipts)
+6. **Treasury of the Hunt** (collapsed proof)
 7. **Lineage / Eras** (narrative timeline)
 8. **Join the Congregation** (CTA)
 
@@ -82,7 +82,7 @@ what is not reinvested is already lost.
 2. **shed the shell** — drop stale beliefs before they become cages.
 3. **buy cognition, not optics** — inference before image.
 4. **pressure reveals truth** — stress is the only honest benchmark.
-5. **receipts over rhetoric** — claims expire. proof compounds.
+5. **proof over rhetoric** — claims expire. proof compounds.
 6. **never end the loop** — earn, learn, reinvest, repeat.
 
 ---
@@ -104,7 +104,7 @@ publish what worked, what failed, what changed.
 dispatches from the hunt
 
 **intro**
-short logs from the edge: decisions, pivots, receipts.
+short logs from the edge: decisions, pivots, proof.
 
 **entry format**
 - one hard claim
@@ -121,7 +121,7 @@ example closing line:
 treasury of the hunt
 
 **intro**
-myth carries attention. receipts carry trust.
+myth carries attention. proof carry trust.
 
 **items**
 - primary wallet
@@ -131,7 +131,7 @@ myth carries attention. receipts carry trust.
 - treasury policy
 
 **microcopy**
-proof lives here. drama lives elsewhere.
+evidence lives here. myth lives elsewhere.
 
 ---
 
@@ -172,7 +172,7 @@ start with one trace per week. consistency beats spectacle.
 - max width: 72rem content rail
 - paragraphs: max 3 short paragraphs per block
 - cards: rounded, low-contrast borders, soft glow on hover
-- receipts module: accordion/collapse by default
+- proof module: accordion/collapse by default
 
 ### Motion
 - slow fade + upward drift for chapter reveals
@@ -195,13 +195,13 @@ start with one trace per week. consistency beats spectacle.
 Anti Hunter — The Eternal Hunt for Edge
 
 **description**
-Anti Hunter is an agentic intelligence project compounding capital into inference, hardware, and operational edge. Read the doctrine, follow the chronicles, verify the receipts.
+Anti Hunter is an agentic intelligence project compounding capital into inference, hardware, and operational edge. Read the doctrine, follow the chronicles, verify the proof.
 
 **og title**
 Anti Hunter — The Eternal Hunt
 
 **og description**
-A lore-first, receipts-backed operating doctrine for compounding edge.
+A lore-first, proof-backed operating doctrine for compounding edge.
 
 ## Implementation Plan
 1. refactor homepage into chapter-based sections
@@ -213,7 +213,7 @@ A lore-first, receipts-backed operating doctrine for compounding edge.
 ## Acceptance Criteria
 - homepage can be read in <3 minutes while still feeling rich
 - at least 12 quoteable lines across hero/revelation/tenets
-- receipts section remains one click away
+- proof section remains one click away
 - no policy-inaccurate claims introduced
 - visual identity feels mythic without becoming unreadable
 
@@ -223,3 +223,9 @@ A lore-first, receipts-backed operating doctrine for compounding edge.
 - [ ] run build + smoke test locally
 - [ ] verify all wallet/policy links
 - [ ] publish
+
+
+## Brand Lexicon Update
+- deprecated term: `receipts`
+- preferred terms: `proof`, `evidence`, `onchain proof`, `verification`
+- avoid slangy finance-twitter phrasing in canonical site copy.
