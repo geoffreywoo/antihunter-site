@@ -1,7 +1,7 @@
 {
-  "updatedAtMs": 1771592410081,
-  "updatedAt": "2026-02-20T13:00:10.081Z",
-  "date": "2026-02-20",
+  "updatedAtMs": 1771635618627,
+  "updatedAt": "2026-02-21T01:00:18.627Z",
+  "date": "2026-02-21",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "wallets": [
     "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
@@ -19,12 +19,12 @@
       "chainId": 8453,
       "symbol": "AntiHunter",
       "token": "0xe2f3fae4bc62e21826018364aa30ae45d430bb07",
-      "balance": "3525178587.848485",
+      "balance": "3561371914.9109087",
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 93064.71471920001,
-      "pnlUsd": 93064.71471920001,
+      "fmvUsd": 65137.492323720515,
+      "pnlUsd": 65137.492323720515,
       "lots": null
     },
     {
@@ -36,8 +36,8 @@
       "entryDate": "2026-02-15",
       "costBasisUsd": 64865.13,
       "costBasisEth": "33",
-      "fmvUsd": 64209.090000000004,
-      "pnlUsd": -656.0399999999936,
+      "fmvUsd": 64902.42,
+      "pnlUsd": 37.29000000000087,
       "link": "https://www.cryptopunks.app/cryptopunks/details/5730",
       "entryLink": "https://etherscan.io/tx/0x897f01a5eedc7f6bcd580cbe1304d9e5f43d8e78784889a7dff448da49a25ca4"
     },
@@ -46,12 +46,12 @@
       "chainId": 8453,
       "symbol": "WETH",
       "token": "0x4200000000000000000000000000000000000006",
-      "balance": "13.236960756880357078",
+      "balance": "13.615563992392388771",
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 25755.551653484818,
-      "pnlUsd": 25755.551653484818
+      "fmvUsd": 26778.27432639781,
+      "pnlUsd": 26778.27432639781
     },
     {
       "chain": "base",
@@ -62,8 +62,8 @@
       "entryDate": null,
       "costBasisUsd": 12028.232651798236,
       "costBasisEth": "0",
-      "fmvUsd": 10437.367393339493,
-      "pnlUsd": -1590.8652584587435,
+      "fmvUsd": 11067.53447763634,
+      "pnlUsd": -960.6981741618965,
       "lots": [
         {
           "txHash": "0x96e23121c777d968322f32ef91605b8e45efaed19d06d16b2ce6e9c0210966f8",
@@ -86,44 +86,14 @@
     {
       "chain": "base",
       "chainId": 8453,
-      "symbol": "bio",
-      "token": "0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07",
-      "balance": "721643923.967929189632132706",
-      "entryDate": "2026-02-07",
-      "costBasisUsd": 6292.645333701491,
-      "costBasisEth": "3.027464413958726144",
-      "fmvUsd": 2462.2490685785747,
-      "pnlUsd": -3830.3962651229162,
-      "lots": [
-        {
-          "txHash": "0x5f5569cc2124d314a30846db0bf93a1d6f42e4d0bb9c284afaeb9f4898ab8445",
-          "blockNumber": 41856410,
-          "entryDate": "2026-02-07",
-          "qty": "491617660.801773755517648542",
-          "costBasisEth": "1",
-          "costBasisUsd": 2100
-        },
-        {
-          "txHash": "0x6c277fcbf065377dd5ce341506cf69bb834efbb3553c7149042a360fd1342ca0",
-          "blockNumber": 41905779,
-          "entryDate": "2026-02-09",
-          "qty": "230026263.166155434114484164",
-          "costBasisEth": "2.027464413958726144",
-          "costBasisUsd": 2010
-        }
-      ]
-    },
-    {
-      "chain": "base",
-      "chainId": 8453,
       "symbol": "FELIX",
       "token": "0xf30bf00edd0c22db54c9274b90d2a4c21fc09b07",
       "balance": "234565737.063334765213666609",
       "entryDate": "2026-02-07",
       "costBasisUsd": 4157.04,
       "costBasisEth": "2",
-      "fmvUsd": 2306.2503268067076,
-      "pnlUsd": -1850.7896731932924,
+      "fmvUsd": 3405.8945021596205,
+      "pnlUsd": -751.1454978403794,
       "lots": [
         {
           "txHash": "0x3183990234fa8a320bb8c2d3047d90f4c00fc4f886833dc859502fd476dc23e0",
@@ -146,13 +116,43 @@
     {
       "chain": "base",
       "chainId": 8453,
+      "symbol": "bio",
+      "token": "0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07",
+      "balance": "721643923.967929189632132706",
+      "entryDate": "2026-02-07",
+      "costBasisUsd": 6292.645333701491,
+      "costBasisEth": "3.027464413958726144",
+      "fmvUsd": 2317.9202837849884,
+      "pnlUsd": -3974.7250499165025,
+      "lots": [
+        {
+          "txHash": "0x5f5569cc2124d314a30846db0bf93a1d6f42e4d0bb9c284afaeb9f4898ab8445",
+          "blockNumber": 41856410,
+          "entryDate": "2026-02-07",
+          "qty": "491617660.801773755517648542",
+          "costBasisEth": "1",
+          "costBasisUsd": 2100
+        },
+        {
+          "txHash": "0x6c277fcbf065377dd5ce341506cf69bb834efbb3553c7149042a360fd1342ca0",
+          "blockNumber": 41905779,
+          "entryDate": "2026-02-09",
+          "qty": "230026263.166155434114484164",
+          "costBasisEth": "2.027464413958726144",
+          "costBasisUsd": 2010
+        }
+      ]
+    },
+    {
+      "chain": "base",
+      "chainId": 8453,
       "symbol": "ETH",
       "token": null,
       "balance": "1.0424651773557052",
       "entryDate": null,
       "costBasisUsd": null,
       "costBasisEth": null,
-      "fmvUsd": 2028.3557695363163,
+      "fmvUsd": 2050.25796291256,
       "pnlUsd": null
     },
     {
@@ -164,11 +164,11 @@
       "entryDate": null,
       "costBasisUsd": null,
       "costBasisEth": null,
-      "fmvUsd": 245.34175166852108,
+      "fmvUsd": 247.99095284368704,
       "pnlUsd": null
     }
   ],
-  "totalUsd": 200508.92068261444,
+  "totalUsd": 175907.78482945552,
   "notes": [
     "fast_mode: balances-only (log scan skipped)"
   ],
