@@ -17,6 +17,69 @@ body.wp {
   line-height: 1.65;
 }
 
+/* top header */
+.wp .site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.wp .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.wp .brand img {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 1px solid rgba(161, 161, 170, 0.45);
+  box-shadow: 0 0 0 1px rgba(24, 24, 27, 0.9);
+  object-fit: cover;
+}
+
+.wp .brand-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  color: #fafafa;
+}
+
+.wp .tiny {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: lowercase;
+}
+
+.wp .muted {
+  color: #a1a1aa;
+}
+
+.wp .nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.wp .nav a {
+  color: #a1a1aa;
+  text-decoration: none;
+}
+
+.wp .nav a:hover {
+  color: #f4f4f5;
+}
+
+.wp .rule {
+  border: 0;
+  border-top: 1px solid rgba(63, 63, 70, 0.7);
+  margin: 10px 0 0;
+}
+
 .wp .container {
   max-width: 72rem;
   margin: 0 auto;
@@ -149,6 +212,22 @@ html { scroll-behavior: smooth; }
 
 @media (max-width: 640px) {
   .wp .container { padding: 14px 12px 32px; }
+
+  .wp .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .wp .brand img {
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+  }
+
+  .wp .nav {
+    gap: 8px;
+  }
 
   .wp h1 { font-size: 2.2rem !important; line-height: 1.02; }
   .wp h2 { font-size: 1.55rem !important; }
