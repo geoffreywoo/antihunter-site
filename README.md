@@ -16,6 +16,18 @@ npm run build
 npm run preview
 ```
 
+## Canonical voice (required)
+
+All public copy must follow the unified Anti Hunter persona/voice file:
+
+- `../playbooks/antihunter_public_persona.md`
+
+This repo links it as:
+
+- `VOICE.md` (symlink to canonical file)
+
+Before editing homepage or public copy, read `VOICE.md` first.
+
 ## Deploy (Vercel)
 
 1) Push this repo to GitHub.
