@@ -105,6 +105,27 @@ body.wp {
   background: rgba(162, 28, 175, 0.16);
 }
 
+.wp .sigil-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 4px 0 16px;
+  color: rgba(228, 228, 231, 0.55);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+}
+
+.wp .sigil-row--soft {
+  margin-top: 56px;
+  color: rgba(161, 161, 170, 0.45);
+}
+
+.wp .chapter-mark {
+  color: #f0abfc;
+  text-shadow: 0 0 10px rgba(217, 70, 239, 0.18);
+}
+
 /* details/summary polish */
 .wp details > summary {
   list-style: none;
