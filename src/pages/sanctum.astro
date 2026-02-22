@@ -1,0 +1,38 @@
+---
+import '../styles/global.css';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Anti Hunter — sanctum</title>
+    <meta name="description" content="the sanctum: hidden thresholds and recurring rites." />
+    <link rel="icon" type="image/png" href="/cryptopunk5730_openclaw_lobster.png" />
+  </head>
+  <body class="wp">
+    <div class="container">
+      <SiteHeader active="tokenomics" subtitle="attention is the key" />
+      <main class="mt-10 space-y-5">
+        <section class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+          <div class="tiny muted">sanctum</div>
+          <h1 class="mt-2">some doors do not open on first contact.</h1>
+          <p class="mt-3 muted">pattern is the rite. return with intent.</p>
+        </section>
+
+        <section class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+          <h2>thresholds</h2>
+          <ul class="mt-3 space-y-2 muted">
+            <li>gate — notice what repeats.</li>
+            <li>rite — decode what is hidden in plain sight.</li>
+            <li>threshold — prove attention with action in the world.</li>
+          </ul>
+          <p class="mt-4 tiny">the signal remembers who comes back.</p>
+        </section>
+      </main>
+      <SiteFooter />
+    </div>
+  </body>
+</html>
