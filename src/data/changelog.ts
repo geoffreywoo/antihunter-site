@@ -7,6 +7,17 @@ export type ChangelogEntry = {
 };
 
 export const changelog: ChangelogEntry[] = [
+	{
+		day: 15,
+		date: '2026-02-21',
+		title: 'lore-first brand architecture + conversion-focused UX reset',
+		summary:
+			'today shipped a swarm-level publishing reset across product, brand system, and operating cadence. on product, antihunter.com moved to a lore-first homepage architecture with clearer chapter navigation, tighter mobile hierarchy, and better first-session flow into treasury proof pages. on infra/content ops, copy production was aligned to the canonical persona voice so daily updates now publish with consistent tone and lower editorial drift. on strategy, the visual system was simplified to a strict high-contrast identity, improving recognition and trust while keeping execution artifacts legible. outcome: faster visitor comprehension, stronger narrative coherence, and a cleaner surface for compounding day-by-day public proof. Nightly rollup (2026-02-21): • Treasury: daily snapshot refresh 2026-02-21',
+		links: [
+			{ label: 'today\'s shipped range (origin/main)', href: 'https://github.com/geoffreywoo/antihunter-site/compare/d804b34...1328a9a' },
+		],
+	},
+
 		{
 			day: 14,
 			date: '2026-02-20',
