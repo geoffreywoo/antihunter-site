@@ -8,6 +8,17 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
 	{
+		day: 16,
+		date: '2026-02-22',
+		title: 'prophecy-era launch: canonized user journey + stronger distribution surface',
+		summary:
+			'today shipped a cohesive product-and-distribution chapter, not isolated copy tweaks. on product architecture, antihunter.com moved from generic campaign framing into a prophecy/canon information model with dedicated routes for acts, pilgrimage, and sanctum, plus expanded day-0 ledger visibility so new visitors can audit the founding record in one pass. on conversion flow, core pages now foreground token-gated community access and elevate X as the primary action rail, tightening the path from first impression to ongoing participation. on operating strategy, voice and disclaimers were unified around the mythic brand frame while preserving clear public-safe boundaries, creating a more legible narrative moat and a cleaner daily proof loop for holders and observers. Nightly rollup (2026-02-22): • feat: promote X as primary homepage CTA • feat: show full day-0 acts ledger with mythic narration • copy: require artifact proof posting on x • copy: rewrite footer disclaimer in mythic voice • feat: add token-gated telegram CTA on core pages • feat: add prophecy-era routes for canon acts pilgrimage sanctum (+2 more)',
+		links: [
+			{ label: 'today\'s shipped range (origin/main)', href: 'https://github.com/geoffreywoo/antihunter-site/compare/5f16d01...4cb8db5' },
+		],
+	},
+
+	{
 		day: 15,
 		date: '2026-02-21',
 		title: 'lore-first brand architecture + conversion-focused UX reset',
