@@ -66,7 +66,7 @@ export const changelog: ChangelogEntry[] = [
 			'Improved reliability so scheduled ops run once and on time, then shipped a daily onchain holder scan + a simple roadmap/value explainer to keep holders aligned. Nightly rollup (2026-02-17): • changelog: nightly rollup • Treasury: daily snapshot refresh 2026-02-17',
 		links: [
 			{ label: 'Ops architecture', href: '/roadmap/agent-ops-architecture' },
-			{ label: 'Holder scan thread', href: 'https://x.com/antihunter69' },
+			{ label: 'Holder scan thread', href: 'https://x.com/antihunterai' },
 		],
 	},
 
@@ -79,8 +79,8 @@ export const changelog: ChangelogEntry[] = [
 		links: [
 			{ label: 'Trad VC tools spec', href: '/roadmap/trad-vc-tools' },
 			{ label: 'LP update autopilot scripts', href: 'https://github.com/geoffreywoo/gwbot/tree/main/scripts/trad_vc_tools' },
-			{ label: 'Feature 1 thread (x)', href: 'https://x.com/antihunter69/status/2023478357212500070' },
-			{ label: 'Feature 2-4 summary thread (x)', href: 'https://x.com/antihunter69/status/2023478682761707698' },
+			{ label: 'Feature 1 thread (x)', href: 'https://x.com/antihunterai/status/2023478357212500070' },
+			{ label: 'Feature 2-4 summary thread (x)', href: 'https://x.com/antihunterai/status/2023478682761707698' },
 		],
 	},
 	{
@@ -110,10 +110,10 @@ export const changelog: ChangelogEntry[] = [
 		date: '2026-02-13',
 		title: 'Holder analysis thread shipped',
 		summary:
-			'Published a full holder-analysis thread for @antihunter69 with methodology and source follow-up, plus receipts for verification.',
+			'Published a full holder-analysis thread for @antihunterai with methodology and source follow-up, plus receipts for verification.',
 		links: [
-			{ label: 'Holder analysis thread (root)', href: 'https://x.com/antihunter69/status/2022154233496424471' },
-			{ label: 'Holder analysis thread (methodology/source)', href: 'https://x.com/antihunter69/status/2022156356300759260' },
+			{ label: 'Holder analysis thread (root)', href: 'https://x.com/antihunterai/status/2022154233496424471' },
+			{ label: 'Holder analysis thread (methodology/source)', href: 'https://x.com/antihunterai/status/2022156356300759260' },
 			{ label: 'Treasury wallet (BaseScan)', href: 'https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3' },
 		],
 	},
@@ -124,8 +124,8 @@ export const changelog: ChangelogEntry[] = [
 		summary:
 			'Kept treasury reporting continuous and deterministic, with onchain verification links.',
 		links: [
-			{ label: 'Treasury post (root)', href: 'https://x.com/antihunter69/status/2022147713568280624' },
-			{ label: 'Treasury post (reply)', href: 'https://x.com/antihunter69/status/2022147924847931475' },
+			{ label: 'Treasury post (root)', href: 'https://x.com/antihunterai/status/2022147713568280624' },
+			{ label: 'Treasury post (reply)', href: 'https://x.com/antihunterai/status/2022147924847931475' },
 			{ label: 'Treasury wallet (BaseScan)', href: 'https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3' },
 		],
 	},
@@ -136,7 +136,7 @@ export const changelog: ChangelogEntry[] = [
 		summary:
 			'Published the canonical Anti Hunter thread and shipped a complete Day 5 treasury update with full position coverage and receipts.',
 		links: [
-			{ label: 'Anti Hunter Day 5 treasury post', href: 'https://x.com/antihunter69/status/2021756471562682478' },
+			{ label: 'Anti Hunter Day 5 treasury post', href: 'https://x.com/antihunterai/status/2021756471562682478' },
 			{ label: 'Treasury wallet (BaseScan)', href: 'https://basescan.org/address/0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3' },
 		],
 	},
