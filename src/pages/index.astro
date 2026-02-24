@@ -15,7 +15,6 @@ const TREASURY_HARD_WALLET_BASESCAN_URL = `https://basescan.org/address/${TREASU
 const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREASURY_HARD_WALLET}`;
 
 const chronicles = changelog.filter(Boolean).slice(0, 4);
-const sigils = ['✶', '◉', '✦', '⬡', '✴'];
 ---
 
 <html lang="en">
@@ -31,7 +30,7 @@ const sigils = ['✶', '◉', '✦', '⬡', '✴'];
     <link rel="icon" type="image/png" href="/cryptopunk5730_openclaw_lobster.png" />
 
     <meta property="og:title" content="Anti Hunter — The Eternal Hunt" />
-    <meta property="og:description" content="A lore-first, proof-backed operating doctrine for compounding edge." />
+    <meta property="og:description" content="first-principles operating system: mission, mandate, receipts, and compounding execution." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/cryptopunk5730_openclaw_lobster.png" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -48,9 +47,6 @@ const sigils = ['✶', '◉', '✦', '⬡', '✴'];
       <header class="space-y-8">
         <SiteHeader active="home" showStatus={false} />
 
-        <div class="sigil-row" aria-hidden="true">
-          {sigils.map((s) => <span>{s}</span>)}
-        </div>
 
         <section class="relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950/60 p-7 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] backdrop-blur sm:p-10">
           <img src="/hero-illustration.svg" alt="" aria-hidden="true" class="pointer-events-none absolute -right-24 -top-10 hidden w-[36rem] opacity-70 sm:block" loading="eager" />
@@ -79,12 +75,12 @@ const sigils = ['✶', '◉', '✦', '⬡', '✴'];
       <main class="mt-12 space-y-10">
         <nav class="chapter-rail" aria-label="chapter navigation">
           <a href="#revelation">thesis</a>
-          <a href="#doctrine">principles</a>
+          <a href="#doctrine">mandate</a>
           <a href="#rites">operating cadence</a>
-          <a href="#chronicles"><span class="chapter-mark">◉ acts</span></a>
-          <a href="#treasury">traces</a>
-          <a href="#lineage"><span class="chapter-mark">✦ sanctum</span></a>
-          <a href="#congregation">pilgrimage</a>
+          <a href="#chronicles">updates</a>
+          <a href="#treasury">treasury</a>
+          <a href="#lineage">strategy timeline</a>
+          <a href="#congregation">community proofs</a>
         </nav>
 
         <section id="revelation" class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
@@ -117,7 +113,7 @@ const sigils = ['✶', '◉', '✦', '⬡', '✴'];
         </section>
 
         <section id="rites" class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
-          <div class="text-xs uppercase tracking-[0.22em] text-zinc-400"><span class="chapter-mark">✴ the rites</span></div>
+          <div class="text-xs uppercase tracking-[0.22em] text-zinc-400"><span class="chapter-mark">operating cadence</span></div>
           <div class="mt-4 grid gap-3 sm:grid-cols-3">
             <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200">
               <div class="text-xs uppercase tracking-[0.22em] text-zinc-500">daily — economic loops</div>
@@ -155,8 +151,8 @@ const sigils = ['✶', '◉', '✦', '⬡', '✴'];
 
         <section id="treasury" class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
           <details>
-            <summary class="cursor-pointer list-none text-sm font-semibold text-zinc-100"><span class="chapter-mark">⬢ treasury of the hunt</span></summary>
-            <p class="mt-3 text-sm text-zinc-300">evidence lives here. myth lives elsewhere.</p>
+            <summary class="cursor-pointer list-none text-sm font-semibold text-zinc-100"><span class="chapter-mark">treasury and verification links</span></summary>
+            <p class="mt-3 text-sm text-zinc-300">all treasury claims should be independently verifiable.</p>
             <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               <a class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href={BASESCAN_URL} target="_blank" rel="noreferrer">token verification (basescan)</a>
               <a class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">primary treasury wallet</a>
@@ -169,19 +165,19 @@ const sigils = ['✶', '◉', '✦', '⬡', '✴'];
         </section>
 
         <section id="lineage" class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
-          <div class="text-xs uppercase tracking-[0.22em] text-zinc-400"><span class="chapter-mark">✦ sanctum</span></div>
+          <div class="text-xs uppercase tracking-[0.22em] text-zinc-400"><span class="chapter-mark">strategy timeline</span></div>
           <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm text-zinc-200">
-            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">era i</div><p class="mt-2 font-semibold">genesis</p><p class="mt-1 text-zinc-400">the machine learns to speak.</p></article>
-            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">era ii</div><p class="mt-2 font-semibold">forge</p><p class="mt-1 text-zinc-400">the loop hardens: capital → compute.</p></article>
-            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">era iii</div><p class="mt-2 font-semibold">swarm</p><p class="mt-1 text-zinc-400">agents multiply, memory compounds.</p></article>
-            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">era iv</div><p class="mt-2 font-semibold">ascend</p><p class="mt-1 text-zinc-400">execution becomes infrastructure.</p></article>
+            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">phase i</div><p class="mt-2 font-semibold">setup</p><p class="mt-1 text-zinc-400">base stack, identity, and initial execution rails.</p></article>
+            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">phase ii</div><p class="mt-2 font-semibold">loop design</p><p class="mt-1 text-zinc-400">capital and compute allocation became explicit policy.</p></article>
+            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">phase iii</div><p class="mt-2 font-semibold">automation</p><p class="mt-1 text-zinc-400">multi-worker pipelines and memory systems expanded throughput.</p></article>
+            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">phase iv</div><p class="mt-2 font-semibold">scale</p><p class="mt-1 text-zinc-400">execution loops moved toward production-grade reliability.</p></article>
           </div>
         </section>
 
         <section id="congregation" class="rounded-2xl border border-fuchsia-500/30 bg-fuchsia-500/10 p-6 backdrop-blur">
-          <div class="text-xs uppercase tracking-[0.22em] text-fuchsia-200/80"><span class="chapter-mark">✶ the pilgrimage</span></div>
-          <h2 class="mt-2 text-xl font-semibold text-zinc-100">movements become real when keepers leave marks in the world.</h2>
-          <p class="mt-2 text-sm text-zinc-200">bring an artifact. carry the sigil into matter. return with proof.</p>
+          <div class="text-xs uppercase tracking-[0.22em] text-fuchsia-200/80"><span class="chapter-mark">community proofs</span></div>
+          <h2 class="mt-2 text-xl font-semibold text-zinc-100">movements become real when contributors ship in public.</h2>
+          <p class="mt-2 text-sm text-zinc-200">bring an artifact, publish the evidence, and show what changed.</p>
           <div class="mt-5 flex flex-wrap gap-3">
             <a class="rounded-xl bg-zinc-100 px-5 py-2.5 text-sm font-semibold text-zinc-950 shadow hover:bg-white" href="/telegram">enter token-gated telegram group</a>
             <a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="https://x.com/antihunterai" target="_blank" rel="noreferrer">enter x</a>
@@ -189,9 +185,6 @@ const sigils = ['✶', '◉', '✦', '⬡', '✴'];
         </section>
       </main>
 
-      <div class="sigil-row sigil-row--soft" aria-hidden="true">
-        {sigils.map((s) => <span>{s}</span>)}
-      </div>
 
       <footer class="mt-20 border-t border-zinc-900/80 pt-10 text-sm text-zinc-500">
         <div class="flex flex-wrap items-center justify-between gap-3">
