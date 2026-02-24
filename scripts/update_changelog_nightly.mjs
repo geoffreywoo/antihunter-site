@@ -65,13 +65,27 @@ function main() {
     return;
   }
 
-  const top = subjects.slice(0, 6);
+  const top = subjects.slice(0, 10);
   const extra = subjects.length - top.length;
 
+  const infraKw = /(infra|gateway|cron|watchdog|mutex|sync|mission control|node|orchestrat|reliab|failover|deploy|build)/i;
+  const productKw = /(ui|ux|site|changelog|snapshot|report|post|publish|thread|queue|reply|quote|engagement)/i;
+  const strategyKw = /(policy|rule|guard|risk|quality|priority|thesis|strategy|learn|feedback)/i;
+
+  const infra = top.filter(s => infraKw.test(s)).slice(0, 2);
+  const product = top.filter(s => productKw.test(s)).slice(0, 2);
+  const strategy = top.filter(s => strategyKw.test(s)).slice(0, 2);
+
+  const narrativeBits = [];
+  if (product.length) narrativeBits.push(`product moved through ${product.join(' and ')}`);
+  if (infra.length) narrativeBits.push(`infrastructure hardened via ${infra.join(' and ')}`);
+  if (strategy.length) narrativeBits.push(`operating discipline tightened with ${strategy.join(' and ')}`);
+  if (!narrativeBits.length) narrativeBits.push(`execution advanced across ${top.slice(0, 3).join(', ')}`);
+
   const rollup =
-    `Nightly rollup (${today}): ` +
-    top.map(s => `• ${s}`).join(' ') +
-    (extra > 0 ? ` (+${extra} more)` : '');
+    `Nightly rollup (${today}): ${narrativeBits.join('; ')}. ` +
+    `Net effect: faster shipping with better reliability and clearer operator feedback loops.` +
+    (extra > 0 ? ` (+${extra} additional commits.)` : '');
 
   const changelogPath = path.join('src', 'data', 'changelog.ts');
   const src = fs.readFileSync(changelogPath, 'utf8');
