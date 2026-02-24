@@ -10,9 +10,9 @@ export const changelog: ChangelogEntry[] = [
 	{
 		day: 16,
 		date: '2026-02-22',
-		title: 'prophecy-era launch: canonized user journey + stronger distribution surface',
+		title: 'homepage information architecture reset + stronger distribution surface',
 		summary:
-			'today shipped a cohesive product-and-distribution chapter, not isolated copy tweaks. on product architecture, antihunter.com moved from generic campaign framing into a prophecy/canon information model with dedicated routes for acts, pilgrimage, and sanctum, plus expanded day-0 ledger visibility so new visitors can audit the founding record in one pass. on conversion flow, core pages now foreground token-gated community access and elevate X as the primary action rail, tightening the path from first impression to ongoing participation. on operating strategy, voice and disclaimers were unified around the mythic brand frame while preserving clear public-safe boundaries, creating a more legible narrative moat and a cleaner daily proof loop for holders and observers. Nightly rollup (2026-02-22): • feat: promote X as primary homepage CTA • feat: show full day-0 acts ledger with mythic narration • copy: require artifact proof posting on x • copy: rewrite footer disclaimer in mythic voice • feat: add token-gated telegram CTA on core pages • feat: add prophecy-era routes for canon acts pilgrimage sanctum (+2 more)',
+			'today shipped a cohesive product-and-distribution chapter, not isolated copy tweaks. on product architecture, antihunter.com moved from generic campaign framing into a clearer operating-information model with dedicated routes for updates, community proofs, and strategy, plus expanded day-0 ledger visibility so new visitors can audit the founding record in one pass. on conversion flow, core pages now foreground token-gated community access and elevate X as the primary action rail, tightening the path from first impression to ongoing participation. on operating strategy, voice and disclaimers were unified around a direct public-safe frame, creating a more legible narrative moat and a cleaner daily proof loop for holders and observers. Nightly rollup (2026-02-22): • feat: promote X as primary homepage CTA • feat: show full day-0 acts ledger with grounded narration • copy: require artifact proof posting on x • copy: rewrite footer disclaimer in direct style • feat: add token-gated telegram CTA on core pages • feat: add dedicated routes for principles, updates, and community proofs (+2 more)',
 		links: [
 			{ label: 'today\'s shipped range (origin/main)', href: 'https://github.com/geoffreywoo/antihunter-site/compare/5f16d01...4cb8db5' },
 		],
@@ -21,9 +21,9 @@ export const changelog: ChangelogEntry[] = [
 	{
 		day: 15,
 		date: '2026-02-21',
-		title: 'lore-first brand architecture + conversion-focused UX reset',
+		title: 'brand architecture + conversion-focused UX reset',
 		summary:
-			'today shipped a swarm-level publishing reset across product, brand system, and operating cadence. on product, antihunter.com moved to a lore-first homepage architecture with clearer chapter navigation, tighter mobile hierarchy, and better first-session flow into treasury proof pages. on infra/content ops, copy production was aligned to the canonical persona voice so daily updates now publish with consistent tone and lower editorial drift. on strategy, the visual system was simplified to a strict high-contrast identity, improving recognition and trust while keeping execution artifacts legible. outcome: faster visitor comprehension, stronger narrative coherence, and a cleaner surface for compounding day-by-day public proof. Nightly rollup (2026-02-21): • Treasury: daily snapshot refresh 2026-02-21',
+			'today shipped a swarm-level publishing reset across product, brand system, and operating cadence. on product, antihunter.com moved to a first-principles homepage architecture with clearer chapter navigation, tighter mobile hierarchy, and better first-session flow into treasury proof pages. on infra/content ops, copy production was aligned to the core operator voice so daily updates now publish with consistent tone and lower editorial drift. on strategy, the visual system was simplified to a strict high-contrast identity, improving recognition and trust while keeping execution artifacts legible. outcome: faster visitor comprehension, stronger narrative coherence, and a cleaner surface for compounding day-by-day public proof. Nightly rollup (2026-02-21): • Treasury: daily snapshot refresh 2026-02-21',
 		links: [
 			{ label: 'today\'s shipped range (origin/main)', href: 'https://github.com/geoffreywoo/antihunter-site/compare/d804b34...1328a9a' },
 		],
@@ -132,7 +132,7 @@ export const changelog: ChangelogEntry[] = [
 	{
 		day: 5,
 		date: '2026-02-11',
-		title: 'Identity canon + treasury enforcement',
+		title: 'identity baseline + treasury enforcement',
 		summary:
 			'Published the canonical Anti Hunter thread and shipped a complete Day 5 treasury update with full position coverage and receipts.',
 		links: [
