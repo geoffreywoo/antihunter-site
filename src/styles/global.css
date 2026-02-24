@@ -1,12 +1,7 @@
 @import "tailwindcss";
 
-/*
-  site mode: "ascii whitepaper"
-  goal: hackery, academic, minimal color + monospace.
-*/
-
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 html {
@@ -14,14 +9,10 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/*
-  wp mode: "whitepaper" (light)
-  goals: white background, black outlines, hard right angles, minimal color.
-*/
 body.wp {
   margin: 0;
-  background: #ffffff;
-  color: #0a0a0a;
+  background: #0a0a0b;
+  color: #f3f4f6;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 14px;
   line-height: 1.6;
@@ -32,38 +23,35 @@ body.wp a {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
-  text-decoration-color: rgba(10,10,10,0.35);
+  text-decoration-color: rgba(244, 244, 245, 0.35);
 }
 
 body.wp a:hover {
-  background: #111;
-  color: #fff;
+  background: #f4f4f5;
+  color: #0a0a0b;
   text-decoration: none;
 }
 
 body.wp ::selection {
-  background: #111;
-  color: #fff;
+  background: #f4f4f5;
+  color: #0a0a0b;
 }
 
-/* layout */
 .wp .container {
-  max-width: 86ch;
+  max-width: 88ch;
   margin: 0 auto;
   padding: 28px 18px;
 }
 
 .wp .rule {
   border: 0;
-  border-top: 1px solid rgba(10,10,10,0.18);
+  border-top: 1px solid rgba(244, 244, 245, 0.16);
   margin: 16px 0;
 }
 
-/* key fix: keep muted readable on white */
-.wp .muted { color: rgba(10,10,10,0.70); }
+.wp .muted { color: rgba(244, 244, 245, 0.72); }
 .wp .tiny { font-size: 12px; letter-spacing: .02em; }
 
-/* header */
 .wp .site-header {
   display: flex;
   align-items: flex-start;
@@ -81,7 +69,7 @@ body.wp ::selection {
   width: 28px;
   height: 28px;
   image-rendering: pixelated;
-  border: 1px solid #111;
+  border: 1px solid rgba(244, 244, 245, 0.45);
 }
 
 .wp .brand-title { font-weight: 700; letter-spacing: .08em; }
@@ -100,18 +88,16 @@ body.wp ::selection {
   .wp .nav a { margin-left: 0; margin-right: 10px; }
 }
 
-/* neutralize legacy dark/tailwind background wrappers */
-.wp .pointer-events-none { display: none !important; }
+/* keep ambient gradient/grid for night readability */
+.wp .pointer-events-none { display: block !important; }
 
-/* hard angles everywhere */
-.wp .rounded-full,
+/* slightly rounded, cleaner on dark */
 .wp .rounded-xl,
 .wp .rounded-2xl,
 .wp .rounded-lg,
 .wp .rounded-md,
-.wp .rounded-sm { border-radius: 0 !important; }
+.wp .rounded-sm { border-radius: 10px !important; }
 
-/* default: white surfaces + black outlines */
 .wp .border-zinc-950,
 .wp .border-zinc-900,
 .wp .border-zinc-800,
@@ -120,9 +106,9 @@ body.wp ::selection {
 .wp .border-zinc-500,
 .wp .border-zinc-400,
 .wp .border-zinc-300,
-.wp .border-zinc-200 { border-color: #111 !important; }
+.wp .border-zinc-200 { border-color: rgba(244, 244, 245, 0.17) !important; }
 
-/* kill grey section fills */
+/* dark surfaces with readable layering */
 .wp .bg-black,
 .wp .bg-black\/10,
 .wp .bg-black\/20,
@@ -145,68 +131,62 @@ body.wp ::selection {
 .wp .bg-zinc-100,
 .wp .bg-fuchsia-500\/10,
 .wp .bg-fuchsia-500\/20,
-.wp .bg-sky-950\/20 { background: transparent !important; }
+.wp .bg-sky-950\/20 {
+  background: rgba(15, 15, 18, 0.78) !important;
+}
 
-/* remove glow/shadows/blurs */
+/* mild depth only */
 .wp .shadow,
-.wp [class*="shadow-"] { box-shadow: none !important; }
+.wp [class*="shadow-"] { box-shadow: 0 8px 24px rgba(0,0,0,0.25) !important; }
+
 .wp .backdrop-blur,
-.wp [class*="backdrop-blur"] { backdrop-filter: none !important; }
+.wp [class*="backdrop-blur"] { backdrop-filter: blur(8px) !important; }
 
-/* zinc text on white */
-.wp .text-zinc-950 { color: #0a0a0a !important; }
-.wp .text-zinc-900 { color: #0a0a0a !important; }
-.wp .text-zinc-800 { color: #111 !important; }
-.wp .text-zinc-700 { color: #222 !important; }
-.wp .text-zinc-600 { color: #333 !important; }
-.wp .text-zinc-500 { color: #444 !important; }
-.wp .text-zinc-400 { color: #555 !important; }
-.wp .text-zinc-300 { color: #666 !important; }
-.wp .text-zinc-200 { color: #777 !important; }
-.wp .text-zinc-100 { color: #0a0a0a !important; }
+/* zinc text tuned for dark */
+.wp .text-zinc-950,
+.wp .text-zinc-900,
+.wp .text-zinc-800,
+.wp .text-zinc-700,
+.wp .text-zinc-100 { color: #f5f5f6 !important; }
+.wp .text-zinc-600 { color: #d4d4d8 !important; }
+.wp .text-zinc-500 { color: #b4b4bc !important; }
+.wp .text-zinc-400 { color: #a1a1aa !important; }
+.wp .text-zinc-300 { color: #d4d4d8 !important; }
+.wp .text-zinc-200 { color: #e4e4e7 !important; }
 
-/* tables */
 .wp table { width: 100%; border-collapse: collapse; }
-.wp th, .wp td { border-top: 1px solid rgba(10,10,10,0.14); padding: 6px 8px; vertical-align: top; }
-.wp thead th { border-top: 1px solid rgba(10,10,10,0.20); border-bottom: 1px solid rgba(10,10,10,0.20); text-align: left; }
+.wp th, .wp td { border-top: 1px solid rgba(244, 244, 245, 0.14); padding: 6px 8px; vertical-align: top; }
+.wp thead th { border-top: 1px solid rgba(244, 244, 245, 0.2); border-bottom: 1px solid rgba(244, 244, 245, 0.2); text-align: left; }
 .wp .tabular-nums { font-variant-numeric: tabular-nums; }
 
-/* keep key semantic colors for pnl (override tailwind if present) */
-.wp .text-emerald-300 { color: #0a7a0a !important; }
-.wp .text-rose-300 { color: #a00000 !important; }
+.wp .text-emerald-300 { color: #6ee7b7 !important; }
+.wp .text-rose-300 { color: #fda4af !important; }
 
-/* make big marketing headings look like docs */
 .wp h1, .wp h2, .wp h3 { font-family: inherit; letter-spacing: 0; }
-.wp h1 { font-size: 20px !important; line-height: 1.3 !important; }
-.wp h2 { font-size: 16px !important; }
+.wp h1 { font-size: 22px !important; line-height: 1.25 !important; }
+.wp h2 { font-size: 17px !important; }
 .wp h3 { font-size: 14px !important; }
 
-/* hide hero illustration */
-.wp img[src="/hero-illustration.svg"] { display: none !important; }
-
-/* ensure pfp image pixelates */
+.wp img[src="/hero-illustration.svg"] { display: block !important; opacity: .45; }
 .wp img[src="/cryptopunk5730_openclaw_lobster.png"] { image-rendering: pixelated; }
 
-/* blocks */
 .wp .box {
-  border: 1px solid rgba(10,10,10,0.16);
-  background: rgba(10,10,10,0.03);
+  border: 1px solid rgba(244, 244, 245, 0.2);
+  background: rgba(244, 244, 245, 0.04);
   padding: 14px;
 }
 
-.wp code, .wp pre {
-  font-family: inherit;
-}
+.wp code, .wp pre { font-family: inherit; }
 
 .wp code {
   padding: 1px 4px;
-  border: 1px solid rgba(10,10,10,0.16);
-  background: rgba(10,10,10,0.06);
+  border: 1px solid rgba(244, 244, 245, 0.22);
+  background: rgba(244, 244, 245, 0.08);
 }
 
 .wp pre {
-  border: 1px solid rgba(10,10,10,0.16);
-  background: rgba(10,10,10,0.05);
+  border: 1px solid rgba(244, 244, 245, 0.2);
+  background: rgba(244, 244, 245, 0.05);
   padding: 12px;
   overflow: auto;
 }
