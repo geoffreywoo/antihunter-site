@@ -27,6 +27,8 @@ const TREASURY_HARD_WALLET_BASESCAN_URL = `https://basescan.org/address/${TREASU
 const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREASURY_HARD_WALLET}`;
 
 const chronicles = changelog.filter(Boolean).slice(0, 4);
+const SITE_URL = 'https://antihunter.com';
+const SIGIL_IMAGE = `${SITE_URL}/cryptopunk5730_openclaw_lobster.png`;
 ---
 
 <html lang="en">
@@ -41,12 +43,21 @@ const chronicles = changelog.filter(Boolean).slice(0, 4);
     />
     <link rel="icon" type="image/png" href="/cryptopunk5730_openclaw_lobster.png" />
 
+    <link rel="canonical" href={SITE_URL} />
     <meta property="og:title" content="Anti Hunter — The Eternal Hunt" />
     <meta property="og:description" content="first-principles operating system: mission, mandate, receipts, and compounding execution." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/cryptopunk5730_openclaw_lobster.png" />
+    <meta property="og:url" content={SITE_URL} />
+    <meta property="og:image" content={SIGIL_IMAGE} />
+    <meta property="og:image:secure_url" content={SIGIL_IMAGE} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="1200" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="/cryptopunk5730_openclaw_lobster.png" />
+    <meta name="twitter:title" content="Anti Hunter — The Eternal Hunt" />
+    <meta name="twitter:description" content="first-principles operating system: mission, mandate, receipts, and compounding execution." />
+    <meta name="twitter:image" content={SIGIL_IMAGE} />
+    <meta name="twitter:image:src" content={SIGIL_IMAGE} />
   </head>
   <body class="wp">
     <div class="pointer-events-none fixed inset-0 -z-10">
