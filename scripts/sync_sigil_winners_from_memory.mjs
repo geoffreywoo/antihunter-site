@@ -7,6 +7,7 @@ const workspaceRoot = path.resolve(siteRoot, '..');
 const sourcePath = path.join(workspaceRoot, 'memory', 'x_self_posts.jsonl');
 const outPath = path.join(siteRoot, 'src', 'data', 'sigil-winners.json');
 const queueStatePath = path.join(workspaceRoot, 'memory', 'x_post_queue_state.json');
+const engagementContextPath = path.join(workspaceRoot, 'memory', 'x_engagement_context.jsonl');
 
 function safeJson(line) {
   try { return JSON.parse(line); } catch { return null; }
@@ -40,6 +41,21 @@ function isWinnerRow(r) {
   return rewardSignals.some((k) => text.includes(k));
 }
 
+function canonicalTweetUrl(inputUrl, parentTweetId, authorByTweetId) {
+  const raw = String(inputUrl || '').trim();
+  if (parentTweetId) {
+    const u = authorByTweetId[parentTweetId];
+    if (u) return `https://x.com/${u}/status/${parentTweetId}`;
+    return `https://x.com/i/web/status/${parentTweetId}`;
+  }
+  const m = raw.match(/\/status\/(\d+)/i);
+  if (!m) return raw;
+  const id = m[1];
+  const user = authorByTweetId[id];
+  if (user) return `https://x.com/${user}/status/${id}`;
+  return raw;
+}
+
 function main() {
   if (!fs.existsSync(sourcePath)) {
     console.error(`missing source: ${sourcePath}`);
@@ -48,6 +64,21 @@ function main() {
 
   const lines = fs.readFileSync(sourcePath, 'utf8').split('\n').filter(Boolean);
   const rows = lines.map(safeJson).filter(Boolean);
+
+  // Build tweetId -> authorUsername map from engagement context so embeds can use canonical x.com/<user>/status/<id>
+  const authorByTweetId = {};
+  if (fs.existsSync(engagementContextPath)) {
+    const ctxLines = fs.readFileSync(engagementContextPath, 'utf8').split('\n').filter(Boolean);
+    for (const line of ctxLines) {
+      const r = safeJson(line);
+      if (!r) continue;
+      const anchor = String(r.anchorUrl || '');
+      const m = anchor.match(/\/status\/(\d+)/i);
+      const id = m?.[1];
+      const user = String(r.authorUsername || '').trim();
+      if (id && user && !authorByTweetId[id]) authorByTweetId[id] = user;
+    }
+  }
 
   let postedByUrl = {};
   if (fs.existsSync(queueStatePath)) {
@@ -72,7 +103,7 @@ function main() {
     // Prefer underlying media post for embeds (parent of our QT/reply), fallback to our post.
     const postedMeta = postedByUrl[postedUrl] || {};
     const parentTweetId = String(r.parentTweetId || postedMeta.parentTweetId || '').trim();
-    const url = parentTweetId ? `https://x.com/i/web/status/${parentTweetId}` : postedUrl;
+    const url = canonicalTweetUrl(postedUrl, parentTweetId || null, authorByTweetId);
 
     if (!url || seen.has(url)) continue;
     seen.add(url);
