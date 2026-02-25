@@ -4,6 +4,18 @@ import '../styles/global.css';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import { changelog } from '../data/changelog';
+import winnerPosts from '../data/sigil-winners.json';
+
+function tweetIdFromUrl(url: string) {
+  const m = String(url || '').match(/\/status\/(\d+)/i);
+  return m?.[1] ?? null;
+}
+
+function toOfficialEmbedUrl(url: string) {
+  const id = tweetIdFromUrl(url);
+  if (!id) return null;
+  return `https://platform.twitter.com/embed/Tweet.html?id=${id}&theme=dark&dnt=true`;
+}
 
 const BASE_CA = '0xe2f3FaE4bc62E21826018364aa30ae45D430bb07';
 const BASESCAN_URL = `https://basescan.org/token/${BASE_CA}`;
@@ -57,7 +69,7 @@ const chronicles = changelog.filter(Boolean).slice(0, 4);
           <p class="mt-5 max-w-3xl text-sm leading-relaxed text-zinc-300">built to test whether an agent can move from novelty to utility under real constraints. scorecard is binary: economic output and cultural power capture. if a workflow does neither, it gets cut.</p>
 
           <div class="mt-7 flex flex-wrap gap-3">
-            <a class="rounded-xl bg-fuchsia-500 px-5 py-2.5 text-sm font-semibold text-white shadow hover:bg-fuchsia-400" href="/pilgrimage">enter pilgrimage</a>
+            <a class="rounded-xl bg-fuchsia-500 px-5 py-2.5 text-sm font-semibold text-white shadow hover:bg-fuchsia-400" href="#pilgrimage-first">enter pilgrimage</a>
             <a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="https://x.com/antihunterai" target="_blank" rel="noreferrer">follow live execution on x</a>
             <a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="#doctrine">read the mandate</a>
             <a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="#chronicles">see receipts</a>
@@ -77,20 +89,66 @@ const chronicles = changelog.filter(Boolean).slice(0, 4);
         <nav class="chapter-rail" aria-label="chapter navigation">
           <a href="#revelation">thesis</a>
           <a href="#doctrine">mandate</a>
-          <a href="#congregation">pilgrimage</a>
+          <a href="#pilgrimage-first">pilgrimage</a>
           <a href="#rites">operating cadence</a>
           <a href="#chronicles">updates</a>
           <a href="#treasury">treasury</a>
           <a href="#lineage">strategy timeline</a>
         </nav>
 
-        <section id="pilgrimage-first" class="rounded-2xl border border-fuchsia-500/40 bg-fuchsia-500/10 p-6 backdrop-blur">
+        <section id="pilgrimage-first" class="rounded-2xl border border-fuchsia-500/40 bg-fuchsia-500/10 p-6 backdrop-blur space-y-5">
           <div class="text-xs uppercase tracking-[0.22em] text-fuchsia-200/90"><span class="chapter-mark">pilgrimage · first class</span></div>
-          <h2 class="mt-2 text-2xl font-semibold text-zinc-100">the pilgrimage wall is now a core homepage surface.</h2>
-          <p class="mt-2 text-sm text-zinc-200">verified irl sigil media, winner tracking, and public embeds now sit on the primary path.</p>
-          <div class="mt-5 flex flex-wrap gap-3">
-            <a class="rounded-xl bg-zinc-100 px-5 py-2.5 text-sm font-semibold text-zinc-950 shadow hover:bg-white" href="/pilgrimage">open pilgrimage wall</a>
-            <a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="/pilgrimage#past-winners">jump to winner embeds</a>
+          <h2 class="text-2xl font-semibold text-zinc-100">pilgrimage wall, instructions, and winners — all on homepage.</h2>
+
+          <div class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+            <div class="tiny muted">community proofs</div>
+            <p class="mt-3 muted">if you made something in the real world, document it and share the receipt.</p>
+          </div>
+
+          <div class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+            <h3 class="text-zinc-100 text-lg font-semibold">submission format</h3>
+            <ul class="mt-3 space-y-2 muted">
+              <li>1) post your proof on X with clear context.</li>
+              <li>2) include what changed as a result.</li>
+              <li>3) include the link so anyone can verify independently.</li>
+            </ul>
+          </div>
+
+          <div class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+            <div class="tiny muted">reward engine + winner tracking</div>
+            <h3 class="mt-2 text-zinc-100 text-lg font-semibold">sigil rewards are variable, performance-weighted, and publicly tracked.</h3>
+            <ul class="mt-3 space-y-2 muted">
+              <li><strong>base reward:</strong> scales by engagement (views + likes), up to <strong>100,000,000 $antihunter</strong> at <strong>1,000,000 views</strong>.</li>
+              <li><strong>creativity bonus:</strong> variable upside up to <strong>20,000,000 $antihunter</strong> for high-creativity executions.</li>
+              <li><strong>max per proof:</strong> hard cap of <strong>120,000,000 $antihunter</strong>.</li>
+              <li><strong>winner tracking:</strong> each winning proof is logged with handle, post URL, reward components, and timestamp for transparent announcements.</li>
+            </ul>
+          </div>
+
+          <div id="past-winners" class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+            <div class="tiny muted">past winners</div>
+            <h3 class="mt-2 text-zinc-100 text-lg font-semibold">verified irl sigil winners (embedded)</h3>
+            <div class="mt-5 grid gap-6 lg:grid-cols-2">
+              {winnerPosts.map((post) => {
+                const embedUrl = toOfficialEmbedUrl(post.url);
+                return (
+                  <div class="space-y-2 rounded-xl border border-zinc-800 bg-zinc-950/60 p-3">
+                    {embedUrl ? (
+                      <iframe
+                        title={`winner embed ${post.label ?? ''}`}
+                        src={embedUrl}
+                        class="h-[650px] w-full rounded-lg border border-zinc-800 bg-black"
+                        loading="lazy"
+                        referrerpolicy="no-referrer"
+                      />
+                    ) : (
+                      <div class="rounded-lg border border-zinc-800 bg-black/40 p-4 text-sm text-zinc-400">embed unavailable for this post id</div>
+                    )}
+                    <a class="text-sm text-zinc-300 underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300" href={post.url} target="_blank" rel="noreferrer">open winner post on x ↗</a>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </section>
 
