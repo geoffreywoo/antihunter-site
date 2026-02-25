@@ -51,13 +51,19 @@ import winnerPosts from '../data/sigil-winners.json';
           <div class="tiny muted">past winners</div>
           <h2 class="mt-2">verified irl sigil winners (embedded)</h2>
           <p class="mt-3 muted">this wall shows prior verified winner posts directly from X.</p>
-          <div class="mt-5 grid gap-4 lg:grid-cols-2">
+          <div class="mt-5 grid gap-6 lg:grid-cols-2">
             {winnerPosts.map((post) => (
-              <blockquote class="twitter-tweet" data-theme="dark">
-                <a href={post.url}>{post.url}</a>
-              </blockquote>
+              <div class="space-y-2 rounded-xl border border-zinc-800 bg-zinc-950/60 p-3">
+                <blockquote class="twitter-tweet" data-theme="dark">
+                  <a href={post.url}>{post.url}</a>
+                </blockquote>
+                <a class="text-sm text-zinc-300 underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300" href={post.url} target="_blank" rel="noreferrer">
+                  open winner post on x ↗
+                </a>
+              </div>
             ))}
           </div>
+          <p class="mt-4 text-xs text-zinc-500">if embeds are blocked by browser privacy/adblock settings, use the direct links above.</p>
         </section>
       </main>
       <SiteFooter />
