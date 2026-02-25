@@ -61,6 +61,11 @@ function canonicalUrlFor(tweetId, authorUsername) {
   return `https://x.com/i/web/status/${tweetId}`;
 }
 
+function usernameFromUrl(url) {
+  const m = String(url || '').match(/x\.com\/([^\/\?]+)\/status\//i);
+  return m?.[1] ? String(m[1]).toLowerCase() : null;
+}
+
 function main() {
   const selfPosts = readJsonl(sourcePath);
   const decisions = readJsonl(decisionsPath);
@@ -96,6 +101,23 @@ function main() {
   // flush and rebuild from first principles
   const winners = [];
   const seen = new Set();
+  const autoByAuthor = {};
+
+  // manual picks are considered canonical curation; avoid auto-adding extra posts from same creators
+  const manualItems = [];
+  const manualAuthors = new Set();
+  if (fs.existsSync(manualPath)) {
+    try {
+      const manual = JSON.parse(fs.readFileSync(manualPath, 'utf8'));
+      for (const m of Array.isArray(manual) ? manual : []) {
+        const url = String(m?.url || '').trim().split('?')[0];
+        if (!url) continue;
+        manualItems.push(url);
+        const u = usernameFromUrl(url);
+        if (u) manualAuthors.add(u);
+      }
+    } catch {}
+  }
 
   for (const row of selfPosts) {
     if (!isSelfWinnerPost(row)) continue;
@@ -128,8 +150,17 @@ function main() {
     if (mediaAuth === 'synthetic') continue;
 
     const authorUsername = String(context.authorUsername || decision.authorUsername || '').trim();
+    const authorKey = authorUsername.toLowerCase();
     const url = canonicalUrlFor(parentTweetId, authorUsername);
     if (!url || seen.has(url)) continue;
+
+    // Pattern learned from manual curation: prioritize one best artifact per creator and defer to manual picks.
+    if (authorKey && manualAuthors.has(authorKey)) continue;
+    if (authorKey) {
+      autoByAuthor[authorKey] = Number(autoByAuthor[authorKey] || 0);
+      if (autoByAuthor[authorKey] >= 1) continue;
+      autoByAuthor[authorKey] += 1;
+    }
 
     seen.add(url);
     winners.push({
@@ -143,25 +174,19 @@ function main() {
     });
   }
 
-  // merge explicit manual includes (human-curated)
-  if (fs.existsSync(manualPath)) {
-    try {
-      const manual = JSON.parse(fs.readFileSync(manualPath, 'utf8'));
-      for (const m of Array.isArray(manual) ? manual : []) {
-        const url = String(m?.url || '').trim().split('?')[0];
-        if (!url || seen.has(url)) continue;
-        seen.add(url);
-        winners.push({
-          url,
-          source: 'manual_include',
-          parentTweetId: tweetIdFromUrl(url),
-          authorUsername: null,
-          mediaTypes: [],
-          tsEt: null,
-          label: `winner #${winners.length + 1}`,
-        });
-      }
-    } catch {}
+  // merge explicit manual includes (human-curated canonical picks)
+  for (const url of manualItems) {
+    if (!url || seen.has(url)) continue;
+    seen.add(url);
+    winners.push({
+      url,
+      source: 'manual_include',
+      parentTweetId: tweetIdFromUrl(url),
+      authorUsername: usernameFromUrl(url),
+      mediaTypes: [],
+      tsEt: null,
+      label: `winner #${winners.length + 1}`,
+    });
   }
 
   winners.sort((a, b) => parseTs(b.tsEt) - parseTs(a.tsEt));

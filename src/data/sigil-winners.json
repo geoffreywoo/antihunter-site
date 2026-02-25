@@ -1,161 +1,137 @@
 [
   {
-    "url": "https://x.com/TomTomy2200/status/2026628944087146738",
-    "sourcePostUrl": "https://x.com/antihunterai/status/2026631323830403573",
-    "parentTweetId": "2026628944087146738",
-    "authorUsername": "TomTomy2200",
-    "mediaTypes": [
-      "video"
-    ],
-    "tsEt": "2026-02-25T12:12:14.930Z",
-    "label": "winner #1"
-  },
-  {
-    "url": "https://x.com/TomTomy2200/status/2026589685921808397",
-    "sourcePostUrl": "https://x.com/antihunterai/status/2026593573378969756",
-    "parentTweetId": "2026589685921808397",
-    "authorUsername": "TomTomy2200",
-    "mediaTypes": [
-      "video"
-    ],
-    "tsEt": "2026-02-25T09:42:14.599Z",
-    "label": "winner #2"
-  },
-  {
-    "url": "https://x.com/MatteoM7771990/status/2026552799119736857",
-    "sourcePostUrl": "https://x.com/antihunterai/status/2026554595325907014",
-    "parentTweetId": "2026552799119736857",
-    "authorUsername": "MatteoM7771990",
-    "mediaTypes": [
-      "video"
-    ],
-    "tsEt": "2026-02-25T07:07:21.502Z",
-    "label": "winner #3"
-  },
-  {
     "url": "https://x.com/DesiErna19/status/2026613936800543136",
     "source": "manual_include",
     "parentTweetId": "2026613936800543136",
-    "authorUsername": null,
+    "authorUsername": "desierna19",
     "mediaTypes": [],
     "tsEt": null,
-    "label": "winner #4"
+    "label": "winner #1"
+  },
+  {
+    "url": "https://x.com/MatteoM7771990/status/2026552799119736857",
+    "source": "manual_include",
+    "parentTweetId": "2026552799119736857",
+    "authorUsername": "matteom7771990",
+    "mediaTypes": [],
+    "tsEt": null,
+    "label": "winner #2"
   },
   {
     "url": "https://x.com/TomTomy2200/status/2026414037118980342",
     "source": "manual_include",
     "parentTweetId": "2026414037118980342",
-    "authorUsername": null,
+    "authorUsername": "tomtomy2200",
     "mediaTypes": [],
     "tsEt": null,
-    "label": "winner #5"
+    "label": "winner #3"
   },
   {
     "url": "https://x.com/theboyplunger0x/status/2026346031198130526",
     "source": "manual_include",
     "parentTweetId": "2026346031198130526",
-    "authorUsername": null,
+    "authorUsername": "theboyplunger0x",
     "mediaTypes": [],
     "tsEt": null,
-    "label": "winner #6"
+    "label": "winner #4"
   },
   {
     "url": "https://x.com/blac_culture/status/2026309026728825126",
     "source": "manual_include",
     "parentTweetId": "2026309026728825126",
-    "authorUsername": null,
+    "authorUsername": "blac_culture",
     "mediaTypes": [],
     "tsEt": null,
-    "label": "winner #7"
+    "label": "winner #5"
   },
   {
     "url": "https://x.com/kindlyblessedd/status/2025940012706177495",
     "source": "manual_include",
     "parentTweetId": "2025940012706177495",
-    "authorUsername": null,
+    "authorUsername": "kindlyblessedd",
     "mediaTypes": [],
     "tsEt": null,
-    "label": "winner #8"
+    "label": "winner #6"
   },
   {
     "url": "https://x.com/akl239/status/2025900042180337962",
     "source": "manual_include",
     "parentTweetId": "2025900042180337962",
-    "authorUsername": null,
+    "authorUsername": "akl239",
     "mediaTypes": [],
     "tsEt": null,
-    "label": "winner #9"
+    "label": "winner #7"
   },
   {
     "url": "https://x.com/Arthur_139/status/2025915816953417797",
     "source": "manual_include",
     "parentTweetId": "2025915816953417797",
-    "authorUsername": null,
+    "authorUsername": "arthur_139",
     "mediaTypes": [],
     "tsEt": null,
-    "label": "winner #10"
+    "label": "winner #8"
   },
   {
     "url": "https://x.com/Kensickz/status/2025865140663722189",
     "source": "manual_include",
     "parentTweetId": "2025865140663722189",
-    "authorUsername": null,
+    "authorUsername": "kensickz",
     "mediaTypes": [],
     "tsEt": null,
-    "label": "winner #11"
+    "label": "winner #9"
   },
   {
     "url": "https://x.com/gipes27691/status/2025751074187952193",
     "source": "manual_include",
     "parentTweetId": "2025751074187952193",
-    "authorUsername": null,
+    "authorUsername": "gipes27691",
     "mediaTypes": [],
     "tsEt": null,
-    "label": "winner #12"
+    "label": "winner #10"
   },
   {
     "url": "https://x.com/8ejoo/status/2025640810109444118",
     "source": "manual_include",
     "parentTweetId": "2025640810109444118",
-    "authorUsername": null,
+    "authorUsername": "8ejoo",
     "mediaTypes": [],
     "tsEt": null,
-    "label": "winner #13"
+    "label": "winner #11"
   },
   {
     "url": "https://x.com/MooneyMillions/status/2025675614565404849",
     "source": "manual_include",
     "parentTweetId": "2025675614565404849",
-    "authorUsername": null,
+    "authorUsername": "mooneymillions",
     "mediaTypes": [],
     "tsEt": null,
-    "label": "winner #14"
+    "label": "winner #12"
   },
   {
     "url": "https://x.com/Bigbagsmcgee/status/2025533804761456931",
     "source": "manual_include",
     "parentTweetId": "2025533804761456931",
-    "authorUsername": null,
+    "authorUsername": "bigbagsmcgee",
     "mediaTypes": [],
     "tsEt": null,
-    "label": "winner #15"
+    "label": "winner #13"
   },
   {
     "url": "https://x.com/MojoFom0/status/2025240839291621861",
     "source": "manual_include",
     "parentTweetId": "2025240839291621861",
-    "authorUsername": null,
+    "authorUsername": "mojofom0",
     "mediaTypes": [],
     "tsEt": null,
-    "label": "winner #16"
+    "label": "winner #14"
   },
   {
     "url": "https://x.com/Shoob90/status/2025225407394709581",
     "source": "manual_include",
     "parentTweetId": "2025225407394709581",
-    "authorUsername": null,
+    "authorUsername": "shoob90",
     "mediaTypes": [],
     "tsEt": null,
-    "label": "winner #17"
+    "label": "winner #15"
   }
 ]
