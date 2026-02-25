@@ -38,9 +38,9 @@ body.wp ::selection {
 }
 
 .wp .container {
-  max-width: 88ch;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 28px 18px;
+  padding: 24px 16px;
 }
 
 .wp .rule {
@@ -73,7 +73,20 @@ body.wp ::selection {
 }
 
 .wp .brand-title { font-weight: 700; letter-spacing: .08em; }
-.wp .nav a { margin-left: 10px; }
+
+.wp .nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.wp .nav a {
+  margin: 0;
+  padding: 4px 8px;
+  border: 1px solid rgba(244, 244, 245, 0.16);
+  border-radius: 8px;
+  text-decoration: none;
+}
 
 .wp .site-footer {
   display: flex;
@@ -85,7 +98,36 @@ body.wp ::selection {
 @media (max-width: 640px) {
   .wp .site-header { flex-direction: column; align-items: flex-start; }
   .wp .site-footer { flex-direction: column; align-items: flex-start; }
-  .wp .nav a { margin-left: 0; margin-right: 10px; }
+
+  .wp .container {
+    padding: 18px 12px;
+  }
+
+  .wp h1 { font-size: 30px !important; }
+  .wp h2 { font-size: 18px !important; }
+}
+
+.wp .chapter-rail {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.wp .chapter-rail a {
+  padding: 4px 10px;
+  border: 1px solid rgba(244, 244, 245, 0.16);
+  border-radius: 9999px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .wp .chapter-rail {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 /* keep ambient gradient/grid for night readability */
