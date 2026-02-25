@@ -8,6 +8,18 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
 	{
+		day: 17,
+		date: '2026-02-25',
+		title: 'pilgrimage consolidated on homepage + winner wall + reward/buyback clarity',
+		summary:
+			'shipped a full pilgrimage-first product pass: moved instructions and winner wall directly into the homepage, improved mobile rendering and visual hierarchy, tightened nav and section flow, and upgraded social metadata so link previews resolve with the sigil asset. on growth mechanics, clarified variable sigil rewards and added explicit buyback commitment/proof visibility with onchain receipt linking. outcome: clearer thesis communication, better mobile usability, and a stronger public proof surface for real-world execution. Nightly rollup (2026-02-25): product moved through site: clean homepage/nav styling and improve mobile rendering and site: add buyback tracker + tx receipt visibility on homepage; operating discipline tightened with site: clarify pilgrimage thesis + add sigil-program buyback commitment and site: add pilgrimage thesis and cultural-impact framing copy. Net effect: faster shipping with better reliability and clearer operator feedback loops. (+13 additional commits.)',
+		links: [
+			{ label: 'homepage pilgrimage wall', href: 'https://antihunter.com/#pilgrimage-first' },
+			{ label: 'winner wall', href: 'https://antihunter.com/#past-winners' },
+			{ label: 'initial buyback tx', href: 'https://basescan.org/tx/0xa1cac5a7dd26506072cc8e134f858d8365149ee147700f71c01b6e1b95ac477c' },
+		],
+	},
+	{
 		day: 16,
 		date: '2026-02-22',
 		title: 'homepage information architecture reset + stronger distribution surface',
