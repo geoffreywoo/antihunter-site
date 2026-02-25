@@ -6,6 +6,7 @@ const siteRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), '
 const workspaceRoot = path.resolve(siteRoot, '..');
 const sourcePath = path.join(workspaceRoot, 'memory', 'x_self_posts.jsonl');
 const outPath = path.join(siteRoot, 'src', 'data', 'sigil-winners.json');
+const queueStatePath = path.join(workspaceRoot, 'memory', 'x_post_queue_state.json');
 
 function safeJson(line) {
   try { return JSON.parse(line); } catch { return null; }
@@ -48,17 +49,38 @@ function main() {
   const lines = fs.readFileSync(sourcePath, 'utf8').split('\n').filter(Boolean);
   const rows = lines.map(safeJson).filter(Boolean);
 
+  let postedByUrl = {};
+  if (fs.existsSync(queueStatePath)) {
+    try {
+      const st = JSON.parse(fs.readFileSync(queueStatePath, 'utf8'));
+      const posted = st?.posted || {};
+      for (const v of Object.values(posted)) {
+        const u = String(v?.url || '').trim();
+        if (u) postedByUrl[u] = v;
+      }
+    } catch {}
+  }
+
   const winners = [];
   const seen = new Set();
 
   for (const r of rows) {
     if (!isWinnerRow(r)) continue;
-    const url = String(r.anchorUrl || r.url || '').trim();
+    const postedUrl = String(r.anchorUrl || r.url || '').trim();
+    if (!postedUrl) continue;
+
+    // Prefer underlying media post for embeds (parent of our QT/reply), fallback to our post.
+    const postedMeta = postedByUrl[postedUrl] || {};
+    const parentTweetId = String(r.parentTweetId || postedMeta.parentTweetId || '').trim();
+    const url = parentTweetId ? `https://x.com/i/web/status/${parentTweetId}` : postedUrl;
+
     if (!url || seen.has(url)) continue;
     seen.add(url);
     winners.push({
       url,
-      tsEt: r.tsEt || null,
+      sourcePostUrl: postedUrl,
+      parentTweetId: parentTweetId || null,
+      tsEt: r.tsEt || postedMeta.postedAtEt || null,
       kind: r.kind || null,
       label: `winner #${winners.length + 1}`
     });
