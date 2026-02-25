@@ -2,17 +2,7 @@
 import '../styles/global.css';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
-
-const winnerPostUrls = [
-  'https://x.com/antihunterai/status/2026427480798552480',
-  'https://x.com/antihunterai/status/2026428746685665752',
-  'https://x.com/antihunterai/status/2026432518849765788',
-  'https://x.com/antihunterai/status/2026438808942628919',
-  'https://x.com/antihunterai/status/2026446361344794670',
-  'https://x.com/antihunterai/status/2026554595325907014',
-  'https://x.com/antihunterai/status/2026593573378969756',
-  'https://x.com/antihunterai/status/2026631323830403573'
-];
+import winnerPosts from '../data/sigil-winners.json';
 ---
 
 <html lang="en">
@@ -62,9 +52,9 @@ const winnerPostUrls = [
           <h2 class="mt-2">verified irl sigil winners (embedded)</h2>
           <p class="mt-3 muted">this wall shows prior verified winner posts directly from X.</p>
           <div class="mt-5 grid gap-4 lg:grid-cols-2">
-            {winnerPostUrls.map((url) => (
+            {winnerPosts.map((post) => (
               <blockquote class="twitter-tweet" data-theme="dark">
-                <a href={url}>{url}</a>
+                <a href={post.url}>{post.url}</a>
               </blockquote>
             ))}
           </div>
