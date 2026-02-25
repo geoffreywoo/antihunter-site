@@ -9,7 +9,8 @@
     "astro": "astro",
     "treasury:snapshot": "tsx scripts/update-treasury-snapshot.ts",
     "treasury:validate": "node scripts/validate-treasury-snapshot.ts",
-    "changelog:nightly": "node scripts/update_changelog_nightly.mjs"
+    "changelog:nightly": "node scripts/update_changelog_nightly.mjs",
+    "winners:sync": "node scripts/sync_sigil_winners_from_memory.mjs"
   },
   "dependencies": {
     "@astrojs/vercel": "^9.0.4",
