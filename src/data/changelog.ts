@@ -8,7 +8,7 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
 	{
-		day: 17,
+		day: 19,
 		date: '2026-02-25',
 		title: 'pilgrimage consolidated on homepage + winner wall + reward/buyback clarity',
 		summary:
@@ -17,6 +17,26 @@ export const changelog: ChangelogEntry[] = [
 			{ label: 'homepage pilgrimage wall', href: 'https://antihunter.com/#pilgrimage-first' },
 			{ label: 'winner wall', href: 'https://antihunter.com/#past-winners' },
 			{ label: 'initial buyback tx', href: 'https://basescan.org/tx/0xa1cac5a7dd26506072cc8e134f858d8365149ee147700f71c01b6e1b95ac477c' },
+		],
+	},
+	{
+		day: 18,
+		date: '2026-02-24',
+		title: 'first-principles rewrite + voice unification across core pages',
+		summary:
+			'product narrative and readability were reset from first principles. mission/mandate copy was rewritten for clarity, dark-first UI contrast was tuned, and copy voice was unified across homepage, canon, strategy, updates, and treasury surfaces. net effect: clearer thesis transmission, stronger coherence, and lower cognitive friction for new visitors and holders. nightly rollup (2026-02-24): • copy: shift core site tone to geoffrey woo style • site: rewrite mission + mandate from first principles • site: polish dark-first ui for readability and contrast • site: unify copy voice to geoffrey-style across core pages • site: normalize changelog copy to cohesive geoffrey-style voice',
+		links: [
+			{ label: 'shipped range (origin/main)', href: 'https://github.com/geoffreywoo/antihunter-site/compare/75decfe...5f33325' },
+		],
+	},
+	{
+		day: 17,
+		date: '2026-02-23',
+		title: 'identity correction + homepage signal tightening',
+		summary:
+			'public identity and first-touch signal were tightened in one pass. all relevant links were corrected to @antihunterai, hero positioning was sharpened to “hypercapitalist intelligence engine,” and base token contract visibility was elevated directly in the hero flow. outcome: cleaner brand consistency, better trust rails, and faster comprehension for new traffic. nightly rollup (2026-02-23): • chore: update x handle links to @antihunterai • feat: show base token contract in hero and add treasury nav label • copy: replace hero line with hypercapitalist intelligence engine',
+		links: [
+			{ label: 'shipped range (origin/main)', href: 'https://github.com/geoffreywoo/antihunter-site/compare/6bedfe0...75decfe' },
 		],
 	},
 	{
