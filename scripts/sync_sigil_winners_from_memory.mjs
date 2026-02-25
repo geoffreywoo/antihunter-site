@@ -10,6 +10,7 @@ const queueStatePath = path.join(workspaceRoot, 'memory', 'x_post_queue_state.js
 const decisionsPath = path.join(workspaceRoot, 'memory', 'x_engagement_policy_decisions.jsonl');
 const contextPath = path.join(workspaceRoot, 'memory', 'x_engagement_context.jsonl');
 const outPath = path.join(siteRoot, 'src', 'data', 'sigil-winners.json');
+const manualPath = path.join(siteRoot, 'src', 'data', 'sigil-winners-manual.json');
 
 const CLAIM_SCAM_TERMS = [
   'claim now', 'claim link', 'airdrop', 'holders only', 'connect wallet', 'verify wallet', 'mint now', 'drop is live', 'antihunterevent.org'
@@ -140,6 +141,27 @@ function main() {
       tsEt: row.tsEt || sourceMeta.postedAtEt || null,
       label: `winner #${winners.length + 1}`,
     });
+  }
+
+  // merge explicit manual includes (human-curated)
+  if (fs.existsSync(manualPath)) {
+    try {
+      const manual = JSON.parse(fs.readFileSync(manualPath, 'utf8'));
+      for (const m of Array.isArray(manual) ? manual : []) {
+        const url = String(m?.url || '').trim().split('?')[0];
+        if (!url || seen.has(url)) continue;
+        seen.add(url);
+        winners.push({
+          url,
+          source: 'manual_include',
+          parentTweetId: tweetIdFromUrl(url),
+          authorUsername: null,
+          mediaTypes: [],
+          tsEt: null,
+          label: `winner #${winners.length + 1}`,
+        });
+      }
+    } catch {}
   }
 
   winners.sort((a, b) => parseTs(b.tsEt) - parseTs(a.tsEt));
