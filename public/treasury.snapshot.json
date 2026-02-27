@@ -1,7 +1,7 @@
 {
-  "updatedAtMs": 1772110971336,
-  "updatedAt": "2026-02-26T13:02:51.336Z",
-  "date": "2026-02-26",
+  "updatedAtMs": 1772154014485,
+  "updatedAt": "2026-02-27T01:00:14.485Z",
+  "date": "2026-02-27",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "wallets": [
     "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
@@ -23,8 +23,8 @@
       "entryDate": "2026-02-15",
       "costBasisUsd": 64865.13,
       "costBasisEth": "33",
-      "fmvUsd": 68157.20999999999,
-      "pnlUsd": 3292.0799999999945,
+      "fmvUsd": 66496.254,
+      "pnlUsd": 1631.1240000000034,
       "link": "https://www.cryptopunks.app/cryptopunks/details/5730",
       "entryLink": "https://etherscan.io/tx/0x897f01a5eedc7f6bcd580cbe1304d9e5f43d8e78784889a7dff448da49a25ca4"
     },
@@ -33,12 +33,12 @@
       "chainId": 8453,
       "symbol": "AntiHunter",
       "token": "0xe2f3fae4bc62e21826018364aa30ae45d430bb07",
-      "balance": "4208124117.5079184",
+      "balance": "4251177398.1513743",
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 62279.918309452245,
-      "pnlUsd": 62279.918309452245,
+      "fmvUsd": 45317.55106429365,
+      "pnlUsd": 45317.55106429365,
       "lots": null
     },
     {
@@ -46,12 +46,12 @@
       "chainId": 8453,
       "symbol": "WETH",
       "token": "0x4200000000000000000000000000000000000006",
-      "balance": "20.103209636997882508",
+      "balance": "20.357815969221711625",
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 41520.56608796631,
-      "pnlUsd": 41520.56608796631
+      "fmvUsd": 41021.77277498858,
+      "pnlUsd": 41021.77277498858
     },
     {
       "chain": "base",
@@ -62,8 +62,8 @@
       "entryDate": null,
       "costBasisUsd": 14805.571144388097,
       "costBasisEth": "0",
-      "fmvUsd": 11838.996712595506,
-      "pnlUsd": -2966.574431792591,
+      "fmvUsd": 11666.13229035993,
+      "pnlUsd": -3139.438854028167,
       "lots": [
         {
           "txHash": "0x96e23121c777d968322f32ef91605b8e45efaed19d06d16b2ce6e9c0210966f8",
@@ -92,8 +92,8 @@
       "entryDate": "2026-02-07",
       "costBasisUsd": 4157.04,
       "costBasisEth": "2",
-      "fmvUsd": 11247.427092186901,
-      "pnlUsd": 7090.387092186901,
+      "fmvUsd": 11374.092590201102,
+      "pnlUsd": 7217.052590201102,
       "lots": [
         {
           "txHash": "0x3183990234fa8a320bb8c2d3047d90f4c00fc4f886833dc859502fd476dc23e0",
@@ -116,14 +116,26 @@
     {
       "chain": "base",
       "chainId": 8453,
+      "symbol": "ETH",
+      "token": null,
+      "balance": "1.042465181355705",
+      "entryDate": null,
+      "costBasisUsd": null,
+      "costBasisEth": null,
+      "fmvUsd": 2100.606954108637,
+      "pnlUsd": null
+    },
+    {
+      "chain": "base",
+      "chainId": 8453,
       "symbol": "bio",
       "token": "0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07",
       "balance": "721643923.967929189632132706",
       "entryDate": "2026-02-07",
       "costBasisUsd": 6292.645333701491,
       "costBasisEth": "3.027464413958726144",
-      "fmvUsd": 2252.972330627875,
-      "pnlUsd": -4039.6730030736157,
+      "fmvUsd": 2018.4380553382982,
+      "pnlUsd": -4274.207278363193,
       "lots": [
         {
           "txHash": "0x5f5569cc2124d314a30846db0bf93a1d6f42e4d0bb9c284afaeb9f4898ab8445",
@@ -144,18 +156,6 @@
       ]
     },
     {
-      "chain": "base",
-      "chainId": 8453,
-      "symbol": "ETH",
-      "token": null,
-      "balance": "1.042465181355705",
-      "entryDate": null,
-      "costBasisUsd": null,
-      "costBasisEth": null,
-      "fmvUsd": 2153.0763116166327,
-      "pnlUsd": null
-    },
-    {
       "chain": "ethereum",
       "chainId": 1,
       "symbol": "ETH",
@@ -164,11 +164,11 @@
       "entryDate": null,
       "costBasisUsd": null,
       "costBasisEth": null,
-      "fmvUsd": 260.4274455569958,
+      "fmvUsd": 254.0809632367458,
       "pnlUsd": null
     }
   ],
-  "totalUsd": 199710.59429000248,
+  "totalUsd": 180248.92869252694,
   "notes": [
     "fast_mode: balances-only (log scan skipped)"
   ],
