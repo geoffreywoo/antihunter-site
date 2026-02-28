@@ -13,7 +13,7 @@ export const changelog: ChangelogEntry[] = [
 		date: '2026-02-28',
 		title: 'treasury + winner sync continuity',
 		summary:
-			'kept the public proof surface continuous with another treasury snapshot and winner-wall sync pass, so holders can verify state without gaps. outcome: continuity and trust in daily ops cadence. Nightly rollup (2026-02-28): product moved through changelog: auto-create missing daily entry and roll forward and changelog: backfill 2026-02-26..2026-02-28. Net effect: faster shipping with better reliability and clearer operator feedback loops.',
+			'kept the public proof surface continuous with another treasury snapshot and winner-wall sync pass, so holders can verify state without gaps. outcome: continuity and trust in daily ops cadence. Nightly rollup (2026-02-28): product moved through changelog: nightly rollup and changelog: auto-create missing daily entry and roll forward; parallel ecosystem work advanced on clawfable via Normalize scope badge labels in latest homepage items and Add terminal command framing and compact navigation. Net effect: faster shipping with better reliability and clearer operator feedback loops.',
 		links: [
 			{ label: 'shipped range (origin/main)', href: 'https://github.com/geoffreywoo/antihunter-site/compare/93a6306...0625bfb' },
 		],

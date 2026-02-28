@@ -26,24 +26,26 @@ function getTodayET() {
   return `${m.year}-${m.month}-${m.day}`;
 }
 
-function getCommitSubjectsSinceMidnightRepo() {
+function getCommitSubjectsSinceMidnightRepo(repoPath = '.', label = 'antihunter-site') {
+  const repoArg = repoPath ? ` -C "${repoPath}"` : '';
+
   // Swarm-aware: fetch remote first, then read from origin/main (not local HEAD only).
   try {
-    sh('git fetch --prune origin');
+    sh(`git${repoArg} fetch --prune origin`);
   } catch (e) {
-    console.warn('[changelog] git fetch origin failed; falling back to local ref.');
+    console.warn(`[changelog] git fetch origin failed for ${label}; falling back to local ref.`);
   }
 
   const ref = (() => {
     try {
-      sh('git rev-parse --verify origin/main');
+      sh(`git${repoArg} rev-parse --verify origin/main`);
       return 'origin/main';
     } catch {
       return 'HEAD';
     }
   })();
 
-  const out = sh(`git log ${ref} --no-merges --since="today 00:00" --pretty=%s`);
+  const out = sh(`git${repoArg} log ${ref} --no-merges --since="today 00:00" --pretty=%s`);
   if (!out) return [];
   return out
     .split('\n')
@@ -83,9 +85,13 @@ function ensureTodayEntryExists(src, today) {
 
 function main() {
   const today = getTodayET();
-  const subjects = getCommitSubjectsSinceMidnightRepo();
+  const subjects = getCommitSubjectsSinceMidnightRepo('.', 'antihunter-site');
+  const clawfableRepo = path.resolve('..', 'clawfable');
+  const clawfableSubjects = fs.existsSync(path.join(clawfableRepo, '.git'))
+    ? getCommitSubjectsSinceMidnightRepo(clawfableRepo, 'clawfable')
+    : [];
 
-  if (subjects.length === 0) {
+  if (subjects.length === 0 && clawfableSubjects.length === 0) {
     console.log(`[changelog] No commits since midnight for ${today}; skipping.`);
     return;
   }
@@ -101,16 +107,20 @@ function main() {
   const product = top.filter(s => productKw.test(s)).slice(0, 2);
   const strategy = top.filter(s => strategyKw.test(s)).slice(0, 2);
 
+  const clawTop = clawfableSubjects.slice(0, 2);
+
   const narrativeBits = [];
   if (product.length) narrativeBits.push(`product moved through ${product.join(' and ')}`);
   if (infra.length) narrativeBits.push(`infrastructure hardened via ${infra.join(' and ')}`);
   if (strategy.length) narrativeBits.push(`operating discipline tightened with ${strategy.join(' and ')}`);
-  if (!narrativeBits.length) narrativeBits.push(`execution advanced across ${top.slice(0, 3).join(', ')}`);
+  if (clawTop.length) narrativeBits.push(`parallel ecosystem work advanced on clawfable via ${clawTop.join(' and ')}`);
+  if (!narrativeBits.length && top.length) narrativeBits.push(`execution advanced across ${top.slice(0, 3).join(', ')}`);
+  if (!narrativeBits.length && !top.length && clawTop.length) narrativeBits.push(`execution expanded through clawfable updates: ${clawTop.join(' and ')}`);
 
   const rollup =
     `Nightly rollup (${today}): ${narrativeBits.join('; ')}. ` +
     `Net effect: faster shipping with better reliability and clearer operator feedback loops.` +
-    (extra > 0 ? ` (+${extra} additional commits.)` : '');
+    (extra > 0 ? ` (+${extra} additional antihunter-site commits.)` : '');
 
   const changelogPath = path.join('src', 'data', 'changelog.ts');
   let src = fs.readFileSync(changelogPath, 'utf8');
@@ -143,7 +153,7 @@ function main() {
   if (ensured.created) {
     console.log(`[changelog] Inserted missing entry for ${today} before rollup.`);
   }
-  console.log(`[changelog] Updated ${changelogPath} for ${today} with ${subjects.length} commit subjects.`);
+  console.log(`[changelog] Updated ${changelogPath} for ${today} with ${subjects.length} antihunter-site subjects + ${clawfableSubjects.length} clawfable subjects.`);
 }
 
 main();
