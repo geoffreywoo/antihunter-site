@@ -56,6 +56,31 @@ function escapeSingleQuotes(s) {
   return s.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
 }
 
+function dayFromBase(today) {
+  const base = new Date('2026-02-06T00:00:00-05:00');
+  const d = new Date(`${today}T00:00:00-05:00`);
+  return Math.floor((d.getTime() - base.getTime()) / 86400000);
+}
+
+function ensureTodayEntryExists(src, today) {
+  const hasToday = new RegExp(`date:\\s*'${today}'`).test(src);
+  if (hasToday) return { src, created: false };
+
+  const day = dayFromBase(today);
+  const entry =
+`\t{\n\t\tday: ${day},\n\t\tdate: '${today}',\n\t\ttitle: 'daily operations rollup',\n\t\tsummary:\n\t\t\t'prepared daily narrative rollup and execution receipts for antihunter.com.',\n\t\tlinks: [],\n\t},\n`;
+
+  const marker = 'export const changelog: ChangelogEntry[] = [\n';
+  if (!src.includes(marker)) {
+    throw new Error('[changelog] Could not find changelog array marker to insert today entry.');
+  }
+
+  return {
+    src: src.replace(marker, marker + entry),
+    created: true,
+  };
+}
+
 function main() {
   const today = getTodayET();
   const subjects = getCommitSubjectsSinceMidnightRepo();
@@ -88,7 +113,10 @@ function main() {
     (extra > 0 ? ` (+${extra} additional commits.)` : '');
 
   const changelogPath = path.join('src', 'data', 'changelog.ts');
-  const src = fs.readFileSync(changelogPath, 'utf8');
+  let src = fs.readFileSync(changelogPath, 'utf8');
+
+  const ensured = ensureTodayEntryExists(src, today);
+  src = ensured.src;
 
   // Find the entry with date: 'YYYY-MM-DD' and patch its summary string.
   // Assumptions (current file style): summary is a single-quoted string on its own line.
@@ -99,7 +127,7 @@ function main() {
 
   const m = src.match(entryRe);
   if (!m) {
-    throw new Error(`[changelog] No entry found for date ${today}. Create it manually (or extend this script).`);
+    throw new Error(`[changelog] No entry found for date ${today} even after ensure step.`);
   }
 
   const prefix = m[1];
@@ -112,6 +140,9 @@ function main() {
   const patched = src.replace(entryRe, `${prefix}'${escapeSingleQuotes(newSummary)}'`);
   fs.writeFileSync(changelogPath, patched);
 
+  if (ensured.created) {
+    console.log(`[changelog] Inserted missing entry for ${today} before rollup.`);
+  }
   console.log(`[changelog] Updated ${changelogPath} for ${today} with ${subjects.length} commit subjects.`);
 }
 
