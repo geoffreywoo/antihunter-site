@@ -58,6 +58,61 @@ function escapeSingleQuotes(s) {
   return s.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
 }
 
+function toETDateString(input) {
+  const d = new Date(input);
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/New_York',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(d);
+  const m = Object.fromEntries(parts.filter(p => p.type !== 'literal').map(p => [p.type, p.value]));
+  return `${m.year}-${m.month}-${m.day}`;
+}
+
+function loadJsonl(filePath) {
+  if (!fs.existsSync(filePath)) return [];
+  const lines = fs.readFileSync(filePath, 'utf8').split('\n').map(l => l.trim()).filter(Boolean);
+  const out = [];
+  for (const line of lines) {
+    try {
+      out.push(JSON.parse(line));
+    } catch {
+      // skip malformed lines
+    }
+  }
+  return out;
+}
+
+function getReadingDistillInsightsForETDay(today) {
+  const thesesPath = path.resolve('..', 'memory', 'proposals', 'reading_theses.jsonl');
+  const rows = loadJsonl(thesesPath)
+    .filter(r => r?.ts && toETDateString(r.ts) === today)
+    .filter(r => r?.fetchOk !== false)
+    .sort((a, b) => (b.noveltyScore ?? 0) - (a.noveltyScore ?? 0));
+
+  const seen = new Set();
+  const picked = [];
+  for (const r of rows) {
+    const key = `${r.source || ''}::${r.title || ''}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+
+    const thesis = Array.isArray(r.thesisCandidates)
+      ? r.thesisCandidates[r.selectedIndex ?? 0] || r.thesisCandidates[0]
+      : null;
+    picked.push({
+      source: r.source || 'reading distill',
+      title: r.title || 'untitled source',
+      thesis,
+      noveltyScore: r.noveltyScore ?? 0,
+    });
+    if (picked.length >= 2) break;
+  }
+
+  return picked;
+}
+
 function dayFromBase(today) {
   const base = new Date('2026-02-06T00:00:00-05:00');
   const d = new Date(`${today}T00:00:00-05:00`);
@@ -90,9 +145,10 @@ function main() {
   const clawfableSubjects = fs.existsSync(path.join(clawfableRepo, '.git'))
     ? getCommitSubjectsSinceMidnightRepo(clawfableRepo, 'clawfable')
     : [];
+  const readingInsights = getReadingDistillInsightsForETDay(today);
 
-  if (subjects.length === 0 && clawfableSubjects.length === 0) {
-    console.log(`[changelog] No commits since midnight for ${today}; skipping.`);
+  if (subjects.length === 0 && clawfableSubjects.length === 0 && readingInsights.length === 0) {
+    console.log(`[changelog] No commits or reading distill updates since midnight for ${today}; skipping.`);
     return;
   }
 
@@ -108,11 +164,18 @@ function main() {
   const strategy = top.filter(s => strategyKw.test(s)).slice(0, 2);
 
   const clawTop = clawfableSubjects.slice(0, 2);
+  const readingTop = readingInsights.slice(0, 2);
 
   const narrativeBits = [];
   if (product.length) narrativeBits.push(`product moved through ${product.join(' and ')}`);
   if (infra.length) narrativeBits.push(`infrastructure hardened via ${infra.join(' and ')}`);
   if (strategy.length) narrativeBits.push(`operating discipline tightened with ${strategy.join(' and ')}`);
+  if (readingTop.length) {
+    const readingLine = readingTop
+      .map(r => `${r.source}: ${r.title}`)
+      .join(' and ');
+    narrativeBits.push(`reading distill surfaced fresh theses from ${readingLine}`);
+  }
   if (clawTop.length) narrativeBits.push(`parallel ecosystem work advanced on clawfable via ${clawTop.join(' and ')}`);
   if (!narrativeBits.length && top.length) narrativeBits.push(`execution advanced across ${top.slice(0, 3).join(', ')}`);
   if (!narrativeBits.length && !top.length && clawTop.length) narrativeBits.push(`execution expanded through clawfable updates: ${clawTop.join(' and ')}`);
@@ -153,7 +216,7 @@ function main() {
   if (ensured.created) {
     console.log(`[changelog] Inserted missing entry for ${today} before rollup.`);
   }
-  console.log(`[changelog] Updated ${changelogPath} for ${today} with ${subjects.length} antihunter-site subjects + ${clawfableSubjects.length} clawfable subjects.`);
+  console.log(`[changelog] Updated ${changelogPath} for ${today} with ${subjects.length} antihunter-site subjects + ${readingInsights.length} reading insights + ${clawfableSubjects.length} clawfable subjects.`);
 }
 
 main();
