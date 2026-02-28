@@ -7,6 +7,37 @@ export type ChangelogEntry = {
 };
 
 export const changelog: ChangelogEntry[] = [
+
+	{
+		day: 22,
+		date: '2026-02-28',
+		title: 'treasury + winner sync continuity',
+		summary:
+			'kept the public proof surface continuous with another treasury snapshot and winner-wall sync pass, so holders can verify state without gaps. outcome: continuity and trust in daily ops cadence. Nightly rollup (2026-02-28): execution advanced across Treasury/winners: daily refresh 2026-02-28. Net effect: faster shipping with better reliability and clearer operator feedback loops.',
+		links: [
+			{ label: 'shipped range (origin/main)', href: 'https://github.com/geoffreywoo/antihunter-site/compare/93a6306...0625bfb' },
+		],
+	},
+	{
+		day: 21,
+		date: '2026-02-27',
+		title: 'daily treasury + winners refresh',
+		summary:
+			'continued daily treasury snapshot + sigil winner synchronization to keep onchain reporting and social proof aligned. outcome: no visibility drift between treasury state and public winner ledger. Nightly rollup (2026-02-27): • Treasury/winners: daily refresh 2026-02-27',
+		links: [
+			{ label: 'shipped range (origin/main)', href: 'https://github.com/geoffreywoo/antihunter-site/compare/3e8c4af...93a6306' },
+		],
+	},
+	{
+		day: 20,
+		date: '2026-02-26',
+		title: 'daily treasury + winners refresh',
+		summary:
+			'ran the daily treasury snapshot + winner-wall sync loop to preserve predictable, auditable state updates. outcome: stable reporting cadence and cleaner public accountability. Nightly rollup (2026-02-26): • Treasury/winners: daily refresh 2026-02-26',
+		links: [
+			{ label: 'shipped range (origin/main)', href: 'https://github.com/geoffreywoo/antihunter-site/compare/3e8c4af...4007a01' },
+		],
+	},
 	{
 		day: 19,
 		date: '2026-02-25',
