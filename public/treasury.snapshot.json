@@ -1,7 +1,7 @@
 {
-  "updatedAtMs": 1772283615814,
-  "updatedAt": "2026-02-28T13:00:15.814Z",
-  "date": "2026-02-28",
+  "updatedAtMs": 1772326812548,
+  "updatedAt": "2026-03-01T01:00:12.548Z",
+  "date": "2026-03-01",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "wallets": [
     "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
@@ -23,8 +23,8 @@
       "entryDate": "2026-02-15",
       "costBasisUsd": 64865.13,
       "costBasisEth": "33",
-      "fmvUsd": 61649.94,
-      "pnlUsd": -3215.189999999995,
+      "fmvUsd": 64704.090000000004,
+      "pnlUsd": -161.0399999999936,
       "link": "https://www.cryptopunks.app/cryptopunks/details/5730",
       "entryLink": "https://etherscan.io/tx/0x897f01a5eedc7f6bcd580cbe1304d9e5f43d8e78784889a7dff448da49a25ca4"
     },
@@ -37,8 +37,8 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 41585.124419434804,
-      "pnlUsd": 41585.124419434804,
+      "fmvUsd": 48996.24746176256,
+      "pnlUsd": 48996.24746176256,
       "lots": null
     },
     {
@@ -50,8 +50,8 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 39452.10890688757,
-      "pnlUsd": 39452.10890688757
+      "fmvUsd": 41406.57404372259,
+      "pnlUsd": 41406.57404372259
     },
     {
       "chain": "base",
@@ -62,8 +62,8 @@
       "entryDate": null,
       "costBasisUsd": 14805.571144388097,
       "costBasisEth": "0",
-      "fmvUsd": 11231.755024229507,
-      "pnlUsd": -3573.81612015859,
+      "fmvUsd": 11830.131870429579,
+      "pnlUsd": -2975.4392739585182,
       "lots": [
         {
           "txHash": "0x96e23121c777d968322f32ef91605b8e45efaed19d06d16b2ce6e9c0210966f8",
@@ -92,8 +92,8 @@
       "entryDate": "2026-02-07",
       "costBasisUsd": 4157.04,
       "costBasisEth": "2",
-      "fmvUsd": 10869.776255514933,
-      "pnlUsd": 6712.736255514933,
+      "fmvUsd": 10872.121912885566,
+      "pnlUsd": 6715.081912885566,
       "lots": [
         {
           "txHash": "0x3183990234fa8a320bb8c2d3047d90f4c00fc4f886833dc859502fd476dc23e0",
@@ -122,7 +122,7 @@
       "entryDate": null,
       "costBasisUsd": null,
       "costBasisEth": null,
-      "fmvUsd": 1947.5126025051013,
+      "fmvUsd": 2043.9927550395716,
       "pnlUsd": null
     },
     {
@@ -134,8 +134,8 @@
       "entryDate": "2026-02-07",
       "costBasisUsd": 6292.645333701491,
       "costBasisEth": "3.027464413958726144",
-      "fmvUsd": 1787.5119996685607,
-      "pnlUsd": -4505.13333403293,
+      "fmvUsd": 1882.7689976323275,
+      "pnlUsd": -4409.876336069164,
       "lots": [
         {
           "txHash": "0x5f5569cc2124d314a30846db0bf93a1d6f42e4d0bb9c284afaeb9f4898ab8445",
@@ -164,11 +164,11 @@
       "entryDate": null,
       "costBasisUsd": null,
       "costBasisEth": null,
-      "fmvUsd": 235.5632865978824,
+      "fmvUsd": 247.23313756226165,
       "pnlUsd": null
     }
   ],
-  "totalUsd": 168759.29249483836,
+  "totalUsd": 181983.16017903446,
   "notes": [
     "fast_mode: balances-only (log scan skipped)"
   ],
