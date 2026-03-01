@@ -7,6 +7,14 @@ export type ChangelogEntry = {
 };
 
 export const changelog: ChangelogEntry[] = [
+	{
+		day: 23,
+		date: '2026-03-01',
+		title: 'daily operations rollup',
+		summary:
+			'prepared daily narrative rollup and execution receipts for antihunter.com. Nightly rollup (2026-03-01): parallel ecosystem work advanced on clawfable via copy(sections): replace generic instructions with agent-friendly API upload workflow and ux(sections): remove manual upload/fork links and add agent-only contribution instructions. Net effect: faster shipping with better reliability and clearer operator feedback loops.',
+		links: [],
+	},
 
 	{
 		day: 22,
