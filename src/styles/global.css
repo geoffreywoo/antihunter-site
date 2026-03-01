@@ -17,6 +17,7 @@ body.wp {
   font-family: "Crimson Text", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   font-size: 18px;
   line-height: 1.65;
+  overflow-x: hidden;
 }
 
 body.wp a {
@@ -25,6 +26,7 @@ body.wp a {
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
   text-decoration-color: rgba(244, 244, 245, 0.35);
+  overflow-wrap: anywhere;
 }
 
 body.wp a:hover {
