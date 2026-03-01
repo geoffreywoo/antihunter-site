@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -13,9 +14,9 @@ body.wp {
   margin: 0;
   background: #0a0a0b;
   color: #f3f4f6;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 14px;
-  line-height: 1.6;
+  font-family: "Crimson Text", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 18px;
+  line-height: 1.65;
 }
 
 body.wp a {
@@ -218,7 +219,9 @@ body.wp ::selection {
   padding: 14px;
 }
 
-.wp code, .wp pre { font-family: inherit; }
+.wp code, .wp pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
 
 .wp code {
   padding: 1px 4px;
