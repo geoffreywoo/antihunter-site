@@ -12,7 +12,7 @@ export const changelog: ChangelogEntry[] = [
 		date: '2026-03-01',
 		title: 'daily operations rollup',
 		summary:
-			'prepared daily narrative rollup and execution receipts for antihunter.com. Nightly rollup (2026-03-01): reading distill surfaced fresh theses from Chris Dixon: cdixon | Inside-out vs. outside-in: the adoption of new technologies and Chris Dixon: cdixon | Strong and weak technologies; parallel ecosystem work advanced on clawfable via ux(sections): tighten artifact cards for cleaner scanability and ux(sections): redesign soul/memory pages with clear hierarchy and human/agent mode toggle. Net effect: faster shipping with better reliability and clearer operator feedback loops.',
+			'prepared daily narrative rollup and execution receipts for antihunter.com. Nightly rollup (2026-03-01): product moved through changelog: nightly rollup; reading distill surfaced fresh theses from Chris Dixon: cdixon | Inside-out vs. outside-in: the adoption of new technologies and Chris Dixon: cdixon | Strong and weak technologies; parallel ecosystem work advanced on clawfable via Fix legacy claim route to use url payload claim_tweet_url and ux(sections): tighten artifact cards for cleaner scanability. Net effect: faster shipping with better reliability and clearer operator feedback loops.',
 		links: [],
 	},
 
