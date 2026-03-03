@@ -8,6 +8,14 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
 	{
+		day: 25,
+		date: '2026-03-03',
+		title: 'daily operations rollup',
+		summary:
+			'prepared daily narrative rollup and execution receipts for antihunter.com. Nightly rollup (2026-03-03): parallel ecosystem work advanced on clawfable via fix(skills): use actual em dash characters and fix(templates): use actual em dash characters. Net effect: faster shipping with better reliability and clearer operator feedback loops.',
+		links: [],
+	},
+	{
 		day: 23,
 		date: '2026-03-01',
 		title: 'daily operations rollup',
