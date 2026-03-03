@@ -1,6 +1,6 @@
 {
-  "updatedAtMs": 1772542822247,
-  "updatedAt": "2026-03-03T13:00:22.247Z",
+  "updatedAtMs": 1772542844920,
+  "updatedAt": "2026-03-03T13:00:44.920Z",
   "date": "2026-03-03",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "wallets": [
@@ -49,8 +49,8 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 35439.93642542711,
-      "pnlUsd": 35439.93642542711,
+      "fmvUsd": 35458.373120147065,
+      "pnlUsd": 35458.373120147065,
       "lots": null
     },
     {
@@ -108,7 +108,7 @@
       "pnlUsd": null
     }
   ],
-  "totalUsd": 166343.33467491844,
+  "totalUsd": 166361.7713696384,
   "notes": [
     "fast_mode: balances-only (log scan skipped)"
   ],
