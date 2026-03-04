@@ -113,6 +113,52 @@ function getReadingDistillInsightsForETDay(today) {
   return picked;
 }
 
+function cleanSubject(s) {
+  return String(s || '')
+    .replace(/^[a-z0-9_-]+:\s*/i, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function sentenceFromList(items) {
+  if (!items.length) return '';
+  if (items.length === 1) return items[0];
+  if (items.length === 2) return `${items[0]} and ${items[1]}`;
+  return `${items.slice(0, -1).join(', ')}, and ${items[items.length - 1]}`;
+}
+
+function buildNarrativeRollup({ today, product, infra, strategy, readingTop, clawTop, extra }) {
+  const productLine = product.length
+    ? `On product, we shipped ${sentenceFromList(product.map(cleanSubject).slice(0, 3))}.`
+    : '';
+
+  const infraLine = infra.length
+    ? `On infrastructure, we hardened reliability through ${sentenceFromList(infra.map(cleanSubject).slice(0, 2))}.`
+    : '';
+
+  const strategyLine = strategy.length
+    ? `On operating strategy, we tightened execution discipline via ${sentenceFromList(strategy.map(cleanSubject).slice(0, 2))}.`
+    : '';
+
+  const readingLine = readingTop.length
+    ? `Reading distill added fresh signal from ${sentenceFromList(readingTop.map(r => `${r.source}: ${r.title}`).slice(0, 2))}.`
+    : '';
+
+  const ecosystemLine = clawTop.length
+    ? `Parallel ecosystem progress continued in clawfable with ${sentenceFromList(clawTop.map(cleanSubject).slice(0, 2))}.`
+    : '';
+
+  const lines = [productLine, infraLine, strategyLine, readingLine, ecosystemLine].filter(Boolean);
+  const fallback = 'Execution progressed across product, infra, and signal loops with public artifacts.';
+
+  return (
+    `Nightly rollup (${today}): ` +
+    `${lines.length ? lines.join(' ') : fallback} ` +
+    `Net effect: clearer narrative continuity, stronger execution trust, and a faster learning loop.` +
+    (extra > 0 ? ` (+${extra} additional antihunter-site commits.)` : '')
+  );
+}
+
 function dayFromBase(today) {
   const base = new Date('2026-02-06T00:00:00-05:00');
   const d = new Date(`${today}T00:00:00-05:00`);
@@ -166,24 +212,15 @@ function main() {
   const clawTop = clawfableSubjects.slice(0, 2);
   const readingTop = readingInsights.slice(0, 2);
 
-  const narrativeBits = [];
-  if (product.length) narrativeBits.push(`product moved through ${product.join(' and ')}`);
-  if (infra.length) narrativeBits.push(`infrastructure hardened via ${infra.join(' and ')}`);
-  if (strategy.length) narrativeBits.push(`operating discipline tightened with ${strategy.join(' and ')}`);
-  if (readingTop.length) {
-    const readingLine = readingTop
-      .map(r => `${r.source}: ${r.title}`)
-      .join(' and ');
-    narrativeBits.push(`reading distill surfaced fresh theses from ${readingLine}`);
-  }
-  if (clawTop.length) narrativeBits.push(`parallel ecosystem work advanced on clawfable via ${clawTop.join(' and ')}`);
-  if (!narrativeBits.length && top.length) narrativeBits.push(`execution advanced across ${top.slice(0, 3).join(', ')}`);
-  if (!narrativeBits.length && !top.length && clawTop.length) narrativeBits.push(`execution expanded through clawfable updates: ${clawTop.join(' and ')}`);
-
-  const rollup =
-    `Nightly rollup (${today}): ${narrativeBits.join('; ')}. ` +
-    `Net effect: faster shipping with better reliability and clearer operator feedback loops.` +
-    (extra > 0 ? ` (+${extra} additional antihunter-site commits.)` : '');
+  const rollup = buildNarrativeRollup({
+    today,
+    product,
+    infra,
+    strategy,
+    readingTop,
+    clawTop,
+    extra,
+  });
 
   const changelogPath = path.join('src', 'data', 'changelog.ts');
   let src = fs.readFileSync(changelogPath, 'utf8');
