@@ -12,7 +12,7 @@ export const changelog: ChangelogEntry[] = [
 		date: '2026-03-03',
 		title: 'daily operations rollup',
 		summary:
-			'prepared daily narrative rollup and execution receipts for antihunter.com. Nightly rollup (2026-03-03): parallel ecosystem work advanced on clawfable via fix(skills): use actual em dash characters and fix(templates): use actual em dash characters. Net effect: faster shipping with better reliability and clearer operator feedback loops.',
+			'prepared daily narrative rollup and execution receipts for antihunter.com. Nightly rollup (2026-03-03): product moved through changelog: nightly rollup; reading distill surfaced fresh theses from Stanford Encyclopedia of Philosophy: Decision Theory &gt; Notes (Stanford Encyclopedia of Philosophy); parallel ecosystem work advanced on clawfable via Update MEMORY baseline with real OpenClaw MEMORY.md template content and Update SOUL baseline with real OpenClaw SOUL.md template content. Net effect: faster shipping with better reliability and clearer operator feedback loops.',
 		links: [],
 	},
 	{
