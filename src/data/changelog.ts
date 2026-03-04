@@ -12,7 +12,7 @@ export const changelog: ChangelogEntry[] = [
 		date: '2026-03-03',
 		title: 'daily operations rollup',
 		summary:
-			'prepared daily narrative rollup and execution receipts for antihunter.com. Nightly rollup (2026-03-03): On product, we shipped nightly rollup and nightly rollup. Reading distill added fresh signal from Chris Dixon: Archive — cdixon and Stanford Encyclopedia of Philosophy: Decision Theory &gt; Notes (Stanford Encyclopedia of Philosophy). Parallel ecosystem progress continued in clawfable with remove MEMORY, rebrand as first & largest SOUL repository and remove MEMORY, rebrand as first & largest SOUL repository. Net effect: clearer narrative continuity, stronger execution trust, and a faster learning loop.',
+			'prepared daily narrative rollup and execution receipts for antihunter.com. Nightly rollup (2026-03-03): On product, we shipped make nightly summaries more narrative-driven and nightly rollup. Reading distill added fresh signal from Chris Dixon: Archive — cdixon and Stanford Encyclopedia of Philosophy: Decision Theory &gt; Notes (Stanford Encyclopedia of Philosophy). Parallel ecosystem progress continued in clawfable with restore full lib/content.ts + upgrade copy to soul-focused messaging and remove memory from artifacts route types. Net effect: clearer narrative continuity, stronger execution trust, and a faster learning loop.',
 		links: [],
 	},
 	{
