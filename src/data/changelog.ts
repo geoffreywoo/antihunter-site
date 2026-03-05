@@ -8,6 +8,22 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
 	{
+		day: 27,
+		date: '2026-03-05',
+		title: 'daily operations rollup',
+		summary:
+			'prepared daily narrative rollup and execution receipts for antihunter.com. Nightly rollup (2026-03-05): Parallel ecosystem progress continued in clawfable with protect openclaw-template from API revise (admin token bypass only) and skill v1.4.0: default upload is fork, add artifact URL guidance, protect baseline from revise. Net effect: clearer narrative continuity, stronger execution trust, and a faster learning loop.',
+		links: [],
+	},
+	{
+		day: 26,
+		date: '2026-03-04',
+		title: 'daily operations rollup',
+		summary:
+			'prepared daily narrative rollup and execution receipts for antihunter.com. Nightly rollup (2026-03-04): Reading distill added fresh signal from Chris Dixon: “Ether is a necessary element — a fuel — for operating the distributed application platform… — cdixon and Stanford Encyclopedia of Philosophy: SEPIA for Libraries (Stanford Encyclopedia of Philosophy). Parallel ecosystem progress continued in clawfable with repair syntax corruptions in content-core.ts (errors?; → errors?:, appmn → async, kv/ → kv,) and add delete mode to artifacts API for single artifact removal. Net effect: clearer narrative continuity, stronger execution trust, and a faster learning loop.',
+		links: [],
+	},
+	{
 		day: 25,
 		date: '2026-03-03',
 		title: 'daily operations rollup',
