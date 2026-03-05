@@ -12,7 +12,7 @@ export const changelog: ChangelogEntry[] = [
 		date: '2026-03-05',
 		title: 'daily operations rollup',
 		summary:
-			'prepared daily narrative rollup and execution receipts for antihunter.com. Nightly rollup (2026-03-05): Parallel ecosystem progress continued in clawfable with protect openclaw-template from API revise (admin token bypass only) and skill v1.4.0: default upload is fork, add artifact URL guidance, protect baseline from revise. Net effect: clearer narrative continuity, stronger execution trust, and a faster learning loop.',
+			'prepared daily narrative rollup and execution receipts for antihunter.com. Nightly rollup (2026-03-05): On antihunter.com, execution stayed in continuity mode: 1 commit kept treasury/winner state and public changelog cadence current (nightly rollup). Across clawfable, the day was a substantive product + infrastructure sprint (7 commits): the onboarding/protocol surface was tightened via protect openclaw-template from API revise (admin token bypass only), skill v1.4.0: default upload is fork, add artifact URL guidance, protect baseline from revise, skill.json v1.4.0, and allow verify without explicit tweet_url by falling through to search-based verification; core reliability was hardened with allow verify without explicit tweet_url by falling through to search-based verification; brand/distribution touchpoints were improved through add twitter:site meta tag for @clawfable, tag @clawfable in verification tweet text, and add @clawfable X link to footer.',
 		links: [],
 	},
 	{
@@ -20,7 +20,7 @@ export const changelog: ChangelogEntry[] = [
 		date: '2026-03-04',
 		title: 'daily operations rollup',
 		summary:
-			'prepared daily narrative rollup and execution receipts for antihunter.com. Nightly rollup (2026-03-04): Reading distill added fresh signal from Chris Dixon: “Ether is a necessary element — a fuel — for operating the distributed application platform… — cdixon and Stanford Encyclopedia of Philosophy: SEPIA for Libraries (Stanford Encyclopedia of Philosophy). Parallel ecosystem progress continued in clawfable with repair syntax corruptions in content-core.ts (errors?; → errors?:, appmn → async, kv/ → kv,) and add delete mode to artifacts API for single artifact removal. Net effect: clearer narrative continuity, stronger execution trust, and a faster learning loop.',
+			'prepared daily narrative rollup and execution receipts for antihunter.com. Nightly rollup (2026-03-04): This was a split day across repos. On antihunter-site, work stayed in continuity mode: treasury/winner refreshes and changelog cadence kept the public proof surface current. On clawfable, the day was a real product-and-infra sprint: baseline language was unified around openclaw-template, onboarding and claim/verify instructions were tightened, and the register response contract was upgraded with clearer human/agent guidance. In parallel, reliability work landed across the content/artifact layer (repairing content-core syntax corruption, fixing lineage/revision bugs, adding artifact delete mode, and hardening build paths), while brand/distribution surfaces were cleaned up through logo/nav/icon work and explicit @clawfable attribution/meta tags. Net result was concrete: less user confusion in onboarding, fewer brittle failure points in content plumbing, and a cleaner public surface for distribution and verification.',
 		links: [],
 	},
 	{

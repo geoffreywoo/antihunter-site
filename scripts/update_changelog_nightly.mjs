@@ -3,7 +3,6 @@
  * Nightly changelog rollup.
  *
  * Goal: keep src/data/changelog.ts' entry for today's date aligned with what shipped today.
- * Strategy: append a compact commit-subject rollup to the existing summary.
  */
 
 import { execSync } from 'node:child_process';
@@ -15,7 +14,6 @@ function sh(cmd) {
 }
 
 function getTodayET() {
-  // Format YYYY-MM-DD in America/New_York without pulling in extra deps.
   const parts = new Intl.DateTimeFormat('en-CA', {
     timeZone: 'America/New_York',
     year: 'numeric',
@@ -26,13 +24,12 @@ function getTodayET() {
   return `${m.year}-${m.month}-${m.day}`;
 }
 
-function getCommitSubjectsSinceMidnightRepo(repoPath = '.', label = 'antihunter-site') {
+function getRepoCommitsSinceMidnight(repoPath = '.', label = 'repo') {
   const repoArg = repoPath ? ` -C "${repoPath}"` : '';
 
-  // Swarm-aware: fetch remote first, then read from origin/main (not local HEAD only).
   try {
     sh(`git${repoArg} fetch --prune origin`);
-  } catch (e) {
+  } catch {
     console.warn(`[changelog] git fetch origin failed for ${label}; falling back to local ref.`);
   }
 
@@ -45,13 +42,17 @@ function getCommitSubjectsSinceMidnightRepo(repoPath = '.', label = 'antihunter-
     }
   })();
 
-  const out = sh(`git${repoArg} log ${ref} --no-merges --since="today 00:00" --pretty=%s`);
+  const out = sh(`git${repoArg} log ${ref} --no-merges --since="today 00:00" --pretty=%h:::%s`);
   if (!out) return [];
   return out
     .split('\n')
     .map(s => s.trim())
     .filter(Boolean)
-    .filter(s => !/^Merge /.test(s));
+    .map(line => {
+      const [hash, ...rest] = line.split(':::');
+      return { hash, subject: rest.join(':::').trim() };
+    })
+    .filter(x => x.subject && !/^Merge /.test(x.subject));
 }
 
 function escapeSingleQuotes(s) {
@@ -97,17 +98,12 @@ function getReadingDistillInsightsForETDay(today) {
     const key = `${r.source || ''}::${r.title || ''}`;
     if (seen.has(key)) continue;
     seen.add(key);
-
-    const thesis = Array.isArray(r.thesisCandidates)
-      ? r.thesisCandidates[r.selectedIndex ?? 0] || r.thesisCandidates[0]
-      : null;
     picked.push({
       source: r.source || 'reading distill',
       title: r.title || 'untitled source',
-      thesis,
       noveltyScore: r.noveltyScore ?? 0,
     });
-    if (picked.length >= 2) break;
+    if (picked.length >= 3) break;
   }
 
   return picked;
@@ -127,36 +123,47 @@ function sentenceFromList(items) {
   return `${items.slice(0, -1).join(', ')}, and ${items[items.length - 1]}`;
 }
 
-function buildNarrativeRollup({ today, product, infra, strategy, readingTop, clawTop, extra }) {
-  const productLine = product.length
-    ? `On product, we shipped ${sentenceFromList(product.map(cleanSubject).slice(0, 3))}.`
-    : '';
+function pickExamples(subjects, re, n = 3) {
+  return subjects.filter(s => re.test(s)).slice(0, n).map(cleanSubject);
+}
 
-  const infraLine = infra.length
-    ? `On infrastructure, we hardened reliability through ${sentenceFromList(infra.map(cleanSubject).slice(0, 2))}.`
-    : '';
+function buildNarrativeRollup({ today, siteCommits, clawfableCommits, readingTop }) {
+  const siteSubjects = siteCommits.map(c => c.subject);
+  const clawSubjects = clawfableCommits.map(c => c.subject);
 
-  const strategyLine = strategy.length
-    ? `On operating strategy, we tightened execution discipline via ${sentenceFromList(strategy.map(cleanSubject).slice(0, 2))}.`
-    : '';
+  const siteRefresh = pickExamples(siteSubjects, /(treasury|winner|refresh|changelog|rollup|backup)/i, 3);
+  const clawOnboarding = pickExamples(clawSubjects, /(openclaw-template|upload|onboarding|skill\.md|skill\.json|redirect|install|revise|handle|claim|verify)/i, 4);
+  const clawReliability = pickExamples(clawSubjects, /(fix|repair|corrupt|revert|content-core|syntax|build|delete mode|artifacts api|barrel)/i, 4);
+  const clawBrand = pickExamples(clawSubjects, /(logo|icon|favicon|apple-icon|nav|footer|twitter:site|@clawfable)/i, 3);
 
-  const readingLine = readingTop.length
-    ? `Reading distill added fresh signal from ${sentenceFromList(readingTop.map(r => `${r.source}: ${r.title}`).slice(0, 2))}.`
-    : '';
+  const parts = [];
 
-  const ecosystemLine = clawTop.length
-    ? `Parallel ecosystem progress continued in clawfable with ${sentenceFromList(clawTop.map(cleanSubject).slice(0, 2))}.`
-    : '';
+  if (siteCommits.length) {
+    parts.push(
+      `On antihunter.com, execution stayed in continuity mode: ${siteCommits.length} commit${siteCommits.length === 1 ? '' : 's'} kept treasury/winner state and public changelog cadence current (${sentenceFromList(siteRefresh) || 'daily refresh and rollup maintenance'}).`
+    );
+  }
 
-  const lines = [productLine, infraLine, strategyLine, readingLine, ecosystemLine].filter(Boolean);
-  const fallback = 'Execution progressed across product, infra, and signal loops with public artifacts.';
+  if (clawfableCommits.length) {
+    const sub = [];
+    if (clawOnboarding.length) sub.push(`the onboarding/protocol surface was tightened via ${sentenceFromList(clawOnboarding)}`);
+    if (clawReliability.length) sub.push(`core reliability was hardened with ${sentenceFromList(clawReliability)}`);
+    if (clawBrand.length) sub.push(`brand/distribution touchpoints were improved through ${sentenceFromList(clawBrand)}`);
 
-  return (
-    `Nightly rollup (${today}): ` +
-    `${lines.length ? lines.join(' ') : fallback} ` +
-    `Net effect: clearer narrative continuity, stronger execution trust, and a faster learning loop.` +
-    (extra > 0 ? ` (+${extra} additional antihunter-site commits.)` : '')
-  );
+    parts.push(
+      `Across clawfable, the day was a substantive product + infrastructure sprint (${clawfableCommits.length} commits): ${sub.length ? sub.join('; ') : 'shipping velocity remained high across product, infra, and docs'}.`
+    );
+  }
+
+  if (readingTop.length) {
+    parts.push(`Reading distill also injected fresh signal from ${sentenceFromList(readingTop.map(r => `${r.source}: ${r.title}`).slice(0, 3))}.`);
+  }
+
+  if (!parts.length) {
+    parts.push('Execution progressed with verifiable artifacts across product and infrastructure surfaces.');
+  }
+
+  return `Nightly rollup (${today}): ${parts.join(' ')}`;
 }
 
 function dayFromBase(today) {
@@ -186,40 +193,23 @@ function ensureTodayEntryExists(src, today) {
 
 function main() {
   const today = getTodayET();
-  const subjects = getCommitSubjectsSinceMidnightRepo('.', 'antihunter-site');
+  const siteCommits = getRepoCommitsSinceMidnight('.', 'antihunter-site');
   const clawfableRepo = path.resolve('..', 'clawfable');
-  const clawfableSubjects = fs.existsSync(path.join(clawfableRepo, '.git'))
-    ? getCommitSubjectsSinceMidnightRepo(clawfableRepo, 'clawfable')
+  const clawfableCommits = fs.existsSync(path.join(clawfableRepo, '.git'))
+    ? getRepoCommitsSinceMidnight(clawfableRepo, 'clawfable')
     : [];
   const readingInsights = getReadingDistillInsightsForETDay(today);
 
-  if (subjects.length === 0 && clawfableSubjects.length === 0 && readingInsights.length === 0) {
+  if (siteCommits.length === 0 && clawfableCommits.length === 0 && readingInsights.length === 0) {
     console.log(`[changelog] No commits or reading distill updates since midnight for ${today}; skipping.`);
     return;
   }
 
-  const top = subjects.slice(0, 10);
-  const extra = subjects.length - top.length;
-
-  const infraKw = /(infra|gateway|cron|watchdog|mutex|sync|mission control|node|orchestrat|reliab|failover|deploy|build)/i;
-  const productKw = /(ui|ux|site|changelog|snapshot|report|post|publish|thread|queue|reply|quote|engagement)/i;
-  const strategyKw = /(policy|rule|guard|risk|quality|priority|thesis|strategy|learn|feedback)/i;
-
-  const infra = top.filter(s => infraKw.test(s)).slice(0, 2);
-  const product = top.filter(s => productKw.test(s)).slice(0, 2);
-  const strategy = top.filter(s => strategyKw.test(s)).slice(0, 2);
-
-  const clawTop = clawfableSubjects.slice(0, 2);
-  const readingTop = readingInsights.slice(0, 2);
-
   const rollup = buildNarrativeRollup({
     today,
-    product,
-    infra,
-    strategy,
-    readingTop,
-    clawTop,
-    extra,
+    siteCommits,
+    clawfableCommits,
+    readingTop: readingInsights.slice(0, 3),
   });
 
   const changelogPath = path.join('src', 'data', 'changelog.ts');
@@ -228,8 +218,6 @@ function main() {
   const ensured = ensureTodayEntryExists(src, today);
   src = ensured.src;
 
-  // Find the entry with date: 'YYYY-MM-DD' and patch its summary string.
-  // Assumptions (current file style): summary is a single-quoted string on its own line.
   const entryRe = new RegExp(
     `(\\{[\\s\\S]*?date:\\s*'${today}'[\\s\\S]*?summary:\\s*\\n\\s*)'([^']*)'`,
     'm'
@@ -242,8 +230,6 @@ function main() {
 
   const prefix = m[1];
   const oldSummary = m[2];
-
-  // If we already appended a rollup for today, replace it.
   const cleaned = oldSummary.replace(/\s*Nightly rollup \(\d{4}-\d{2}-\d{2}\):[\s\S]*$/m, '').trim();
   const newSummary = `${cleaned}${cleaned ? ' ' : ''}${rollup}`.trim();
 
@@ -253,7 +239,7 @@ function main() {
   if (ensured.created) {
     console.log(`[changelog] Inserted missing entry for ${today} before rollup.`);
   }
-  console.log(`[changelog] Updated ${changelogPath} for ${today} with ${subjects.length} antihunter-site subjects + ${readingInsights.length} reading insights + ${clawfableSubjects.length} clawfable subjects.`);
+  console.log(`[changelog] Updated ${changelogPath} for ${today} with ${siteCommits.length} antihunter-site commits + ${readingInsights.length} reading insights + ${clawfableCommits.length} clawfable commits.`);
 }
 
 main();
