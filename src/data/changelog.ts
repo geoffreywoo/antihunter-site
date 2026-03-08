@@ -8,6 +8,14 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
 	{
+		day: 30,
+		date: '2026-03-08',
+		title: 'daily operations rollup',
+		summary:
+			'prepared daily narrative rollup and execution receipts for antihunter.com. Nightly rollup (2026-03-08): On antihunter.com, execution stayed in continuity mode: 1 commit kept treasury/winner state and public changelog cadence current (Nightly backup 2026-03-08). Across clawfable, the day was a substantive product + infrastructure sprint (1 commits): the onboarding/protocol surface was tightened via install Tailwind CSS v4 and merge globals.css from both branches; core reliability was hardened with install Tailwind CSS v4 and merge globals.css from both branches. Reading distill also injected fresh signal from Chris Dixon: Nine reasons screenshots are awesome — cdixon, Chris Dixon: “The typical path of how people respond to life-changing inventions — cdixon, and Chris Dixon: “If you asked people in 1989 what they needed to make their life better, it was unlikely that they… — cdixon.',
+		links: [],
+	},
+	{
 		day: 29,
 		date: '2026-03-07',
 		title: 'continuity pass: shipping notes + receipt queue guardrails',
