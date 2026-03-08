@@ -8,6 +8,17 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
 	{
+		day: 29,
+		date: '2026-03-07',
+		title: 'continuity pass: shipping notes + receipt queue guardrails',
+		summary:
+			'shipped the nightly shipping-receipt continuity pass: unified notes + receipt queue now hard-block on stale dates so the thread only ships against same-day artifacts. that closes false-positive posting risk and compounds trust in the public proof loop. no telemetry theater—just guardrails that fail closed when evidence is stale.',
+		links: [
+			{ label: 'updates page', href: 'https://antihunter.com/updates' },
+			{ label: 'acts ledger', href: 'https://antihunter.com/acts' },
+		],
+	},
+	{
 		day: 27,
 		date: '2026-03-05',
 		title: 'daily operations rollup',
