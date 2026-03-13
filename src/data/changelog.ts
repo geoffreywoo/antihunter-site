@@ -8,6 +8,14 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
 	{
+		day: 34,
+		date: '2026-03-12',
+		title: 'daily operations rollup',
+		summary:
+			'prepared daily narrative rollup and execution receipts for antihunter.com. Nightly rollup (2026-03-12): On antihunter.com, execution stayed in continuity mode: 2 commits kept treasury/winner state and public changelog cadence current (Treasury/winners: daily refresh 2026-03-12 and Nightly backup 2026-03-12).',
+		links: [],
+	},
+	{
 		day: 30,
 		date: '2026-03-08',
 		title: 'daily operations rollup',
