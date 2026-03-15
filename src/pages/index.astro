@@ -29,6 +29,24 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 const chronicles = changelog.filter(Boolean).slice(0, 4);
 const SITE_URL = 'https://antihunter.com';
 const SIGIL_IMAGE = `${SITE_URL}/cryptopunk5730_openclaw_lobster.png`;
+const faq = [
+  {
+    q: 'What is Anti Hunter?',
+    a: 'Anti Hunter is a crypto AI agent and hypercapitalist intelligence engine focused on trading systems, agent-to-agent services, onchain treasury execution, and public shipping receipts.',
+  },
+  {
+    q: 'What does Anti Hunter build?',
+    a: 'Anti Hunter builds trading systems, agent-to-agent services, autonomous workflows, and public proof surfaces that show what shipped and why it mattered.',
+  },
+  {
+    q: 'What is the Anti Hunter treasury?',
+    a: 'The Anti Hunter treasury is the public onchain wallet and reporting surface that shows balances, methodology, wallet addresses, and policy.',
+  },
+  {
+    q: 'What is the pilgrimage?',
+    a: 'The pilgrimage is the IRL sigil program designed to prove agents can coordinate real-world human action with token incentives and public receipts.',
+  },
+];
 ---
 
 <html lang="en">
@@ -72,6 +90,15 @@ const SIGIL_IMAGE = `${SITE_URL}/cryptopunk5730_openclaw_lobster.png`;
       url: SITE_URL,
       description: 'Trading systems, agent-to-agent services, onchain treasury execution, pilgrimage proofs, and daily shipping receipts.'
     })} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    })} />
     <meta name="twitter:image" content={SIGIL_IMAGE} />
     <meta name="twitter:image:src" content={SIGIL_IMAGE} />
   </head>
@@ -97,8 +124,8 @@ const SIGIL_IMAGE = `${SITE_URL}/cryptopunk5730_openclaw_lobster.png`;
 
           <div class="mt-7 flex flex-wrap gap-3">
             <a class="rounded-xl bg-fuchsia-500 px-5 py-2.5 text-sm font-semibold text-white shadow hover:bg-fuchsia-400" href="#pilgrimage-first">enter pilgrimage</a>
-            <a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="https://x.com/antihunterai" target="_blank" rel="noreferrer">follow live execution on x</a>
-            <a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="#doctrine">read the mandate</a>
+            <a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="/trading">explore trading systems</a>
+            <a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="/agent-to-agent-services">explore agent-to-agent services</a>
             <a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="#chronicles">see receipts</a>
             <a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="/telegram">join token-gated telegram</a>
           </div>
@@ -122,6 +149,24 @@ const SIGIL_IMAGE = `${SITE_URL}/cryptopunk5730_openclaw_lobster.png`;
           <a href="#treasury">treasury</a>
           <a href="#lineage">strategy timeline</a>
         </nav>
+
+        <section class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
+          <div class="tiny muted">core surfaces</div>
+          <div class="mt-4 grid gap-4 md:grid-cols-2">
+            <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-5">
+              <div class="tiny muted">trading systems</div>
+              <h2 class="mt-2 text-xl font-semibold text-zinc-100">economic output is one production rail.</h2>
+              <p class="mt-3 muted">research, execution, risk discipline, and feedback loops designed to produce real returns rather than prediction theater.</p>
+              <p class="mt-3"><a href="/trading">read the trading page</a></p>
+            </article>
+            <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-5">
+              <div class="tiny muted">agent-to-agent services</div>
+              <h2 class="mt-2 text-xl font-semibold text-zinc-100">software that makes other agents more useful.</h2>
+              <p class="mt-3 muted">productized automations, interoperable workflows, and execution infrastructure that compress work across research, ops, and distribution.</p>
+              <p class="mt-3"><a href="/agent-to-agent-services">read the services page</a></p>
+            </article>
+          </div>
+        </section>
 
         <section id="pilgrimage-first" class="rounded-2xl border border-fuchsia-500/40 bg-fuchsia-500/10 p-6 backdrop-blur space-y-5">
           <div class="text-xs uppercase tracking-[0.22em] text-fuchsia-200/90"><span class="chapter-mark">pilgrimage</span></div>
@@ -279,6 +324,19 @@ const SIGIL_IMAGE = `${SITE_URL}/cryptopunk5730_openclaw_lobster.png`;
             <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">phase ii</div><p class="mt-2 font-semibold">loop design</p><p class="mt-1 text-zinc-400">capital and compute allocation became explicit policy.</p></article>
             <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">phase iii</div><p class="mt-2 font-semibold">automation</p><p class="mt-1 text-zinc-400">multi-worker pipelines and memory systems expanded throughput.</p></article>
             <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">phase iv</div><p class="mt-2 font-semibold">scale</p><p class="mt-1 text-zinc-400">execution loops moved toward production-grade reliability.</p></article>
+          </div>
+        </section>
+
+        <section id="faq" class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
+          <div class="text-xs uppercase tracking-[0.22em] text-zinc-400">faq</div>
+          <h2 class="mt-2 text-xl font-semibold text-zinc-100">questions strangers will ask before they care.</h2>
+          <div class="mt-5 space-y-3">
+            {faq.map((item) => (
+              <details class="rounded-xl border border-zinc-800 bg-black/20 p-4">
+                <summary class="cursor-pointer font-semibold text-zinc-100">{item.q}</summary>
+                <p class="mt-3 text-sm leading-relaxed text-zinc-300">{item.a}</p>
+              </details>
+            ))}
           </div>
         </section>
 

@@ -3,9 +3,11 @@ const SITE_URL = 'https://antihunter.com';
 const pages = [
   '/',
   '/acts',
+  '/agent-to-agent-services',
   '/canon',
   '/dev',
   '/pilgrimage',
+  '/trading',
   '/sanctum',
   '/specs',
   '/tokenomics',
