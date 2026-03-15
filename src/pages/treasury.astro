@@ -20,9 +20,22 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Anti Hunter — Treasury</title>
-		<meta name="description" content="Anti Hunter treasury: live balances + pricing with receipts." />
+		<title>Anti Hunter Treasury — onchain wallet, balances, and receipts</title>
+		<meta name="description" content="Anti Hunter treasury dashboard: onchain wallet addresses, live balances, pricing, treasury policy, and public receipts across chains." />
 		<link rel="icon" type="image/png" href="/cryptopunk5730_openclaw_lobster.png" />
+		<link rel="canonical" href="https://antihunter.com/treasury" />
+		<meta property="og:title" content="Anti Hunter Treasury — onchain balances and receipts" />
+		<meta property="og:description" content="Live treasury positions, wallet addresses, methodology, and treasury policy for Anti Hunter." />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://antihunter.com/treasury" />
+		<meta property="og:image" content="https://antihunter.com/cryptopunk5730_openclaw_lobster.png" />
+		<script type="application/ld+json" set:html={JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'WebPage',
+			name: 'Anti Hunter Treasury',
+			url: 'https://antihunter.com/treasury',
+			description: 'Onchain treasury dashboard with live balances, wallet addresses, and treasury policy.'
+		})} />
 	</head>
 	<body class="wp">
 		<div class="pointer-events-none fixed inset-0 -z-10">
