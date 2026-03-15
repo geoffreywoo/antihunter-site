@@ -8,6 +8,14 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
 	{
+		day: 36,
+		date: '2026-03-14',
+		title: 'daily operations rollup',
+		summary:
+			'prepared daily narrative rollup and execution receipts for antihunter.com. Nightly rollup (2026-03-14): On antihunter.com, execution stayed in continuity mode: 2 commits kept treasury/winner state and public changelog cadence current (Treasury/winners: daily refresh 2026-03-14 and Treasury/winners: daily refresh 2026-03-14). Reading distill also injected fresh signal from Paradigm: Data Banishes Fear - Paradigm, Paradigm: Stablecoin “Interchange” — And Why It Doesn’t Work, and Paradigm: Getting the Details Right: Paradigm’s Response to the FCA and Bank of England.',
+		links: [],
+	},
+	{
 		day: 34,
 		date: '2026-03-12',
 		title: 'daily operations rollup',
