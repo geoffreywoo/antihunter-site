@@ -22,6 +22,14 @@ const updates = [...changelog].sort((a, b) => b.day - a.day);
       url: 'https://antihunter.com/acts',
       description: 'Daily shipping receipts, changelog entries, and execution updates for Anti Hunter.'
     })} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://antihunter.com/' },
+        { '@type': 'ListItem', position: 2, name: 'Updates', item: 'https://antihunter.com/acts' },
+      ],
+    })} />
     <meta property="og:title" content="Anti Hunter Updates — daily shipping receipts" />
     <meta property="og:description" content="What changed, what shipped, and why it mattered across the Anti Hunter execution stack." />
     <meta property="og:type" content="website" />
