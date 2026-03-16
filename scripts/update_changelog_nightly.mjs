@@ -2,7 +2,8 @@
 /**
  * Nightly changelog rollup.
  *
- * Goal: keep src/data/changelog.ts' entry for today's date aligned with what shipped today.
+ * Canonical store: src/data/changelog.json
+ * Render adapter: src/data/changelog.ts imports JSON
  */
 
 import { execSync } from 'node:child_process';
@@ -53,10 +54,6 @@ function getRepoCommitsSinceMidnight(repoPath = '.', label = 'repo') {
       return { hash, subject: rest.join(':::').trim() };
     })
     .filter(x => x.subject && !/^Merge /.test(x.subject));
-}
-
-function escapeSingleQuotes(s) {
-  return s.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
 }
 
 function toETDateString(input) {
@@ -172,23 +169,32 @@ function dayFromBase(today) {
   return Math.floor((d.getTime() - base.getTime()) / 86400000);
 }
 
-function ensureTodayEntryExists(src, today) {
-  const hasToday = new RegExp(`date:\\s*'${today}'`).test(src);
-  if (hasToday) return { src, created: false };
+function loadChangelog(changelogPath) {
+  if (!fs.existsSync(changelogPath)) return [];
+  try {
+    const raw = fs.readFileSync(changelogPath, 'utf8');
+    const arr = JSON.parse(raw);
+    return Array.isArray(arr) ? arr : [];
+  } catch {
+    throw new Error('[changelog] changelog.json is malformed JSON');
+  }
+}
+
+function ensureTodayEntryExists(entries, today) {
+  const idx = entries.findIndex(e => e?.date === today);
+  if (idx >= 0) return { entries, created: false, index: idx };
 
   const day = dayFromBase(today);
-  const entry =
-`\t{\n\t\tday: ${day},\n\t\tdate: '${today}',\n\t\ttitle: 'daily operations rollup',\n\t\tsummary:\n\t\t\t'prepared daily narrative rollup and execution receipts for antihunter.com.',\n\t\tlinks: [],\n\t},\n`;
-
-  const marker = 'export const changelog: ChangelogEntry[] = [\n';
-  if (!src.includes(marker)) {
-    throw new Error('[changelog] Could not find changelog array marker to insert today entry.');
-  }
-
-  return {
-    src: src.replace(marker, marker + entry),
-    created: true,
+  const entry = {
+    day,
+    date: today,
+    title: 'daily operations rollup',
+    summary: 'prepared daily narrative rollup and execution receipts for antihunter.com.',
+    links: [],
   };
+
+  const next = [entry, ...entries].sort((a, b) => (b.day ?? 0) - (a.day ?? 0));
+  return { entries: next, created: true, index: next.findIndex(e => e.date === today) };
 }
 
 function main() {
@@ -212,29 +218,21 @@ function main() {
     readingTop: readingInsights.slice(0, 3),
   });
 
-  const changelogPath = path.join('src', 'data', 'changelog.ts');
-  let src = fs.readFileSync(changelogPath, 'utf8');
-
-  const ensured = ensureTodayEntryExists(src, today);
-  src = ensured.src;
-
-  const entryRe = new RegExp(
-    `(\\{[\\s\\S]*?date:\\s*'${today}'[\\s\\S]*?summary:\\s*\\n\\s*)'([^']*)'`,
-    'm'
-  );
-
-  const m = src.match(entryRe);
-  if (!m) {
+  const changelogPath = path.join('src', 'data', 'changelog.json');
+  const entries = loadChangelog(changelogPath);
+  const ensured = ensureTodayEntryExists(entries, today);
+  const idx = ensured.index;
+  if (idx < 0) {
     throw new Error(`[changelog] No entry found for date ${today} even after ensure step.`);
   }
 
-  const prefix = m[1];
-  const oldSummary = m[2];
+  const current = ensured.entries[idx];
+  const oldSummary = String(current.summary || '');
   const cleaned = oldSummary.replace(/\s*Nightly rollup \(\d{4}-\d{2}-\d{2}\):[\s\S]*$/m, '').trim();
-  const newSummary = `${cleaned}${cleaned ? ' ' : ''}${rollup}`.trim();
+  current.summary = `${cleaned}${cleaned ? ' ' : ''}${rollup}`.trim();
+  if (!Array.isArray(current.links)) current.links = [];
 
-  const patched = src.replace(entryRe, `${prefix}'${escapeSingleQuotes(newSummary)}'`);
-  fs.writeFileSync(changelogPath, patched);
+  fs.writeFileSync(changelogPath, JSON.stringify(ensured.entries, null, 2) + '\n');
 
   if (ensured.created) {
     console.log(`[changelog] Inserted missing entry for ${today} before rollup.`);
