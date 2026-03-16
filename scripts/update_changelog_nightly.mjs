@@ -234,6 +234,9 @@ function main() {
 
   fs.writeFileSync(changelogPath, JSON.stringify(ensured.entries, null, 2) + '\n');
 
+  // publish gate: schema + quality validation must pass before downstream build/push flows
+  sh('node scripts/validate_changelog_json.mjs');
+
   if (ensured.created) {
     console.log(`[changelog] Inserted missing entry for ${today} before rollup.`);
   }
