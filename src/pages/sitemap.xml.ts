@@ -1,3 +1,5 @@
+import changelog from '../data/changelog.json';
+
 const SITE_URL = 'https://antihunter.com';
 
 const pages = [
@@ -20,6 +22,7 @@ const pages = [
   '/roadmap/agent-ops-architecture',
   '/roadmap/token-gated-telegram',
   '/roadmap/trad-vc-tools',
+  ...(changelog || []).map((e) => `/acts/${e.date}`),
 ];
 
 export function GET() {

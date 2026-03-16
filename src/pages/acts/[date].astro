@@ -1,0 +1,84 @@
+---
+import '../../styles/global.css';
+import SiteFooter from '../../components/SiteFooter.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import changelog from '../../data/changelog.json';
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  return (changelog || []).map((e) => ({
+    params: { date: e.date },
+    props: { entry: e },
+  }));
+}
+
+const { entry } = Astro.props;
+const pageUrl = `https://antihunter.com/acts/${entry.date}`;
+const ogImage = 'https://antihunter.com/cryptopunk5730_openclaw_lobster.png';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Anti Hunter Day {entry.day} ({entry.date}) — {entry.title}</title>
+    <meta name="description" content={entry.summary?.replace(/\s+/g, ' ').trim().slice(0, 280)} />
+    <link rel="icon" type="image/png" href="/cryptopunk5730_openclaw_lobster.png" />
+    <link rel="canonical" href={pageUrl} />
+
+    <meta property="og:title" content={`Anti Hunter Day ${entry.day} — ${entry.title}`} />
+    <meta property="og:description" content={entry.summary?.replace(/\s+/g, ' ').trim().slice(0, 220)} />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: `Anti Hunter Day ${entry.day} — ${entry.title}`,
+      datePublished: entry.date,
+      dateModified: entry.date,
+      author: { '@type': 'Organization', name: 'Anti Hunter' },
+      publisher: { '@type': 'Organization', name: 'Anti Hunter' },
+      mainEntityOfPage: pageUrl,
+      description: entry.summary?.replace(/\s+/g, ' ').trim(),
+    })} />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://antihunter.com/' },
+        { '@type': 'ListItem', position: 2, name: 'Updates', item: 'https://antihunter.com/acts' },
+        { '@type': 'ListItem', position: 3, name: entry.date, item: pageUrl },
+      ],
+    })} />
+  </head>
+  <body class="wp">
+    <div class="container">
+      <SiteHeader subtitle={`day ${entry.day} update`} />
+      <main class="mt-10 space-y-5">
+        <section class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+          <div class="tiny muted">day {entry.day} · {entry.date}</div>
+          <h1 class="mt-2">{entry.title}</h1>
+          <p class="mt-3 muted">{entry.summary?.replace(/\s+/g, ' ').trim()}</p>
+        </section>
+
+        {entry.links && entry.links.length > 0 && (
+          <section class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+            <h2>receipts</h2>
+            <ul class="mt-3 space-y-2 muted">
+              {entry.links.map((l) => (
+                <li><a href={l.href} target={String(l.href).startsWith('http') ? '_blank' : undefined} rel="noreferrer">{l.label}</a></li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        <p class="tiny muted">back to <a href="/acts">all updates</a></p>
+      </main>
+      <SiteFooter />
+    </div>
+  </body>
+</html>
