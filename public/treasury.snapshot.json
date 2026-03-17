@@ -1,7 +1,7 @@
 {
-  "updatedAtMs": 1773662431410,
-  "updatedAt": "2026-03-16T12:00:31.410Z",
-  "date": "2026-03-16",
+  "updatedAtMs": 1773705746849,
+  "updatedAt": "2026-03-17T00:02:26.849Z",
+  "date": "2026-03-17",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "wallets": [
     "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
@@ -23,8 +23,8 @@
       "entryDate": "2026-02-15",
       "costBasisUsd": 64865.13,
       "costBasisEth": "33",
-      "fmvUsd": 75009.462,
-      "pnlUsd": 10144.332000000002,
+      "fmvUsd": 77508.42,
+      "pnlUsd": 12643.29,
       "link": "https://www.cryptopunks.app/cryptopunks/details/5730",
       "entryLink": "https://etherscan.io/tx/0x897f01a5eedc7f6bcd580cbe1304d9e5f43d8e78784889a7dff448da49a25ca4"
     },
@@ -37,21 +37,8 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 52271.436500934244,
-      "pnlUsd": 52271.436500934244
-    },
-    {
-      "chain": "base",
-      "chainId": 8453,
-      "symbol": "AntiHunter",
-      "token": "0xe2f3fae4bc62e21826018364aa30ae45d430bb07",
-      "balance": "4949613579.619344",
-      "entryDate": "2026-02-06",
-      "costBasisUsd": 0,
-      "costBasisEth": "0",
-      "fmvUsd": 23708.649046376653,
-      "pnlUsd": 23708.649046376653,
-      "lots": null
+      "fmvUsd": 54012.87179366439,
+      "pnlUsd": 54012.87179366439
     },
     {
       "chain": "base",
@@ -62,8 +49,21 @@
       "entryDate": null,
       "costBasisUsd": null,
       "costBasisEth": null,
-      "fmvUsd": 23678.24605217199,
+      "fmvUsd": 24467.09242995355,
       "pnlUsd": null
+    },
+    {
+      "chain": "base",
+      "chainId": 8453,
+      "symbol": "AntiHunter",
+      "token": "0xe2f3fae4bc62e21826018364aa30ae45d430bb07",
+      "balance": "4949613579.619344",
+      "entryDate": "2026-02-06",
+      "costBasisUsd": 0,
+      "costBasisEth": "0",
+      "fmvUsd": 21214.043802248507,
+      "pnlUsd": 21214.043802248507,
+      "lots": null
     },
     {
       "chain": "ethereum",
@@ -74,11 +74,11 @@
       "entryDate": null,
       "costBasisUsd": null,
       "costBasisEth": null,
-      "fmvUsd": 286.60977439165345,
+      "fmvUsd": 296.1582469376132,
       "pnlUsd": null
     }
   ],
-  "totalUsd": 174954.40337387452,
+  "totalUsd": 177498.58627280407,
   "notes": [
     "fast_mode: balances-only (log scan skipped)"
   ],
