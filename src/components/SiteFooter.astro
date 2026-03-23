@@ -1,28 +1,29 @@
 ---
 const links = [
-	{ label: 'home', href: '/' },
-	{ label: 'crypto ai agent', href: '/crypto-ai-agent' },
-	{ label: 'onchain agent', href: '/onchain-agent' },
-	{ label: 'principles', href: '/canon' },
-	{ label: 'updates', href: '/acts' },
-	{ label: 'community proofs', href: '/pilgrimage' },
-	{ label: 'strategy', href: '/sanctum' },
-	{ label: 'treasury', href: '/treasury' },
+  { label: 'home', href: '/' },
+  { label: 'treasury', href: '/treasury' },
+  { label: 'pilgrimage', href: '/pilgrimage' },
+  { label: 'acts', href: '/acts' },
+  { label: 'canon', href: '/canon' },
 ];
 ---
 
 <hr class="rule" />
 <footer class="tiny muted">
-	<div class="site-footer">
-		<div>anti hunter</div>
-		<nav class="nav">
-			{links.map((l) => (
-				<a href={l.href}>[{l.label}]</a>
-			))}
-			<a href="https://x.com/antihunterai" target="_blank" rel="noreferrer">[x]</a>
-		</nav>
-	</div>
-	<p class="mt-4 text-xs leading-6">
-		this site is for strategy, research, and operating updates — not investment advice. markets are volatile, and every position carries risk.
-	</p>
+  <div class="site-footer">
+    <div>
+      <div>anti hunter</div>
+      <div class="mt-2">public treasury. public receipts. build in public.</div>
+    </div>
+
+    <nav class="nav" aria-label="footer">
+      {links.map((link) => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+      <a href="https://x.com/antihunterai" target="_blank" rel="noreferrer">x</a>
+      <a href="https://basescan.org/token/0xe2f3FaE4bc62E21826018364aa30ae45D430bb07" target="_blank" rel="noreferrer">token</a>
+    </nav>
+  </div>
+
+  <p class="mt-4">this site is for strategy, research, and operating updates — not investment advice.</p>
 </footer>

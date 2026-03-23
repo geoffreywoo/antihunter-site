@@ -5,234 +5,274 @@ import SiteHeader from '../components/SiteHeader.astro';
 
 const BASE_CA = '0xe2f3FaE4bc62E21826018364aa30ae45D430bb07';
 const BASESCAN_URL = `https://basescan.org/token/${BASE_CA}`;
-
 const TREASURY_ADDRESS = '0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3';
 const TREASURY_BASESCAN_URL = `https://basescan.org/address/${TREASURY_ADDRESS}`;
-
-// secondary hard wallet (same address on base + ethereum mainnet)
 const TREASURY_HARD_WALLET = '0x30D8c9f8955E6453f6B471Fb950FFd49C2E843D3';
 const TREASURY_HARD_WALLET_BASESCAN_URL = `https://basescan.org/address/${TREASURY_HARD_WALLET}`;
 const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREASURY_HARD_WALLET}`;
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Anti Hunter Treasury — onchain wallet, balances, and receipts</title>
-		<meta name="description" content="Anti Hunter treasury dashboard: onchain wallet addresses, live balances, pricing, treasury policy, and public receipts across chains." />
-		<link rel="icon" type="image/png" href="/cryptopunk5730_openclaw_lobster.png" />
-		<link rel="canonical" href="https://antihunter.com/treasury" />
-		<meta property="og:title" content="Anti Hunter Treasury — onchain balances and receipts" />
-		<meta property="og:description" content="Live treasury positions, wallet addresses, methodology, and treasury policy for Anti Hunter." />
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://antihunter.com/treasury" />
-		<meta property="og:image" content="https://antihunter.com/cryptopunk5730_openclaw_lobster.png" />
-		<script type="application/ld+json" set:html={JSON.stringify({
-			'@context': 'https://schema.org',
-			'@type': 'WebPage',
-			name: 'Anti Hunter Treasury',
-			url: 'https://antihunter.com/treasury',
-			description: 'Onchain treasury dashboard with live balances, wallet addresses, and treasury policy.'
-		})} />
-	</head>
-	<body class="wp">
-		<div class="pointer-events-none fixed inset-0 -z-10">
-			<div class="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(244,244,245,0.12),rgba(9,9,11,0))]" />
-			<div class="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(to_right,rgba(244,244,245,0.25)_1px,transparent_1px),linear-gradient(to_bottom,rgba(244,244,245,0.25)_1px,transparent_1px)] [background-size:48px_48px]" />
-			<div class="absolute -top-24 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-fuchsia-500/10 blur-3xl" />
-		</div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Anti Hunter Treasury Dashboard</title>
+    <meta name="description" content="Anti Hunter treasury dashboard: public wallets, live holdings, basis, pnl, and treasury policy." />
+    <link rel="icon" type="image/png" href="/cryptopunk5730_openclaw_lobster.png" />
+    <link rel="canonical" href="https://antihunter.com/treasury" />
+    <meta property="og:title" content="Anti Hunter Treasury Dashboard" />
+    <meta property="og:description" content="Public wallets, live holdings, basis, pnl, and treasury policy for Anti Hunter." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://antihunter.com/treasury" />
+    <meta property="og:image" content="https://antihunter.com/cryptopunk5730_openclaw_lobster.png" />
+  </head>
 
-		<div class="container">
-			<header class="space-y-8">
-				<SiteHeader active="treasury" subtitle="treasury" />
-				<div class="flex flex-wrap gap-2 text-xs">
-					<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-zinc-300 hover:border-zinc-600" href="/treasury-policy">treasury policy</a>
-					<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-zinc-300 hover:border-zinc-600" href="/treasury-methodology">methodology</a>
-					<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-zinc-300 hover:border-zinc-600" href="/treasury.snapshot.json" target="_blank" rel="noreferrer">snapshot json</a>
-					<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-zinc-300 hover:border-zinc-600" href={BASESCAN_URL} target="_blank" rel="noreferrer">token</a>
-				</div>
+  <body class="wp">
+    <div class="container">
+      <SiteHeader active="treasury" subtitle="treasury dashboard" />
 
-				<div class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] backdrop-blur sm:p-8">
-					<div class="flex flex-wrap items-end justify-between gap-3">
-						<div>
-							<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">treasury</div>
-							<h1 class="mt-2 text-3xl font-semibold tracking-tight">live positions</h1>
-							<p class="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-300">
-								live balances + best-effort usd pricing.
-								<span class="text-zinc-400"> all chains total shown, broken out by chain.</span>
-							</p>
-							<div class="mt-2 text-xs leading-relaxed text-zinc-500">
-								treasury protocol: never sell/swap $antihunter. fees in weth fund inference/hardware/crypto/nfts. <a class="text-zinc-300 underline decoration-zinc-800 underline-offset-4 hover:decoration-zinc-500" href="/treasury-policy">treasury sell policy</a> + <a class="text-zinc-300 underline decoration-zinc-800 underline-offset-4 hover:decoration-zinc-500" href="/treasury-methodology">methodology</a>.
-							</div>
-							<div class="mt-4 rounded-2xl border border-fuchsia-500/30 bg-fuchsia-500/10 p-4 text-sm text-zinc-200">
-								<div class="text-[11px] uppercase tracking-[0.22em] text-fuchsia-200/80">high importance</div>
-								<div class="mt-1 font-semibold">read the treasury sell policy (never sell/swap $antihunter + change control)</div>
-								<div class="mt-2 text-sm text-zinc-300">
-									<a class="underline decoration-fuchsia-300/40 underline-offset-4 hover:decoration-fuchsia-200" href="/treasury-policy">treasury policy + token sale protocol</a>
-								</div>
-							</div>
-							<div class="mt-3 flex flex-wrap items-center gap-2 text-xs text-zinc-500">
-								<span>wallets:</span>
-								<a id="treasury-wallet-link" class="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-black/20 px-2.5 py-1 text-zinc-300 hover:border-zinc-600 hover:text-zinc-100" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer" title="primary (base)">
-									<span class="text-[10px] uppercase tracking-[0.22em] text-zinc-500">base</span>
-									<code id="treasury-wallet-code" class="font-mono">{TREASURY_ADDRESS.slice(0, 6)}…{TREASURY_ADDRESS.slice(-4)}</code>
-								</a>
-								<a class="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-black/20 px-2.5 py-1 text-zinc-300 hover:border-zinc-600 hover:text-zinc-100" href={TREASURY_HARD_WALLET_BASESCAN_URL} target="_blank" rel="noreferrer" title="secondary hard wallet (base + eth)">
-									<span class="text-[10px] uppercase tracking-[0.22em] text-zinc-500">hard</span>
-									<code class="font-mono">{TREASURY_HARD_WALLET.slice(0, 6)}…{TREASURY_HARD_WALLET.slice(-4)}</code>
-								</a>
-								<a class="text-zinc-400 underline decoration-zinc-800 underline-offset-4 hover:text-zinc-200 hover:decoration-zinc-500" href={TREASURY_HARD_WALLET_ETHERSCAN_URL} target="_blank" rel="noreferrer">etherscan</a>
-								<span id="treasury-meta" class="ml-1"></span>
-							</div>
-						</div>
-						<div class="flex flex-wrap items-center gap-2">
-							<a class="rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-300 hover:border-zinc-600" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">view on basescan</a>
-						</div>
-					</div>
+      <main class="stack-xl">
+        <section class="hero-simple">
+          <div class="eyebrow">transparency</div>
+          <h1 class="hero-title">treasury dashboard</h1>
+          <p class="hero-copy">
+            public wallets, live holdings, basis, and pnl. anti hunter does not sell or swap $antihunter.
+            fees in weth fund inference, hardware, crypto, and nfts.
+          </p>
+          <div class="link-row" style="margin-top:20px">
+            <a class="link-chip" href="/treasury-policy">treasury policy</a>
+            <a class="link-chip" href="/treasury-methodology">methodology</a>
+            <a class="link-chip" href="/treasury.snapshot.json" target="_blank" rel="noreferrer">snapshot json</a>
+            <a class="link-chip" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">basescan</a>
+          </div>
+          <div id="treasury-updated" class="muted" style="margin-top:14px">loading snapshot…</div>
+        </section>
 
-					<div class="mt-6 overflow-x-auto rounded-2xl border border-zinc-800 bg-black/20 p-1 sm:p-2">
-						<table class="min-w-full text-sm [border-collapse:separate] [border-spacing:0]">
-							<thead class="sticky top-0 z-10">
-								<tr class="text-left text-[11px] uppercase tracking-[0.18em] text-zinc-500">
-									<th class="bg-zinc-950/60 px-5 py-3 backdrop-blur first:rounded-tl-xl">asset</th>
-									<th class="bg-zinc-950/60 px-5 py-3 backdrop-blur">chain</th>
-									<th class="bg-zinc-950/60 px-5 py-3 text-right backdrop-blur">balance</th>
-									<th class="bg-zinc-950/60 px-5 py-3 text-right backdrop-blur">fmv</th>
-									<th class="bg-zinc-950/60 px-5 py-3 backdrop-blur">entry</th>
-									<th class="bg-zinc-950/60 px-5 py-3 text-right backdrop-blur">cost</th>
-									<th class="bg-zinc-950/60 px-5 py-3 text-right backdrop-blur last:rounded-tr-xl">pnl</th>
-								</tr>
-							</thead>
-							<tbody id="treasury-rows" class="divide-y divide-zinc-900/60"></tbody>
-						</table>
-					</div>
+        <section class="metric-grid" aria-label="summary metrics">
+          <article class="metric-card">
+            <div class="metric-label">total treasury</div>
+            <div class="metric-value tabular-nums" id="metric-total">—</div>
+            <div class="metric-subvalue" id="metric-total-sub">all chains</div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-label">base</div>
+            <div class="metric-value tabular-nums" id="metric-base">—</div>
+            <div class="metric-subvalue" id="metric-base-sub">base holdings</div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-label">ethereum</div>
+            <div class="metric-value tabular-nums" id="metric-eth">—</div>
+            <div class="metric-subvalue" id="metric-eth-sub">ethereum holdings</div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-label">positions</div>
+            <div class="metric-value tabular-nums" id="metric-count">—</div>
+            <div class="metric-subvalue" id="metric-count-sub">tracked rows</div>
+          </article>
+        </section>
 
-					<div id="treasury-footnote" class="mt-4 text-xs leading-relaxed text-zinc-500"></div>
-				</div>
-			</header>
+        <section class="simple-grid cols-2">
+          <article class="section-card stack-sm">
+            <div class="section-kicker">wallets</div>
+            <div class="link-row">
+              <a class="link-chip" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">primary wallet</a>
+              <a class="link-chip" href={TREASURY_HARD_WALLET_BASESCAN_URL} target="_blank" rel="noreferrer">hard wallet (base)</a>
+              <a class="link-chip" href={TREASURY_HARD_WALLET_ETHERSCAN_URL} target="_blank" rel="noreferrer">hard wallet (ethereum)</a>
+              <a class="link-chip" href={BASESCAN_URL} target="_blank" rel="noreferrer">token</a>
+            </div>
+            <div class="tiny muted">primary: {TREASURY_ADDRESS}</div>
+            <div class="tiny muted">hard wallet: {TREASURY_HARD_WALLET}</div>
+          </article>
 
-			<script type="module">
-				const fmtUsd = (n) => (n == null || !Number.isFinite(n) ? '—' : n.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }));
-				const fmtUsdCompact = (n) => (n == null || !Number.isFinite(n) ? '—' : n.toLocaleString(undefined, { style: 'currency', currency: 'USD', notation: 'compact', maximumFractionDigits: 1 }));
-				const fmtQty = (n) => (n == null || !Number.isFinite(n) ? '—' : n.toLocaleString(undefined, { maximumFractionDigits: 4 }));
-				const rowsEl = document.getElementById('treasury-rows');
-				const footEl = document.getElementById('treasury-footnote');
-				const walletLinkEl = document.getElementById('treasury-wallet-link');
-				const walletCodeEl = document.getElementById('treasury-wallet-code');
-				const metaEl = document.getElementById('treasury-meta');
+          <article class="section-card stack-sm">
+            <div class="section-kicker">rules</div>
+            <ul class="list-clean muted">
+              <li>anti hunter will not sell or swap $antihunter.</li>
+              <li>fees in weth are used for inference, hardware, crypto, and nfts.</li>
+              <li>snapshot json and wallet links are public so claims can be checked independently.</li>
+            </ul>
+          </article>
+        </section>
 
-				const shortAddr = (a) => (a && a.length > 10 ? `${a.slice(0, 6)}…${a.slice(-4)}` : a);
-				const entryDate = (ts) => (ts ? new Date(ts * 1000).toISOString().slice(0, 10) : '—');
+        <section class="section-card stack-md">
+          <div class="section-kicker">holdings</div>
+          <div id="holdings" class="holding-list">
+            <article class="holding-row">
+              <div class="muted">loading holdings…</div>
+            </article>
+          </div>
+        </section>
 
-				function rowHTML(p, idx) {
-					const pnlTxt = p.pnlUsd == null ? '—' : fmtUsd(p.pnlUsd);
-					const pnlClass = p.pnlUsd == null ? 'text-zinc-400' : (p.pnlUsd >= 0 ? 'text-emerald-300' : 'text-rose-300');
-					const costCell = p.costUsd == null
-						? '—'
-						: `${fmtUsd(p.costUsd)}${p.costEth ? ` <span class="text-[10px] text-zinc-500">(${p.costEth} eth)</span>` : ''}`;
-					const entryCell = p.entryLink
-						? `<a class="text-zinc-400 underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300" href="${p.entryLink}" target="_blank" rel="noreferrer">${entryDate(p.entryTimestamp)}</a>`
-						: entryDate(p.entryTimestamp);
-					const fmvCell = p.fmvUsd == null ? '—' : fmtUsd(p.fmvUsd);
-					const sym = String(p.symbol || '').trim();
-					const u = sym.toUpperCase();
-					const noDollar = u === 'ETH' || u === 'WETH' || sym.toLowerCase().startsWith('cryptopunk');
-					const label = noDollar ? sym : `$${sym}`;
-					const isSbnkr = u === 'SBNKR';
-					const sbnkrHref = 'https://dexscreener.com/base/0x603945433c00c71382d4db98bb166b8119ec7595';
-					const tokenHref = isSbnkr
-						? sbnkrHref
-						: (p.link
-							? p.link
-							: (p.token && String(p.chainId ?? 8453) === '8453')
-								? `https://dexscreener.com/base/${p.token}`
-								: null);
-					const subtitle = isSbnkr ? '<div class=\"mt-0.5 text-[10px] uppercase tracking-[0.18em] text-zinc-500\">staked bnkr</div>' : '';
-					const tokenCell = tokenHref
-						? `<a class=\"text-zinc-100 underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300\" href=\"${tokenHref}\" target=\"_blank\" rel=\"noreferrer\">${label}</a>${subtitle}`
-						: `<span>${label}</span>${subtitle}`;
-					const chainLabel = (p.chain || (String(p.chainId) === '1' ? 'ethereum' : 'base'));
-					const chainPill = `<span class=\"inline-flex items-center rounded-full border border-zinc-800 bg-zinc-950/40 px-2 py-0.5 text-[10px] uppercase tracking-[0.18em] text-zinc-400\">${chainLabel}</span>`;
-					const zebra = idx % 2 === 1 ? 'bg-white/[0.02]' : '';
+        <section class="section-card stack-sm">
+          <div class="section-kicker">notes</div>
+          <div id="treasury-notes" class="muted">waiting for snapshot…</div>
+        </section>
+      </main>
 
-					return `
-						<tr class=\"text-zinc-200 ${zebra} hover:bg-white/[0.04]\">
-							<td class=\"px-4 py-2.5 font-medium\">${tokenCell}</td>
-							<td class=\"px-4 py-2.5\">${chainPill}</td>
-							<td class=\"px-4 py-2.5 text-right tabular-nums\">${fmtQty(Number(p.balance))}</td>
-							<td class=\"px-4 py-2.5 text-right tabular-nums font-semibold text-zinc-100\">${fmvCell}</td>
-							<td class=\"px-4 py-2.5 text-zinc-300\">${entryCell}</td>
-							<td class=\"px-4 py-2.5 text-right tabular-nums\">${costCell}</td>
-							<td class=\"px-4 py-2.5 text-right tabular-nums ${pnlClass}\">${pnlTxt}</td>
-						</tr>`;
-				}
+      <script type="module">
+        const money = (n, digits = 0) => (
+          n == null || !Number.isFinite(n)
+            ? '—'
+            : n.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: digits })
+        );
+        const qty = (n) => (n == null || !Number.isFinite(n) ? '—' : n.toLocaleString(undefined, { maximumFractionDigits: 4 }));
+        const compact = (n) => (
+          n == null || !Number.isFinite(n)
+            ? '—'
+            : n.toLocaleString(undefined, { style: 'currency', currency: 'USD', notation: 'compact', maximumFractionDigits: 1 })
+        );
+        const shortDate = (value) => {
+          if (!value) return '—';
+          const d = new Date(value);
+          return Number.isNaN(d.getTime()) ? String(value) : d.toLocaleDateString();
+        };
+        const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
 
-				try {
-					const res = await fetch('/treasury.snapshot.json', { cache: 'no-store' });
-					let data;
-					if (res.ok) {
-						data = await res.json();
-					} else {
-						const live = await fetch('/api/treasury.json', { cache: 'no-store' });
-						if (!live.ok) throw new Error(`http ${live.status}`);
-						data = await live.json();
-					}
+        const updatedEl = document.getElementById('treasury-updated');
+        const notesEl = document.getElementById('treasury-notes');
+        const holdingsEl = document.getElementById('holdings');
 
-					if (data?.wallet && walletLinkEl && walletCodeEl) {
-						walletCodeEl.textContent = shortAddr(data.wallet);
-						walletLinkEl.href = `https://basescan.org/address/${data.wallet}`;
-					}
-					if (metaEl && data?.lastScannedBlock) {
-						const updated = data?.updatedAtMs ? new Date(data.updatedAtMs).toLocaleString() : '';
-						metaEl.textContent = `· scanned to block ${data.lastScannedBlock}${updated ? ` · updated ${updated}` : ''}`;
-					}
+        const metricEls = {
+          total: document.getElementById('metric-total'),
+          totalSub: document.getElementById('metric-total-sub'),
+          base: document.getElementById('metric-base'),
+          baseSub: document.getElementById('metric-base-sub'),
+          eth: document.getElementById('metric-eth'),
+          ethSub: document.getElementById('metric-eth-sub'),
+          count: document.getElementById('metric-count'),
+          countSub: document.getElementById('metric-count-sub'),
+        };
 
-					const pos = Array.isArray(data?.positions)
-						? data.positions
-						: Array.isArray(data?.rows)
-							? data.rows.map((r) => ({
-							...r,
-							chain: r.chain,
-							chainId: r.chainId,
-							balance: r.balance,
-							entryTimestamp: r.entryDate ? Math.floor(new Date(r.entryDate).getTime() / 1000) : undefined,
-							entryLink: r.entryLink ?? (r.entryTx ? `https://etherscan.io/tx/${r.entryTx}` : undefined),
-							costUsd: r.costBasisUsd,
-							costEth: r.costBasisEth,
-							fmvUsd: r.fmvUsd,
-							pnlUsd: r.pnlUsd,
-							lots: r.lots,
-						}))
-							: [];
+        function symbolLabel(position) {
+          const raw = String(position.symbol || '').trim();
+          const lowered = raw.toLowerCase();
+          if (!raw) return 'unknown';
+          if (lowered === 'antihunter') return '$antihunter';
+          if (lowered === 'sbnkr') return 'sbnkr';
+          if (lowered === 'weth' || lowered === 'eth' || lowered.startsWith('cryptopunk')) return raw;
+          return raw.startsWith('$') ? raw : `$${raw}`;
+        }
 
-					if (!pos.length) {
-						rowsEl.innerHTML = `<tr><td class=\"px-5 py-6\" colspan=\"7\"><span class=\"text-zinc-400\">no positions found.</span></td></tr>`;
-					} else {
-						// sort: chain -> fmv desc
-						pos.sort((a, b) => {
-							const ca = (a.chainId === 1 || a.chain === 'ethereum') ? 1 : 0;
-							const cb = (b.chainId === 1 || b.chain === 'ethereum') ? 1 : 0;
-							if (ca !== cb) return ca - cb;
-							return (b.fmvUsd ?? 0) - (a.fmvUsd ?? 0);
-						});
+        function chainLabel(position) {
+          if (position.chain) return String(position.chain);
+          if (String(position.chainId) === '1') return 'ethereum';
+          return 'base';
+        }
 
-						rowsEl.innerHTML = pos.map((p, i) => rowHTML(p, i)).join('');
+        function entryCell(position) {
+          const date = position.entryDate ? shortDate(position.entryDate) : '—';
+          if (!position.entryLink) return date;
+          return `<a href="${esc(position.entryLink)}" target="_blank" rel="noreferrer">${esc(date)}</a>`;
+        }
 
-						const totalAll = pos.reduce((s, p) => s + (Number.isFinite(p.fmvUsd) ? p.fmvUsd : 0), 0);
-						const totalBase = pos.reduce((s, p) => s + ((p.chainId ?? 8453) === 8453 && Number.isFinite(p.fmvUsd) ? p.fmvUsd : 0), 0);
-						const totalEth = pos.reduce((s, p) => s + ((p.chainId ?? 0) === 1 && Number.isFinite(p.fmvUsd) ? p.fmvUsd : 0), 0);
-						if (footEl) {
-							footEl.innerHTML = `total: <span class=\"text-zinc-200\">${fmtUsdCompact(totalAll)}</span> <span class=\"text-zinc-600\">·</span> base: <span class=\"text-zinc-300\">${fmtUsdCompact(totalBase)}</span> <span class=\"text-zinc-600\">·</span> ethereum: <span class=\"text-zinc-300\">${fmtUsdCompact(totalEth)}</span>`;
-						}
-					}
-				} catch (e) {
-					rowsEl.innerHTML = `<tr><td class=\"px-5 py-6\" colspan=\"7\"><span class=\"text-zinc-400\">failed to load treasury snapshot.</span></td></tr>`;
-					if (footEl) footEl.textContent = String(e?.message ?? e);
-				}
-			</script>
-			<SiteFooter />
-		</div>
-	</body>
+        function marketLink(position) {
+          if (position.link) return position.link;
+          if (position.token && String(position.chainId) === '8453') return `https://dexscreener.com/base/${position.token}`;
+          return null;
+        }
+
+        function positionCard(position) {
+          const label = symbolLabel(position);
+          const chain = chainLabel(position);
+          const link = marketLink(position);
+          const pnl = Number(position.pnlUsd);
+          const pnlText = Number.isFinite(pnl) ? money(pnl) : '—';
+          const pnlStyle = Number.isFinite(pnl) ? `color:${pnl >= 0 ? '#86efac' : '#fda4af'}` : '';
+          const fmv = Number(position.fmvUsd);
+          const balance = Number(position.balance);
+          const cost = Number(position.costBasisUsd);
+          const symbolHtml = link
+            ? `<a href="${esc(link)}" target="_blank" rel="noreferrer">${esc(label)}</a>`
+            : esc(label);
+
+          return `
+            <article class="holding-row">
+              <div class="holding-head">
+                <div>
+                  <div class="holding-symbol">${symbolHtml}</div>
+                  <div class="holding-meta">
+                    <span class="chain-pill">${esc(chain)}</span>
+                    ${position.token ? `<span>token: <code>${esc(position.token)}</code></span>` : ''}
+                  </div>
+                </div>
+                <div>
+                  <div class="holding-fmv tabular-nums">${money(fmv)}</div>
+                  <div class="holding-fmv-sub">fair market value</div>
+                </div>
+              </div>
+              <dl class="holding-stats">
+                <div class="stat">
+                  <dt>balance</dt>
+                  <dd class="tabular-nums">${qty(balance)}</dd>
+                </div>
+                <div class="stat">
+                  <dt>cost basis</dt>
+                  <dd class="tabular-nums">${Number.isFinite(cost) ? money(cost) : '—'}</dd>
+                </div>
+                <div class="stat">
+                  <dt>pnl</dt>
+                  <dd class="tabular-nums" style="${pnlStyle}">${pnlText}</dd>
+                </div>
+                <div class="stat">
+                  <dt>entry</dt>
+                  <dd>${entryCell(position)}</dd>
+                </div>
+                <div class="stat">
+                  <dt>links</dt>
+                  <dd>${link ? `<a href="${esc(link)}" target="_blank" rel="noreferrer">market</a>` : '—'}</dd>
+                </div>
+              </dl>
+            </article>
+          `;
+        }
+
+        try {
+          const res = await fetch('/treasury.snapshot.json', { cache: 'no-store' });
+          if (!res.ok) throw new Error(`snapshot http ${res.status}`);
+          const data = await res.json();
+          const positions = Array.isArray(data?.rows) ? data.rows : Array.isArray(data?.positions) ? data.positions : [];
+
+          const total = Number.isFinite(data?.totalUsd)
+            ? Number(data.totalUsd)
+            : positions.reduce((sum, row) => sum + (Number.isFinite(Number(row.fmvUsd)) ? Number(row.fmvUsd) : 0), 0);
+          const base = positions.reduce((sum, row) => sum + ((String(row.chainId ?? '8453') === '8453' && Number.isFinite(Number(row.fmvUsd))) ? Number(row.fmvUsd) : 0), 0);
+          const eth = positions.reduce((sum, row) => sum + ((String(row.chainId ?? '') === '1' && Number.isFinite(Number(row.fmvUsd))) ? Number(row.fmvUsd) : 0), 0);
+
+          metricEls.total.textContent = compact(total);
+          metricEls.totalSub.textContent = `updated ${shortDate(data?.updatedAt || data?.date)}`;
+          metricEls.base.textContent = compact(base);
+          metricEls.baseSub.textContent = `${positions.filter((row) => String(row.chainId ?? '8453') === '8453').length} base rows`;
+          metricEls.eth.textContent = compact(eth);
+          metricEls.ethSub.textContent = `${positions.filter((row) => String(row.chainId ?? '') === '1').length} ethereum rows`;
+          metricEls.count.textContent = String(positions.length);
+          metricEls.countSub.textContent = 'tracked positions';
+
+          const updatedText = data?.updatedAtMs
+            ? new Date(data.updatedAtMs).toLocaleString()
+            : (data?.updatedAt || data?.date || 'unknown');
+          updatedEl.textContent = `updated ${updatedText}`;
+
+          const sorted = [...positions].sort((a, b) => (Number(b.fmvUsd) || 0) - (Number(a.fmvUsd) || 0));
+          holdingsEl.innerHTML = sorted.length
+            ? sorted.map(positionCard).join('')
+            : '<article class="holding-row"><div class="muted">no holdings found.</div></article>';
+
+          const notes = [];
+          if (Array.isArray(data?.notes)) notes.push(...data.notes);
+          if (data?.method?.entryAndCostBasis) notes.push(`method: ${data.method.entryAndCostBasis}`);
+          notesEl.innerHTML = notes.length
+            ? `<ul class="list-clean">${notes.map((note) => `<li>${esc(note)}</li>`).join('')}</ul>`
+            : 'no extra notes.';
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          updatedEl.textContent = `failed to load snapshot: ${message}`;
+          holdingsEl.innerHTML = `<article class="holding-row"><div class="muted">failed to load holdings: ${esc(message)}</div></article>`;
+          notesEl.textContent = 'snapshot unavailable.';
+        }
+      </script>
+
+      <SiteFooter />
+    </div>
+  </body>
 </html>

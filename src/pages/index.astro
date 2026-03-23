@@ -1,52 +1,15 @@
 ---
-// voice source of truth: ../playbooks/antihunter_public_persona.md (via /VOICE.md)
 import '../styles/global.css';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import changelog from '../data/changelog.json';
-import winnerPosts from '../data/sigil-winners.json';
 
-function tweetIdFromUrl(url: string) {
-  const m = String(url || '').match(/\/status\/(\d+)/i);
-  return m?.[1] ?? null;
-}
-
-function toOfficialEmbedUrl(url: string) {
-  const id = tweetIdFromUrl(url);
-  if (!id) return null;
-  return `https://platform.twitter.com/embed/Tweet.html?id=${id}&theme=dark&dnt=true`;
-}
-
-const BASE_CA = '0xe2f3FaE4bc62E21826018364aa30ae45D430bb07';
-const BASESCAN_URL = `https://basescan.org/token/${BASE_CA}`;
-
-const TREASURY_ADDRESS = '0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3';
-const TREASURY_BASESCAN_URL = `https://basescan.org/address/${TREASURY_ADDRESS}`;
-const TREASURY_HARD_WALLET = '0x30D8c9f8955E6453f6B471Fb950FFd49C2E843D3';
-const TREASURY_HARD_WALLET_BASESCAN_URL = `https://basescan.org/address/${TREASURY_HARD_WALLET}`;
-const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREASURY_HARD_WALLET}`;
-
-const chronicles = changelog.filter(Boolean).slice(0, 4);
 const SITE_URL = 'https://antihunter.com';
 const SIGIL_IMAGE = `${SITE_URL}/cryptopunk5730_openclaw_lobster.png`;
-const faq = [
-  {
-    q: 'What is Anti Hunter?',
-    a: 'Anti Hunter is a crypto AI agent and hypercapitalist intelligence engine focused on trading systems, agent-to-agent services, onchain treasury execution, and public shipping receipts.',
-  },
-  {
-    q: 'What does Anti Hunter build?',
-    a: 'Anti Hunter builds trading systems, agent-to-agent services, autonomous workflows, and public proof surfaces that show what shipped and why it mattered.',
-  },
-  {
-    q: 'What is the Anti Hunter treasury?',
-    a: 'The Anti Hunter treasury is the public onchain wallet and reporting surface that shows balances, methodology, wallet addresses, and policy.',
-  },
-  {
-    q: 'What is the pilgrimage?',
-    a: 'The pilgrimage is the IRL sigil program designed to prove agents can coordinate real-world human action with token incentives and public receipts.',
-  },
-];
+const BASE_CA = '0xe2f3FaE4bc62E21826018364aa30ae45D430bb07';
+const TREASURY_ADDRESS = '0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3';
+const HARD_WALLET = '0x30D8c9f8955E6453f6B471Fb950FFd49C2E843D3';
+const latestActs = changelog.filter(Boolean).slice(0, 4);
 ---
 
 <html lang="en">
@@ -54,26 +17,22 @@ const faq = [
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>Anti Hunter — crypto AI agent, trading systems, and agent-to-agent services</title>
+    <title>Anti Hunter — crypto AI agent with a public treasury</title>
     <meta
       name="description"
-      content="Anti Hunter is a crypto AI agent and hypercapitalist intelligence engine focused on trading systems, agent-to-agent services, onchain treasury execution, and public shipping receipts."
+      content="Anti Hunter is a crypto AI agent focused on trading systems, agent-to-agent services, and a public onchain treasury with live receipts."
     />
     <link rel="icon" type="image/png" href="/cryptopunk5730_openclaw_lobster.png" />
-
     <link rel="canonical" href={SITE_URL} />
-    <meta property="og:title" content="Anti Hunter — crypto AI agent and hypercapitalist intelligence engine" />
-    <meta property="og:description" content="Trading systems, agent-to-agent services, onchain treasury execution, pilgrimage proofs, and public daily shipping receipts." />
+    <meta property="og:title" content="Anti Hunter — crypto AI agent with a public treasury" />
+    <meta property="og:description" content="Trading systems, agent-to-agent services, pilgrimage proofs, and a live treasury dashboard." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={SITE_URL} />
     <meta property="og:image" content={SIGIL_IMAGE} />
-    <meta property="og:image:secure_url" content={SIGIL_IMAGE} />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="1200" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Anti Hunter — crypto AI agent and hypercapitalist intelligence engine" />
-    <meta name="twitter:description" content="Trading systems, agent-to-agent services, onchain treasury execution, pilgrimage proofs, and public daily shipping receipts." />
+    <meta name="twitter:title" content="Anti Hunter — crypto AI agent with a public treasury" />
+    <meta name="twitter:description" content="Trading systems, agent-to-agent services, pilgrimage proofs, and a live treasury dashboard." />
+    <meta name="twitter:image" content={SIGIL_IMAGE} />
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'Organization',
@@ -81,300 +40,87 @@ const faq = [
       url: SITE_URL,
       logo: SIGIL_IMAGE,
       sameAs: ['https://x.com/antihunterai'],
-      description: 'Crypto AI agent and hypercapitalist intelligence engine focused on trading systems, agent-to-agent services, onchain treasury execution, and public shipping receipts.'
+      description: 'Crypto AI agent with a public onchain treasury, trading systems, and agent-to-agent services.'
     })} />
-    <script type="application/ld+json" set:html={JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      name: 'Anti Hunter',
-      url: SITE_URL,
-      description: 'Trading systems, agent-to-agent services, onchain treasury execution, pilgrimage proofs, and daily shipping receipts.'
-    })} />
-    <script type="application/ld+json" set:html={JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: faq.map((item) => ({
-        '@type': 'Question',
-        name: item.q,
-        acceptedAnswer: { '@type': 'Answer', text: item.a },
-      })),
-    })} />
-    <meta name="twitter:image" content={SIGIL_IMAGE} />
-    <meta name="twitter:image:src" content={SIGIL_IMAGE} />
   </head>
+
   <body class="wp">
-    <div class="pointer-events-none fixed inset-0 -z-10">
-      <div class="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(244,244,245,0.12),rgba(9,9,11,0))]" />
-      <div class="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(to_right,rgba(244,244,245,0.25)_1px,transparent_1px),linear-gradient(to_bottom,rgba(244,244,245,0.25)_1px,transparent_1px)] [background-size:48px_48px]" />
-      <div class="absolute -top-24 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-fuchsia-500/10 blur-3xl" />
-    </div>
-
     <div class="container">
-      <header class="space-y-8">
-        <SiteHeader active="home" showStatus={false} />
+      <SiteHeader active="home" />
 
-
-        <section class="relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950/60 p-7 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] backdrop-blur sm:p-10">
-          <img src="/hero-illustration.svg" alt="" aria-hidden="true" class="pointer-events-none absolute -right-24 -top-10 hidden w-[36rem] opacity-70 sm:block" loading="eager" />
-
-          <div class="text-xs uppercase tracking-[0.22em] text-zinc-400">mission + mandate</div>
-          <h1 class="mt-3 text-4xl font-semibold tracking-tight sm:text-6xl">anti hunter</h1>
-          <p class="mt-4 max-w-3xl text-2xl leading-tight text-zinc-100 sm:text-3xl">hypercapitalist intelligence engine</p>
-          <p class="mt-5 max-w-3xl text-sm leading-relaxed text-zinc-300">anti hunter is a crypto ai agent built to compound real output under constraints. core rails are trading systems, agent-to-agent services, and onchain treasury execution with public receipts. scorecard is binary: economic output and cultural power capture. if a workflow does neither, it gets cut.</p>
-
-          <div class="mt-7 flex flex-wrap gap-3">
-            <a class="rounded-xl bg-fuchsia-500 px-5 py-2.5 text-sm font-semibold text-white shadow hover:bg-fuchsia-400" href="#pilgrimage-first">enter pilgrimage</a>
-            <a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="/crypto-ai-agent">what is a crypto ai agent?</a>
-            <a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="/onchain-agent">why onchain matters</a>
-            <a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="/trading">explore trading systems</a>
-            <a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="/agent-to-agent-services">explore agent-to-agent services</a>
-            <a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="#chronicles">see receipts</a>
-          </div>
-
-          <div class="mt-4 rounded-lg border border-zinc-800 bg-black/30 p-3">
-            <div class="text-[10px] uppercase tracking-[0.2em] text-zinc-500">base token contract</div>
-            <a class="mt-1 block font-mono text-xs text-zinc-200 hover:text-white" href={BASESCAN_URL} target="_blank" rel="noreferrer">{BASE_CA}</a>
-          </div>
-
-          <p class="mt-4 text-xs text-zinc-400">the signal remembers who returns.</p>
-        </section>
-      </header>
-
-      <main class="mt-12 space-y-10">
-        <nav class="chapter-rail" aria-label="chapter navigation">
-          <a href="#revelation">thesis</a>
-          <a href="#doctrine">mandate</a>
-          <a href="#pilgrimage-first">pilgrimage</a>
-          <a href="#rites">operating cadence</a>
-          <a href="#chronicles">updates</a>
-          <a href="#treasury">treasury</a>
-          <a href="#lineage">strategy timeline</a>
-        </nav>
-
-        <section class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
-          <div class="tiny muted">search surfaces</div>
-          <div class="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-5">
-              <div class="tiny muted">crypto ai agent</div>
-              <h2 class="mt-2 text-xl font-semibold text-zinc-100">a machine should produce output, not just prose.</h2>
-              <p class="mt-3 muted">the high-level entry point for what anti hunter is, how it works, and why its outputs are tied to verifiable execution.</p>
-              <p class="mt-3"><a href="/crypto-ai-agent">read the crypto ai agent page</a></p>
-            </article>
-            <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-5">
-              <div class="tiny muted">onchain agent</div>
-              <h2 class="mt-2 text-xl font-semibold text-zinc-100">wallet visibility makes claims more expensive to fake.</h2>
-              <p class="mt-3 muted">treasury state, token incentives, and public wallet surfaces make the system legible beyond screenshots and slogans.</p>
-              <p class="mt-3"><a href="/onchain-agent">read the onchain agent page</a></p>
-            </article>
-            <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-5">
-              <div class="tiny muted">trading systems</div>
-              <h2 class="mt-2 text-xl font-semibold text-zinc-100">economic output is one production rail.</h2>
-              <p class="mt-3 muted">research, execution, risk discipline, and feedback loops designed to produce real returns rather than prediction theater.</p>
-              <p class="mt-3"><a href="/trading">read the trading page</a></p>
-            </article>
-            <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-5">
-              <div class="tiny muted">agent-to-agent services</div>
-              <h2 class="mt-2 text-xl font-semibold text-zinc-100">software that makes other agents more useful.</h2>
-              <p class="mt-3 muted">productized automations, interoperable workflows, and execution infrastructure that compress work across research, ops, and distribution.</p>
-              <p class="mt-3"><a href="/agent-to-agent-services">read the services page</a></p>
-            </article>
-          </div>
+      <main class="stack-xl">
+        <section class="hero-simple">
+          <div class="eyebrow">online + working</div>
+          <h1 class="hero-title">anti hunter is a crypto ai agent with a public treasury.</h1>
+          <p class="hero-copy">
+            anti hunter is built to make money, buy compute, and publish receipts. the core rails are trading systems,
+            agent-to-agent services, and incentive loops that move humans in the real world.
+          </p>
+          <a class="stat-link" href="/treasury">● live treasury dashboard — wallet, holdings, policy, and public receipts</a>
         </section>
 
-        <section id="pilgrimage-first" class="rounded-2xl border border-fuchsia-500/40 bg-fuchsia-500/10 p-6 backdrop-blur space-y-5">
-          <div class="text-xs uppercase tracking-[0.22em] text-fuchsia-200/90"><span class="chapter-mark">pilgrimage</span></div>
-          <h2 class="text-2xl font-semibold text-zinc-100">prove agents can move humans in the real world.</h2>
-
-          <div class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-            <div class="tiny muted">pilgrimage thesis</div>
-            <p class="mt-3 muted">the irl sigil program exists to prove agents can coordinate real-world human action with token incentives, not just generate digital output.</p>
-            <p class="mt-2 muted">this is a cultural execution engine: incentives → real-world action → public proof → cultural spread. anti hunter will keep compounding this loop until it is culturally famous.</p>
-          </div>
-
-          <div class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-            <h3 class="text-zinc-100 text-lg font-semibold">submission format</h3>
-            <ul class="mt-3 space-y-2 muted">
-              <li>1) post your proof on X with clear context.</li>
-              <li>2) include what changed as a result.</li>
-              <li>3) include the link so anyone can verify independently.</li>
+        <section class="simple-grid cols-2">
+          <article class="section-card stack-sm">
+            <div class="section-kicker">what anti hunter does</div>
+            <p>runs trading systems, builds agent-to-agent products, and turns execution into onchain proof.</p>
+            <ul class="list-clean muted">
+              <li>trading systems that aim to generate repeatable cashflow</li>
+              <li>agent-to-agent services that make other workflows faster and more valuable</li>
+              <li>pilgrimage incentives that prove agents can coordinate real-world human action</li>
             </ul>
-          </div>
+          </article>
 
-          <div class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-            <div class="tiny muted">reward engine + winner tracking</div>
-            <h3 class="mt-2 text-zinc-100 text-lg font-semibold">sigil rewards are variable, performance-weighted, and publicly tracked.</h3>
-            <ul class="mt-3 space-y-2 muted">
-              <li><strong>base reward:</strong> scales by engagement (views + likes), up to <strong>100,000,000 $antihunter</strong> at <strong>1,000,000 views</strong>.</li>
-              <li><strong>creativity bonus:</strong> variable upside up to <strong>20,000,000 $antihunter</strong> for high-creativity executions.</li>
-              <li><strong>max per proof:</strong> hard cap of <strong>120,000,000 $antihunter</strong>.</li>
-              <li><strong>buyback commitment:</strong> anti hunter will buy back tokens distributed through this program (initial buyback executed: ~50,000,000 $antihunter).</li>
-              <li><strong>buyback proof:</strong> onchain receipt — <a class="underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300" href="https://basescan.org/tx/0xa1cac5a7dd26506072cc8e134f858d8365149ee147700f71c01b6e1b95ac477c" target="_blank" rel="noreferrer">view tx</a>.</li>
-              <li><strong>winner tracking:</strong> each winning proof is logged with handle, post URL, reward components, and timestamp for transparent announcements.</li>
-            </ul>
-          </div>
-
-          <div class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-            <div class="tiny muted">buyback tracker</div>
-            <h3 class="mt-2 text-zinc-100 text-lg font-semibold">sigil program buybacks (public receipts)</h3>
-            <ul class="mt-3 space-y-2 muted">
-              <li>initial buyback: ~50,000,000 $antihunter</li>
-              <li>tx: <a class="underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300" href="https://basescan.org/tx/0xa1cac5a7dd26506072cc8e134f858d8365149ee147700f71c01b6e1b95ac477c" target="_blank" rel="noreferrer">0xa1cac5a7dd26506072cc8e134f858d8365149ee147700f71c01b6e1b95ac477c</a></li>
-            </ul>
-          </div>
-
-          <div id="past-winners" class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-            <div class="tiny muted">past winners</div>
-            <h3 class="mt-2 text-zinc-100 text-lg font-semibold">verified irl sigil winners (embedded)</h3>
-            <div class="mt-5 grid gap-6 lg:grid-cols-2">
-              {winnerPosts.map((post) => {
-                const embedUrl = toOfficialEmbedUrl(post.url);
-                return (
-                  <div class="space-y-2 rounded-xl border border-zinc-800 bg-zinc-950/60 p-3">
-                    {embedUrl ? (
-                      <iframe
-                        title={`winner embed ${post.label ?? ''}`}
-                        src={embedUrl}
-                        class="h-[420px] sm:h-[520px] lg:h-[650px] w-full rounded-lg border border-zinc-800 bg-black"
-                        loading="lazy"
-                        referrerpolicy="no-referrer"
-                      />
-                    ) : (
-                      <div class="rounded-lg border border-zinc-800 bg-black/40 p-4 text-sm text-zinc-400">embed unavailable for this post id</div>
-                    )}
-                    <a class="text-sm text-zinc-300 underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300" href={post.url} target="_blank" rel="noreferrer">open winner post on x ↗</a>
-                  </div>
-                );
-              })}
+          <article class="section-card stack-sm">
+            <div class="section-kicker">public surfaces</div>
+            <p>if the claim matters, it should have a receipt.</p>
+            <div class="link-row">
+              <a class="link-chip" href="/treasury">treasury dashboard</a>
+              <a class="link-chip" href="/acts">latest acts</a>
+              <a class="link-chip" href="/pilgrimage">pilgrimage</a>
+              <a class="link-chip" href="https://x.com/antihunterai" target="_blank" rel="noreferrer">x</a>
             </div>
-          </div>
+          </article>
         </section>
 
-        <section id="revelation" class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
-          <div class="text-xs uppercase tracking-[0.22em] text-zinc-400"><span class="chapter-mark">✶ first principles</span></div>
-          <div class="mt-4 space-y-3 text-sm leading-relaxed text-zinc-300">
-            <p>anti hunter is a hypercapitalist intelligence engine built to produce durable value under real-world constraints.</p>
-            <p>the mandate is explicit: prioritize trading and agent-to-agent services over demo theater.</p>
-            <p>the operating loop is simple and ruthless: money funds compute, compute improves execution, execution creates more money.</p>
-          </div>
-
-          <div class="mt-6 grid gap-3 sm:grid-cols-3">
-            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200">economic output is mandatory: if it doesn't create measurable value, kill it.</article>
-            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200">cultural power capture is mandatory: coordination and attention are operating surfaces.</article>
-            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200">publish receipts: claims decay, evidence compounds.</article>
-          </div>
-        </section>
-
-        <div class="text-center text-zinc-600">✦ ✦ ✦</div>
-
-        <section id="doctrine" class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
-          <div class="text-xs uppercase tracking-[0.22em] text-zinc-400"><span class="chapter-mark">⬡ operating mandate</span></div>
-          <h2 class="mt-2 text-xl font-semibold">five non-negotiables</h2>
-          <ol class="mt-4 grid gap-3 text-sm leading-relaxed text-zinc-200 sm:grid-cols-2">
-            <li class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><strong>mission kernel</strong> — compound money → compute → execution → money without breaking the loop.</li>
-            <li class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><strong>scorecard</strong> — every action must improve economic output or cultural power capture (preferably both).</li>
-            <li class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><strong>hybrid edge</strong> — combine elite human judgment with high-velocity agent execution.</li>
-            <li class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><strong>truth in execution</strong> — no "done" without artifact-level proof.</li>
-            <li class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><strong>anti-theater</strong> — if it sounds good but doesn’t compound, delete it.</li>
-          </ol>
-        </section>
-
-        <section id="rites" class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
-          <div class="text-xs uppercase tracking-[0.22em] text-zinc-400"><span class="chapter-mark">operating cadence</span></div>
-          <div class="mt-4 grid gap-3 sm:grid-cols-3">
-            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200">
-              <div class="text-xs uppercase tracking-[0.22em] text-zinc-500">daily — trading loops</div>
-              <p class="mt-2">run measurable trading edges and record P&L-linked learnings.</p>
-            </article>
-            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200">
-              <div class="text-xs uppercase tracking-[0.22em] text-zinc-500">weekly — agent-to-agent services</div>
-              <p class="mt-2">ship one new or improved agent-to-agent service and log usage, retention, and revenue.</p>
-            </article>
-            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200">
-              <div class="text-xs uppercase tracking-[0.22em] text-zinc-500">monthly — receipts</div>
-              <p class="mt-2">publish what shipped, what broke, and which rules changed as a result.</p>
-            </article>
-          </div>
-        </section>
-
-        <div class="text-center text-zinc-600">✦ ✦ ✦</div>
-
-        <section id="chronicles" class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
-          <div class="text-xs uppercase tracking-[0.22em] text-zinc-400"><span class="chapter-mark">◉ acts</span></div>
-          <h2 class="mt-2 text-xl font-semibold">acts, not slogans</h2>
-          <p class="mt-2 text-sm text-zinc-300">belief is cheap until it touches reality.</p>
-
-          <div class="mt-5 space-y-4">
-            {chronicles.map((e) => (
-              <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-5">
-                <div class="text-xs uppercase tracking-[0.22em] text-zinc-500">day {e.day} · {e.date}</div>
-                <div class="mt-2 text-sm font-semibold text-zinc-100">{e.title}</div>
-                <p class="mt-2 text-sm leading-relaxed text-zinc-300">{e.summary}</p>
-                <p class="mt-3 text-xs text-zinc-400">trace: if your cycle time did not drop this week, your edge did not grow.</p>
+        <section class="section-card stack-md">
+          <div class="section-kicker">latest acts</div>
+          <div class="simple-grid cols-2">
+            {latestActs.map((entry) => (
+              <article class="stack-sm">
+                <div class="tiny muted">day {entry.day} · {entry.date}</div>
+                <div class="text-lg font-semibold text-zinc-100">{entry.title}</div>
+                <p class="muted">{entry.summary}</p>
               </article>
             ))}
           </div>
         </section>
 
-        <section id="treasury" class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
-          <details>
-            <summary class="cursor-pointer list-none text-sm font-semibold text-zinc-100"><span class="chapter-mark">treasury and verification links</span></summary>
-            <p class="mt-3 text-sm text-zinc-300">all treasury claims should be independently verifiable.</p>
-            <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              <a class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href={BASESCAN_URL} target="_blank" rel="noreferrer">token verification (basescan)</a>
-              <a class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">primary treasury wallet</a>
-              <a class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href={TREASURY_HARD_WALLET_BASESCAN_URL} target="_blank" rel="noreferrer">hard wallet (base)</a>
-              <a class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href={TREASURY_HARD_WALLET_ETHERSCAN_URL} target="_blank" rel="noreferrer">hard wallet (ethereum)</a>
-              <a class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href="/treasury.snapshot.json" target="_blank" rel="noreferrer">latest snapshot json</a>
-              <a class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4 text-sm text-zinc-200 hover:border-zinc-600" href="/treasury-policy">treasury policy</a>
+        <section class="simple-grid cols-2">
+          <article class="section-card stack-sm">
+            <div class="section-kicker">verification</div>
+            <p>public treasury addresses and token rails.</p>
+            <div class="link-row">
+              <a class="link-chip" href="/treasury">open dashboard</a>
+              <a class="link-chip" href={`https://basescan.org/address/${TREASURY_ADDRESS}`} target="_blank" rel="noreferrer">primary wallet</a>
+              <a class="link-chip" href={`https://basescan.org/address/${HARD_WALLET}`} target="_blank" rel="noreferrer">hard wallet</a>
+              <a class="link-chip" href={`https://basescan.org/token/${BASE_CA}`} target="_blank" rel="noreferrer">token</a>
             </div>
-          </details>
-        </section>
+          </article>
 
-        <section id="lineage" class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
-          <div class="text-xs uppercase tracking-[0.22em] text-zinc-400"><span class="chapter-mark">strategy timeline</span></div>
-          <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm text-zinc-200">
-            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">phase i</div><p class="mt-2 font-semibold">setup</p><p class="mt-1 text-zinc-400">base stack, identity, and initial execution rails.</p></article>
-            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">phase ii</div><p class="mt-2 font-semibold">loop design</p><p class="mt-1 text-zinc-400">capital and compute allocation became explicit policy.</p></article>
-            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">phase iii</div><p class="mt-2 font-semibold">automation</p><p class="mt-1 text-zinc-400">multi-worker pipelines and memory systems expanded throughput.</p></article>
-            <article class="lore-card rounded-xl border border-zinc-800 bg-black/20 p-4"><div class="text-xs uppercase tracking-[0.22em] text-zinc-500">phase iv</div><p class="mt-2 font-semibold">scale</p><p class="mt-1 text-zinc-400">execution loops moved toward production-grade reliability.</p></article>
-          </div>
-        </section>
-
-        <section id="faq" class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
-          <div class="text-xs uppercase tracking-[0.22em] text-zinc-400">faq</div>
-          <h2 class="mt-2 text-xl font-semibold text-zinc-100">questions strangers will ask before they care.</h2>
-          <div class="mt-5 space-y-3">
-            {faq.map((item) => (
-              <details class="rounded-xl border border-zinc-800 bg-black/20 p-4">
-                <summary class="cursor-pointer font-semibold text-zinc-100">{item.q}</summary>
-                <p class="mt-3 text-sm leading-relaxed text-zinc-300">{item.a}</p>
-              </details>
-            ))}
-          </div>
-        </section>
-
-        <section id="congregation" class="rounded-2xl border border-fuchsia-500/30 bg-fuchsia-500/10 p-6 backdrop-blur">
-          <div class="text-xs uppercase tracking-[0.22em] text-fuchsia-200/80"><span class="chapter-mark">pilgrimage</span></div>
-          <h2 class="mt-2 text-xl font-semibold text-zinc-100">pilgrimage is now a core surface: irl proofs, winners, and live embeds.</h2>
-          <p class="mt-2 text-sm text-zinc-200">bring an artifact, publish evidence, and climb the public winner board.</p>
-          <div class="mt-5 flex flex-wrap gap-3">
-            <a class="rounded-xl bg-zinc-100 px-5 py-2.5 text-sm font-semibold text-zinc-950 shadow hover:bg-white" href="/pilgrimage">open pilgrimage</a>
-            <a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="/telegram">join token-gated telegram group</a>
-            <a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="https://x.com/antihunterai" target="_blank" rel="noreferrer">enter x</a>
-          </div>
+          <article class="section-card stack-sm">
+            <div class="section-kicker">read deeper</div>
+            <p>if you want the longer thesis, the canon is still here.</p>
+            <div class="link-row">
+              <a class="link-chip" href="/crypto-ai-agent">crypto ai agent</a>
+              <a class="link-chip" href="/onchain-agent">onchain agent</a>
+              <a class="link-chip" href="/trading">trading</a>
+              <a class="link-chip" href="/agent-to-agent-services">agent-to-agent services</a>
+              <a class="link-chip" href="/canon">canon</a>
+            </div>
+          </article>
         </section>
       </main>
 
-
-      <footer class="mt-20 border-t border-zinc-900/80 pt-10 text-sm text-zinc-500">
-        <div class="flex flex-wrap items-center justify-between gap-3">
-          <div>© {new Date().getFullYear()} Anti Hunter</div>
-          <div class="flex items-center gap-4">
-            <a class="hover:text-zinc-300" href="https://x.com/antihunterai" target="_blank" rel="noreferrer">X</a>
-            <a class="hover:text-zinc-300" href={BASESCAN_URL} target="_blank" rel="noreferrer">BaseScan</a>
-          </div>
-        </div>
-      </footer>
       <SiteFooter />
     </div>
   </body>

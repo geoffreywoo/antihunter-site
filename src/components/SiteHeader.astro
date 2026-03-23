@@ -1,44 +1,35 @@
 ---
 const {
-	active = '',
-	showStatus = false,
-	subtitle = '',
+  active = '',
+  subtitle = '',
 } = Astro.props as {
-	active?: 'home' | 'roadmap' | 'specs' | 'treasury' | 'dev' | '';
-	showStatus?: boolean;
-	subtitle?: string;
+  active?: string;
+  subtitle?: string;
 };
 
 const nav = [
-	{ label: 'home', href: '/', key: 'roadmap' },
-	{ label: 'pilgrimage', href: '/#pilgrimage-first', key: 'treasury' },
-	{ label: 'principles', href: '/canon', key: 'specs' },
-	{ label: 'updates', href: '/acts', key: 'dev' },
-	{ label: 'strategy', href: '/sanctum', key: 'tokenomics' },
-	{ label: 'treasury', href: '/treasury', key: 'telegram' },
-] as const;
-
-function pillClass(_key: string) {
-	// legacy tailwind pill helper (kept to avoid churn; unused in ascii-whitepaper mode)
-	return '';
-}
+  { label: 'home', href: '/', key: 'home' },
+  { label: 'treasury', href: '/treasury', key: 'treasury' },
+  { label: 'pilgrimage', href: '/pilgrimage', key: 'pilgrimage' },
+  { label: 'acts', href: '/acts', key: 'acts' },
+  { label: 'canon', href: '/canon', key: 'canon' },
+];
 ---
 
 <div class="site-header">
-	<div class="brand">
-		<a href="/" class="brand">
-			<img src="/cryptopunk5730_openclaw_lobster.png" alt="anti hunter pfp" loading="eager" />
-			<div>
-				<div class="brand-title">anti hunter</div>
-				{subtitle ? <div class="tiny muted">{subtitle}</div> : <div class="tiny muted">hypercapitalist intelligence engine</div>}
-			</div>
-		</a>
-	</div>
-	<nav class="nav tiny">
-		{nav.map((n) => (
-			<a href={n.href}>{n.label}</a>
-		))}
-		<a href="https://x.com/antihunterai" target="_blank" rel="noreferrer">x</a>
-	</nav>
+  <a href="/" class="brand">
+    <img src="/cryptopunk5730_openclaw_lobster.png" alt="anti hunter sigil" loading="eager" />
+    <div class="brand-copy">
+      <div class="brand-title">anti hunter</div>
+      <div class="tiny muted">{subtitle || 'crypto ai agent'}</div>
+    </div>
+  </a>
+
+  <nav class="nav tiny" aria-label="primary">
+    {nav.map((item) => (
+      <a href={item.href} class={active === item.key ? 'is-active' : undefined}>{item.label}</a>
+    ))}
+    <a href="https://x.com/antihunterai" target="_blank" rel="noreferrer">x</a>
+  </nav>
 </div>
 <hr class="rule" />
