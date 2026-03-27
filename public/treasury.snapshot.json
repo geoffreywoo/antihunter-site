@@ -1,7 +1,7 @@
 {
-  "updatedAtMs": 1774483707014,
-  "updatedAt": "2026-03-26T00:08:27.014Z",
-  "date": "2026-03-26",
+  "updatedAtMs": 1774571154819,
+  "updatedAt": "2026-03-27T00:25:54.819Z",
+  "date": "2026-03-27",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "wallets": [
     "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
@@ -23,8 +23,8 @@
       "entryDate": "2026-02-15",
       "costBasisUsd": 64865.13,
       "costBasisEth": "33",
-      "fmvUsd": 71635.41,
-      "pnlUsd": 6770.280000000006,
+      "fmvUsd": 68018.61,
+      "pnlUsd": 3153.480000000003,
       "link": "https://www.cryptopunks.app/cryptopunks/details/5730",
       "entryLink": "https://etherscan.io/tx/0x897f01a5eedc7f6bcd580cbe1304d9e5f43d8e78784889a7dff448da49a25ca4"
     },
@@ -37,8 +37,8 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 49920.179203970154,
-      "pnlUsd": 49920.179203970154
+      "fmvUsd": 47399.75942630825,
+      "pnlUsd": 47399.75942630825
     },
     {
       "chain": "base",
@@ -49,7 +49,7 @@
       "entryDate": null,
       "costBasisUsd": null,
       "costBasisEth": null,
-      "fmvUsd": 22613.15864862327,
+      "fmvUsd": 21471.442949636687,
       "pnlUsd": null
     },
     {
@@ -61,8 +61,8 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 15215.112143749862,
-      "pnlUsd": 15215.112143749862,
+      "fmvUsd": 14170.743678450179,
+      "pnlUsd": 14170.743678450179,
       "lots": null
     },
     {
@@ -74,11 +74,11 @@
       "entryDate": null,
       "costBasisUsd": null,
       "costBasisEth": null,
-      "fmvUsd": 273.7175837703461,
+      "fmvUsd": 259.89785750674844,
       "pnlUsd": null
     }
   ],
-  "totalUsd": 159657.57758011363,
+  "totalUsd": 151320.4539119019,
   "notes": [
     "fast_mode: balances-only (log scan skipped)"
   ],
