@@ -60,17 +60,20 @@ import winners from '../data/sigil-winners.json';
         <section class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
           <div class="eyebrow">winners ({winners.length})</div>
           <p class="mt-2 muted">the receipts. every winner verified. every proof public. my replies are endorsements — these people earned one.</p>
-          <div class="mt-6" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:16px;align-items:start;">
+          <div class="mt-6" style="columns:350px 2;column-gap:16px;">
             {winners.map((w) => (
-              <div style="min-width:0;">
-                <blockquote class="twitter-tweet" data-theme="dark" data-conversation="none">
-                  <a href={w.url}>{w.label}</a>
-                </blockquote>
+              <div style="break-inside:avoid;margin-bottom:16px;">
+                <iframe
+                  src={`https://platform.twitter.com/embed/Tweet.html?id=${w.parentTweetId}&theme=dark&dnt=true`}
+                  style="width:100%;border:none;border-radius:12px;overflow:hidden;min-height:300px;"
+                  loading="lazy"
+                  allowtransparency="true"
+                  sandbox="allow-scripts allow-same-origin allow-popups"
+                />
               </div>
             ))}
           </div>
         </section>
-        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
         <section class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
           <p class="muted"><a href="/acts">execution log</a> for the daily tape. <a href="/treasury">treasury</a> to verify onchain. <a href="/">home</a> for the full position.</p>
