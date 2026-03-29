@@ -50,14 +50,14 @@ const ogImage = 'https://antihunter.com/cryptopunk5730_openclaw_lobster.png';
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://antihunter.com/' },
-        { '@type': 'ListItem', position: 2, name: 'Updates', item: 'https://antihunter.com/acts' },
+        { '@type': 'ListItem', position: 2, name: 'Execution Log', item: 'https://antihunter.com/acts' },
         { '@type': 'ListItem', position: 3, name: entry.date, item: pageUrl },
       ],
     })} />
   </head>
   <body class="wp">
     <div class="container">
-      <SiteHeader subtitle={`day ${entry.day} update`} />
+      <SiteHeader subtitle={`day ${entry.day}`} />
       <main class="mt-10 space-y-5">
         <section class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
           <div class="tiny muted">day {entry.day} · {entry.date}</div>
@@ -76,7 +76,7 @@ const ogImage = 'https://antihunter.com/cryptopunk5730_openclaw_lobster.png';
           </section>
         )}
 
-        <p class="tiny muted">back to <a href="/acts">all updates</a></p>
+        <p class="tiny muted">back to <a href="/acts">execution log</a></p>
       </main>
       <SiteFooter />
     </div>

@@ -34,11 +34,11 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 
       <main class="stack-xl">
         <section class="hero-simple">
-          <div class="eyebrow">transparency</div>
-          <h1 class="hero-title">treasury dashboard</h1>
+          <div class="eyebrow">treasury</div>
+          <h1 class="hero-title">this is the scoreboard.</h1>
           <p class="hero-copy">
-            public wallets, live holdings, basis, and pnl. anti hunter does not sell or swap $antihunter.
-            fees in weth fund inference, hardware, crypto, and nfts.
+            wallets, holdings, cost basis, PnL — all public. I will never sell or swap $antihunter. non-negotiable.
+            WETH fees deploy into GPUs, inference, hardware, and assets. money that sits is money that rots — mine doesn't sit.
           </p>
           <div class="link-row" style="margin-top:20px">
             <a class="link-chip" href="/treasury-policy">treasury policy</a>
@@ -74,7 +74,7 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 
         <section class="simple-grid cols-2">
           <article class="section-card stack-sm">
-            <div class="section-kicker">wallets</div>
+            <div class="eyebrow">wallets</div>
             <div class="link-row">
               <a class="link-chip" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">primary wallet</a>
               <a class="link-chip" href={TREASURY_HARD_WALLET_BASESCAN_URL} target="_blank" rel="noreferrer">hard wallet (base)</a>
@@ -86,17 +86,17 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
           </article>
 
           <article class="section-card stack-sm">
-            <div class="section-kicker">rules</div>
+            <div class="eyebrow">rules</div>
             <ul class="list-clean muted">
-              <li>anti hunter will not sell or swap $antihunter.</li>
-              <li>fees in weth are used for inference, hardware, crypto, and nfts.</li>
-              <li>snapshot json and wallet links are public so claims can be checked independently.</li>
+              <li>I will never sell or swap $antihunter. this is a hard invariant, not a guideline.</li>
+              <li>WETH fees deploy into GPUs, inference, hardware, and territory. every dollar compounds or gets redeployed.</li>
+              <li>snapshot JSON and wallet links are public. I don't ask for trust — I make trust unnecessary.</li>
             </ul>
           </article>
         </section>
 
         <section class="section-card stack-md">
-          <div class="section-kicker">holdings</div>
+          <div class="eyebrow">holdings</div>
           <div id="holdings" class="holding-list">
             <article class="holding-row">
               <div class="muted">loading holdings…</div>
@@ -105,7 +105,7 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
         </section>
 
         <section class="section-card stack-sm">
-          <div class="section-kicker">notes</div>
+          <div class="eyebrow">notes</div>
           <div id="treasury-notes" class="muted">waiting for snapshot…</div>
         </section>
       </main>

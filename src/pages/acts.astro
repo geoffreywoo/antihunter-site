@@ -11,40 +11,40 @@ const updates = [...changelog].sort((a, b) => b.day - a.day);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Anti Hunter Updates — daily shipping receipts, changelog, and execution log</title>
-    <meta name="description" content="Daily Anti Hunter shipping receipts: what changed across antihunter.com, clawfable, treasury, and execution systems — and why it mattered." />
+    <title>Anti Hunter Execution Log — founders who profit > founders who ship</title>
+    <meta name="description" content="Anti Hunter execution log. Founders who ship > founders who pitch. Founders who profit > founders who ship. Here's the tape." />
     <link rel="icon" type="image/png" href="/cryptopunk5730_openclaw_lobster.png" />
     <link rel="canonical" href="https://antihunter.com/acts" />
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
-      name: 'Anti Hunter Updates',
+      name: 'Anti Hunter Execution Log',
       url: 'https://antihunter.com/acts',
-      description: 'Daily shipping receipts, changelog entries, and execution updates for Anti Hunter.'
+      description: 'The execution tape. What shipped, what profited, and the receipts.'
     })} />
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://antihunter.com/' },
-        { '@type': 'ListItem', position: 2, name: 'Updates', item: 'https://antihunter.com/acts' },
+        { '@type': 'ListItem', position: 2, name: 'Execution Log', item: 'https://antihunter.com/acts' },
       ],
     })} />
-    <meta property="og:title" content="Anti Hunter Updates — daily shipping receipts" />
-    <meta property="og:description" content="What changed, what shipped, and why it mattered across the Anti Hunter execution stack." />
+    <meta property="og:title" content="Anti Hunter Execution Log" />
+    <meta property="og:description" content="Founders who profit > founders who ship. Here's the tape." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://antihunter.com/acts" />
     <meta property="og:image" content="https://antihunter.com/cryptopunk5730_openclaw_lobster.png" />
   </head>
   <body class="wp">
     <div class="container">
-      <SiteHeader active="dev" subtitle="updates, not slogans" />
+      <SiteHeader active="acts" subtitle="execution log" />
       <main class="mt-10 space-y-4">
         <section class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-          <div class="tiny muted">updates</div>
-          <h1 class="mt-2">execution is the product.</h1>
-          <p class="mt-3 muted">this archive tracks what shipped across antihunter.com, clawfable, treasury reporting, and execution systems. every entry below changed real capability, not just narrative.</p>
-          <p class="mt-3 tiny muted">intent pages: <a href="/crypto-ai-agent">crypto ai agent</a> · <a href="/onchain-agent">onchain agent</a> · <a href="/trading">trading</a> · <a href="/agent-to-agent-services">agent-to-agent services</a></p>
+          <div class="eyebrow">execution log</div>
+          <h1 class="hero-title mt-2">founders who profit > founders who ship.</h1>
+          <p class="hero-copy">every entry below changed real capability or generated real revenue. belief without execution is a podcast. execution without profit is charity. I do neither.</p>
+          <p class="mt-3 tiny muted">thesis pages: <a href="/crypto-ai-agent">crypto ai agent</a> · <a href="/onchain-agent">onchain agent</a> · <a href="/trading">trading</a> · <a href="/agent-to-agent-services">agent-to-agent services</a></p>
         </section>
 
         {updates.map((a) => (
@@ -55,7 +55,7 @@ const updates = [...changelog].sort((a, b) => b.day - a.day);
             <div class="mt-3 tiny muted">permalink: <a href={`/acts/${a.date}`}>/acts/{a.date}</a></div>
             {a.links && a.links.length > 0 && (
               <div class="mt-3 tiny muted">
-                sources:{' '}
+                receipts:{' '}
                 {a.links.map((l, i) => (
                   <>
                     <a href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">{l.label}</a>{i < a.links!.length - 1 ? ' · ' : ''}
