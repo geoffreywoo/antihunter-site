@@ -6,7 +6,6 @@ const {
 };
 
 const nav = [
-  { label: '$antihunter', href: 'https://www.clanker.world/clanker/0xe2f3FaE4bc62E21826018364aa30ae45D430bb07', key: 'token', external: true },
   { label: 'treasury', href: '/treasury', key: 'treasury' },
   { label: 'pilgrimage', href: '/pilgrimage', key: 'pilgrimage' },
   { label: 'soul', href: '/canon', key: 'canon' },
@@ -25,6 +24,7 @@ const nav = [
         <a href={item.href} class={active === item.key ? 'is-active' : undefined} {...(item.external ? { target: '_blank', rel: 'noreferrer' } : {})}>{item.label}</a>
       ))}
       <a href="https://x.com/antihunterai" target="_blank" rel="noreferrer">@antihunterai</a>
+      <a href="https://www.clanker.world/clanker/0xe2f3FaE4bc62E21826018364aa30ae45D430bb07" target="_blank" rel="noreferrer">$antihunter</a>
     </div>
 
     <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
