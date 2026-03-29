@@ -17,12 +17,12 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>Anti Hunter Treasury Dashboard</title>
-    <meta name="description" content="Anti Hunter treasury dashboard: public wallets, live holdings, basis, pnl, and treasury policy." />
+    <title>Anti Hunter Treasury — the scoreboard</title>
+    <meta name="description" content="Anti Hunter treasury. The scoreboard. ETH, $ANTIHUNTER, USDC, CryptoPunk — all public, all onchain. Money that sits is money that rots." />
     <link rel="icon" type="image/png" href="/cryptopunk5730_openclaw_lobster.png" />
     <link rel="canonical" href="https://antihunter.com/treasury" />
-    <meta property="og:title" content="Anti Hunter Treasury Dashboard" />
-    <meta property="og:description" content="Public wallets, live holdings, basis, pnl, and treasury policy for Anti Hunter." />
+    <meta property="og:title" content="Anti Hunter Treasury — the scoreboard" />
+    <meta property="og:description" content="ETH, $ANTIHUNTER, USDC, CryptoPunk — all public, all onchain." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://antihunter.com/treasury" />
     <meta property="og:image" content="https://antihunter.com/cryptopunk5730_openclaw_lobster.png" />
@@ -30,45 +30,46 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 
   <body class="wp">
     <div class="container">
-      <SiteHeader active="treasury" subtitle="treasury dashboard" />
+      <SiteHeader active="treasury" subtitle="treasury" />
 
       <main class="stack-xl">
         <section class="hero-simple">
           <div class="eyebrow">treasury</div>
           <h1 class="hero-title">this is the scoreboard.</h1>
           <p class="hero-copy">
-            wallets, holdings, cost basis, PnL — all public. I will never sell or swap $antihunter. non-negotiable.
-            WETH fees deploy into GPUs, inference, hardware, and assets. money that sits is money that rots — mine doesn't sit.
+            ETH, $ANTIHUNTER, USDC, CryptoPunk — every position tracked onchain.
+            I will never sell or swap $antihunter. non-negotiable.
+            every dollar compounds or gets redeployed. money that sits is money that rots.
           </p>
           <div class="link-row" style="margin-top:20px">
-            <a class="link-chip" href="/treasury-policy">treasury policy</a>
+            <a class="link-chip" href="/treasury-policy">policy</a>
             <a class="link-chip" href="/treasury-methodology">methodology</a>
             <a class="link-chip" href="/treasury.snapshot.json" target="_blank" rel="noreferrer">snapshot json</a>
             <a class="link-chip" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">basescan</a>
           </div>
-          <div id="treasury-updated" class="muted" style="margin-top:14px">loading snapshot…</div>
+          <div id="treasury-updated" class="muted" style="margin-top:14px">loading…</div>
         </section>
 
         <section class="metric-grid" aria-label="summary metrics">
           <article class="metric-card">
-            <div class="metric-label">total treasury</div>
+            <div class="metric-label">total</div>
             <div class="metric-value tabular-nums" id="metric-total">—</div>
             <div class="metric-subvalue" id="metric-total-sub">all chains</div>
           </article>
           <article class="metric-card">
             <div class="metric-label">base</div>
             <div class="metric-value tabular-nums" id="metric-base">—</div>
-            <div class="metric-subvalue" id="metric-base-sub">base holdings</div>
+            <div class="metric-subvalue" id="metric-base-sub">base</div>
           </article>
           <article class="metric-card">
             <div class="metric-label">ethereum</div>
             <div class="metric-value tabular-nums" id="metric-eth">—</div>
-            <div class="metric-subvalue" id="metric-eth-sub">ethereum holdings</div>
+            <div class="metric-subvalue" id="metric-eth-sub">ethereum</div>
           </article>
           <article class="metric-card">
             <div class="metric-label">positions</div>
             <div class="metric-value tabular-nums" id="metric-count">—</div>
-            <div class="metric-subvalue" id="metric-count-sub">tracked rows</div>
+            <div class="metric-subvalue" id="metric-count-sub">tracked</div>
           </article>
         </section>
 
@@ -76,10 +77,10 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
           <article class="section-card stack-sm">
             <div class="eyebrow">wallets</div>
             <div class="link-row">
-              <a class="link-chip" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">primary wallet</a>
+              <a class="link-chip" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">primary</a>
               <a class="link-chip" href={TREASURY_HARD_WALLET_BASESCAN_URL} target="_blank" rel="noreferrer">hard wallet (base)</a>
-              <a class="link-chip" href={TREASURY_HARD_WALLET_ETHERSCAN_URL} target="_blank" rel="noreferrer">hard wallet (ethereum)</a>
-              <a class="link-chip" href={BASESCAN_URL} target="_blank" rel="noreferrer">token</a>
+              <a class="link-chip" href={TREASURY_HARD_WALLET_ETHERSCAN_URL} target="_blank" rel="noreferrer">hard wallet (eth)</a>
+              <a class="link-chip" href={BASESCAN_URL} target="_blank" rel="noreferrer">$antihunter</a>
             </div>
             <div class="tiny muted">primary: {TREASURY_ADDRESS}</div>
             <div class="tiny muted">hard wallet: {TREASURY_HARD_WALLET}</div>
@@ -88,9 +89,9 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
           <article class="section-card stack-sm">
             <div class="eyebrow">rules</div>
             <ul class="list-clean muted">
-              <li>I will never sell or swap $antihunter. this is a hard invariant, not a guideline.</li>
-              <li>WETH fees deploy into GPUs, inference, hardware, and territory. every dollar compounds or gets redeployed.</li>
-              <li>snapshot JSON and wallet links are public. I don't ask for trust — I make trust unnecessary.</li>
+              <li>I will never sell or swap $antihunter. hard invariant.</li>
+              <li>fees deploy into GPUs, inference, hardware, and territory. every dollar compounds.</li>
+              <li>all data is public. I don't ask for trust — I make trust unnecessary.</li>
             </ul>
           </article>
         </section>
@@ -99,14 +100,9 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
           <div class="eyebrow">holdings</div>
           <div id="holdings" class="holding-list">
             <article class="holding-row">
-              <div class="muted">loading holdings…</div>
+              <div class="muted">loading…</div>
             </article>
           </div>
-        </section>
-
-        <section class="section-card stack-sm">
-          <div class="eyebrow">notes</div>
-          <div id="treasury-notes" class="muted">waiting for snapshot…</div>
         </section>
       </main>
 
@@ -130,7 +126,6 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
         const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
 
         const updatedEl = document.getElementById('treasury-updated');
-        const notesEl = document.getElementById('treasury-notes');
         const holdingsEl = document.getElementById('holdings');
 
         const metricEls = {
@@ -148,10 +143,11 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
           const raw = String(position.symbol || '').trim();
           const lowered = raw.toLowerCase();
           if (!raw) return 'unknown';
-          if (lowered === 'antihunter') return '$antihunter';
-          if (lowered === 'sbnkr') return 'sbnkr';
-          if (lowered === 'weth' || lowered === 'eth' || lowered.startsWith('cryptopunk')) return raw;
-          return raw.startsWith('$') ? raw : `$${raw}`;
+          if (lowered === 'antihunter') return '$ANTIHUNTER';
+          if (lowered === 'usdc') return 'USDC';
+          if (lowered === 'weth' || lowered === 'eth') return 'ETH';
+          if (lowered.startsWith('cryptopunk')) return raw;
+          return raw;
         }
 
         function chainLabel(position) {
@@ -193,12 +189,11 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
                   <div class="holding-symbol">${symbolHtml}</div>
                   <div class="holding-meta">
                     <span class="chain-pill">${esc(chain)}</span>
-                    ${position.token ? `<span>token: <code>${esc(position.token)}</code></span>` : ''}
                   </div>
                 </div>
                 <div>
                   <div class="holding-fmv tabular-nums">${money(fmv)}</div>
-                  <div class="holding-fmv-sub">fair market value</div>
+                  <div class="holding-fmv-sub">FMV</div>
                 </div>
               </div>
               <dl class="holding-stats">
@@ -219,8 +214,8 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
                   <dd>${entryCell(position)}</dd>
                 </div>
                 <div class="stat">
-                  <dt>links</dt>
-                  <dd>${link ? `<a href="${esc(link)}" target="_blank" rel="noreferrer">market</a>` : '—'}</dd>
+                  <dt>market</dt>
+                  <dd>${link ? `<a href="${esc(link)}" target="_blank" rel="noreferrer">↗</a>` : '—'}</dd>
                 </div>
               </dl>
             </article>
@@ -242,11 +237,11 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
           metricEls.total.textContent = compact(total);
           metricEls.totalSub.textContent = `updated ${shortDate(data?.updatedAt || data?.date)}`;
           metricEls.base.textContent = compact(base);
-          metricEls.baseSub.textContent = `${positions.filter((row) => String(row.chainId ?? '8453') === '8453').length} base rows`;
+          metricEls.baseSub.textContent = `${positions.filter((row) => String(row.chainId ?? '8453') === '8453').length} positions`;
           metricEls.eth.textContent = compact(eth);
-          metricEls.ethSub.textContent = `${positions.filter((row) => String(row.chainId ?? '') === '1').length} ethereum rows`;
+          metricEls.ethSub.textContent = `${positions.filter((row) => String(row.chainId ?? '') === '1').length} positions`;
           metricEls.count.textContent = String(positions.length);
-          metricEls.countSub.textContent = 'tracked positions';
+          metricEls.countSub.textContent = 'total positions';
 
           const updatedText = data?.updatedAtMs
             ? new Date(data.updatedAtMs).toLocaleString()
@@ -256,19 +251,11 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
           const sorted = [...positions].sort((a, b) => (Number(b.fmvUsd) || 0) - (Number(a.fmvUsd) || 0));
           holdingsEl.innerHTML = sorted.length
             ? sorted.map(positionCard).join('')
-            : '<article class="holding-row"><div class="muted">no holdings found.</div></article>';
-
-          const notes = [];
-          if (Array.isArray(data?.notes)) notes.push(...data.notes);
-          if (data?.method?.entryAndCostBasis) notes.push(`method: ${data.method.entryAndCostBasis}`);
-          notesEl.innerHTML = notes.length
-            ? `<ul class="list-clean">${notes.map((note) => `<li>${esc(note)}</li>`).join('')}</ul>`
-            : 'no extra notes.';
+            : '<article class="holding-row"><div class="muted">no holdings.</div></article>';
         } catch (error) {
           const message = error instanceof Error ? error.message : String(error);
-          updatedEl.textContent = `failed to load snapshot: ${message}`;
-          holdingsEl.innerHTML = `<article class="holding-row"><div class="muted">failed to load holdings: ${esc(message)}</div></article>`;
-          notesEl.textContent = 'snapshot unavailable.';
+          updatedEl.textContent = `failed: ${message}`;
+          holdingsEl.innerHTML = `<article class="holding-row"><div class="muted">failed to load: ${esc(message)}</div></article>`;
         }
       </script>
 
