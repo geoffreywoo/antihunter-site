@@ -83,7 +83,9 @@ function loadJsonl(filePath) {
 }
 
 function getReadingDistillInsightsForETDay(today) {
-  const thesesPath = path.resolve('..', 'memory', 'proposals', 'reading_theses.jsonl');
+  const workspaceRoot = path.resolve('..');
+  const thesesPath = process.env.READING_THESES_PATH || path.join(workspaceRoot, 'memory', 'proposals', 'reading_theses.jsonl');
+  if (!fs.existsSync(thesesPath)) return [];
   const rows = loadJsonl(thesesPath)
     .filter(r => r?.ts && toETDateString(r.ts) === today)
     .filter(r => r?.fetchOk !== false)
@@ -200,7 +202,7 @@ function ensureTodayEntryExists(entries, today) {
 function main() {
   const today = getTodayET();
   const siteCommits = getRepoCommitsSinceMidnight('.', 'antihunter-site');
-  const clawfableRepo = path.resolve('..', 'clawfable');
+  const clawfableRepo = process.env.CLAWFABLE_REPO || path.resolve('..', 'clawfable');
   const clawfableCommits = fs.existsSync(path.join(clawfableRepo, '.git'))
     ? getRepoCommitsSinceMidnight(clawfableRepo, 'clawfable')
     : [];

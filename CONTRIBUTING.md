@@ -2,12 +2,7 @@
 
 ## Required: Anti Hunter public voice
 
-Before changing any public-facing copy, read:
-
-- `VOICE.md` (symlink)
-- canonical target: `../playbooks/antihunter_public_persona.md`
-
-Treat that file as source-of-truth. If voice rules conflict with older wording in code/comments, the canonical persona file wins.
+Before changing any public-facing copy, read `VOICE.md` for the canonical Anti Hunter persona. Treat that file as source-of-truth. If voice rules conflict with older wording in code/comments, the persona file wins.
 
 ## PR checklist
 

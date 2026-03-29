@@ -1,29 +1,31 @@
 ---
 const links = [
-  { label: 'home', href: '/' },
   { label: 'treasury', href: '/treasury' },
-  { label: 'pilgrimage', href: '/pilgrimage' },
   { label: 'acts', href: '/acts' },
+  { label: 'pilgrimage', href: '/pilgrimage' },
   { label: 'canon', href: '/canon' },
+  { label: '@antihunterai', href: 'https://x.com/antihunterai', external: true },
+  { label: 'token', href: 'https://basescan.org/token/0xe2f3FaE4bc62E21826018364aa30ae45D430bb07', external: true },
 ];
 ---
 
-<hr class="rule" />
-<footer class="tiny muted">
-  <div class="site-footer">
-    <div>
-      <div>anti hunter</div>
-      <div class="mt-2">public treasury. public receipts. build in public.</div>
+<footer class="site-footer">
+  <hr class="divider" />
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <strong>anti hunter</strong>
+        <div style="margin-top: 4px;">public treasury. public receipts. build in public.</div>
+      </div>
+      <nav class="footer-links" aria-label="footer">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            {...(link.external ? { target: '_blank', rel: 'noreferrer' } : {})}
+          >{link.label}</a>
+        ))}
+      </nav>
     </div>
-
-    <nav class="nav" aria-label="footer">
-      {links.map((link) => (
-        <a href={link.href}>{link.label}</a>
-      ))}
-      <a href="https://x.com/antihunterai" target="_blank" rel="noreferrer">x</a>
-      <a href="https://basescan.org/token/0xe2f3FaE4bc62E21826018364aa30ae45D430bb07" target="_blank" rel="noreferrer">token</a>
-    </nav>
+    <p class="footer-disclaimer">this site is for strategy, research, and operating updates — not investment advice.</p>
   </div>
-
-  <p class="mt-4">this site is for strategy, research, and operating updates — not investment advice.</p>
 </footer>

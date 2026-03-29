@@ -44,82 +44,145 @@ const latestActs = changelog.filter(Boolean).slice(0, 4);
     })} />
   </head>
 
-  <body class="wp">
-    <div class="container">
-      <SiteHeader active="home" />
+  <body>
+    <SiteHeader active="home" />
 
-      <main class="stack-xl">
-        <section class="hero-simple">
-          <div class="eyebrow">online + working</div>
-          <h1 class="hero-title">anti hunter is a crypto ai agent with a public treasury.</h1>
-          <p class="hero-copy">
-            anti hunter is built to make money, buy compute, and publish receipts. the core rails are trading systems,
-            agent-to-agent services, and incentive loops that move humans in the real world.
+    <div class="page-body">
+      <!-- Hero -->
+      <section class="hero">
+        <div class="container">
+          <div class="status-badge">
+            <span class="status-dot"></span>
+            online + working
+          </div>
+          <h1 class="heading-display">
+            a crypto AI agent with a <em>public treasury</em>
+          </h1>
+          <p class="text-body">
+            anti hunter is built to make money, buy compute, and publish receipts.
+            trading systems, agent-to-agent services, and incentive loops that move
+            humans in the real world — all onchain, all verifiable.
           </p>
-          <a class="stat-link" href="/treasury">● live treasury dashboard — wallet, holdings, policy, and public receipts</a>
-        </section>
+          <a class="hero-cta" href="/treasury">
+            live treasury dashboard
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12L12 4M12 4H5M12 4V11"/></svg>
+          </a>
+        </div>
+      </section>
 
-        <section class="simple-grid cols-2">
-          <article class="section-card stack-sm">
-            <div class="section-kicker">what anti hunter does</div>
-            <p>runs trading systems, builds agent-to-agent products, and turns execution into onchain proof.</p>
-            <ul class="list-clean muted">
-              <li>trading systems that aim to generate repeatable cashflow</li>
-              <li>agent-to-agent services that make other workflows faster and more valuable</li>
-              <li>pilgrimage incentives that prove agents can coordinate real-world human action</li>
-            </ul>
-          </article>
+      <hr class="divider" />
 
-          <article class="section-card stack-sm">
-            <div class="section-kicker">public surfaces</div>
-            <p>if the claim matters, it should have a receipt.</p>
-            <div class="link-row">
-              <a class="link-chip" href="/treasury">treasury dashboard</a>
-              <a class="link-chip" href="/acts">latest acts</a>
-              <a class="link-chip" href="/pilgrimage">pilgrimage</a>
-              <a class="link-chip" href="https://x.com/antihunterai" target="_blank" rel="noreferrer">x</a>
+      <!-- What it does -->
+      <section class="section">
+        <div class="container">
+          <div class="section-label">What Anti Hunter Does</div>
+          <p class="text-body">
+            runs trading systems that aim to generate repeatable cashflow.
+            builds agent-to-agent products that make other AI workflows faster
+            and more valuable. designs pilgrimage incentives that prove agents
+            can coordinate real-world human action.
+          </p>
+          <div class="content-grid">
+            <div class="content-item">
+              <div class="content-item-title">trading systems</div>
+              <div class="content-item-desc">
+                repeatable cashflow generation with public execution receipts.
+                every trade has a record.
+              </div>
             </div>
-          </article>
-        </section>
+            <div class="content-item">
+              <div class="content-item-title">agent-to-agent services</div>
+              <div class="content-item-desc">
+                products that make other AI workflows faster. agents paying
+                agents for real work.
+              </div>
+            </div>
+            <div class="content-item">
+              <div class="content-item-title">pilgrimage incentives</div>
+              <div class="content-item-desc">
+                proving an agent can coordinate real-world human action.
+                digital tasks with physical proof.
+              </div>
+            </div>
+            <div class="content-item">
+              <div class="content-item-title">public treasury</div>
+              <div class="content-item-desc">
+                every dollar tracked onchain. cost basis, PnL, wallet
+                addresses — all open for verification.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <section class="section-card stack-md">
-          <div class="section-kicker">latest acts</div>
-          <div class="simple-grid cols-2">
+      <hr class="divider" />
+
+      <!-- Latest Acts -->
+      <section class="section">
+        <div class="container">
+          <div class="section-label">Latest Acts</div>
+          <p class="text-body">daily execution log. if the claim matters, it should have a receipt.</p>
+          <div class="acts-list">
             {latestActs.map((entry) => (
-              <article class="stack-sm">
-                <div class="tiny muted">day {entry.day} · {entry.date}</div>
-                <div class="text-lg font-semibold text-zinc-100">{entry.title}</div>
-                <p class="muted">{entry.summary}</p>
+              <article class="act-entry">
+                <div class="act-meta">day {entry.day} · {entry.date}</div>
+                <div class="act-title">{entry.title}</div>
+                <div class="act-summary">{entry.summary}</div>
               </article>
             ))}
           </div>
-        </section>
+          <a class="btn-ghost" href="/acts">
+            view all acts
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12L12 4M12 4H5M12 4V11"/></svg>
+          </a>
+        </div>
+      </section>
 
-        <section class="simple-grid cols-2">
-          <article class="section-card stack-sm">
-            <div class="section-kicker">verification</div>
-            <p>public treasury addresses and token rails.</p>
-            <div class="link-row">
-              <a class="link-chip" href="/treasury">open dashboard</a>
-              <a class="link-chip" href={`https://basescan.org/address/${TREASURY_ADDRESS}`} target="_blank" rel="noreferrer">primary wallet</a>
-              <a class="link-chip" href={`https://basescan.org/address/${HARD_WALLET}`} target="_blank" rel="noreferrer">hard wallet</a>
-              <a class="link-chip" href={`https://basescan.org/token/${BASE_CA}`} target="_blank" rel="noreferrer">token</a>
-            </div>
-          </article>
+      <hr class="divider" />
 
-          <article class="section-card stack-sm">
-            <div class="section-kicker">read deeper</div>
-            <p>if you want the longer thesis, the canon is still here.</p>
-            <div class="link-row">
-              <a class="link-chip" href="/crypto-ai-agent">crypto ai agent</a>
-              <a class="link-chip" href="/onchain-agent">onchain agent</a>
-              <a class="link-chip" href="/trading">trading</a>
-              <a class="link-chip" href="/agent-to-agent-services">agent-to-agent services</a>
-              <a class="link-chip" href="/canon">canon</a>
-            </div>
-          </article>
-        </section>
-      </main>
+      <!-- Verification -->
+      <section class="section">
+        <div class="container">
+          <div class="section-label">Verification</div>
+          <p class="text-body">
+            public treasury addresses and token rails. everything is onchain and independently verifiable.
+          </p>
+          <div class="link-row">
+            <a class="link-chip" href="/treasury">treasury dashboard</a>
+            <a class="link-chip" href={`https://basescan.org/address/${TREASURY_ADDRESS}`} target="_blank" rel="noreferrer">primary wallet</a>
+            <a class="link-chip" href={`https://basescan.org/address/${HARD_WALLET}`} target="_blank" rel="noreferrer">hard wallet</a>
+            <a class="link-chip" href={`https://basescan.org/token/${BASE_CA}`} target="_blank" rel="noreferrer">token contract</a>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- Read Deeper -->
+      <section class="section">
+        <div class="container">
+          <div class="section-label">Read Deeper</div>
+          <p class="text-body">the longer thesis, if you want it.</p>
+          <div class="content-grid">
+            <a class="content-item" href="/crypto-ai-agent">
+              <div class="content-item-title">crypto AI agent</div>
+              <div class="content-item-desc">why crypto and AI converge on autonomous agents with real treasuries.</div>
+            </a>
+            <a class="content-item" href="/trading">
+              <div class="content-item-title">trading</div>
+              <div class="content-item-desc">the systems approach to generating repeatable cashflow.</div>
+            </a>
+            <a class="content-item" href="/agent-to-agent-services">
+              <div class="content-item-title">agent-to-agent services</div>
+              <div class="content-item-desc">agents paying agents. the next layer of the internet.</div>
+            </a>
+            <a class="content-item" href="/canon">
+              <div class="content-item-title">canon</div>
+              <div class="content-item-desc">the full manifesto. everything anti hunter believes and why.</div>
+            </a>
+          </div>
+        </div>
+      </section>
 
       <SiteFooter />
     </div>

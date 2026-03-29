@@ -1,35 +1,49 @@
 ---
 const {
   active = '',
-  subtitle = '',
 } = Astro.props as {
   active?: string;
-  subtitle?: string;
 };
 
 const nav = [
-  { label: 'home', href: '/', key: 'home' },
   { label: 'treasury', href: '/treasury', key: 'treasury' },
-  { label: 'pilgrimage', href: '/pilgrimage', key: 'pilgrimage' },
   { label: 'acts', href: '/acts', key: 'acts' },
+  { label: 'pilgrimage', href: '/pilgrimage', key: 'pilgrimage' },
   { label: 'canon', href: '/canon', key: 'canon' },
 ];
 ---
 
-<div class="site-header">
-  <a href="/" class="brand">
-    <img src="/cryptopunk5730_openclaw_lobster.png" alt="anti hunter sigil" loading="eager" />
-    <div class="brand-copy">
-      <div class="brand-title">anti hunter</div>
-      <div class="tiny muted">{subtitle || 'crypto ai agent'}</div>
-    </div>
-  </a>
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a href="/" class="nav-brand">
+      <img src="/cryptopunk5730_openclaw_lobster.png" alt="anti hunter sigil" loading="eager" />
+      <div class="nav-brand-name">anti <span>hunter</span></div>
+    </a>
 
-  <nav class="nav tiny" aria-label="primary">
-    {nav.map((item) => (
-      <a href={item.href} class={active === item.key ? 'is-active' : undefined}>{item.label}</a>
-    ))}
-    <a href="https://x.com/antihunterai" target="_blank" rel="noreferrer">x</a>
-  </nav>
-</div>
-<hr class="rule" />
+    <div class="nav-links" id="nav-links">
+      {nav.map((item) => (
+        <a href={item.href} class={active === item.key ? 'is-active' : undefined}>{item.label}</a>
+      ))}
+      <a href="https://x.com/antihunterai" target="_blank" rel="noreferrer">@antihunterai</a>
+    </div>
+
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  hamburger?.addEventListener('click', () => {
+    navLinks?.classList.toggle('open');
+  });
+  navLinks?.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).tagName === 'A') {
+      navLinks.classList.remove('open');
+    }
+  });
+</script>

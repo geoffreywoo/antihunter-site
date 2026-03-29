@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 """Generate a real PDF artifact for agent ops architecture from the Markdown spec."""
 
+import os
 from pathlib import Path
 from fpdf import FPDF
 
-SRC = Path('/Users/gwbox/.openclaw/workspace/antihunter-opensource/agent_ops_architecture_spec.md')
-OUT = Path('/Users/gwbox/.openclaw/workspace/antihunter-site/public/roadmap/agent-ops-architecture.pdf')
+SCRIPT_DIR = Path(__file__).resolve().parent
+REPO_ROOT = SCRIPT_DIR.parent
+
+SRC = Path(os.environ.get('AGENT_OPS_SPEC', REPO_ROOT / 'agent_ops_architecture_spec.md'))
+OUT = Path(os.environ.get('AGENT_OPS_PDF_OUT', REPO_ROOT / 'public' / 'roadmap' / 'agent-ops-architecture.pdf'))
 
 if not SRC.exists():
     raise SystemExit(f'missing source spec: {SRC}')

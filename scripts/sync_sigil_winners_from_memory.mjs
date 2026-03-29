@@ -3,12 +3,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const siteRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
-const workspaceRoot = path.resolve(siteRoot, '..');
+const workspaceRoot = process.env.WORKSPACE_ROOT || path.resolve(siteRoot, '..');
+const memoryDir = process.env.MEMORY_DIR || path.join(workspaceRoot, 'memory');
 
-const sourcePath = path.join(workspaceRoot, 'memory', 'x_self_posts.jsonl');
-const queueStatePath = path.join(workspaceRoot, 'memory', 'x_post_queue_state.json');
-const decisionsPath = path.join(workspaceRoot, 'memory', 'x_engagement_policy_decisions.jsonl');
-const contextPath = path.join(workspaceRoot, 'memory', 'x_engagement_context.jsonl');
+const sourcePath = path.join(memoryDir, 'x_self_posts.jsonl');
+const queueStatePath = path.join(memoryDir, 'x_post_queue_state.json');
+const decisionsPath = path.join(memoryDir, 'x_engagement_policy_decisions.jsonl');
+const contextPath = path.join(memoryDir, 'x_engagement_context.jsonl');
 const outPath = path.join(siteRoot, 'src', 'data', 'sigil-winners.json');
 const manualPath = path.join(siteRoot, 'src', 'data', 'sigil-winners-manual.json');
 
