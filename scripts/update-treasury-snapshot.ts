@@ -65,6 +65,7 @@ const BASE_TOKEN_ALLOWLIST = [
 	SBNKR_TOKEN, // sBNKR (Staked Banker)
 	'0xf30bf00edd0c22db54c9274b90d2a4c21fc09b07', // FELIX
 	'0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07', // BIO
+	'0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913', // USDC
 ].map((a) => a.toLowerCase());
 
 const EXTRA_TOKENS = String(process.env.TREASURY_EXTRA_TOKENS ?? '')

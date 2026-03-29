@@ -102,6 +102,7 @@ export const GET: APIRoute = async ({ url }) => {
 					'0x22af33fe49fd1fa80c7149773dde5890d3c76f3b', // BNKR
 					'0xf30bf00edd0c22db54c9274b90d2a4c21fc09b07', // FELIX
 					'0xd655790b0486fa681c23b955f5ca7cd5f5c8cb07', // BIO
+					'0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913', // USDC
 				].map((a) => a.toLowerCase());
 
 				const FEE_ENTRY_DATE = '2026-02-06';
