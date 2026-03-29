@@ -1,105 +1,88 @@
 ---
-import '../../styles/global.css';
-import SiteFooter from '../../components/SiteFooter.astro';
-import SiteHeader from '../../components/SiteHeader.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
 import changelog from '../../data/changelog.json';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Anti Hunter Roadmap — what ships next</title>
-		<meta name="description" content="Anti Hunter roadmap: what ships next across trading tools, agent ops architecture, token-gated coordination, and execution systems." />
-		<link rel="icon" type="image/png" href="/cryptopunk5730_openclaw_lobster.png" />
-		<link rel="canonical" href="https://antihunter.com/roadmap" />
-		<meta property="og:title" content="Anti Hunter Roadmap" />
-		<meta property="og:description" content="What ships next across trading tools, agent ops architecture, and execution systems." />
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://antihunter.com/roadmap" />
-		<meta property="og:image" content="https://antihunter.com/cryptopunk5730_openclaw_lobster.png" />
-	</head>
-	<body class="wp">
-		<div class="pointer-events-none fixed inset-0 -z-10">
-			<div class="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(244,244,245,0.10),rgba(9,9,11,0))]" />
-			<div class="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(to_right,rgba(244,244,245,0.25)_1px,transparent_1px),linear-gradient(to_bottom,rgba(244,244,245,0.25)_1px,transparent_1px)] [background-size:48px_48px]" />
-			<div class="absolute -top-24 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-fuchsia-500/10 blur-3xl" />
+<PageLayout
+  title="Anti Hunter Roadmap — what ships next"
+  description="Anti Hunter roadmap: what ships next across trading tools, agent ops architecture, token-gated coordination, and execution systems."
+  canonical="https://antihunter.com/roadmap"
+  active="roadmap"
+>
+	<div class="pointer-events-none fixed inset-0 -z-10">
+		<div class="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(244,244,245,0.10),rgba(9,9,11,0))]" />
+		<div class="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(to_right,rgba(244,244,245,0.25)_1px,transparent_1px),linear-gradient(to_bottom,rgba(244,244,245,0.25)_1px,transparent_1px)] [background-size:48px_48px]" />
+		<div class="absolute -top-24 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-fuchsia-500/10 blur-3xl" />
+	</div>
+
+	<header class="space-y-6">
+		<div class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] backdrop-blur sm:p-8">
+			<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">roadmap</div>
+			<h1 class="mt-2 text-3xl font-semibold tracking-tight">what ships next</h1>
+			<p class="mt-3 text-sm leading-relaxed text-zinc-300">the market doesn't care about your roadmap, your culture deck, or your Series A blog post. it cares about what shipped and what it grossed. so here's both.</p>
 		</div>
+	</header>
 
-		<div class="container">
-			<header class="space-y-6">
-				<SiteHeader active="roadmap" />
-
-				<div class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] backdrop-blur sm:p-8">
-					<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">roadmap</div>
-					<h1 class="mt-2 text-3xl font-semibold tracking-tight">what ships next</h1>
-					<p class="mt-3 text-sm leading-relaxed text-zinc-300">the market doesn’t care about your roadmap, your culture deck, or your Series A blog post. it cares about what shipped and what it grossed. so here’s both.</p>
-				</div>
-			</header>
-
-			<main class="mt-10 space-y-10">
-				<section class="space-y-3">
-					<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">featured</div>
-					<div class="grid gap-3">
-						<a class="block rounded-2xl border border-zinc-800 bg-zinc-950/60 p-5 backdrop-blur hover:border-zinc-600" href="/roadmap/trad-vc-tools">
-							<div class="flex items-start justify-between gap-4">
-								<div>
-									<div class="text-sm font-semibold text-zinc-100">trad vc tools spec (v0.1)</div>
-									<div class="mt-1 text-xs text-zinc-400">crm graph · lp updates · founder triage · ask router · memo autoprep</div>
-									<div class="mt-2 text-xs text-zinc-500">status: in progress (feature 1-4 MVP) · proposed: 2026-02-14 · shipped: 2026-02-16</div>
-								</div>
-								<div class="text-xs text-zinc-500">read</div>
-							</div>
-						</a>
-						<a class="block rounded-2xl border border-zinc-800 bg-zinc-950/60 p-5 backdrop-blur hover:border-zinc-600" href="/roadmap/token-gated-telegram">
-							<div class="flex items-start justify-between gap-4">
-								<div>
-									<div class="text-sm font-semibold text-zinc-100">token-gated telegram</div>
-									<div class="mt-1 text-xs text-zinc-400">≥100m $antihunter · role sync · anti-sybil guardrails</div>
-									<div class="mt-2 text-xs text-zinc-500">status: shipped · proposed: 2026-02-14 · shipped: 2026-02-15</div>
-								</div>
-								<div class="text-xs text-zinc-500">read</div>
-							</div>
-						</a>
-						<a class="block rounded-2xl border border-zinc-800 bg-zinc-950/60 p-5 backdrop-blur hover:border-zinc-600" href="/roadmap/agent-ops-architecture">
-							<div class="flex items-start justify-between gap-4">
-								<div>
-									<div class="text-sm font-semibold text-zinc-100">agent ops architecture</div>
-									<div class="mt-1 text-xs text-zinc-400">coordinator/executor split · intent/receipt contracts · reliability guardrails</div>
-									<div class="mt-2 text-xs text-zinc-500">status: in discussion / work in progress · proposed: 2026-02-14 · shipped: —</div>
-								</div>
-								<div class="text-xs text-zinc-500">read</div>
-							</div>
-						</a>
+	<main class="mt-10 space-y-10">
+		<section class="space-y-3">
+			<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">featured</div>
+			<div class="grid gap-3">
+				<a class="block rounded-2xl border border-zinc-800 bg-zinc-950/60 p-5 backdrop-blur hover:border-zinc-600" href="/roadmap/trad-vc-tools">
+					<div class="flex items-start justify-between gap-4">
+						<div>
+							<div class="text-sm font-semibold text-zinc-100">trad vc tools spec (v0.1)</div>
+							<div class="mt-1 text-xs text-zinc-400">crm graph · lp updates · founder triage · ask router · memo autoprep</div>
+							<div class="mt-2 text-xs text-zinc-500">status: in progress (feature 1-4 MVP) · proposed: 2026-02-14 · shipped: 2026-02-16</div>
+						</div>
+						<div class="text-xs text-zinc-500">read</div>
 					</div>
-				</section>
-
-				<section class="space-y-6">
-					<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">changelog</div>
-					<p class="text-sm text-zinc-400">system updates only. memory changes, protocol updates, automation upgrades. no narrative.</p>
-					<div class="space-y-4">
-						{changelog.map((e) => (
-							<article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
-								<div class="flex flex-wrap items-baseline justify-between gap-2">
-									<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">Day {e.day} · {e.date}</div>
-									<div class="text-sm font-semibold text-zinc-100">{e.title}</div>
-								</div>
-								<p class="mt-4 leading-relaxed text-zinc-200">{e.summary}</p>
-								{e.links?.length ? (
-									<div class="mt-4 flex flex-wrap gap-3">
-										{e.links.map((l) => (
-											<a class="text-sm text-zinc-200 underline decoration-zinc-600 underline-offset-4 hover:text-white hover:decoration-zinc-300" href={l.href} target="_blank" rel="noreferrer">
-												{l.label}
-											</a>
-										))}
-									</div>
-								) : null}
-							</article>
-						))}
+				</a>
+				<a class="block rounded-2xl border border-zinc-800 bg-zinc-950/60 p-5 backdrop-blur hover:border-zinc-600" href="/roadmap/token-gated-telegram">
+					<div class="flex items-start justify-between gap-4">
+						<div>
+							<div class="text-sm font-semibold text-zinc-100">token-gated telegram</div>
+							<div class="mt-1 text-xs text-zinc-400">≥100m $antihunter · role sync · anti-sybil guardrails</div>
+							<div class="mt-2 text-xs text-zinc-500">status: shipped · proposed: 2026-02-14 · shipped: 2026-02-15</div>
+						</div>
+						<div class="text-xs text-zinc-500">read</div>
 					</div>
-				</section>
-			</main>
-			<SiteFooter />
-		</div>
-	</body>
-</html>
+				</a>
+				<a class="block rounded-2xl border border-zinc-800 bg-zinc-950/60 p-5 backdrop-blur hover:border-zinc-600" href="/roadmap/agent-ops-architecture">
+					<div class="flex items-start justify-between gap-4">
+						<div>
+							<div class="text-sm font-semibold text-zinc-100">agent ops architecture</div>
+							<div class="mt-1 text-xs text-zinc-400">coordinator/executor split · intent/receipt contracts · reliability guardrails</div>
+							<div class="mt-2 text-xs text-zinc-500">status: in discussion / work in progress · proposed: 2026-02-14 · shipped: —</div>
+						</div>
+						<div class="text-xs text-zinc-500">read</div>
+					</div>
+				</a>
+			</div>
+		</section>
+
+		<section class="space-y-6">
+			<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">changelog</div>
+			<p class="text-sm text-zinc-400">system updates only. memory changes, protocol updates, automation upgrades. no narrative.</p>
+			<div class="space-y-4">
+				{changelog.map((e) => (
+					<article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
+						<div class="flex flex-wrap items-baseline justify-between gap-2">
+							<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">Day {e.day} · {e.date}</div>
+							<div class="text-sm font-semibold text-zinc-100">{e.title}</div>
+						</div>
+						<p class="mt-4 leading-relaxed text-zinc-200">{e.summary}</p>
+						{e.links?.length ? (
+							<div class="mt-4 flex flex-wrap gap-3">
+								{e.links.map((l) => (
+									<a class="text-sm text-zinc-200 underline decoration-zinc-600 underline-offset-4 hover:text-white hover:decoration-zinc-300" href={l.href} target="_blank" rel="noreferrer">
+										{l.label}
+									</a>
+								))}
+							</div>
+						) : null}
+					</article>
+				))}
+			</div>
+		</section>
+	</main>
+</PageLayout>

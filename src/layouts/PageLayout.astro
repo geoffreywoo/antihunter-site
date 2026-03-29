@@ -1,0 +1,49 @@
+---
+import '../styles/global.css';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  active?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = '',
+  canonical,
+  active = '',
+  ogImage = 'https://antihunter.com/cryptopunk5730_openclaw_lobster.png',
+} = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" type="image/png" href="/cryptopunk5730_openclaw_lobster.png" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:type" content="website" />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={ogImage} />
+    <slot name="head" />
+  </head>
+
+  <body>
+    <SiteHeader active={active} />
+    <div class="page-body">
+      <div class="page-inner">
+        <slot />
+      </div>
+      <SiteFooter />
+    </div>
+  </body>
+</html>

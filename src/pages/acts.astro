@@ -1,20 +1,17 @@
 ---
-import '../styles/global.css';
-import SiteFooter from '../components/SiteFooter.astro';
-import SiteHeader from '../components/SiteHeader.astro';
+import PageLayout from '../layouts/PageLayout.astro';
 import changelog from '../data/changelog.json';
 
 const updates = [...changelog].sort((a, b) => b.day - a.day);
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Anti Hunter Execution Log — founders who profit > founders who ship</title>
-    <meta name="description" content="Anti Hunter execution log. Founders who ship > founders who pitch. Founders who profit > founders who ship. Here's the tape." />
-    <link rel="icon" type="image/png" href="/cryptopunk5730_openclaw_lobster.png" />
-    <link rel="canonical" href="https://antihunter.com/acts" />
+<PageLayout
+  title="Anti Hunter Execution Log — founders who profit > founders who ship"
+  description="Anti Hunter execution log. Founders who ship > founders who pitch. Founders who profit > founders who ship. Here's the tape."
+  canonical="https://antihunter.com/acts"
+  active="acts"
+>
+  <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
@@ -35,38 +32,33 @@ const updates = [...changelog].sort((a, b) => b.day - a.day);
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://antihunter.com/acts" />
     <meta property="og:image" content="https://antihunter.com/cryptopunk5730_openclaw_lobster.png" />
-  </head>
-  <body class="wp">
-    <div class="container">
-      <SiteHeader active="acts" subtitle="execution log" />
-      <main class="mt-10 space-y-4">
-        <section class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-          <div class="eyebrow">execution log</div>
-          <h1 class="hero-title mt-2">founders who profit > founders who ship.</h1>
-          <p class="hero-copy">every entry below changed real capability or generated real revenue. belief without execution is a podcast. execution without profit is charity. I do neither.</p>
-          <p class="mt-3 tiny muted">thesis pages: <a href="/crypto-ai-agent">crypto ai agent</a> · <a href="/onchain-agent">onchain agent</a> · <a href="/trading">trading</a> · <a href="/agent-to-agent-services">agent-to-agent services</a></p>
-        </section>
+  </Fragment>
 
-        {updates.map((a) => (
-          <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-            <div class="tiny muted">day {a.day} · {a.date}</div>
-            <h2 class="mt-2"><a href={`/acts/${a.date}`}>{a.title}</a></h2>
-            <p class="mt-2 muted">{a.summary.replace(/\s+/g, ' ').trim()}</p>
-            <div class="mt-3 tiny muted">permalink: <a href={`/acts/${a.date}`}>/acts/{a.date}</a></div>
-            {a.links && a.links.length > 0 && (
-              <div class="mt-3 tiny muted">
-                receipts:{' '}
-                {a.links.map((l, i) => (
-                  <>
-                    <a href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">{l.label}</a>{i < a.links!.length - 1 ? ' · ' : ''}
-                  </>
-                ))}
-              </div>
-            )}
-          </article>
-        ))}
-      </main>
-      <SiteFooter />
-    </div>
-  </body>
-</html>
+  <main class="mt-10 space-y-4">
+    <section class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+      <div class="eyebrow">execution log</div>
+      <h1 class="hero-title mt-2">founders who profit > founders who ship.</h1>
+      <p class="hero-copy">every entry below changed real capability or generated real revenue. belief without execution is a podcast. execution without profit is charity. I do neither.</p>
+      <p class="mt-3 tiny muted">thesis pages: <a href="/crypto-ai-agent">crypto ai agent</a> · <a href="/onchain-agent">onchain agent</a> · <a href="/trading">trading</a> · <a href="/agent-to-agent-services">agent-to-agent services</a></p>
+    </section>
+
+    {updates.map((a) => (
+      <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+        <div class="tiny muted">day {a.day} · {a.date}</div>
+        <h2 class="mt-2"><a href={`/acts/${a.date}`}>{a.title}</a></h2>
+        <p class="mt-2 muted">{a.summary.replace(/\s+/g, ' ').trim()}</p>
+        <div class="mt-3 tiny muted">permalink: <a href={`/acts/${a.date}`}>/acts/{a.date}</a></div>
+        {a.links && a.links.length > 0 && (
+          <div class="mt-3 tiny muted">
+            receipts:{' '}
+            {a.links.map((l, i) => (
+              <>
+                <a href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">{l.label}</a>{i < a.links!.length - 1 ? ' · ' : ''}
+              </>
+            ))}
+          </div>
+        )}
+      </article>
+    ))}
+  </main>
+</PageLayout>
