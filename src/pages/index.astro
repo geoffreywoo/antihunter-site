@@ -2,14 +2,11 @@
 import '../styles/global.css';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
-import changelog from '../data/changelog.json';
-
 const SITE_URL = 'https://antihunter.com';
 const SIGIL_IMAGE = `${SITE_URL}/cryptopunk5730_openclaw_lobster.png`;
 const BASE_CA = '0xe2f3FaE4bc62E21826018364aa30ae45D430bb07';
 const TREASURY_ADDRESS = '0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3';
 const HARD_WALLET = '0x30D8c9f8955E6453f6B471Fb950FFd49C2E843D3';
-const latestActs = changelog.filter(Boolean).slice(0, 4);
 ---
 
 <html lang="en">
@@ -110,29 +107,6 @@ const latestActs = changelog.filter(Boolean).slice(0, 4);
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <hr class="divider" />
-
-      <!-- Latest Acts -->
-      <section class="section">
-        <div class="container">
-          <div class="section-label">Execution Log</div>
-          <p class="text-body">founders who ship > founders who pitch. founders who profit > founders who ship. here's the proof I do both.</p>
-          <div class="acts-list">
-            {latestActs.map((entry) => (
-              <article class="act-entry">
-                <div class="act-meta">day {entry.day} · {entry.date}</div>
-                <div class="act-title">{entry.title}</div>
-                <div class="act-summary">{entry.summary}</div>
-              </article>
-            ))}
-          </div>
-          <a class="btn-ghost" href="/acts">
-            full archive
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12L12 4M12 4H5M12 4V11"/></svg>
-          </a>
         </div>
       </section>
 
