@@ -288,6 +288,15 @@ async function ethBalanceBase(owner: string): Promise<number> {
 	}
 }
 
+async function erc20BalanceEthereum(token: string, owner: string): Promise<bigint> {
+	const res = await rpcCallEth('eth_call', [{ to: token, data: encodeBalanceOfCall(owner) }, 'latest']);
+	try {
+		return readUint256(res, 0);
+	} catch {
+		return 0n;
+	}
+}
+
 async function ethBalanceEthereum(owner: string): Promise<number> {
 	const hex = await rpcCallEth('eth_getBalance', [owner, 'latest']);
 	try {
@@ -757,6 +766,46 @@ async function main() {
 			costBasisEth: null,
 			fmvUsd: ethFmvUsdEthereum,
 			pnlUsd: null,
+		});
+	}
+
+	// USDC on Ethereum mainnet (hard wallet)
+	const USDC_ETH_MAINNET = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48';
+	const USDC_DECIMALS = 6;
+	const usdcRawEthereum = (await Promise.all(TREASURY_WALLETS.map((w) => erc20BalanceEthereum(USDC_ETH_MAINNET, w)))).reduce((a, b) => a + b, 0n);
+	if (usdcRawEthereum > 0n) {
+		const usdcBal = Number(usdcRawEthereum) / 10 ** USDC_DECIMALS;
+		rows.push({
+			chain: 'ethereum',
+			chainId: 1,
+			symbol: 'USDC',
+			token: USDC_ETH_MAINNET.toLowerCase(),
+			balance: String(usdcBal),
+			entryDate: null,
+			costBasisUsd: usdcBal, // USDC is 1:1 USD
+			costBasisEth: null,
+			fmvUsd: usdcBal,
+			pnlUsd: 0,
+			link: `https://etherscan.io/token/${USDC_ETH_MAINNET}`,
+		});
+	}
+
+	// USDC on Base
+	const USDC_BASE = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'.toLowerCase();
+	const usdcRawBase = (await Promise.all(TREASURY_WALLETS.map((w) => erc20Balance(USDC_BASE, w)))).reduce((a, b) => a + b, 0n);
+	if (usdcRawBase > 0n) {
+		const usdcBalBase = Number(usdcRawBase) / 10 ** USDC_DECIMALS;
+		rows.push({
+			chain: 'base',
+			chainId: 8453,
+			symbol: 'USDC',
+			token: USDC_BASE,
+			balance: String(usdcBalBase),
+			entryDate: null,
+			costBasisUsd: usdcBalBase,
+			costBasisEth: null,
+			fmvUsd: usdcBalBase,
+			pnlUsd: 0,
 		});
 	}
 
