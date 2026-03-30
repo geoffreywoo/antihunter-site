@@ -237,11 +237,21 @@ em, .accent {
   font-size: 1rem;
 }
 
+.hero-moniker {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  margin-bottom: 1.5rem;
+}
+
 .status-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.25rem;
   padding: 6px 14px;
   border: 1px solid var(--border);
   border-radius: 999px;
