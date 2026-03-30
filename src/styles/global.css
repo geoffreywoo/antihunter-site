@@ -334,6 +334,30 @@ em, .accent {
   line-height: 1.65;
 }
 
+.content-item-featured {
+  border-color: var(--accent);
+  grid-column: 1 / -1;
+}
+
+.content-item-featured:hover {
+  border-color: var(--accent);
+}
+
+.content-item-tag {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  border-radius: 999px;
+  padding: 2px 8px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
 /* ── Acts list ──────────────────────────────────── */
 
 .acts-list {
