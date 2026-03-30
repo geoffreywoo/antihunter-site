@@ -291,6 +291,25 @@ em, .accent {
   height: 14px;
 }
 
+.hero-cta-ghost {
+  background: transparent;
+  border: 1px solid var(--border-accent);
+  color: var(--text);
+}
+
+.hero-cta-ghost:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  box-shadow: none;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 2rem;
+}
+
 /* ── Homepage sections ──────────────────────────── */
 
 .section {
