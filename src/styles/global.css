@@ -688,7 +688,7 @@ em, .accent {
 .section-card,
 .box,
 .lore-card {
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-accent);
   background: var(--surface);
   border-radius: var(--radius);
   padding: 20px;
