@@ -8,7 +8,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "treasury:snapshot": "tsx scripts/update-treasury-snapshot.ts",
-    "treasury:validate": "node scripts/validate-treasury-snapshot.ts",
+    "treasury:validate": "tsx scripts/validate-treasury-snapshot.ts",
     "changelog:nightly": "node scripts/update_changelog_nightly.mjs",
     "changelog:validate": "node scripts/validate_changelog_json.mjs",
     "winners:sync": "node scripts/sync_sigil_winners_from_memory.mjs"

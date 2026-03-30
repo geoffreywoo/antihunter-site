@@ -2,9 +2,10 @@ name: Treasury snapshot
 
 on:
   schedule:
-    # Daily at 7pm EST = midnight UTC (00:00)
-    # During EDT (Mar–Nov), this runs at 8pm ET. Adjust if needed.
+    # Twice daily: midnight UTC (7pm EST) and noon UTC (7am EST)
+    # During EDT (Mar–Nov), these run at 8pm and 8am ET.
     - cron: '0 0 * * *'
+    - cron: '0 12 * * *'
   workflow_dispatch:
 
 jobs:
@@ -30,7 +31,7 @@ jobs:
           ETHEREUM_RPC_URL: ${{ secrets.ETHEREUM_RPC_URL }}
 
       - name: Validate snapshot
-        run: node scripts/validate-treasury-snapshot.ts
+        run: npm run treasury:validate
 
       - name: Commit and push if changed
         run: |
