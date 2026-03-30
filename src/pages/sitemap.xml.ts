@@ -1,24 +1,10 @@
-import changelog from '../data/changelog.json';
-
 const SITE_URL = 'https://antihunter.com';
 
 const pages = [
   '/',
-  '/acts',
-  '/agent-to-agent-services',
-  '/canon',
-  '/dev',
-  '/pilgrimage',
-  '/trading',
-  '/tokenomics',
   '/treasury',
   '/treasury-methodology',
-  '/treasury-policy',
-  '/roadmap',
-  '/roadmap/agent-ops-architecture',
-  '/roadmap/token-gated-telegram',
-  '/roadmap/trad-vc-tools',
-  ...(changelog || []).map((e) => `/acts/${e.date}`),
+  '/pilgrimage',
 ];
 
 export function GET() {
