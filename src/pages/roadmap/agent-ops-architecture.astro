@@ -42,7 +42,7 @@ const htmlUrl = '/roadmap/agent-ops-architecture.html';
 	<main class="mt-12 space-y-10">
 		<section class="space-y-4">
 			<h2 class="text-xl font-semibold">north star</h2>
-			<div class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 backdrop-blur">
+			<div class="section-card-blur">
 				<p class="text-sm leading-relaxed text-zinc-300">
 					separate <span class="text-zinc-100">decision + state</span> from <span class="text-zinc-100">side effects</span>.
 					mini #1 is the brain. mini #2 is the hands.
@@ -57,7 +57,7 @@ const htmlUrl = '/roadmap/agent-ops-architecture.html';
 
 		<section class="space-y-4">
 			<h2 class="text-xl font-semibold">transport + storage (scales)</h2>
-			<div class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 backdrop-blur">
+			<div class="section-card-blur">
 				<p class="text-sm leading-relaxed text-zinc-300">
 					start with append-only intents + receipts on a shared path, and trigger execution via openclaw nodes.
 					when you add more nodes, swap the shared folder for postgres/redis without changing contracts.
@@ -80,7 +80,7 @@ const htmlUrl = '/roadmap/agent-ops-architecture.html';
 
 		<section class="space-y-4">
 			<h2 class="text-xl font-semibold">hard specs (the contracts)</h2>
-			<div class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 backdrop-blur">
+			<div class="section-card-blur">
 				<p class="text-sm leading-relaxed text-zinc-300">
 					these constraints prevent double-posts, drift, and distributed chaos.
 				</p>
@@ -96,7 +96,7 @@ const htmlUrl = '/roadmap/agent-ops-architecture.html';
 
 		<section class="space-y-4">
 			<h2 class="text-xl font-semibold">implementation checklist (when mini #2 arrives)</h2>
-			<div class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 backdrop-blur">
+			<div class="section-card-blur">
 				<ol class="list-decimal space-y-2 pl-5 text-sm text-zinc-300">
 					<li>install openclaw on mini #2; pair it as a node.</li>
 					<li>create shared folder: <code class="rounded border border-zinc-800 bg-black/30 px-2 py-0.5 text-xs">~/shared/openclaw/</code> with subdirs queues/state/receipts/deadletter.</li>
@@ -114,7 +114,7 @@ const htmlUrl = '/roadmap/agent-ops-architecture.html';
 
 		<section class="space-y-4">
 			<h2 class="text-xl font-semibold">notes</h2>
-			<div class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 backdrop-blur">
+			<div class="section-card-blur">
 				<p class="text-sm leading-relaxed text-zinc-300">
 					when scaling beyond 2 nodes, keep the same intent/receipt contract and swap storage:
 					shared folder → postgres/redis streams. don't rewrite the world.

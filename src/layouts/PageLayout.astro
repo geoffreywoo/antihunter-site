@@ -34,6 +34,18 @@ const {
     <meta property="og:type" content="website" />
     {canonical && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content={ogImage} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: title,
+      url: canonical || undefined,
+      description: description || undefined,
+      isPartOf: { '@type': 'WebSite', name: 'Anti Hunter', url: 'https://antihunter.com' }
+    })} />
     <slot name="head" />
   </head>
 

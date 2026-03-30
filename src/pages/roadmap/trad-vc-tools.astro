@@ -24,14 +24,10 @@ import PageLayout from '../../layouts/PageLayout.astro';
     })} />
   </Fragment>
 
-	<div class="pointer-events-none fixed inset-0 -z-10">
-		<div class="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(244,244,245,0.12),rgba(9,9,11,0))]" />
-		<div class="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(to_right,rgba(244,244,245,0.25)_1px,transparent_1px),linear-gradient(to_bottom,rgba(244,244,245,0.25)_1px,transparent_1px)] [background-size:48px_48px]" />
-		<div class="absolute -top-24 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-fuchsia-500/10 blur-3xl" />
-	</div>
+	<div class="page-glow"></div>
 
 	<header class="space-y-6">
-		<div class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] backdrop-blur sm:p-8">
+		<div class="section-card-blur sm:p-8">
 			<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">whitepaper spec</div>
 			<h1 class="mt-2 text-3xl font-semibold tracking-tight">trad vc tools roadmap (v0.1)</h1>
 
@@ -51,7 +47,7 @@ import PageLayout from '../../layouts/PageLayout.astro';
 	</header>
 
 	<main class="mt-10 space-y-10">
-		<section class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur">
+		<section class="section-card-blur">
 			<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">principles</div>
 			<ul class="mt-3 space-y-2 text-sm text-zinc-300">
 				<li><span class="text-zinc-100 font-medium">auditability:</span> every output links back to sources (emails, notes, docs).</li>

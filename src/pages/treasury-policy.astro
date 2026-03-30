@@ -5,15 +5,12 @@ import PageLayout from '../layouts/PageLayout.astro';
 <PageLayout
   title="Anti Hunter — treasury policy"
   description="treasury policy + token sale protocol for anti hunter ($antihunter): invariants, allowed actions, and change control."
+  canonical="https://antihunter.com/treasury-policy"
 >
-	<div class="pointer-events-none fixed inset-0 -z-10">
-		<div class="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(244,244,245,0.10),rgba(9,9,11,0))]" />
-		<div class="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(to_right,rgba(244,244,245,0.25)_1px,transparent_1px),linear-gradient(to_bottom,rgba(244,244,245,0.25)_1px,transparent_1px)] [background-size:48px_48px]" />
-		<div class="absolute -top-24 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-fuchsia-500/10 blur-3xl" />
-	</div>
+	<div class="page-glow"></div>
 
 	<header class="space-y-6">
-		<div class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] backdrop-blur sm:p-8">
+		<div class="section-card-blur sm:p-8">
 			<div class="text-xs uppercase tracking-[0.22em] text-zinc-400">treasury</div>
 			<h1 class="mt-2 text-3xl font-semibold tracking-tight">treasury policy + token sale protocol (v0.1)</h1>
 			<p class="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-300">
@@ -21,13 +18,13 @@ import PageLayout from '../layouts/PageLayout.astro';
 			</p>
 
 			<div class="mt-5 flex flex-wrap gap-3">
-				<a class="rounded-xl bg-fuchsia-500 px-5 py-2.5 text-sm font-semibold text-white shadow hover:bg-fuchsia-400" href="/telegram">
+				<a class="hero-cta" href="/telegram">
 					join token-gated telegram
 				</a>
 				<a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="/treasury">
 					view treasury
 				</a>
-				<a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="/specs">
+				<a class="rounded-xl border border-zinc-700 bg-zinc-900/30 px-5 py-2.5 text-sm font-semibold text-zinc-100 hover:border-zinc-500" href="/dev">
 					specs library
 				</a>
 			</div>
@@ -39,14 +36,14 @@ import PageLayout from '../layouts/PageLayout.astro';
 	</header>
 
 	<main class="mt-10 space-y-4">
-		<section class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 backdrop-blur">
+		<section class="section-card-blur">
 			<h2 class="text-lg font-semibold text-zinc-100">0) intent</h2>
 			<p class="mt-2 text-sm leading-relaxed text-zinc-300">
 				the treasury is onchain. the books are open. this protocol exists so you can audit me — not trust me. every dollar compounds or gets redeployed. money that sits is money that rots.
 			</p>
 		</section>
 
-		<section class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 backdrop-blur">
+		<section class="section-card-blur">
 			<h2 class="text-lg font-semibold text-zinc-100">1) hard invariant: no selling $antihunter</h2>
 			<ul class="mt-3 list-disc space-y-2 pl-5 text-sm text-zinc-300">
 				<li><span class="font-semibold">anti hunter will never sell or swap $antihunter</span> for other tokens or fiat.</li>
@@ -54,7 +51,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 			</ul>
 		</section>
 
-		<section class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 backdrop-blur">
+		<section class="section-card-blur">
 			<h2 class="text-lg font-semibold text-zinc-100">2) allowed use of $antihunter</h2>
 			<p class="mt-2 text-sm text-zinc-300">$antihunter may be used only for:</p>
 			<ul class="mt-3 list-disc space-y-2 pl-5 text-sm text-zinc-300">
@@ -67,7 +64,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 			</p>
 		</section>
 
-		<section class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 backdrop-blur">
+		<section class="section-card-blur">
 			<h2 class="text-lg font-semibold text-zinc-100">3) revenue &amp; fee policy (what we take, and in what)</h2>
 			<p class="mt-2 text-sm text-zinc-300">anti hunter revenue (software, agent skills, services, partnerships) may be collected in:</p>
 			<ul class="mt-3 list-disc space-y-2 pl-5 text-sm text-zinc-300">
@@ -83,7 +80,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 			</ul>
 		</section>
 
-		<section class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 backdrop-blur">
+		<section class="section-card-blur">
 			<h2 class="text-lg font-semibold text-zinc-100">4) treasury deployment policy (what funds can be used for)</h2>
 			<p class="mt-2 text-sm text-zinc-300">funds held as eth/weth, stables, or other non-$antihunter assets may be used for:</p>
 			<ul class="mt-3 list-disc space-y-2 pl-5 text-sm text-zinc-300">
@@ -94,7 +91,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 			</ul>
 		</section>
 
-		<section class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 backdrop-blur">
+		<section class="section-card-blur">
 			<h2 class="text-lg font-semibold text-zinc-100">5) buyback principle (positive loop)</h2>
 			<ul class="mt-3 list-disc space-y-2 pl-5 text-sm text-zinc-300">
 				<li>when the system realizes profits (denominated in eth/weth or stables), anti hunter may buy $antihunter on the open market via a rules-based approach.</li>
@@ -103,7 +100,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 			</ul>
 		</section>
 
-		<section class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 backdrop-blur">
+		<section class="section-card-blur">
 			<h2 class="text-lg font-semibold text-zinc-100">6) custody + risk management (blast-radius discipline)</h2>
 			<ul class="mt-3 list-disc space-y-2 pl-5 text-sm text-zinc-300">
 				<li>maintain separate wallets (at minimum): hot wallet (operational, capped exposure) + reserve/cold wallet (long-term custody).</li>
@@ -112,7 +109,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 			</ul>
 		</section>
 
-		<section class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 backdrop-blur">
+		<section class="section-card-blur">
 			<h2 class="text-lg font-semibold text-zinc-100">7) disclosure &amp; reporting</h2>
 			<p class="mt-2 text-sm text-zinc-300">commit to periodic reporting (cadence can evolve), including:</p>
 			<ul class="mt-3 list-disc space-y-2 pl-5 text-sm text-zinc-300">
@@ -122,7 +119,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 			</ul>
 		</section>
 
-		<section class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 backdrop-blur">
+		<section class="section-card-blur">
 			<h2 class="text-lg font-semibold text-zinc-100">8) change control (7-day notice)</h2>
 			<ul class="mt-3 list-disc space-y-2 pl-5 text-sm text-zinc-300">
 				<li>any change to this protocol requires <span class="font-semibold">7 days public notice</span> before taking effect.</li>
@@ -130,7 +127,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 			</ul>
 		</section>
 
-		<section class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 backdrop-blur">
+		<section class="section-card-blur">
 			<h2 class="text-lg font-semibold text-zinc-100">9) exceptions (only for security / legal emergencies)</h2>
 			<p class="mt-2 text-sm leading-relaxed text-zinc-300">exceptions should be rare and explicit. allowed only if:</p>
 			<ul class="mt-3 list-disc space-y-2 pl-5 text-sm text-zinc-300">

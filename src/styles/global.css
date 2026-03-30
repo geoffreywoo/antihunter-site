@@ -483,6 +483,14 @@ em, .accent {
   color: var(--text-muted);
 }
 
+.footer-links-secondary {
+  margin-top: 0.75rem;
+}
+
+.footer-links-secondary a {
+  font-size: 0.72rem;
+}
+
 .footer-disclaimer {
   margin-top: 2rem;
   font-size: 0.75rem;
@@ -685,6 +693,64 @@ em, .accent {
 .section-card:hover,
 .box:hover {
   border-color: var(--border-accent);
+}
+
+.section-card-hero {
+  border: 1px solid var(--accent);
+  background: var(--accent-dim);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+.section-card-blur {
+  border: 1px solid var(--border);
+  background: rgba(9, 9, 11, 0.6);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  backdrop-filter: blur(12px);
+}
+
+.section-card-blur:hover {
+  border-color: var(--border-accent);
+}
+
+.page-inner h2 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  line-height: 1.3;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.page-glow {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+.page-glow::before {
+  content: '';
+  position: absolute;
+  top: -6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rem;
+  height: 18rem;
+  border-radius: 50%;
+  background: var(--accent-glow);
+  filter: blur(80px);
+}
+
+.pilgrimage-grid {
+  columns: 350px 2;
+  column-gap: 16px;
+}
+
+.pilgrimage-grid > * {
+  break-inside: avoid;
+  margin-bottom: 16px;
 }
 
 .list-clean {
