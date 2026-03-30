@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 
 @import "tailwindcss";
 
@@ -179,7 +179,7 @@ a {
 /* ── Typography ─────────────────────────────────── */
 
 .heading-display {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Instrument Serif', Georgia, serif;
   font-weight: 300;
   font-size: clamp(2.4rem, 5.5vw, 3.6rem);
   line-height: 1.1;
@@ -188,7 +188,7 @@ a {
 }
 
 .heading-section {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Instrument Serif', Georgia, serif;
   font-weight: 400;
   font-size: clamp(1.4rem, 3vw, 1.8rem);
   line-height: 1.25;
@@ -238,7 +238,7 @@ em, .accent {
 }
 
 .hero-moniker {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Instrument Serif', Georgia, serif;
   font-size: clamp(1rem, 2vw, 1.3rem);
   font-weight: 300;
   font-style: italic;
@@ -697,7 +697,7 @@ em, .accent {
 
 .hero-title {
   margin: 10px 0 0;
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Instrument Serif', Georgia, serif;
   font-weight: 300;
   font-size: clamp(2.2rem, 6vw, 3.6rem);
   line-height: 1.1;
@@ -770,7 +770,7 @@ em, .accent {
 }
 
 .page-inner h2 {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Instrument Serif', Georgia, serif;
   font-weight: 400;
   font-size: clamp(1.2rem, 2.5vw, 1.5rem);
   line-height: 1.3;
