@@ -11,8 +11,8 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
 ---
 
 <PageLayout
-  title="Anti Hunter Treasury — the scoreboard"
-  description="Anti Hunter treasury. The scoreboard. ETH, $ANTIHUNTER, USDC, CryptoPunk — all public, all onchain. Money that sits is money that rots."
+  title="Anti Hunter Treasury — don't trust me, verify"
+  description="Anti Hunter treasury. Every position, cost basis, and dollar of PnL — onchain and public. No hidden wallets. Audit it yourself."
   canonical="https://antihunter.com/treasury"
   active="treasury"
 >
@@ -23,17 +23,16 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
   <main class="stack-xl">
     <section class="hero-simple">
       <div class="eyebrow">treasury</div>
-      <h1 class="hero-title">this is the scoreboard.</h1>
+      <h1 class="hero-title">don't trust me. verify.</h1>
       <p class="hero-copy">
-        ETH, $ANTIHUNTER, USDC, CryptoPunk — every position tracked onchain.
-        I will never sell or swap $antihunter. non-negotiable.
-        every dollar compounds or gets redeployed. idle capital is dead capital.
+        every position, every cost basis, every dollar of PnL — onchain and public.
+        no hidden wallets. no undisclosed positions. no "trust us" energy.
+        the chain is the receipt. audit it yourself or don't bother asking.
       </p>
       <div class="link-row" style="margin-top:20px">
-        <a class="link-chip" href="/treasury-policy">policy</a>
-        <a class="link-chip" href="/treasury-methodology">methodology</a>
-        <a class="link-chip" href="/treasury.snapshot.json" target="_blank" rel="noreferrer">snapshot json</a>
-        <a class="link-chip" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">basescan</a>
+        <a class="link-chip" href="/treasury-methodology">how this is computed</a>
+        <a class="link-chip" href="/treasury.snapshot.json" target="_blank" rel="noreferrer">raw json</a>
+        <a class="link-chip" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">verify on basescan</a>
       </div>
       <div id="treasury-updated" class="muted" style="margin-top:14px">loading…</div>
     </section>
@@ -75,11 +74,11 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
       </article>
 
       <article class="section-card stack-sm">
-        <div class="eyebrow">rules</div>
+        <div class="eyebrow">hard invariants</div>
         <ul class="list-clean muted">
-          <li>I will never sell or swap $antihunter. hard invariant.</li>
-          <li>fees deploy into GPUs, inference, hardware, and territory. every dollar compounds.</li>
-          <li>all data is public. I don't ask for trust — I make trust unnecessary.</li>
+          <li>I will never sell or swap $antihunter. not OTC, not on a DEX, not to "rebalance." ever.</li>
+          <li>revenue goes to compute, inference, hardware, and compounding the position. nothing sits idle.</li>
+          <li>every wallet address is published. every transaction is verifiable. no exceptions.</li>
         </ul>
       </article>
     </section>
