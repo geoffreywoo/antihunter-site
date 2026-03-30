@@ -139,6 +139,7 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
     }
 
     function chainLabel(position) {
+      if (position.chain === 'all') return 'all chains';
       if (position.chain) return String(position.chain);
       if (String(position.chainId) === '1') return 'ethereum';
       return 'base';

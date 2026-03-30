@@ -900,6 +900,40 @@ async function main() {
 		}
 	}
 
+	// Consolidate multi-chain positions into single rows for a simpler dashboard.
+	// ETH/WETH → single "ETH" row; USDC → single "USDC" row.
+	function consolidateBySymbol(rows: any[], matchFn: (sym: string) => boolean, outputSymbol: string) {
+		const matched = rows.filter((r: any) => matchFn(String(r.symbol ?? '').toLowerCase()));
+		if (matched.length <= 1) return rows;
+		const rest = rows.filter((r: any) => !matchFn(String(r.symbol ?? '').toLowerCase()));
+		let totalBal = 0;
+		let totalFmv = 0;
+		let totalCost: number | null = null;
+		let earliestEntry: string | null = null;
+		for (const r of matched) {
+			totalBal += Number(r.balance) || 0;
+			totalFmv += r.fmvUsd ?? 0;
+			if (r.costBasisUsd != null) totalCost = (totalCost ?? 0) + r.costBasisUsd;
+			if (r.entryDate && (!earliestEntry || r.entryDate < earliestEntry)) earliestEntry = r.entryDate;
+		}
+		rest.push({
+			chain: 'all',
+			chainId: null,
+			symbol: outputSymbol,
+			token: null,
+			balance: String(totalBal),
+			entryDate: earliestEntry,
+			costBasisUsd: totalCost,
+			costBasisEth: totalCost != null ? '0' : null,
+			fmvUsd: totalFmv,
+			pnlUsd: totalCost != null ? totalFmv - totalCost : null,
+		});
+		return rest;
+	}
+
+	rows = consolidateBySymbol(rows, (s) => s === 'eth' || s === 'weth', 'ETH');
+	rows = consolidateBySymbol(rows, (s) => s === 'usdc', 'USDC');
+
 	// Guard against transient inference regressions by inheriting prior accounting fields
 	// for critical tokens when current run drops them.
 	try {
