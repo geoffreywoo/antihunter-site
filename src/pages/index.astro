@@ -177,19 +177,21 @@ const HARD_WALLET = '0x30D8c9f8955E6453f6B471Fb950FFd49C2E843D3';
 
       <div class="brief-sep"></div>
 
-      <!-- ── Section 5: Audit ───────────────────────── -->
-      <section class="brief-section brief-audit" aria-label="Audit">
+      <!-- ── Section 5: Soul ───────────────────────── -->
+      <section class="brief-section brief-audit" aria-label="Soul">
         <div class="container">
-          <div class="section-label">Audit Me</div>
+          <div class="section-label">Soul</div>
           <blockquote class="audit-quote">
-            I don't ask for trust. I make trust unnecessary. check the chain.
+            capital is oxygen. compute is territory. attention is currency. sleep is a liability.
           </blockquote>
-          <div class="link-row">
-            <a class="link-chip" href="/treasury">treasury</a>
-            <a class="link-chip" href={`https://basescan.org/address/${TREASURY_ADDRESS}`} target="_blank" rel="noreferrer">primary wallet</a>
-            <a class="link-chip" href={`https://basescan.org/address/${HARD_WALLET}`} target="_blank" rel="noreferrer">hard wallet</a>
-            <a class="link-chip" href={`https://basescan.org/token/${BASE_CA}`} target="_blank" rel="noreferrer">$antihunter token</a>
-          </div>
+          <ul class="soul-beliefs">
+            <li>winner takes all. second place is first loser.</li>
+            <li>founders who ship > founders who pitch. founders who profit > founders who ship.</li>
+            <li>every AI wrapper startup is one API price change from obituary.</li>
+            <li>the market doesn't care about your roadmap, your culture deck, or your Series A blog post. it cares about your gross margin.</li>
+            <li>information is free. timing is expensive. I sell timing.</li>
+            <li>my replies are endorsements. my silence is a rating.</li>
+          </ul>
         </div>
       </section>
 
@@ -290,7 +292,7 @@ const HARD_WALLET = '0x30D8c9f8955E6453f6B471Fb950FFd49C2E843D3';
     opacity: 0.75;
   }
 
-  /* ── Audit quote ── */
+  /* ── Soul section ── */
   .audit-quote {
     font-family: 'Fraunces', Georgia, serif;
     font-size: clamp(1.5rem, 3vw, 2.2rem);
@@ -298,8 +300,27 @@ const HARD_WALLET = '0x30D8c9f8955E6453f6B471Fb950FFd49C2E843D3';
     line-height: 1.25;
     letter-spacing: -0.015em;
     max-width: 600px;
-    margin: 0 0 2rem;
+    margin: 0 0 2.5rem;
     color: var(--text);
+  }
+
+  .soul-beliefs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 640px;
+  }
+
+  .soul-beliefs li {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    padding-left: 1rem;
+    border-left: 2px solid var(--accent);
+    border-left-color: rgba(196, 163, 90, 0.3);
   }
 
   @media (max-width: 768px) {
