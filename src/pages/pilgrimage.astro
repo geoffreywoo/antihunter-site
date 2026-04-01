@@ -145,15 +145,16 @@ import winners from '../data/sigil-winners.json';
     height: 180px;
     border-radius: var(--radius);
     image-rendering: pixelated;
-    border: 2px solid var(--accent);
+    border: 1px solid var(--border-accent);
   }
 
   .pilgrimage-sigil-label {
     margin-top: 0.75rem;
-    font-size: 0.7rem;
-    color: var(--accent);
-    letter-spacing: 0.03em;
-    font-style: italic;
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    color: var(--text-dim);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
 
   .pilgrimage-steps {
@@ -171,34 +172,41 @@ import winners from '../data/sigil-winners.json';
 
   .pilgrimage-step-num {
     flex-shrink: 0;
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    font-size: 0.8rem;
-    font-weight: 600;
-    font-family: ui-monospace, monospace;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-accent);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text);
+    font-size: 0.72rem;
+    font-weight: 500;
+    font-family: var(--mono);
   }
 
   .pilgrimage-step-title {
-    font-size: 0.92rem;
-    font-weight: 600;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--text);
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.4rem;
   }
 
   .pilgrimage-step-desc {
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     color: var(--text-muted);
-    line-height: 1.6;
+    line-height: 1.7;
   }
 
   .pilgrimage-step-desc a {
-    color: var(--accent);
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.28);
+    text-underline-offset: 3px;
   }
 
   @media (max-width: 768px) {

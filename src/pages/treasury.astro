@@ -34,7 +34,7 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
         <a class="link-chip" href="/treasury.snapshot.json" target="_blank" rel="noreferrer">raw json</a>
         <a class="link-chip" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">verify on basescan</a>
       </div>
-      <div id="treasury-updated" class="muted" style="margin-top:14px">loading…</div>
+      <div id="treasury-updated" class="muted tabular-nums treasury-updated" style="margin-top:14px">loading…</div>
     </section>
 
     <section class="metric-grid" aria-label="summary metrics">
@@ -94,6 +94,8 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
   </main>
 
   <script type="module">
+    const SNAPSHOT_STALE_MS = 36 * 60 * 60 * 1000;
+
     const money = (n, digits = 0) => (
       n == null || !Number.isFinite(n)
         ? '—'
@@ -109,6 +111,11 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
       if (!value) return '—';
       const d = new Date(value);
       return Number.isNaN(d.getTime()) ? String(value) : d.toLocaleDateString();
+    };
+    const parseUpdatedMs = (data) => {
+      if (Number.isFinite(Number(data?.updatedAtMs))) return Number(data.updatedAtMs);
+      const parsed = Date.parse(data?.updatedAt || data?.date || '');
+      return Number.isNaN(parsed) ? null : parsed;
     };
     const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
 
@@ -231,10 +238,11 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
       metricEls.count.textContent = String(positions.length);
       metricEls.countSub.textContent = 'total positions';
 
-      const updatedText = data?.updatedAtMs
-        ? new Date(data.updatedAtMs).toLocaleString()
-        : (data?.updatedAt || data?.date || 'unknown');
-      updatedEl.textContent = `updated ${updatedText}`;
+      const updatedMs = parseUpdatedMs(data);
+      const updatedText = updatedMs ? new Date(updatedMs).toLocaleString() : (data?.updatedAt || data?.date || 'unknown');
+      const stale = updatedMs ? Date.now() - updatedMs > SNAPSHOT_STALE_MS : false;
+      updatedEl.textContent = `updated ${updatedText}${stale ? ' · stale' : ''}`;
+      updatedEl.classList.toggle('is-stale', stale);
 
       const sorted = [...positions].sort((a, b) => (Number(b.fmvUsd) || 0) - (Number(a.fmvUsd) || 0));
       holdingsEl.innerHTML = sorted.length
@@ -243,7 +251,21 @@ const TREASURY_HARD_WALLET_ETHERSCAN_URL = `https://etherscan.io/address/${TREAS
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       updatedEl.textContent = `failed: ${message}`;
+      updatedEl.classList.add('is-stale');
       holdingsEl.innerHTML = `<article class="holding-row"><div class="muted">failed to load: ${esc(message)}</div></article>`;
     }
   </script>
+
+  <style>
+    .treasury-updated {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .treasury-updated.is-stale {
+      color: var(--text);
+    }
+  </style>
 </PageLayout>

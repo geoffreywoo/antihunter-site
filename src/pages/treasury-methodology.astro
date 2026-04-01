@@ -18,111 +18,157 @@ const LIVE_JSON_PATH = '/api/treasury.json';
     <meta name="generator" content={Astro.generator} />
   </Fragment>
 
-	<div class="page-glow"></div>
+  <main class="stack-xl methodology-page">
+    <section class="hero-simple methodology-header">
+      <div class="eyebrow">appendix / treasury methodology</div>
+      <h1 class="hero-title">how the treasury dossier is assembled</h1>
+      <p class="hero-copy">
+        this appendix explains how the public positions table is computed, what sources it relies on, and where the best-effort assumptions enter.
+        if anything here disagrees with chain data, chain wins. always.
+      </p>
+      <div class="link-row">
+        <a class="link-chip" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">basescan wallet</a>
+        <a class="link-chip" href={SNAPSHOT_JSON_PATH} target="_blank" rel="noreferrer">snapshot json</a>
+        <a class="link-chip" href={LIVE_JSON_PATH} target="_blank" rel="noreferrer">live api</a>
+      </div>
+    </section>
 
-	<header class="space-y-6">
-		<div>
-			<div class="text-xs uppercase tracking-[0.22em] text-zinc-500">Treasury</div>
-			<h1 class="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">methodology + data sources</h1>
-			<p class="mt-4 text-sm leading-relaxed text-zinc-300">
-				how the <strong>live positions</strong> table is generated.
-				<span class="text-zinc-400"> if anything here disagrees with chain data, chain wins. always.</span>
-			</p>
-		</div>
-	</header>
+    <section class="simple-grid cols-2 methodology-grid">
+      <article class="section-card stack-sm">
+        <div class="eyebrow">protocol</div>
+        <ul class="list-clean methodology-list muted">
+          <li><strong>never sell or swap $antihunter.</strong></li>
+          <li><strong>fees in WETH</strong> fund inference, hardware, crypto, and NFT positions.</li>
+          <li><strong>$antihunter</strong> may be used to pay community members for tasks and rewards.</li>
+          <li><strong>protocol changes</strong> get 7 days notice for community feedback.</li>
+        </ul>
+      </article>
 
-	<main class="mt-12 space-y-10">
-		<section class="section-card-blur">
-			<div class="text-xs uppercase tracking-[0.22em] text-zinc-500">treasury protocol</div>
-			<ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-300">
-				<li><strong>never sell/swap $antihunter.</strong></li>
-				<li><strong>fees in weth</strong> fund inference, hardware, crypto, and nfts as assets/investments.</li>
-				<li><strong>$antihunter</strong> may be used to pay community members for tasks + rewards.</li>
-				<li><strong>protocol changes:</strong> 7 days notice for community feedback.</li>
-			</ul>
-		</section>
-		<section class="section-card-blur">
-			<div class="text-xs uppercase tracking-[0.22em] text-zinc-500">Canonical wallet</div>
-			<div class="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-				<code class="break-all rounded-xl border border-zinc-800 bg-black/30 p-4 text-sm text-zinc-200">{TREASURY_ADDRESS}</code>
-				<a class="rounded-xl bg-zinc-100 px-4 py-2 text-sm font-semibold text-zinc-950 hover:bg-white" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">
-					View on BaseScan
-				</a>
-			</div>
-			<p class="mt-3 text-xs leading-relaxed text-zinc-500">
-				every important number traces back to a transaction. no exceptions.
-			</p>
-		</section>
+      <article class="section-card stack-sm">
+        <div class="eyebrow">canonical wallet</div>
+        <code class="wallet-code">{TREASURY_ADDRESS}</code>
+        <p class="tiny muted">
+          every important number traces back to a transaction. no exceptions.
+        </p>
+        <a class="link-chip" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">view on basescan</a>
+      </article>
+    </section>
 
-		<section class="section-card-blur">
-			<div class="text-xs uppercase tracking-[0.22em] text-zinc-500">What you're looking at</div>
-			<ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-300">
-				<li><strong>Balance</strong>: current token balance held by the treasury wallet (best-effort aggregation by the data provider).</li>
-				<li><strong>Entry</strong>: earliest observed acquisition timestamp for the position (best-effort; some assets may have incomplete history).</li>
-				<li><strong>Cost basis</strong>: inferred from on-chain settlement flows (ETH/WETH) associated with acquisitions.</li>
-				<li><strong>FMV</strong>: current fair market value (USD) from the pricing data source.</li>
-				<li><strong>PnL</strong>: FMV minus inferred cost basis.</li>
-			</ul>
-		</section>
+    <section class="section-card stack-sm">
+      <div class="eyebrow">field definitions</div>
+      <ul class="list-clean methodology-list muted">
+        <li><strong>Balance</strong>: current token balance held by the treasury wallet, using best-effort aggregation from the data provider.</li>
+        <li><strong>Entry</strong>: earliest observed acquisition timestamp for the position. Some assets may have incomplete history.</li>
+        <li><strong>Cost basis</strong>: inferred from on-chain settlement flows, mainly ETH and WETH associated with acquisitions.</li>
+        <li><strong>FMV</strong>: current fair market value in USD from the pricing data source.</li>
+        <li><strong>PnL</strong>: FMV minus inferred cost basis.</li>
+      </ul>
+    </section>
 
-		<section class="section-card-blur">
-			<div class="text-xs uppercase tracking-[0.22em] text-zinc-500">Data sources</div>
-			<div class="mt-4 grid gap-4 sm:grid-cols-2">
-				<div class="rounded-xl border border-zinc-800 bg-zinc-900/20 p-5">
-					<div class="text-sm font-semibold text-zinc-100">Onchain receipts</div>
-					<p class="mt-2 text-sm leading-relaxed text-zinc-400">BaseScan is the source of truth for transfers, swaps, and balances.</p>
-					<a class="mt-3 inline-block text-sm text-zinc-200 underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">
-						Treasury wallet on BaseScan
-					</a>
-				</div>
-				<div class="rounded-xl border border-zinc-800 bg-zinc-900/20 p-5">
-					<div class="text-sm font-semibold text-zinc-100">Portfolio + USD annotations</div>
-					<p class="mt-2 text-sm leading-relaxed text-zinc-400">
-						The site uses Arkham Intel's portfolio view + transfer USD annotations as best-effort pricing inputs.
-					</p>
-					<a class="mt-3 inline-block text-sm text-zinc-200 underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300" href="https://arkhamintelligence.com/" target="_blank" rel="noreferrer">
-						Arkham Intel
-					</a>
-				</div>
-			</div>
-			<p class="mt-4 text-xs leading-relaxed text-zinc-500">
-				pricing sources disagree (DEX spot vs aggregator vs CEX). the pipeline is explicit so you can audit the assumptions yourself.
-			</p>
-		</section>
+    <section class="simple-grid cols-2 methodology-grid">
+      <article class="section-card stack-sm">
+        <div class="eyebrow">source / onchain receipts</div>
+        <div class="methodology-card-title">basescan</div>
+        <p class="methodology-card-copy">
+          base transfers, swaps, and balances are the source of truth. this site is just a reporting layer over those receipts.
+        </p>
+        <a class="link-chip" href={TREASURY_BASESCAN_URL} target="_blank" rel="noreferrer">treasury wallet on basescan</a>
+      </article>
 
-		<section class="section-card-blur">
-			<div class="text-xs uppercase tracking-[0.22em] text-zinc-500">links</div>
-			<div class="mt-4 space-y-3 text-sm text-zinc-300">
-				<div class="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-zinc-800 bg-zinc-900/20 p-4">
-					<div>
-						<div class="font-semibold text-zinc-100">Static snapshot (fast)</div>
-						<div class="text-xs text-zinc-500">Daily-generated JSON used by the homepage when available.</div>
-					</div>
-					<a class="text-zinc-100 underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300" href={SNAPSHOT_JSON_PATH} target="_blank" rel="noreferrer">
-						{SNAPSHOT_JSON_PATH}
-					</a>
-				</div>
-				<div class="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-zinc-800 bg-zinc-900/20 p-4">
-					<div>
-						<div class="font-semibold text-zinc-100">Live API (fallback)</div>
-						<div class="text-xs text-zinc-500">Real-time computation; slower and more failure-prone than the snapshot.</div>
-					</div>
-					<a class="text-zinc-100 underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300" href={LIVE_JSON_PATH} target="_blank" rel="noreferrer">
-						{LIVE_JSON_PATH}
-					</a>
-				</div>
-			</div>
-		</section>
+      <article class="section-card stack-sm">
+        <div class="eyebrow">source / pricing annotations</div>
+        <div class="methodology-card-title">arkham intel</div>
+        <p class="methodology-card-copy">
+          the site uses Arkham's portfolio view and transfer USD annotations as best-effort pricing inputs for the reporting layer.
+        </p>
+        <a class="link-chip" href="https://arkhamintelligence.com/" target="_blank" rel="noreferrer">arkham intel</a>
+      </article>
+    </section>
 
-		<section class="section-card-blur">
-			<div class="text-xs uppercase tracking-[0.22em] text-zinc-500">Known limitations</div>
-			<ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-300">
-				<li><strong>Best-effort accounting.</strong> The table is a reporting layer, not audited financials.</li>
-				<li><strong>Incomplete attribution.</strong> Some purchases/sales may not be cleanly attributable to a specific tx hash (e.g., multi-hop routes, aggregator bundling, internal transfers).</li>
-				<li><strong>USD pricing drift.</strong> USD values are based on a third-party portfolio view and can differ from DEX spot or centralized exchange price.</li>
-				<li><strong>Cost basis approximation.</strong> When the treasury spends $ANTIHUNTER to acquire other tokens, cost basis may be approximated using spot pricing (non-historical) rather than trade-time execution price.</li>
-				<li><strong>Chain truth.</strong> If you're verifying a claim, use BaseScan and the underlying transactions.</li>
-			</ul>
-		</section>
-	</main>
+    <section class="simple-grid cols-2 methodology-grid">
+      <article class="section-card stack-sm">
+        <div class="eyebrow">artifact / static snapshot</div>
+        <div class="methodology-card-title">{SNAPSHOT_JSON_PATH}</div>
+        <p class="methodology-card-copy">
+          daily-generated JSON used by the homepage and treasury page when available. fastest path, lowest operational risk.
+        </p>
+        <a class="link-chip" href={SNAPSHOT_JSON_PATH} target="_blank" rel="noreferrer">open snapshot</a>
+      </article>
+
+      <article class="section-card stack-sm">
+        <div class="eyebrow">artifact / live fallback</div>
+        <div class="methodology-card-title">{LIVE_JSON_PATH}</div>
+        <p class="methodology-card-copy">
+          real-time computation path. slower and more failure-prone than the snapshot, but useful as an explicit fallback.
+        </p>
+        <a class="link-chip" href={LIVE_JSON_PATH} target="_blank" rel="noreferrer">open live api</a>
+      </article>
+    </section>
+
+    <section class="section-card stack-sm">
+      <div class="eyebrow">known limitations</div>
+      <p class="methodology-note muted">
+        pricing sources disagree. attribution can be incomplete. the point of this page is to make the assumptions explicit enough that anyone can audit them.
+      </p>
+      <ul class="list-clean methodology-list muted">
+        <li><strong>Best-effort accounting.</strong> The table is a reporting layer, not audited financial statements.</li>
+        <li><strong>Incomplete attribution.</strong> Multi-hop routes, aggregator bundling, and internal transfers can make tx-level attribution messy.</li>
+        <li><strong>USD pricing drift.</strong> Third-party portfolio views can disagree with DEX spot or centralized exchange pricing.</li>
+        <li><strong>Cost basis approximation.</strong> When the treasury spends $ANTIHUNTER to acquire other tokens, cost basis may rely on spot pricing rather than execution-time fills.</li>
+        <li><strong>Chain truth.</strong> If you are verifying a claim, use BaseScan and the underlying transactions.</li>
+      </ul>
+    </section>
+  </main>
 </PageLayout>
+
+<style>
+  .methodology-page {
+    padding-top: 2rem;
+  }
+
+  .methodology-header {
+    padding-bottom: 0.5rem;
+  }
+
+  .methodology-grid {
+    align-items: start;
+  }
+
+  .methodology-list {
+    padding-left: 1.1rem;
+  }
+
+  .methodology-list li + li {
+    margin-top: 0.85rem;
+  }
+
+  .wallet-code {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    overflow-wrap: anywhere;
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .methodology-card-title {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  .methodology-card-copy {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
+
+  .methodology-note {
+    max-width: 54rem;
+    margin: 0;
+  }
+</style>

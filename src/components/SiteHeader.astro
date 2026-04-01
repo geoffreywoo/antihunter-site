@@ -27,7 +27,7 @@ const nav = [
       <a href="https://www.clanker.world/clanker/0xe2f3FaE4bc62E21826018364aa30ae45D430bb07" target="_blank" rel="noreferrer">$antihunter</a>
     </div>
 
-    <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-controls="nav-links" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
@@ -36,14 +36,20 @@ const nav = [
 </nav>
 
 <script>
+  document.documentElement.classList.add('nav-enhanced');
+
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('nav-links');
+  const setExpanded = (open) => hamburger?.setAttribute('aria-expanded', open ? 'true' : 'false');
+
   hamburger?.addEventListener('click', () => {
-    navLinks?.classList.toggle('open');
+    const open = navLinks?.classList.toggle('open');
+    setExpanded(Boolean(open));
   });
   navLinks?.addEventListener('click', (e) => {
     if ((e.target as HTMLElement).tagName === 'A') {
       navLinks.classList.remove('open');
+      setExpanded(false);
     }
   });
 </script>
