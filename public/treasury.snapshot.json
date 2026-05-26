@@ -1,6 +1,6 @@
 {
-  "updatedAtMs": 1779755677553,
-  "updatedAt": "2026-05-26T00:34:37.553Z",
+  "updatedAtMs": 1779800770834,
+  "updatedAt": "2026-05-26T13:06:10.834Z",
   "date": "2026-05-26",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "wallets": [
@@ -23,8 +23,8 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 75702.04972416052,
-      "pnlUsd": 75702.04972416052
+      "fmvUsd": 76117.58176552247,
+      "pnlUsd": 76117.58176552247
     },
     {
       "chain": "ethereum",
@@ -35,23 +35,10 @@
       "entryDate": "2026-02-15",
       "costBasisUsd": 64865.13,
       "costBasisEth": "33",
-      "fmvUsd": 69546.51,
-      "pnlUsd": 4681.379999999997,
+      "fmvUsd": 69928.254,
+      "pnlUsd": 5063.124000000003,
       "link": "https://www.cryptopunks.app/cryptopunks/details/5730",
       "entryLink": "https://etherscan.io/tx/0x897f01a5eedc7f6bcd580cbe1304d9e5f43d8e78784889a7dff448da49a25ca4"
-    },
-    {
-      "chain": "base",
-      "chainId": 8453,
-      "symbol": "BNKR",
-      "token": "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b",
-      "balance": "5900.962983793567",
-      "entryDate": null,
-      "costBasisUsd": null,
-      "costBasisEth": "0",
-      "fmvUsd": 12923.108934507913,
-      "pnlUsd": null,
-      "lots": null
     },
     {
       "chain": "base",
@@ -62,8 +49,8 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 6524.724803594502,
-      "pnlUsd": 6524.724803594502,
+      "fmvUsd": 7264.107137202628,
+      "pnlUsd": 7264.107137202628,
       "lots": null
     },
     {
@@ -80,7 +67,7 @@
       "link": "https://etherscan.io/token/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
     }
   ],
-  "totalUsd": 167454.42631926294,
+  "totalUsd": 156067.97575972512,
   "notes": [
     "fast_mode: balances-only (log scan skipped)"
   ],
