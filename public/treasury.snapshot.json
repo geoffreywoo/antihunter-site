@@ -1,7 +1,7 @@
 {
-  "updatedAtMs": 1779800770834,
-  "updatedAt": "2026-05-26T13:06:10.834Z",
-  "date": "2026-05-26",
+  "updatedAtMs": 1779842150035,
+  "updatedAt": "2026-05-27T00:35:50.035Z",
+  "date": "2026-05-27",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "wallets": [
     "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
@@ -19,12 +19,12 @@
       "chainId": null,
       "symbol": "ETH",
       "token": null,
-      "balance": "35.92081961980978",
+      "balance": "35.92081694007506",
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 76117.58176552247,
-      "pnlUsd": 76117.58176552247
+      "fmvUsd": 74490.43492131126,
+      "pnlUsd": 74490.43492131126
     },
     {
       "chain": "ethereum",
@@ -35,8 +35,8 @@
       "entryDate": "2026-02-15",
       "costBasisUsd": 64865.13,
       "costBasisEth": "33",
-      "fmvUsd": 69928.254,
-      "pnlUsd": 5063.124000000003,
+      "fmvUsd": 68433.42,
+      "pnlUsd": 3568.290000000001,
       "link": "https://www.cryptopunks.app/cryptopunks/details/5730",
       "entryLink": "https://etherscan.io/tx/0x897f01a5eedc7f6bcd580cbe1304d9e5f43d8e78784889a7dff448da49a25ca4"
     },
@@ -49,8 +49,8 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 7264.107137202628,
-      "pnlUsd": 7264.107137202628,
+      "fmvUsd": 7063.047028940769,
+      "pnlUsd": 7063.047028940769,
       "lots": null
     },
     {
@@ -58,16 +58,16 @@
       "chainId": 1,
       "symbol": "USDC",
       "token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-      "balance": "2758.032857",
+      "balance": "2008.032857",
       "entryDate": null,
-      "costBasisUsd": 2758.032857,
+      "costBasisUsd": 2008.032857,
       "costBasisEth": null,
-      "fmvUsd": 2758.032857,
+      "fmvUsd": 2008.032857,
       "pnlUsd": 0,
       "link": "https://etherscan.io/token/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
     }
   ],
-  "totalUsd": 156067.97575972512,
+  "totalUsd": 151994.93480725205,
   "notes": [
     "fast_mode: balances-only (log scan skipped)"
   ],
