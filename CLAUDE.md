@@ -42,7 +42,7 @@ Data flows: RPC logs → cost-basis inference → snapshot JSON → API endpoint
 
 ### Pages (`src/pages/`)
 
-Astro file-based routing. Dynamic route at `/acts/[date].astro`. Server API endpoint at `/api/treasury.json.ts`. Treasury dashboard (`treasury.astro`) fetches snapshot client-side with inline `<script>`.
+Astro file-based routing. Dynamic route at `/acts/[date].astro`. Prerendered snapshot API at `src/pages/api/treasury.json.ts`; it serves the same dated `rows` schema as the public snapshot, without request-time RPC calls. Treasury dashboard (`treasury.astro`) fetches snapshot client-side with inline `<script>`.
 
 ### Key Environment Variables
 

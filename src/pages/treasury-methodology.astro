@@ -5,7 +5,7 @@ const TREASURY_ADDRESS = '0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3';
 const TREASURY_BASESCAN_URL = `https://basescan.org/address/${TREASURY_ADDRESS}`;
 
 const SNAPSHOT_JSON_PATH = '/treasury.snapshot.json';
-const LIVE_JSON_PATH = '/api/treasury.json';
+const API_JSON_PATH = '/api/treasury.json';
 ---
 
 <PageLayout
@@ -25,7 +25,7 @@ const LIVE_JSON_PATH = '/api/treasury.json';
 			<div class="text-xs uppercase tracking-[0.22em] text-zinc-500">Treasury</div>
 			<h1 class="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">methodology + data sources</h1>
 			<p class="mt-4 text-sm leading-relaxed text-zinc-300">
-				how the <strong>live positions</strong> table is generated.
+				how the <strong>treasury snapshot</strong> is generated.
 				<span class="text-zinc-400"> if anything here disagrees with chain data, chain wins. always.</span>
 			</p>
 		</div>
@@ -57,10 +57,10 @@ const LIVE_JSON_PATH = '/api/treasury.json';
 		<section class="section-card-blur">
 			<div class="text-xs uppercase tracking-[0.22em] text-zinc-500">What you're looking at</div>
 			<ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-300">
-				<li><strong>Balance</strong>: current token balance held by the treasury wallet (best-effort aggregation by the data provider).</li>
+				<li><strong>Balance</strong>: token balance at the snapshot timestamp (best-effort aggregation by the data provider).</li>
 				<li><strong>Entry</strong>: earliest observed acquisition timestamp for the position (best-effort; some assets may have incomplete history).</li>
 				<li><strong>Cost basis</strong>: inferred from on-chain settlement flows (ETH/WETH) associated with acquisitions.</li>
-				<li><strong>FMV</strong>: current fair market value (USD) from the pricing data source.</li>
+				<li><strong>FMV</strong>: estimated fair market value (USD) at the snapshot timestamp from the pricing data source.</li>
 				<li><strong>PnL</strong>: FMV minus inferred cost basis.</li>
 			</ul>
 		</section>
@@ -96,7 +96,7 @@ const LIVE_JSON_PATH = '/api/treasury.json';
 				<div class="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-zinc-800 bg-zinc-900/20 p-4">
 					<div>
 						<div class="font-semibold text-zinc-100">Static snapshot (fast)</div>
-						<div class="text-xs text-zinc-500">Daily-generated JSON used by the homepage when available.</div>
+						<div class="text-xs text-zinc-500">Published JSON used by the treasury dashboard. Check updatedAt for its age.</div>
 					</div>
 					<a class="text-zinc-100 underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300" href={SNAPSHOT_JSON_PATH} target="_blank" rel="noreferrer">
 						{SNAPSHOT_JSON_PATH}
@@ -104,11 +104,11 @@ const LIVE_JSON_PATH = '/api/treasury.json';
 				</div>
 				<div class="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-zinc-800 bg-zinc-900/20 p-4">
 					<div>
-						<div class="font-semibold text-zinc-100">Live API (fallback)</div>
-						<div class="text-xs text-zinc-500">Real-time computation; slower and more failure-prone than the snapshot.</div>
+						<div class="font-semibold text-zinc-100">Snapshot API</div>
+						<div class="text-xs text-zinc-500">The same dated snapshot, served directly. Opening this link does not refresh chain data.</div>
 					</div>
-					<a class="text-zinc-100 underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300" href={LIVE_JSON_PATH} target="_blank" rel="noreferrer">
-						{LIVE_JSON_PATH}
+					<a class="text-zinc-100 underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300" href={API_JSON_PATH} target="_blank" rel="noreferrer">
+						{API_JSON_PATH}
 					</a>
 				</div>
 			</div>
@@ -117,6 +117,7 @@ const LIVE_JSON_PATH = '/api/treasury.json';
 		<section class="section-card-blur">
 			<div class="text-xs uppercase tracking-[0.22em] text-zinc-500">Known limitations</div>
 			<ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-300">
+				<li><strong>Snapshot freshness.</strong> Updates are scheduled twice daily. A delayed or failed update leaves the previous snapshot in place; the timestamp is the receipt.</li>
 				<li><strong>Best-effort accounting.</strong> The table is a reporting layer, not audited financials.</li>
 				<li><strong>Incomplete attribution.</strong> Some purchases/sales may not be cleanly attributable to a specific tx hash (e.g., multi-hop routes, aggregator bundling, internal transfers).</li>
 				<li><strong>USD pricing drift.</strong> USD values are based on a third-party portfolio view and can differ from DEX spot or centralized exchange price.</li>
