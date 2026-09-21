@@ -34,10 +34,18 @@ jobs:
       - name: Validate treasury snapshot schema + guardrails
         run: npm run treasury:validate
 
-      - name: Link check (dist HTML)
+      - name: Start compiled site for link checks
+        run: |
+          node scripts/serve-built-site.mjs > /tmp/antihunter-link-preview.log 2>&1 &
+          echo $! > /tmp/antihunter-link-preview.pid
+          curl --retry 10 --retry-connrefused --retry-delay 1 --max-time 5 --fail --silent http://127.0.0.1:4328/ > /dev/null
+
+      - name: Link check (compiled site)
         uses: lycheeverse/lychee-action@v2
         with:
-          # Scan built HTML; allow transient failures on rate-limited/public infra.
+          lycheeVersion: v0.24.2
+          # Resolve site URLs against this build, including the real SSR handler.
+          # Keep the existing external authentication/rate-limit policy.
           args: >-
             --no-progress
             --verbose
@@ -45,9 +53,17 @@ jobs:
             --retry-wait-time 2
             --max-retries 2
             --timeout 20
-            --exclude-mail
+            --base-url http://127.0.0.1:4328
+            --remap 'https://(www\.)?antihunter\.com(.*) http://127.0.0.1:4328$2'
             --exclude 'https://(www\.)?twitter\.com/.*'
             --exclude 'https://(www\.)?x\.com/.*'
             --exclude 'https://discord\.gg/.*'
-            .vercel/output/static/**/*.html
+            '.vercel/output/static/**/*.html'
           fail: true
+
+      - name: Stop compiled site
+        if: always()
+        run: |
+          if [ -f /tmp/antihunter-link-preview.pid ]; then
+            kill "$(cat /tmp/antihunter-link-preview.pid)" || true
+          fi
