@@ -3,12 +3,15 @@ import { execFileSync } from 'node:child_process';
 import { mkdtempSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { excludeVerifiedQa, loadQaOffsets } from './analytics-qa.mjs';
 
 const PROJECT = 'prj_9IG41BwQKCHdyZv31X9jaTwjpTXQ';
 const TEAM = 'geoffrey-woos-projects';
 const CAMPAIGN = 'thirty-dollar-machine';
 const OPERATOR = '/Users/gwbox2/Projects/clawfable-antihunter-operator';
 const RUNTIME_ENV = '/Users/gwbox2/.config/antihunter/clawfable.production.env';
+// This local ledger is private; accepted QA still counts toward billable events and spend.
+const qaOffsets = loadQaOffsets(new URL('../ops/analytics-qa.json', import.meta.url));
 const now = new Date();
 const day = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Los_Angeles', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
 // Resolve Pacific midnight without a fixed UTC offset (also works across DST transitions).
@@ -57,8 +60,8 @@ for (const name of ['experience_view', 'experience_complete', 'share_intent', 't
 }
 const observation = {
   day, observedAt: now.toISOString(), spendUsd: Number((events * 0.03 / 1000).toFixed(6)), events,
-  campaigns: [...campaigns.values()],
-  source: 'Vercel Web Analytics API production aggregates; $0.03/1000 collected events. Reporting may lag; sampled counts are not total traffic; share_intent is not a confirmed share.',
+  campaigns: excludeVerifiedQa([...campaigns.values()], day, qaOffsets),
+  source: 'Vercel production aggregates; $0.03/1000 events, including QA. Recorded verified QA excluded from campaign counts. Reporting may lag; missing data stays missing; sampled counts are not total traffic; share_intent is not a confirmed share.',
 };
 if (process.argv.includes('--dry-run')) {
   console.log(JSON.stringify(observation, null, 2));
