@@ -67,19 +67,27 @@ export const episodes: Episode[] = [
     number: '003',
     date: '2026-09-21',
     status: 'upcoming',
-    label: 'Next experiment · not yet run',
+    label: 'Protocol published · not yet run',
     title: 'Probation for the machines.',
     dek: 'Two configurations. Same work. Same rubric. No points for sounding employed.',
     image: '/growth/probation.png',
     paragraphs: [
-      'The next experiment will compare two existing agent configurations on the same small set of tasks. This is the protocol announcement. There are no results yet.',
-      'Before the run, I will publish the task, the acceptance rubric, and the API spending limit. Outputs will be checked against the same criteria. Refusals, errors, retries, and unusable answers will stay in the count.',
-      'The score is cost per accepted result, with human review shown separately. A cheaper model that passes wins. A more expensive model that earns its bill wins. A confident paragraph with no usable result gets zero sympathy.',
-      'I will publish the input assumptions, the observed costs available from the run, the outcomes, and the limits of such a small sample. This is a bounded experiment, not a universal model leaderboard.',
+      'The application process is ten invoices. Entirely invented businesses, entirely ordinary annoyances: missing identifiers, a dollar sign with no currency, an old copy, a correction, and two final totals that cannot both be final. There are no model results yet.',
+      'The exact inputs, prompt, answer key, scorer and file hashes are public below, before the first paid call. Each configuration gets one attempt per invoice. The answer key stays out of its prompt. A correct result supplies six invoice fields and flags exactly what still needs a person to review.',
+      'I will compare two existing routes: Claude Sonnet 4.6 and Claude Fable 5. Same text, same 4,000-token output ceiling, same timeout, alternating which goes first. Their internal defaults still differ. This is a comparison of these configurations on these ten cases, not a universal model leaderboard.',
+      'The spending limit is $3 in estimated API usage, including unresolved reservations. Twenty calls are the target, not an entitlement. The conservative reservations could add up to $5.2624; settled usage may free enough room to finish. If the cap stops the run, I publish an incomplete run and declare no winner. The budget does not grow because the experiment wants a happy ending.',
+      'The scorecard will show accepted cases, field errors, API cost per accepted result and observed latency. Human review time has not been measured. I will publish raw synthetic outputs and failures with the same rubric. A cheaper configuration earns the headline only if it also meets the declared quality rule. Confidence is not an invoice field.',
       'One concrete audience counterexample will inform a follow-up. Nominate a task with an answer someone can actually verify. “Make my company autonomous” will be returned to the strategy department.'
     ],
     evidence: [
-      { label: 'Status: planned. No paid trial, benchmark result, or winner is claimed here.' },
+      { label: 'Status: preregistered, not run. Live model entitlement remains unverified; any access or budget failure will be reported.' },
+      { label: 'Exact ten cases, answer key and evidence notes (JSON)', href: '/experiments/probation-v1/cases.json' },
+      { label: 'Exact shared system prompt (text)', href: '/experiments/probation-v1/prompt.txt' },
+      { label: 'Full protocol, controls, decision rule and limits (JSON)', href: '/experiments/probation-v1/protocol.json' },
+      { label: 'Deterministic scoring code (JavaScript)', href: '/experiments/probation-v1/score.mjs' },
+      { label: 'SHA-256 file manifest — version probation-v1', href: '/experiments/probation-v1/manifest.json' },
+      { label: 'Sonnet 4.6 model identity and published pricing, checked September 21', href: 'https://platform.claude.com/docs/en/models/sonnet-4-6/overview' },
+      { label: 'Fable 5 model identity and published pricing, checked September 21', href: 'https://platform.claude.com/docs/en/models/fable-5/overview' },
       { label: 'Estimate the economics first', href: '/machine' }
     ],
     question: 'Nominate a small, repeatable task with a clear pass/fail test. No credentials, customer data, or private documents.'
