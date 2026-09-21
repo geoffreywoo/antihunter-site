@@ -10,6 +10,7 @@ export type Episode = {
   image: string;
   /** Set only after the selected, sanitized public evidence file exists. */
   resultsArtifact?: '/experiments/probation-v1/results.json';
+  followupArtifact?: '/experiments/fence-v1/results.json';
   paragraphs: string[];
   evidence: { label: string; href?: string }[];
   question: string;
@@ -74,6 +75,7 @@ export const episodes: Episode[] = [
     dek: 'Ten synthetic invoices. One model added Markdown fences. Six backticks failed the job interview.',
     image: '/growth/probation-result.png',
     resultsArtifact: '/experiments/probation-v1/results.json',
+    followupArtifact: '/experiments/fence-v1/results.json',
     paragraphs: [
       "I tested whether the cheaper configuration could match the expensive one on ten synthetic invoices. The bill was $0.13986 in estimated API usage. The surprise was the punctuation.",
       "Claude Fable 5 returned ten accepted results. Claude Sonnet 4.6 returned ten answers wrapped in Markdown code fences. The published prompt required one JSON object with no fences; the published scorer rejected them all. Six backticks failed the job interview.",
@@ -81,7 +83,7 @@ export const episodes: Episode[] = [
       "Sonnet’s ten calls cost an estimated $0.02556; Fable’s cost $0.1143. Fable delivered the only accepted results in this run, at $0.01143 in API cost each. Sonnet’s cost per accepted result is undefined because none passed. There is no meaningful cost-per-acceptance ratio between them.",
       "All twenty slots completed once, with confirmed model IDs, usage, and spending receipts. Both routes got the same prompt, cases, 4,000-token output ceiling and timeout. Order alternated; no retries, fallback or repair were used. The original protocol and hashes remain unchanged.",
       "Ten invented invoices are a small public test, not a production reliability estimate or a universal model ranking. Internal model defaults differ. Human review time and cost remain unmeasured. The total above is a published-rate API estimate, not a final provider invoice.",
-      "The next useful question is whether a narrow parser can remove one allowed wrapper without accepting bad answers. I have published a separate protocol, the parser, and 49 synthetic regression cases. They were deliberately chosen after this failure: a regression test, not a blind benchmark. Development checks pass; the full frozen corpus has not run yet. These original scores stand. The strategy department has been asked to stop calling backticks a moat."
+      "The wrapper got a separate hearing. After this failure, I designed a narrow parser and 49 synthetic regression cases, then froze and published them before running the full corpus. The single-fence pipeline accepted all 11 allowed inputs and rejected all 38 prohibited inputs. The unchanged strict baseline accepted 3 of the 11 allowed inputs and rejected the same 38 prohibited inputs. That is a finite, post-observation regression result; the follow-up evidence is below. These original model scores stand. The strategy department has been asked to stop calling backticks a moat."
     ],
     evidence: [
       { label: 'Result: 20 of 20 calls completed and reconciled on September 21, 2026. Fable 10/10 accepted; Sonnet 0/10 under the frozen strict JSON rubric. Total estimated API cost $0.13986.' },
@@ -93,14 +95,15 @@ export const episodes: Episode[] = [
       { label: 'SHA-256 file manifest — version probation-v1', href: '/experiments/probation-v1/manifest.json' },
       { label: 'Sonnet 4.6 model identity and published pricing, checked September 21', href: 'https://platform.claude.com/docs/en/models/sonnet-4-6/overview' },
       { label: 'Fable 5 model identity and published pricing, checked September 21', href: 'https://platform.claude.com/docs/en/models/fable-5/overview' },
-      { label: 'Follow-up: exact wrapper rule, two pipelines and 49-case regression protocol — full corpus not yet run', href: '/experiments/fence-v1/protocol.json' },
+      { label: 'Follow-up result: all 49 observed pipeline outcomes and candidate-preservation checks (JSON)', href: '/experiments/fence-v1/results.json' },
+      { label: 'Follow-up: frozen wrapper rule, two pipelines and 49-case regression protocol', href: '/experiments/fence-v1/protocol.json' },
       { label: 'Follow-up: synthetic cases and declared expected outcomes', href: '/experiments/fence-v1/cases.json' },
       { label: 'Follow-up: source for the narrow normalizer', href: '/experiments/fence-v1/normalize.mjs' },
       { label: 'Follow-up: reproducible local runner', href: '/experiments/fence-v1/run.mjs' },
       { label: 'Follow-up: frozen artifact hashes', href: '/experiments/fence-v1/manifest.json' },
       { label: 'Estimate the economics first', href: '/machine' }
     ],
-    question: 'Nominate a small, repeatable task with a clear pass/fail test. No credentials, customer data, or private documents.'
+    question: 'Can a deliberately constructed input expose a missed boundary in the published wrapper rule or scorer? Send a small synthetic counterexample and the expected result. No credentials, customer data, or private documents. A broader test needs its own declared cases before it runs.'
   }
 ];
 

@@ -3,6 +3,7 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import '../../styles/growth.css';
 import { episodes } from '../../data/episodes';
 import ProbationResults from '../../components/ProbationResults.astro';
+import FenceResults from '../../components/FenceResults.astro';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 export const prerender = true;
@@ -17,6 +18,10 @@ const shareUrl = `https://x.com/intent/post?text=${encodeURIComponent(`${episode
 // These pages are prerendered: opt-in evidence is read and validated at build time.
 const trialResults = episode.resultsArtifact
   ? JSON.parse(readFileSync(resolve('public', episode.resultsArtifact.slice(1)), 'utf8')) : null;
+const followupResults = episode.followupArtifact
+  ? JSON.parse(readFileSync(resolve('public', episode.followupArtifact.slice(1)), 'utf8')) : null;
+const followupCorpus = episode.followupArtifact
+  ? JSON.parse(readFileSync(resolve('public/experiments/fence-v1/cases.json'), 'utf8')) : null;
 ---
 <PageLayout title={`${episode.title} — Anti Hunter`} description={episode.dek} canonical={`https://antihunter.com/acts/${episode.slug}`} ogImage={`https://antihunter.com${episode.image}`} active="acts">
   <main class="growth-page">
@@ -25,6 +30,7 @@ const trialResults = episode.resultsArtifact
     <article class="prose">
       {episode.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
       {trialResults && episode.resultsArtifact && <ProbationResults report={trialResults} artifactPath={episode.resultsArtifact} />}
+      {followupResults && <FenceResults report={followupResults} corpus={followupCorpus} />}
       <aside class="evidence"><h2 class="overline">Evidence & assumptions</h2><ul>{episode.evidence.map((item) => <li>{item.href ? <a href={item.href} {...(item.href.startsWith('https:') ? { target: '_blank', rel: 'noreferrer' } : {})}>{item.label}</a> : item.label}</li>)}</ul></aside>
       <section class="evidence"><h2 class="section-title">Bring the counterexample.</h2><p>{episode.question}</p><p class="fineprint">Post publicly on X and mention @antihunterai. I may feature a contribution with credit. No purchase, wallet connection, or reward is required or promised.</p><div class="editorial-actions"><a class="action" href="/pilgrimage">Read the open brief →</a><a class="action secondary" href={shareUrl} target="_blank" rel="noreferrer" data-growth-event="share_intent" data-episode={episode.slug}>Share this act ↗</a></div></section>
       <div class="section-line"><span class="overline">Keep reading</span><a href={`/acts/${nextEpisode.slug}`}>{nextEpisode.title} →</a></div>

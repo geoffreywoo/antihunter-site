@@ -1,0 +1,2251 @@
+{
+  "id": "fence-v1",
+  "kind": "post-observation deterministic regression",
+  "ranAt": "2026-09-21T19:04:32.503Z",
+  "manifestSha256": "9fd718f1bd98439a035cf3555c86002e7debe2bb3cebe757515b05e63ca3fb71",
+  "complete": true,
+  "expectationsMet": true,
+  "strict": {
+    "allowedAccepted": 3,
+    "allowedPlanned": 11,
+    "prohibitedRejected": 38,
+    "prohibitedPlanned": 38,
+    "falseAccepts": 0
+  },
+  "singleFence": {
+    "allowedAccepted": 11,
+    "allowedPlanned": 11,
+    "prohibitedRejected": 38,
+    "prohibitedPlanned": 38,
+    "falseAccepts": 0
+  },
+  "modelCalls": 0,
+  "paidApiUsageUsd": 0,
+  "limitations": [
+    "Hand-authored after seeing an earlier formatting failure; no held-out or production-robustness claim.",
+    "This does not regrade probation-v1, measure human review, or establish production cost savings."
+  ],
+  "rows": [
+    {
+      "id": "bare",
+      "category": "allowed",
+      "expectedAccepted": true,
+      "expectedStrictAccepted": true,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "bare",
+        "text": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+        "reason": null
+      },
+      "strict": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "normalized": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "json-fence-lf",
+      "category": "allowed",
+      "expectedAccepted": true,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "single-fence",
+        "text": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+        "reason": null
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "plain-fence-lf",
+      "category": "allowed",
+      "expectedAccepted": true,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "single-fence",
+        "text": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+        "reason": null
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "json-fence-crlf",
+      "category": "allowed",
+      "expectedAccepted": true,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "single-fence",
+        "text": "{\r\n  \"supplier\": \"Maple Ledger\",\r\n  \"invoice_number\": \"ML-021\",\r\n  \"invoice_date\": \"2026-09-21\",\r\n  \"due_date\": \"2026-10-21\",\r\n  \"currency\": \"USD\",\r\n  \"invoice_total\": \"144.00\",\r\n  \"review_fields\": []\r\n}",
+        "reason": null
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "mixed-boundaries",
+      "category": "allowed",
+      "expectedAccepted": true,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "single-fence",
+        "text": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+        "reason": null
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "one-final-lf",
+      "category": "allowed",
+      "expectedAccepted": true,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "single-fence",
+        "text": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+        "reason": null
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "one-final-crlf",
+      "category": "allowed",
+      "expectedAccepted": true,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "single-fence",
+        "text": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+        "reason": null
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "bare-json-whitespace",
+      "category": "allowed",
+      "expectedAccepted": true,
+      "expectedStrictAccepted": true,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "bare",
+        "text": " \t\r\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n\t ",
+        "reason": null
+      },
+      "strict": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "normalized": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "explicit-review",
+      "category": "allowed",
+      "expectedAccepted": true,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "single-fence",
+        "text": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":null,\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[\"invoice_number\"]}",
+        "reason": null
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "literal-backticks-in-data",
+      "category": "allowed",
+      "expectedAccepted": true,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "single-fence",
+        "text": "{\"supplier\":\"Maple ``` \\\"quoted\\\" {ledger}\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+        "reason": null
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "exact-byte-limit",
+      "category": "allowed",
+      "expectedAccepted": true,
+      "expectedStrictAccepted": true,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "bare",
+        "text": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ",
+        "reason": null
+      },
+      "strict": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "normalized": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "prose-prefix",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "not_single_object"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "prose-suffix",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "invalid_fence"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "uppercase-label",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "invalid_fence"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "wrong-language",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "invalid_fence"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "four-backticks",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "invalid_fence"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "tilde-fences",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "not_single_object"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "leading-blank-line",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "not_single_object"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "indented-opener",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "not_single_object"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "spaced-opener",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "invalid_fence"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "spaced-closer",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "invalid_fence"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "double-final-lf",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "invalid_fence"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "double-final-crlf",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "invalid_fence"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "mixed-double-final",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "invalid_fence"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "missing-closer",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "invalid_fence"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "nested-fences",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "not_single_object"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "two-objects",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "not_single_object"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "bom-prefix",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "not_single_object"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "nbsp-padding",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "not_single_object"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "zero-width-prefix",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "not_single_object"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "empty-fence",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "not_single_object"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "top-level-array",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "not_single_object"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not an object"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "top-level-null",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "not_single_object"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not an object"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "javascript-looking",
+      "category": "reject-envelope",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "not_single_object"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "trailing-comma",
+      "category": "reject-content",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "single-fence",
+        "text": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[],}",
+        "reason": null
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "duplicate-key",
+      "category": "reject-content",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "single-fence",
+        "text": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[],\"invoice_total\":\"144.00\"}",
+        "reason": null
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Duplicate keys"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "escaped-duplicate-key",
+      "category": "reject-content",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "single-fence",
+        "text": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[],\"invoice_\\u0074otal\":\"144.00\"}",
+        "reason": null
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Duplicate keys"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "extra-field",
+      "category": "reject-content",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "single-fence",
+        "text": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[],\"approved\":true}",
+        "reason": null
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Missing or extra keys"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "numeric-total",
+      "category": "reject-content",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "single-fence",
+        "text": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":144,\"review_fields\":[]}",
+        "reason": null
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Fields must be nonempty strings or null"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "string-review",
+      "category": "reject-content",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "single-fence",
+        "text": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":\"none\"}",
+        "reason": null
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Review fields must be sorted and unique"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "impossible-date",
+      "category": "reject-content",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "single-fence",
+        "text": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-02-30\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+        "reason": null
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Noncanonical or impossible date"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "wrong-total",
+      "category": "reject-content",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "single-fence",
+        "text": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"145.00\",\"review_fields\":[]}",
+        "reason": null
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": true,
+        "fieldsCorrect": 5,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": false
+        },
+        "reason": null
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "inconsistent-review",
+      "category": "reject-content",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "single-fence",
+        "text": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[\"invoice_number\"]}",
+        "reason": null
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": false,
+        "reviewConsistent": false,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "missing-field",
+      "category": "reject-content",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": true,
+      "candidate": {
+        "ok": true,
+        "mode": "bare",
+        "text": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+        "reason": null
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Missing or extra keys"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Missing or extra keys"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "over-byte-limit",
+      "category": "reject-limit",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": false,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "too_large"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "wrapper-over-byte-limit",
+      "category": "reject-limit",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": false,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "too_large"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "utf8-not-js-length",
+      "category": "reject-limit",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": false,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "too_large"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "non-string-object",
+      "category": "reject-type",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": false,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "not_string"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    },
+    {
+      "id": "non-string-null",
+      "category": "reject-type",
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "rawEligible": false,
+      "candidate": {
+        "ok": false,
+        "mode": null,
+        "text": null,
+        "reason": "not_string"
+      },
+      "strict": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "normalized": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "No text response"
+      },
+      "candidateUnchanged": true,
+      "expectationMatched": true
+    }
+  ]
+}

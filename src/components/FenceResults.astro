@@ -1,0 +1,35 @@
+---
+import { summarizeFenceResults } from '../lib/fence-results';
+interface Props { report: unknown; corpus: unknown }
+const results = summarizeFenceResults(Astro.props.report, Astro.props.corpus);
+const runDate = new Date(results.ranAt).toISOString().replace('T', ' ').replace('.000Z', ' UTC').replace(/\.\d{3}Z$/, ' UTC');
+---
+<section id="fence-results" class="fence-results evidence" aria-labelledby="fence-results-title">
+  <div class="overline">Follow-up / fence-v1 / <time datetime={results.ranAt}>{runDate}</time></div>
+  <h2 id="fence-results-title" class="section-title">{results.contractMet ? 'The wrapper came off. The rules stayed on.' : 'The wrapper rule missed its contract.'}</h2>
+  <p>This is a separate, deterministic regression check. I chose these strings and built the parser after seeing the earlier formatting failure. The full corpus ran after its files and expected outcomes were frozen and published.</p>
+  <table>
+    <caption>Observed outcomes on the same 49 synthetic inputs</caption>
+    <thead><tr><th scope="col">Measure</th><th scope="col">Strict scorer</th><th scope="col">Single fence, then strict scorer</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Allowed inputs accepted</th><td>{results.strict.allowedAccepted}/{results.strict.allowedPlanned}</td><td>{results.singleFence.allowedAccepted}/{results.singleFence.allowedPlanned}</td></tr>
+      <tr><th scope="row">Prohibited inputs rejected</th><td>{results.strict.prohibitedRejected}/{results.strict.prohibitedPlanned}</td><td>{results.singleFence.prohibitedRejected}/{results.singleFence.prohibitedPlanned}</td></tr>
+      <tr><th scope="row">False acceptances</th><td>{results.strict.falseAccepts}</td><td>{results.singleFence.falseAccepts}</td></tr>
+    </tbody>
+  </table>
+  <p>Both pipeline outcomes matched their declared labels in <strong>{results.expectationMatches}/{results.planned}</strong> cases. Candidate text and mode matched the declared expectation in <strong>{results.candidatePreserved}/{results.planned}</strong>. {results.contractMet ? 'That meets this finite regression contract.' : 'That does not meet the declared regression contract.'}</p>
+  <p>The parser recognizes one permitted wrapper; the unchanged scorer still decides whether the JSON and invoice fields are valid. These hand-authored cases do not establish general robustness or production readiness. I made no new model calls and did not regrade the original trial. Engineering time, human review, and production savings remain unmeasured.</p>
+  <div class="fence-links"><a href="/experiments/fence-v1/results.json">Inspect every observed outcome (JSON)</a><a href="/experiments/fence-v1/protocol.json">Read the separate frozen protocol</a><a href="/experiments/fence-v1/manifest.json">Verify the follow-up hashes</a></div>
+</section>
+<style>
+  .fence-results { margin-top: 3rem; scroll-margin-top: 7rem; }
+  .fence-results table { width: 100%; border-collapse: collapse; font-size: .8rem; line-height: 1.6; table-layout: fixed; }
+  .fence-results caption { text-align: left; color: #aaa79d; padding: .8rem 0; font-size: .75rem; }
+  .fence-results th, .fence-results td { padding: .8rem .4rem; border-bottom: 1px solid #454236; text-align: left; vertical-align: top; overflow-wrap: break-word; }
+  .fence-results thead th { color: #aaa79d; font-size: .73rem; font-weight: 500; }
+  .fence-results th:first-child { width: 46%; }
+  .fence-results tbody th { font-weight: 400; }
+  .fence-results td { color: var(--acid); font-variant-numeric: tabular-nums; }
+  .fence-links { display: flex; flex-direction: column; gap: .85rem; font-size: .8rem; line-height: 1.6; }
+  @media(max-width: 560px) { .fence-results { padding: 1rem; } .fence-results table { font-size: .74rem; } .fence-results th:first-child { width: 43%; } .fence-results thead th { font-size: .66rem; } }
+</style>
