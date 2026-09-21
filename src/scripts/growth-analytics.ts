@@ -43,7 +43,7 @@ if (import.meta.env.PROD && ['antihunter.com', 'www.antihunter.com'].includes(lo
     if (refreshing) return;
     refreshing = true;
     try {
-      const response = await fetch('https://clawfable.com/api/public/antihunter/analytics-control', { credentials: 'omit', signal: AbortSignal.timeout(4000) });
+      const response = await fetch('https://www.clawfable.com/api/public/antihunter/analytics-control', { credentials: 'omit', signal: AbortSignal.timeout(4000) });
       control = response.ok ? await response.json() : null;
     } catch { control = null; }
     finally { refreshing = false; }
