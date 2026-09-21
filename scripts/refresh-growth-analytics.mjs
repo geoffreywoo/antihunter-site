@@ -4,6 +4,7 @@ import { mkdtempSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { excludeVerifiedQa, loadQaOffsets } from './analytics-qa.mjs';
+import { parseEpisodeAggregate } from './analytics-aggregate.mjs';
 
 const PROJECT = 'prj_9IG41BwQKCHdyZv31X9jaTwjpTXQ';
 const TEAM = 'geoffrey-woos-projects';
@@ -50,10 +51,7 @@ const events = count(visits, 'pageviews') + count(custom, 'count');
 const campaigns = new Map();
 for (const name of ['experience_view', 'experience_complete', 'share_intent', 'token_info_view']) {
   const rows = query('events', { by: 'eventData/episode', filter: `eventData/campaign eq '${CAMPAIGN}' and eventName eq '${name}'` });
-  for (const row of rows) {
-    const episodeId = typeof row.eventData === 'string' ? row.eventData : row.eventData?.episode;
-    if (typeof episodeId !== 'string' || !/^[a-z0-9][a-z0-9-]{0,63}$/.test(episodeId)) continue;
-    const value = count([row], 'count');
+  for (const { episodeId, count: value } of parseEpisodeAggregate(rows)) {
     if (!campaigns.has(episodeId)) campaigns.set(episodeId, { campaignId: CAMPAIGN, episodeId, experience_view: 0, experience_complete: 0, share_intent: 0, token_info_view: 0 });
     campaigns.get(episodeId)[name] = value;
   }
