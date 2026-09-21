@@ -1,0 +1,64 @@
+{
+  "id": "fence-v1",
+  "status": "frozen-before-full-corpus-run",
+  "campaignId": "thirty-dollar-machine",
+  "episodeId": "probation-for-the-machines",
+  "createdOn": "2026-09-21",
+  "question": "Can one explicitly delimited Markdown wrapper be removed while the same strict invoice scorer continues to reject malformed or wrong answers?",
+  "hypothesis": "On this declared regression corpus, the single-fence pipeline should accept all 11 allowed inputs and reject all 38 prohibited inputs while preserving candidate text exactly. These are expected labels, not measured results.",
+  "design": "Deterministic, post-observation regression test. Cases and implementation were designed after observing the original Sonnet fence failure. Development unit checks were run before freezing. This is not a blind, held-out, representative or model-quality benchmark.",
+  "priorTrial": "probation-v1 stays unchanged. Its model outputs are neither rerun nor regraded in this test. No new model requests are made.",
+  "inputs": {
+    "file": "cases.json",
+    "count": 49,
+    "allowed": 11,
+    "prohibited": 38,
+    "data": "Hand-authored synthetic strings and two non-string controls. No private invoices or live participant data.",
+    "rawLimitUtf8Bytes": 8192
+  },
+  "pipelines": [
+    {
+      "id": "strict",
+      "definition": "Reject non-string or raw input over 8192 UTF-8 bytes before parsing. Apply byte-identical probation-v1 scorer to the original eligible string."
+    },
+    {
+      "id": "single-fence",
+      "definition": "Apply normalizeCandidate to the original string, including the same raw 8192-byte bound. If candidate framing succeeds, apply the unchanged strict scorer to the unchanged candidate; otherwise reject."
+    }
+  ],
+  "normalizerContract": {
+    "framingIsNotAcceptance": "ok=true means only that one top-level object span was recognized. It does not establish valid JSON, unique keys, valid schema, or correct fields. Only scoreResponse can accept an extraction.",
+    "bare": "Return the entire original string unchanged if it contains one quote-aware top-level object span and only ASCII JSON whitespace outside that span. Full JSON grammar is checked by the scorer.",
+    "fenced": "Opening line starts at the first character and is exactly ```json or ```, followed by LF or CRLF. Closing line is exactly ```, preceded by LF or CRLF. At most one final LF or CRLF after the closing fence is allowed. Boundary line endings can differ. Return the inner text exactly; do not trim or normalize its whitespace.",
+    "reject": "Unsupported fence labels, prose outside the object/wrapper, repeated or nested envelopes, concatenated objects, nonobject top-level values, forbidden outside whitespace, non-string inputs and oversized raw inputs do not become eligible candidates. The scorer additionally rejects invalid JSON, duplicate keys (including escaped aliases), extra/missing fields, invalid types/dates/review lists and wrong values.",
+    "inert": "Backticks, braces and JavaScript-looking content are data. No eval, function construction, tool execution, model repair, key dropping, type coercion or JSON reserialization is used.",
+    "byteLimit": "Measure original raw UTF-8 bytes before stripping any wrapper or whitespace. 8192 is inclusive. String-code-unit length is not the byte limit."
+  },
+  "scorer": {
+    "file": "score.mjs",
+    "source": "../probation-v1/score.mjs",
+    "sha256": "1bd0924b40e9a26394e5c079e9dbd8a89f2aa279bfcc4513888b4814981cc0d5",
+    "rule": "Exactly the same invoice fields, review list, duplicate-key rejection and semantic gold comparison as the original trial."
+  },
+  "procedure": [
+    "Freeze cases, normalizer, scorer, runner and protocol in manifest.json. Publish and verify every live hash before running the full 49-case corpus.",
+    "Run node public/experiments/fence-v1/run.mjs --verify-live --output /absolute/new-results.json once for the reported run. --check-only verifies local hashes and corpus structure without evaluating the corpus.",
+    "Record both pipeline outcomes for every case, candidate mode/text preservation, expected-label agreement, source manifest hash and timestamp. Publish failures as well as passes.",
+    "Any post-freeze change requires a new version; do not repair a failing fixture or implementation in place and silently rerun. Keep the original evidence."
+  ],
+  "measurement": {
+    "primary": [
+      "Allowed inputs accepted out of 11.",
+      "Prohibited inputs rejected out of 38, and false acceptances.",
+      "Candidate text/mode matches declared expectation for all 49 cases."
+    ],
+    "decision": "All declared normalized outcomes and candidate-preservation checks must agree to meet this finite regression contract. Any prohibited input accepted is a failed contract. A pass demonstrates only these cases, not general safety, robustness or production readiness.",
+    "comparison": "Strict-baseline outcomes provide context. Increased allowed acceptance is not evidence of better model reasoning or lower all-in cost."
+  },
+  "budget": {
+    "paidModelCalls": 0,
+    "paidApiUsageUsd": 0,
+    "basis": "Local deterministic parsing only; existing compute/subscriptions unchanged. No new purchases or infrastructure. Engineering time, human review and production savings are not measured."
+  },
+  "publication": "Link this frozen follow-up from the existing episode. Publish its own full-corpus result later; never overwrite probation-v1 or its strict scores."
+}

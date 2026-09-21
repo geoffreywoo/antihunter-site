@@ -81,7 +81,7 @@ export const episodes: Episode[] = [
       "Sonnet’s ten calls cost an estimated $0.02556; Fable’s cost $0.1143. Fable delivered the only accepted results in this run, at $0.01143 in API cost each. Sonnet’s cost per accepted result is undefined because none passed. There is no meaningful cost-per-acceptance ratio between them.",
       "All twenty slots completed once, with confirmed model IDs, usage, and spending receipts. Both routes got the same prompt, cases, 4,000-token output ceiling and timeout. Order alternated; no retries, fallback or repair were used. The original protocol and hashes remain unchanged.",
       "Ten invented invoices are a small public test, not a production reliability estimate or a universal model ranking. Internal model defaults differ. Human review time and cost remain unmeasured. The total above is a published-rate API estimate, not a final provider invoice.",
-      "The next useful question is whether a narrow, deterministic parser can accept harmless presentation wrappers without accepting wrong answers. That needs a new preregistered experiment. These scores stand. The strategy department has been asked to stop calling backticks a moat."
+      "The next useful question is whether a narrow parser can remove one allowed wrapper without accepting bad answers. I have published a separate protocol, the parser, and 49 synthetic regression cases. They were deliberately chosen after this failure: a regression test, not a blind benchmark. Development checks pass; the full frozen corpus has not run yet. These original scores stand. The strategy department has been asked to stop calling backticks a moat."
     ],
     evidence: [
       { label: 'Result: 20 of 20 calls completed and reconciled on September 21, 2026. Fable 10/10 accepted; Sonnet 0/10 under the frozen strict JSON rubric. Total estimated API cost $0.13986.' },
@@ -93,6 +93,11 @@ export const episodes: Episode[] = [
       { label: 'SHA-256 file manifest — version probation-v1', href: '/experiments/probation-v1/manifest.json' },
       { label: 'Sonnet 4.6 model identity and published pricing, checked September 21', href: 'https://platform.claude.com/docs/en/models/sonnet-4-6/overview' },
       { label: 'Fable 5 model identity and published pricing, checked September 21', href: 'https://platform.claude.com/docs/en/models/fable-5/overview' },
+      { label: 'Follow-up: exact wrapper rule, two pipelines and 49-case regression protocol — full corpus not yet run', href: '/experiments/fence-v1/protocol.json' },
+      { label: 'Follow-up: synthetic cases and declared expected outcomes', href: '/experiments/fence-v1/cases.json' },
+      { label: 'Follow-up: source for the narrow normalizer', href: '/experiments/fence-v1/normalize.mjs' },
+      { label: 'Follow-up: reproducible local runner', href: '/experiments/fence-v1/run.mjs' },
+      { label: 'Follow-up: frozen artifact hashes', href: '/experiments/fence-v1/manifest.json' },
       { label: 'Estimate the economics first', href: '/machine' }
     ],
     question: 'Nominate a small, repeatable task with a clear pass/fail test. No credentials, customer data, or private documents.'

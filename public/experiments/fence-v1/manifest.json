@@ -1,0 +1,31 @@
+{
+  "id": "fence-v1",
+  "status": "frozen-before-full-corpus-run",
+  "files": [
+    {
+      "path": "cases.json",
+      "bytes": 80920,
+      "sha256": "58a0cbe80d7f6df1a3a050e51257b89946e2cc2e8a7b5523a93996c66dc7fd58"
+    },
+    {
+      "path": "normalize.mjs",
+      "bytes": 2576,
+      "sha256": "a19d0d47bcfe6cf46ad14cfedcbc648655e9e928b2682bddfa463aed4d354920"
+    },
+    {
+      "path": "score.mjs",
+      "bytes": 3566,
+      "sha256": "1bd0924b40e9a26394e5c079e9dbd8a89f2aa279bfcc4513888b4814981cc0d5"
+    },
+    {
+      "path": "protocol.json",
+      "bytes": 5488,
+      "sha256": "edf45777b2402dfbd3cc0cfa16ad8aa46d48131036d4563fa559c8f7e2f58ca0"
+    },
+    {
+      "path": "run.mjs",
+      "bytes": 4955,
+      "sha256": "77b1670fb9785ff9c733f1c698e0c28f8e1c194cda96f7d43369cb77a980bec3"
+    }
+  ]
+}

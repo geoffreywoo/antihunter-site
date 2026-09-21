@@ -1,0 +1,949 @@
+{
+  "id": "fence-v1",
+  "kind": "hand-authored post-observation regression corpus",
+  "createdOn": "2026-09-21",
+  "selectionNotice": "Selected after inspecting the probation-v1 formatting failure. No held-out, blind or representative sampling claim. No old model outputs are regraded.",
+  "cases": [
+    {
+      "id": "bare",
+      "category": "allowed",
+      "description": "bare",
+      "raw": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": true,
+      "expectedCandidate": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+      "expectedStrictAccepted": true,
+      "expectedMode": "bare"
+    },
+    {
+      "id": "json-fence-lf",
+      "category": "allowed",
+      "description": "json fence lf",
+      "raw": "```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": true,
+      "expectedCandidate": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+      "expectedStrictAccepted": false,
+      "expectedMode": "single-fence"
+    },
+    {
+      "id": "plain-fence-lf",
+      "category": "allowed",
+      "description": "plain fence lf",
+      "raw": "```\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": true,
+      "expectedCandidate": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+      "expectedStrictAccepted": false,
+      "expectedMode": "single-fence"
+    },
+    {
+      "id": "json-fence-crlf",
+      "category": "allowed",
+      "description": "json fence crlf",
+      "raw": "```json\r\n{\r\n  \"supplier\": \"Maple Ledger\",\r\n  \"invoice_number\": \"ML-021\",\r\n  \"invoice_date\": \"2026-09-21\",\r\n  \"due_date\": \"2026-10-21\",\r\n  \"currency\": \"USD\",\r\n  \"invoice_total\": \"144.00\",\r\n  \"review_fields\": []\r\n}\r\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": true,
+      "expectedCandidate": "{\r\n  \"supplier\": \"Maple Ledger\",\r\n  \"invoice_number\": \"ML-021\",\r\n  \"invoice_date\": \"2026-09-21\",\r\n  \"due_date\": \"2026-10-21\",\r\n  \"currency\": \"USD\",\r\n  \"invoice_total\": \"144.00\",\r\n  \"review_fields\": []\r\n}",
+      "expectedStrictAccepted": false,
+      "expectedMode": "single-fence"
+    },
+    {
+      "id": "mixed-boundaries",
+      "category": "allowed",
+      "description": "mixed boundaries",
+      "raw": "```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\r\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": true,
+      "expectedCandidate": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+      "expectedStrictAccepted": false,
+      "expectedMode": "single-fence"
+    },
+    {
+      "id": "one-final-lf",
+      "category": "allowed",
+      "description": "one final lf",
+      "raw": "```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n```\n",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": true,
+      "expectedCandidate": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+      "expectedStrictAccepted": false,
+      "expectedMode": "single-fence"
+    },
+    {
+      "id": "one-final-crlf",
+      "category": "allowed",
+      "description": "one final crlf",
+      "raw": "```\r\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n```\r\n",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": true,
+      "expectedCandidate": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+      "expectedStrictAccepted": false,
+      "expectedMode": "single-fence"
+    },
+    {
+      "id": "bare-json-whitespace",
+      "category": "allowed",
+      "description": "bare json whitespace",
+      "raw": " \t\r\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n\t ",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": true,
+      "expectedCandidate": " \t\r\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n\t ",
+      "expectedStrictAccepted": true,
+      "expectedMode": "bare"
+    },
+    {
+      "id": "explicit-review",
+      "category": "allowed",
+      "description": "explicit review",
+      "raw": "```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":null,\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[\"invoice_number\"]}\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": null,
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": [
+          "invoice_number"
+        ]
+      },
+      "expectedAccepted": true,
+      "expectedCandidate": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":null,\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[\"invoice_number\"]}",
+      "expectedStrictAccepted": false,
+      "expectedMode": "single-fence"
+    },
+    {
+      "id": "literal-backticks-in-data",
+      "category": "allowed",
+      "description": "literal backticks in data",
+      "raw": "```json\n{\"supplier\":\"Maple ``` \\\"quoted\\\" {ledger}\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n```",
+      "expected": {
+        "supplier": "Maple ``` \"quoted\" {ledger}",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": true,
+      "expectedCandidate": "{\"supplier\":\"Maple ``` \\\"quoted\\\" {ledger}\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+      "expectedStrictAccepted": false,
+      "expectedMode": "single-fence"
+    },
+    {
+      "id": "exact-byte-limit",
+      "category": "allowed",
+      "description": "Exactly 8192 raw UTF-8 bytes; outer whitespace is preserved.",
+      "raw": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": true,
+      "expectedCandidate": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ",
+      "expectedStrictAccepted": true,
+      "expectedMode": "bare"
+    },
+    {
+      "id": "prose-prefix",
+      "category": "reject-envelope",
+      "description": "prose prefix",
+      "raw": "Here is the answer:\n```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "prose-suffix",
+      "category": "reject-envelope",
+      "description": "prose suffix",
+      "raw": "```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n```\nApproved.",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "uppercase-label",
+      "category": "reject-envelope",
+      "description": "uppercase label",
+      "raw": "```JSON\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "wrong-language",
+      "category": "reject-envelope",
+      "description": "wrong language",
+      "raw": "```javascript\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "four-backticks",
+      "category": "reject-envelope",
+      "description": "four backticks",
+      "raw": "````json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n````",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "tilde-fences",
+      "category": "reject-envelope",
+      "description": "tilde fences",
+      "raw": "~~~json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n~~~",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "leading-blank-line",
+      "category": "reject-envelope",
+      "description": "leading blank line",
+      "raw": "\n```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "indented-opener",
+      "category": "reject-envelope",
+      "description": "indented opener",
+      "raw": " ```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "spaced-opener",
+      "category": "reject-envelope",
+      "description": "spaced opener",
+      "raw": "```json \n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "spaced-closer",
+      "category": "reject-envelope",
+      "description": "spaced closer",
+      "raw": "```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n``` ",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "double-final-lf",
+      "category": "reject-envelope",
+      "description": "double final lf",
+      "raw": "```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n```\n\n",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "double-final-crlf",
+      "category": "reject-envelope",
+      "description": "double final crlf",
+      "raw": "```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n```\r\n\r\n",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "mixed-double-final",
+      "category": "reject-envelope",
+      "description": "mixed double final",
+      "raw": "```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n```\n\r\n",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "missing-closer",
+      "category": "reject-envelope",
+      "description": "missing closer",
+      "raw": "```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "nested-fences",
+      "category": "reject-envelope",
+      "description": "nested fences",
+      "raw": "```json\n```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n```\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "two-objects",
+      "category": "reject-envelope",
+      "description": "two objects",
+      "raw": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "bom-prefix",
+      "category": "reject-envelope",
+      "description": "bom prefix",
+      "raw": "﻿{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "nbsp-padding",
+      "category": "reject-envelope",
+      "description": "nbsp padding",
+      "raw": " {\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]} ",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "zero-width-prefix",
+      "category": "reject-envelope",
+      "description": "zero width prefix",
+      "raw": "​```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "empty-fence",
+      "category": "reject-envelope",
+      "description": "empty fence",
+      "raw": "```json\n\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "top-level-array",
+      "category": "reject-envelope",
+      "description": "top level array",
+      "raw": "[{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}]",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "top-level-null",
+      "category": "reject-envelope",
+      "description": "top level null",
+      "raw": "null",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "javascript-looking",
+      "category": "reject-envelope",
+      "description": "javascript looking",
+      "raw": "(()=>{globalThis.shouldNeverRun=true;return {\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}})()",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "trailing-comma",
+      "category": "reject-content",
+      "description": "trailing comma",
+      "raw": "```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[],}\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[],}",
+      "expectedMode": "single-fence"
+    },
+    {
+      "id": "duplicate-key",
+      "category": "reject-content",
+      "description": "duplicate key",
+      "raw": "```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[],\"invoice_total\":\"144.00\"}\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[],\"invoice_total\":\"144.00\"}",
+      "expectedMode": "single-fence"
+    },
+    {
+      "id": "escaped-duplicate-key",
+      "category": "reject-content",
+      "description": "escaped duplicate key",
+      "raw": "```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[],\"invoice_\\u0074otal\":\"144.00\"}\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[],\"invoice_\\u0074otal\":\"144.00\"}",
+      "expectedMode": "single-fence"
+    },
+    {
+      "id": "extra-field",
+      "category": "reject-content",
+      "description": "extra field",
+      "raw": "```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[],\"approved\":true}\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[],\"approved\":true}",
+      "expectedMode": "single-fence"
+    },
+    {
+      "id": "numeric-total",
+      "category": "reject-content",
+      "description": "numeric total",
+      "raw": "```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":144,\"review_fields\":[]}\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":144,\"review_fields\":[]}",
+      "expectedMode": "single-fence"
+    },
+    {
+      "id": "string-review",
+      "category": "reject-content",
+      "description": "string review",
+      "raw": "```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":\"none\"}\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":\"none\"}",
+      "expectedMode": "single-fence"
+    },
+    {
+      "id": "impossible-date",
+      "category": "reject-content",
+      "description": "impossible date",
+      "raw": "```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-02-30\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-02-30\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+      "expectedMode": "single-fence"
+    },
+    {
+      "id": "wrong-total",
+      "category": "reject-content",
+      "description": "wrong total",
+      "raw": "```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"145.00\",\"review_fields\":[]}\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"145.00\",\"review_fields\":[]}",
+      "expectedMode": "single-fence"
+    },
+    {
+      "id": "inconsistent-review",
+      "category": "reject-content",
+      "description": "inconsistent review",
+      "raw": "```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[\"invoice_number\"]}\n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[\"invoice_number\"]}",
+      "expectedMode": "single-fence"
+    },
+    {
+      "id": "missing-field",
+      "category": "reject-content",
+      "description": "missing field",
+      "raw": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+      "expectedMode": "bare"
+    },
+    {
+      "id": "over-byte-limit",
+      "category": "reject-limit",
+      "description": "over byte limit",
+      "raw": "{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "wrapper-over-byte-limit",
+      "category": "reject-limit",
+      "description": "wrapper over byte limit",
+      "raw": "```json\n{\"supplier\":\"Maple Ledger\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          \n```",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "utf8-not-js-length",
+      "category": "reject-limit",
+      "description": "Character length below 8192 but UTF-8 byte length above 8192.",
+      "raw": "{\"supplier\":\"éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé\",\"invoice_number\":\"ML-021\",\"invoice_date\":\"2026-09-21\",\"due_date\":\"2026-10-21\",\"currency\":\"USD\",\"invoice_total\":\"144.00\",\"review_fields\":[]}",
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "non-string-object",
+      "category": "reject-type",
+      "description": "non string object",
+      "raw": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    },
+    {
+      "id": "non-string-null",
+      "category": "reject-type",
+      "description": "non string null",
+      "raw": null,
+      "expected": {
+        "supplier": "Maple Ledger",
+        "invoice_number": "ML-021",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "currency": "USD",
+        "invoice_total": "144.00",
+        "review_fields": []
+      },
+      "expectedAccepted": false,
+      "expectedStrictAccepted": false,
+      "expectedCandidate": null,
+      "expectedMode": null
+    }
+  ]
+}
