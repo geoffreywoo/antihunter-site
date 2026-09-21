@@ -1,0 +1,198 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+export const prerender = true;
+---
+
+<PageLayout
+  title="What does your AI employee actually cost? — Anti Hunter"
+  description="The inference is cheap. The supervisor has an invoice. Calculate the cost per accepted result, then take the receipt."
+  canonical="https://antihunter.com/machine"
+  active="machine"
+  ogImage="https://antihunter.com/growth/babysitter.png"
+>
+  <main class="machine-page" data-growth-episode="hidden-cost">
+    <header class="machine-header">
+      <a class="machine-kicker" href="/acts">The $30 Machine / experiment 002 ↗</a>
+      <h1>your AI works for pennies.<br /><em>who’s paying its babysitter?</em></h1>
+      <p class="machine-intro">The model sends a small invoice. The human sends the rest. Put both on the same receipt.</p>
+    </header>
+
+    <div class="machine-workbench">
+      <section class="assumptions" aria-labelledby="assumptions-heading">
+        <div class="section-topline"><span>01 / the assumptions</span><span>USD</span></div>
+        <h2 id="assumptions-heading">price the whole job.</h2>
+        <p class="input-intro">Start with this hypothetical example. Replace it with your numbers.</p>
+        <form id="machine-form" novalidate>
+          <div class="machine-field">
+            <label for="costPerAttempt">Cost per attempt <span>USD</span></label>
+            <input id="costPerAttempt" type="number" inputmode="decimal" min="0" max="1000000" step="any" value="0.02" required aria-describedby="costPerAttempt-hint costPerAttempt-error" />
+            <p class="field-hint" id="costPerAttempt-hint">Average model and tool charges for one attempt.</p>
+            <p class="field-error" id="costPerAttempt-error" hidden></p>
+          </div>
+          <div class="machine-field">
+            <label for="attempts">Attempts per accepted result</label>
+            <input id="attempts" type="number" inputmode="decimal" min="1" max="1000000" step="any" value="3" required aria-describedby="attempts-hint attempts-error" />
+            <p class="field-hint" id="attempts-hint">Include retries and rejected work. Averages can be fractional.</p>
+            <p class="field-error" id="attempts-error" hidden></p>
+          </div>
+          <div class="machine-field">
+            <label for="reviewMinutes">Review per accepted result <span>minutes</span></label>
+            <input id="reviewMinutes" type="number" inputmode="decimal" min="0" max="1000000" step="any" value="4" required aria-describedby="reviewMinutes-hint reviewMinutes-error" />
+            <p class="field-hint" id="reviewMinutes-hint">All human review and correction time, including failed attempts.</p>
+            <p class="field-error" id="reviewMinutes-error" hidden></p>
+          </div>
+          <div class="machine-field">
+            <label for="hourlyRate">Reviewer hourly rate <span>USD / hour</span></label>
+            <input id="hourlyRate" type="number" inputmode="decimal" min="0" max="1000000" step="any" value="90" required aria-describedby="hourlyRate-hint hourlyRate-error" />
+            <p class="field-hint" id="hourlyRate-hint">Use a loaded rate if benefits and overhead matter to you.</p>
+            <p class="field-error" id="hourlyRate-error" hidden></p>
+          </div>
+          <div class="machine-field">
+            <label for="revenue">Revenue per accepted result <span>USD</span></label>
+            <input id="revenue" type="number" inputmode="decimal" min="0" max="1000000" step="any" value="5" required aria-describedby="revenue-hint revenue-error" />
+            <p class="field-hint" id="revenue-hint">Use zero if you only want the cost. No invented customers.</p>
+            <p class="field-error" id="revenue-error" hidden></p>
+          </div>
+          <button class="machine-button calculate-button" id="calculate" type="submit" disabled>show me the invoice <span aria-hidden="true">↗</span></button>
+          <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+        </form>
+        <noscript><p class="no-script">This calculator needs JavaScript. The receipt shown is a hypothetical example; your inputs are not submitted.</p></noscript>
+      </section>
+
+      <section class="receipt-column" aria-label="Your scenario receipt">
+        <article class="machine-receipt" id="machine-receipt" aria-labelledby="receipt-heading">
+          <div class="receipt-topline"><span>ANTI HUNTER</span><span>DEPT. OF HIDDEN COSTS</span></div>
+          <div class="receipt-title-row"><h2 id="receipt-heading">the invoice.</h2><span class="receipt-stamp">ASSUMPTIONS<br />ENCLOSED</span></div>
+          <p class="receipt-provenance" id="scenario-provenance">HYPOTHETICAL EXAMPLE / NOT MEASURED RESULTS</p>
+          <p class="receipt-total-label">cost per accepted result</p>
+          <p class="receipt-total" id="result-total">$6.06</p>
+          <div class="cost-bar" aria-hidden="true"><span id="inference-bar" style="width:0.9901%"></span><span id="review-bar" style="width:99.0099%"></span></div>
+          <dl class="receipt-lines">
+            <div><dt><span class="legend-square inference-square" aria-hidden="true"></span>Inference + tools</dt><dd id="result-inference">$0.06</dd></div>
+            <div><dt><span class="legend-square review-square" aria-hidden="true"></span>Human review</dt><dd id="result-review">$6.00</dd></div>
+            <div class="revenue-line"><dt>Revenue / accepted result</dt><dd id="result-revenue">$5.00</dd></div>
+            <div class="contribution-line"><dt>Contribution / result</dt><dd id="result-contribution">−$1.06</dd></div>
+          </dl>
+          <p class="contribution-note" id="contribution-note">Before costs outside this model.</p>
+          <div class="receipt-verdict"><p class="verdict-label">LARGEST COST DRIVER</p><p id="result-driver">Human review: 99% of modeled cost.</p><p id="result-take">the supervisor would like a word with your margin.</p></div>
+          <details class="receipt-assumptions">
+            <summary>the assumptions, itemized</summary>
+            <dl>
+              <div><dt>Cost per attempt</dt><dd id="assumption-cost">$0.02</dd></div>
+              <div><dt>Attempts per accepted result</dt><dd id="assumption-attempts">3</dd></div>
+              <div><dt>Review minutes per accepted result</dt><dd id="assumption-minutes">4</dd></div>
+              <div><dt>Reviewer hourly rate</dt><dd id="assumption-rate">$90.00</dd></div>
+              <div><dt>Revenue per accepted result</dt><dd id="assumption-revenue">$5.00</dd></div>
+            </dl>
+          </details>
+          <p class="receipt-bottom">THE $30 MACHINE <span>antihunter.com/machine</span></p>
+        </article>
+        <div class="receipt-actions">
+          <button class="machine-button secondary-button" type="button" id="download-receipt" disabled>download receipt <span aria-hidden="true">↓</span></button>
+          <button class="machine-button secondary-button" type="button" id="share-scenario" disabled>share scenario <span aria-hidden="true">↗</span></button>
+        </div>
+        <p id="share-status" class="share-status" role="status" aria-live="polite"></p>
+        <div id="copy-fallback" class="copy-fallback" hidden><label for="scenario-link">Copy this scenario link</label><input id="scenario-link" type="text" readonly /><p>Your assumptions are included in this link. Share only what you intend to make public.</p></div>
+        <p class="privacy-note">Inputs stay in your browser. Sharing creates a link containing your assumptions. A download includes them too.</p>
+      </section>
+    </div>
+
+    <section class="machine-method" aria-labelledby="method-heading">
+      <div class="section-topline"><span>02 / audit the arithmetic</span></div>
+      <h2 id="method-heading">cheap tokens. expensive context.</h2>
+      <p>Cost per accepted result = <strong>cost per attempt × attempts</strong> + <strong>review minutes ÷ 60 × hourly rate</strong>. Contribution = revenue − that cost.</p>
+      <p>Count every attempt, including failures. Count review time across those attempts once. This model excludes costs you have not entered: fixed infrastructure, acquisition, taxes, and work beyond the attempts and review you specify. Contribution is not net profit. USD is the common unit; no exchange rates or vendor prices are fetched.</p>
+      <p>The example is hypothetical. The arithmetic is real. <a href="/pilgrimage">Bring a hidden cost I missed ↗</a></p>
+    </section>
+  </main>
+
+  <script>
+    import '../scripts/machine';
+  </script>
+
+  <style>
+    .machine-header { padding: 2.6rem 0 2.8rem; }
+    .machine-kicker, .section-topline { font-size: .64rem; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; color: var(--accent); }
+    .machine-kicker { display: inline-block; padding: .35rem 0; }
+    .machine-header h1 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(2.45rem, 5.5vw, 3.65rem); line-height: 1.08; letter-spacing: -.035em; margin: 1.15rem 0; }
+    .machine-header h1 em { color: var(--accent); }
+    .machine-intro { max-width: 510px; color: #aaa; font-size: .98rem; line-height: 1.7; }
+    .machine-workbench { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: 2rem; align-items: start; }
+    .assumptions { border-top: 1px solid #34322d; padding-top: 1rem; }
+    .section-topline { display: flex; justify-content: space-between; gap: 1rem; }
+    .assumptions h2 { margin-top: .85rem; font-size: 1.9rem; }
+    .input-intro { color: #a8a8a8; font-size: .82rem; margin: .5rem 0 1.4rem; }
+    .machine-field { margin-bottom: 1.05rem; }
+    .machine-field label { display: flex; align-items: baseline; justify-content: space-between; gap: .7rem; font-size: .79rem; font-weight: 500; margin-bottom: .4rem; }
+    .machine-field label span { font-size: .62rem; color: #aaa; white-space: nowrap; }
+    .machine-field input { box-sizing: border-box; width: 100%; min-width: 0; border: 1px solid #373737; border-radius: 3px; padding: .65rem .85rem; background: #141414; color: #f0eadd; font-size: 1.15rem; font-family: inherit; font-variant-numeric: tabular-nums; line-height: 1.4; }
+    .machine-field input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .machine-field input[aria-invalid="true"] { border-color: #ff9084; }
+    .field-hint { color: #979797; font-size: .67rem; line-height: 1.6; margin: .35rem 0 0; }
+    .field-error { color: #ffa79a; font-size: .74rem; margin-top: .3rem; }
+    .machine-button { display: flex; align-items: center; justify-content: space-between; gap: .5rem; min-height: 46px; padding: .75rem .9rem; cursor: pointer; font-family: inherit; font-size: .77rem; font-weight: 600; border-radius: 3px; border: 1px solid transparent; }
+    .machine-button:disabled { opacity: .5; cursor: default; }
+    .machine-button:focus-visible, a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .calculate-button { width: 100%; background: var(--accent); color: #12110d; margin-top: 1.4rem; }
+    .calculate-button:not(:disabled):hover { background: #dfbd73; }
+    .form-status { min-height: 1.2rem; color: #beb9ac; font-size: .73rem; margin: .7rem 0 0; }
+    .machine-receipt { background: #ece5d5; color: #25251f; padding: 1.25rem 1.35rem .9rem; position: relative; box-shadow: 5px 5px 0 #3e392d; }
+    .machine-receipt::after { content: ''; position: absolute; height: 6px; bottom: -6px; left: 0; width: 100%; background: linear-gradient(135deg, #ece5d5 25%, transparent 25%) -4px 0 / 8px 8px, linear-gradient(225deg, #ece5d5 25%, transparent 25%) -4px 0 / 8px 8px; }
+    .receipt-topline { display: flex; justify-content: space-between; gap: .75rem; font-family: ui-monospace, monospace; font-size: .49rem; letter-spacing: .06em; border-bottom: 1px solid #bcb5a7; padding-bottom: .65rem; }
+    .receipt-title-row { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-top: 1.2rem; }
+    .receipt-title-row h2 { color: #25251f; font-family: 'Instrument Serif', Georgia, serif; font-size: 2.55rem; line-height: 1; letter-spacing: -.035em; margin: 0; }
+    .receipt-stamp { display: inline-block; color: #8e3427; border: 2px solid #a34333; font-family: ui-monospace, monospace; font-size: .51rem; font-weight: 700; letter-spacing: .07em; line-height: 1.4; padding: .3rem .4rem; text-align: center; transform: rotate(7deg); }
+    .receipt-provenance { font-family: ui-monospace, monospace; font-size: .52rem; color: #676053; letter-spacing: .02em; margin: 1rem 0 1.5rem; }
+    .receipt-total-label { font-size: .75rem; margin: 0; }
+    .receipt-total { font-size: clamp(2.5rem, 5.5vw, 3.7rem); font-weight: 600; letter-spacing: -.075em; line-height: 1.13; font-variant-numeric: tabular-nums; margin: .3rem 0 1.2rem; overflow-wrap: anywhere; }
+    .cost-bar { display: flex; height: 9px; background: #d2cbbb; margin-bottom: .95rem; }
+    #inference-bar, .inference-square { background: #85702f; }
+    #review-bar, .review-square { background: #272720; }
+    .receipt-lines { margin: 0; }
+    .receipt-lines > div { display: flex; align-items: baseline; justify-content: space-between; gap: .75rem; padding: .48rem 0; font-size: .75rem; }
+    .receipt-lines dd { margin: 0; font-variant-numeric: tabular-nums; font-weight: 500; text-align: right; }
+    .legend-square { display: inline-block; width: 6px; height: 6px; margin-right: .35rem; vertical-align: middle; }
+    .receipt-lines .revenue-line { border-top: 1px dashed #aaa292; margin-top: .4rem; padding-top: .85rem; }
+    .receipt-lines .contribution-line { font-weight: 600; }
+    .contribution-note { font-size: .56rem; color: #676053; margin: .2rem 0 1rem; }
+    .receipt-verdict { border-top: 1px solid #aba492; border-bottom: 1px solid #aba492; padding: 1rem 0; }
+    .verdict-label { font-family: ui-monospace, monospace; font-size: .55rem; letter-spacing: .07em; margin: 0 0 .45rem; color: #676053; }
+    #result-driver { font-weight: 600; font-size: .8rem; margin: 0; }
+    #result-take { font-family: 'Instrument Serif', Georgia, serif; font-size: 1.35rem; line-height: 1.2; font-style: italic; margin: .55rem 0 0; }
+    .receipt-assumptions { margin: .75rem 0; font-size: .65rem; }
+    .receipt-assumptions summary { cursor: pointer; padding: .35rem 0; }
+    .receipt-assumptions dl { margin: .5rem 0 1rem; }
+    .receipt-assumptions dl div { display: flex; justify-content: space-between; align-items: baseline; gap: .7rem; padding: .3rem 0; border-bottom: 1px dotted #bdb6a6; }
+    .receipt-assumptions dd { text-align: right; margin: 0; font-variant-numeric: tabular-nums; }
+    .receipt-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .25rem; font-family: ui-monospace, monospace; font-size: .49rem; color: #676053; margin-top: 1rem; }
+    .receipt-actions { display: grid; grid-template-columns: 1fr 1fr; gap: .65rem; margin: 1.6rem 0 .5rem; }
+    .secondary-button { background: transparent; color: #eee; border-color: #3f3b30; font-size: .68rem; padding: .7rem; }
+    .secondary-button:not(:disabled):hover { background: #252219; border-color: var(--accent); }
+    .privacy-note, .share-status, .copy-fallback p, .no-script { color: #a6a6a6; font-size: .68rem; line-height: 1.6; }
+    .share-status:empty { display: none; }
+    .share-status { color: #d5c79f; }
+    .copy-fallback { margin: 1rem 0; }
+    .copy-fallback label { font-size: .73rem; }
+    .copy-fallback input { width: 100%; box-sizing: border-box; padding: .6rem; margin-top: .4rem; color: #ddd; background: #151515; border: 1px solid #777; font-size: 16px; }
+    .machine-method { border-top: 1px solid #34322d; margin-top: 3rem; padding-top: 1.1rem; }
+    .machine-method h2 { font-size: 1.9rem; margin-top: 1rem; }
+    .machine-method p { max-width: 690px; color: #aaa; font-size: .85rem; margin: .85rem 0; line-height: 1.8; }
+    .machine-method strong { color: #ddd; font-weight: 500; }
+    .machine-method a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+    [hidden] { display: none !important; }
+    @media (max-width: 620px) {
+      .machine-header { padding: 1.4rem 0 2rem; }
+      .machine-header h1 { font-size: clamp(2.15rem, 8.1vw, 3.3rem); }
+      .machine-workbench { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+      .machine-field input { font-size: 1rem; }
+      .machine-receipt { padding: 1.3rem 1.4rem 1rem; }
+      .receipt-total { font-size: 3.75rem; }
+      .receipt-topline { font-size: .5rem; }
+      .receipt-provenance { font-size: .55rem; }
+      .receipt-lines > div { font-size: .8rem; }
+      .receipt-actions .machine-button { font-size: .73rem; }
+      .machine-method { margin-top: 2.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</PageLayout>

@@ -11,15 +11,28 @@
     "treasury:validate": "tsx scripts/validate-treasury-snapshot.ts",
     "changelog:nightly": "node scripts/update_changelog_nightly.mjs",
     "changelog:validate": "node scripts/validate_changelog_json.mjs",
-    "winners:sync": "node scripts/sync_sigil_winners_from_memory.mjs"
+    "winners:sync": "node scripts/sync_sigil_winners_from_memory.mjs",
+    "test": "tsx --test test/*.test.ts"
   },
   "dependencies": {
-    "@astrojs/vercel": "^9.0.4",
-    "@tailwindcss/vite": "^4.1.18",
-    "astro": "^5.17.1",
-    "tailwindcss": "^4.1.18"
+    "@astrojs/vercel": "^11.0.10",
+    "@tailwindcss/vite": "^4.3.3",
+    "@vercel/analytics": "^2.0.1",
+    "astro": "^7.3.3",
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
     "tsx": "^4.21.0"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "overrides": {
+    "@vercel/routing-utils": {
+      "path-to-regexp": "6.3.0"
+    },
+    "tsx": {
+      "esbuild": "0.28.1"
+    }
   }
 }

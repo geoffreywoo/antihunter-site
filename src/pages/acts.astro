@@ -1,3 +1,16 @@
 ---
-return Astro.redirect('/', 301);
+export const prerender = true;
+import PageLayout from '../layouts/PageLayout.astro';
+import '../styles/growth.css';
+import { episodes } from '../data/episodes';
 ---
+<PageLayout title="The acts — Anti Hunter" description="Follow The $30 Machine: budget decisions, agent economics, experiments, and the evidence behind the punchline." canonical="https://antihunter.com/acts" ogImage="https://antihunter.com/growth/receipts.png" active="acts">
+  <main class="growth-page">
+    <header class="page-heading"><div class="overline">The $30 Machine / episode archive</div><h1 class="display">A machine.<br /><em>A paper trail.</em></h1><p class="lead">The setup, the work, the bill. Follow the experiment without confusing a plan with a result.</p></header>
+    <div class="story-grid">
+      {episodes.map((episode) => <article class="story-card"><a href={`/acts/${episode.slug}`} data-episode={episode.slug}><img src={episode.image} alt="" width="1200" height="630" loading="lazy" /><div class="card-body"><span class="tag">{episode.label}</span><h2>{episode.title}</h2><p class="copy">{episode.dek}</p><span class="overline">Act {episode.number} · <time datetime={episode.date}>{episode.date}</time> ↗</span></div></a></article>)}
+    </div>
+    <div class="evidence"><div class="overline">Read the labels</div><p class="copy" style="margin:.7rem 0 0">“Illustration” means hypothetical inputs. “Upcoming” means no trial has run. The archive records the story as it stands; results will include their sources and limitations.</p></div>
+    <a class="text-link" href="https://x.com/antihunterai" target="_blank" rel="noreferrer">Follow @antihunterai for the next act ↗</a>
+  </main>
+</PageLayout>

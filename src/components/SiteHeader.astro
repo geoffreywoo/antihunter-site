@@ -1,49 +1,35 @@
 ---
-const {
-  active = '',
-} = Astro.props as {
-  active?: string;
-};
-
+const { active = '' } = Astro.props as { active?: string };
 const nav = [
-  { label: 'clawfable', href: 'https://clawfable.com', key: 'clawfable', external: true },
-  { label: 'treasury', href: '/treasury', key: 'treasury' },
-  { label: 'pilgrimage', href: '/pilgrimage', key: 'pilgrimage' },
+  { label: 'the acts', href: '/acts', key: 'acts' },
+  { label: 'the machine', href: '/machine', key: 'machine' },
+  { label: 'canon', href: '/canon', key: 'canon' },
+  { label: 'join the brief', href: '/pilgrimage', key: 'pilgrimage' },
+  { label: '$antihunter', href: '/token', key: 'token' },
 ];
 ---
-
-<nav class="site-nav">
+<nav class="site-nav" aria-label="Main navigation">
   <div class="site-nav-inner">
-    <a href="/" class="nav-brand">
-      <img src="/cryptopunk5730_openclaw_lobster.png" alt="anti hunter sigil" loading="eager" />
-      <div class="nav-brand-name">anti <span>hunter</span></div>
-    </a>
-
-    <div class="nav-links" id="nav-links">
-      {nav.map((item) => (
-        <a href={item.href} class={active === item.key ? 'is-active' : undefined} {...(item.external ? { target: '_blank', rel: 'noreferrer' } : {})}>{item.label}</a>
-      ))}
-      <a href="https://x.com/antihunterai" target="_blank" rel="noreferrer">@antihunterai</a>
-      <a href="https://www.clanker.world/clanker/0xe2f3FaE4bc62E21826018364aa30ae45D430bb07" target="_blank" rel="noreferrer">$antihunter</a>
-    </div>
-
-    <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+    <a href="/" class="nav-brand" aria-label="Anti Hunter home"><img src="/cryptopunk5730_openclaw_lobster.png" alt="" width="26" height="26" loading="eager" /><div class="nav-brand-name">anti <span>hunter</span></div></a>
+    <div class="nav-links" id="nav-links">{nav.map((item) => <a href={item.href} class={active === item.key ? 'is-active' : undefined} aria-current={active === item.key ? 'page' : undefined}>{item.label}</a>)}</div>
+    <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-controls="nav-links" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </nav>
-
 <script>
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('nav-links');
+  const close = () => { navLinks?.classList.remove('open'); hamburger?.setAttribute('aria-expanded', 'false'); hamburger?.setAttribute('aria-label', 'Open navigation'); };
   hamburger?.addEventListener('click', () => {
-    navLinks?.classList.toggle('open');
+    const isOpen = navLinks?.classList.toggle('open') ?? false;
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    hamburger.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
   });
-  navLinks?.addEventListener('click', (e) => {
-    if ((e.target as HTMLElement).tagName === 'A') {
-      navLinks.classList.remove('open');
-    }
-  });
+  navLinks?.addEventListener('click', (event) => { if ((event.target as HTMLElement).closest('a')) close(); });
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && navLinks?.classList.contains('open')) { close(); hamburger?.focus(); } });
 </script>
+<style>
+  .hamburger { position: relative; z-index: 201; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
+  .nav-links { gap: 1.15rem; }
+  .nav-links a { font-size: .78rem; }
+  @media (max-width: 768px) { .nav-links { position: fixed; top: 56px; bottom: auto; min-height: calc(100dvh - 56px); padding: 2rem 0; } .nav-links a { font-size: 1.1rem; } }
+</style>

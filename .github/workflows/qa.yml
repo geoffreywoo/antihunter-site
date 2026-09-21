@@ -19,7 +19,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install
@@ -27,6 +27,9 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Test calculator and growth controls
+        run: npm test
 
       - name: Validate treasury snapshot schema + guardrails
         run: npm run treasury:validate
@@ -46,5 +49,5 @@ jobs:
             --exclude 'https://(www\.)?twitter\.com/.*'
             --exclude 'https://(www\.)?x\.com/.*'
             --exclude 'https://discord\.gg/.*'
-            dist/**/*.html
+            .vercel/output/static/**/*.html
           fail: true

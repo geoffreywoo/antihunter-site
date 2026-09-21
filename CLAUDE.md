@@ -16,11 +16,13 @@ npm run changelog:validate  # Validate changelog JSON structure
 npm run winners:sync        # Sync pilgrimage winners from external store
 ```
 
-No test runner is configured. CI runs `build`, `treasury:validate`, and a link check (Lychee) via `.github/workflows/qa.yml`.
+`npm test` uses the Node test runner through tsx for calculator arithmetic,
+scenario validation, and analytics admission. CI runs tests, `build`,
+`treasury:validate`, and a link check (Lychee) via `.github/workflows/qa.yml`.
 
 ## Architecture
 
-**Astro 5 SSR site** deployed on Vercel. Tailwind CSS 4 for styling (via `@tailwindcss/vite` plugin). Minimal client-side JS — most pages are server-rendered Astro components.
+**Astro 7 site** deployed on Vercel, using Node 22. Tailwind CSS 4 for styling (via `@tailwindcss/vite` plugin). Growth pages and the calculator are prerendered; the calculator computes and renders receipts in the browser. Existing treasury pages retain their rendering behavior.
 
 ### Treasury System (`src/lib/treasury/`)
 
@@ -36,7 +38,8 @@ Data flows: RPC logs → cost-basis inference → snapshot JSON → API endpoint
 
 ### Data Layer (`src/data/`)
 
-- **changelog.json**: Daily execution log entries (day counter, date, title, summary, links). Auto-generated nightly from git log. Rendered on `/acts` and homepage.
+- **changelog.json**: Historical automatic commit rollups. Kept separate from current editorial stories.
+- **episodes.ts**: Current /acts episodes, factual status labels, evidence, and canon artwork metadata. Homepage features these stories.
 - **roadmap.ts**: Roadmap phases and items.
 - **sigil-winners.json**: Pilgrimage winner records.
 

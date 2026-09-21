@@ -1,3 +1,5 @@
+import { episodes } from '../data/episodes';
+export const prerender = true;
 const SITE_URL = 'https://antihunter.com';
 
 const pages = [
@@ -5,6 +7,11 @@ const pages = [
   '/treasury',
   '/treasury-methodology',
   '/pilgrimage',
+  '/machine',
+  '/acts',
+  '/canon',
+  '/token',
+  ...episodes.map(episode => `/acts/${episode.slug}`),
 ];
 
 export function GET() {
