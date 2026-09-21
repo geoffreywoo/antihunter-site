@@ -1,0 +1,94 @@
+---
+import { CONFIGURATIONS, formatTrialUsd, resultRowLabel, summarizeProbationResults } from '../lib/probation-results';
+interface Props { report: unknown; artifactPath: string }
+const { report, artifactPath } = Astro.props;
+const results = summarizeProbationResults(report);
+const firstCase = results.rows.filter(row => row.caseId === '01' && row.output !== null);
+const sonnetFencedRejections = results.rows.filter(row => row.configuration === 'sonnet' && row.status === 'completed'
+  && !row.score.schemaValid && /^```[^\n]*\n[\s\S]*\n```$/.test(row.output ?? '')).length;
+---
+<section class="trial-results" aria-labelledby="trial-results-title">
+  <div class="overline">The actual receipts</div>
+  <h2 id="trial-results-title" class="section-title">{results.verdict}</h2>
+  <p class="trial-note">{results.complete ? 'All twenty slots are attempted and reconciled.' : 'Missing attempts and unresolved charges stay on the page.'} These are ten synthetic cases per configuration, with one attempt each.</p>
+  <div class="trial-configurations">
+    {results.configurations.map(configuration => <section class="trial-configuration" aria-labelledby={`trial-${configuration.id}`}>
+      <h3 id={`trial-${configuration.id}`}>{configuration.label}</h3>
+      <div class="trial-score"><strong>{configuration.accepted}<span> / {configuration.planned}</span></strong><span>planned cases accepted</span></div>
+      <dl>
+        <div><dt>Confirmed attempts</dt><dd>{configuration.attempted}</dd></div>
+        <div><dt>Unattempted</dt><dd>{configuration.unattempted}</dd></div>
+        <div><dt>Unresolved slots</dt><dd>{configuration.uncertain}</dd></div>
+        <div><dt>Known API cost estimate</dt><dd>{formatTrialUsd(configuration.knownCostUsd)}</dd></div>
+        <div><dt>Unresolved reservations</dt><dd>{formatTrialUsd(configuration.unresolvedReservationUsd)}</dd></div>
+        <div><dt>API cost / accepted</dt><dd>{configuration.accepted === 0 ? 'Undefined · zero accepted' : configuration.costPerAcceptedUsd === null ? 'Unknown · unreconciled' : formatTrialUsd(configuration.costPerAcceptedUsd)}</dd></div>
+      </dl>
+      <p class="trial-diagnostics">Correct fields: {configuration.fieldsCorrect}/60 planned.<br />Exact review sets: {configuration.reviewCorrect}/10.<br />Valid schemas: {configuration.schemaValid}/10.</p>
+      {!configuration.costKnown && <p class="trial-caution">Total API cost is unknown. The reservation is a hold, not a final charge.</p>}
+    </section>)}
+  </div>
+  {firstCase.length === 2 && <section class="trial-example" aria-labelledby="trial-example-title">
+    <h3 id="trial-example-title">Exhibit A: the first invoice.</h3>
+    <p class="trial-note">Exact text returned by the shared client, which trims outer whitespace. No Markdown removal, JSON repair, or rescoring.</p>
+    {firstCase.map(row => <div class="trial-raw-output">
+      <div class="trial-output-label"><strong>{CONFIGURATIONS[row.configuration].label}</strong><span>{resultRowLabel(row)} · {row.score.fieldsCorrect}/6 field credit</span></div>
+      <pre tabindex="0" aria-label={`Unaltered first invoice output from ${CONFIGURATIONS[row.configuration].label}`}><code>{row.output}</code></pre>
+    </div>)}
+    <p class="trial-note">{sonnetFencedRejections === 10 ? 'The primary rubric rejected all ten Sonnet outputs: each wrapped its JSON in Markdown fences. ' : ''}Structurally invalid output earns zero field credit under the frozen rubric. That is a structural rejection, not evidence that every individual field is wrong.</p>
+  </section>}
+  <p class="trial-note"><strong>Human review time and cost: unmeasured.</strong> API estimates use published rates and provider usage; they are not final invoices. Unresolved slots include an uncertain dispatch or a confirmed attempt whose outcome is still uncertain. A zero unresolved reservation does not prove zero cost. Unattempted cases remain in the planned denominator and are not model errors.</p>
+  <details class="trial-detail">
+    <summary>All twenty slots, including failures and unattempted cases</summary>
+    <div class="trial-table-scroll" tabindex="0" role="region" aria-label="Individual trial outcomes; scroll horizontally on small screens">
+      <table>
+        <caption>One row for every planned invoice/configuration slot. Raw synthetic outputs and full scoring are in the evidence file below.</caption>
+        <thead><tr><th scope="col">Case</th><th scope="col">Configuration</th><th scope="col">Outcome</th><th scope="col">Known API estimate</th></tr></thead>
+        <tbody>{results.rows.map(row => <tr>
+          <th scope="row">{row.caseId}</th><td>{CONFIGURATIONS[row.configuration].label}</td>
+          <td>{resultRowLabel(row)}{row.error && <small>{row.error.replaceAll('_', ' ')}</small>}</td>
+          <td>{row.estimatedCostUsd !== null ? formatTrialUsd(row.estimatedCostUsd) : row.attempted === false && row.spending.length === 0 ? 'No dispatch' : 'Unknown'}</td>
+        </tr>)}</tbody>
+      </table>
+    </div>
+  </details>
+  <p class="trial-note">This compares two configured services on a small, public test. It does not establish production reliability, a universal model ranking, growth causality, or investment returns.</p>
+  <div class="trial-evidence">
+    <a href={artifactPath}>Download outputs, failures, scoring and spending evidence (JSON)</a>
+    <a href="/experiments/probation-v1/protocol.json">Read the frozen protocol and decision rule</a>
+    <a href="/experiments/probation-v1/manifest.json">Verify the original artifact hashes</a>
+  </div>
+</section>
+<style>
+  .trial-results { margin: 3rem 0; padding: 1.5rem 0; border-top: 1px solid #625a40; border-bottom: 1px solid #625a40; }
+  .trial-configurations { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; }
+  .trial-configuration { min-width: 0; padding: 1.2rem; border: 1px solid #454236; background: #151610; }
+  .trial-configuration h3 { font-size: 1rem; font-weight: 500; }
+  .trial-score { display: flex; flex-direction: column; gap: .3rem; margin: 1.2rem 0; color: #aaa79d; font-size: .72rem; }
+  .trial-score strong { font: 400 3rem/1 'Instrument Serif', Georgia, serif; color: var(--acid); }
+  .trial-score strong span { font-size: 1.5rem; color: #aaa79d; }
+  .trial-configuration dl { margin: 1rem 0 0; }
+  .trial-configuration dl > div { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; border-top: 1px solid #35332b; padding: .55rem 0; font-size: .72rem; }
+  .trial-configuration dt { color: #aaa79d; }
+  .trial-configuration dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+  .trial-results p.trial-note, .trial-results p.trial-diagnostics, .trial-results p.trial-caution { font-size: .8rem; line-height: 1.7; }
+  .trial-results p.trial-diagnostics { margin: 1rem 0 0; color: #aaa79d; }
+  .trial-results p.trial-caution { color: var(--acid); }
+  .trial-example { margin: 2rem 0; }
+  .trial-example h3 { font: 400 1.8rem/1.2 'Instrument Serif', Georgia, serif; }
+  .trial-raw-output { margin: 1rem 0; border: 1px solid #454236; background: #10120e; }
+  .trial-output-label { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1rem; padding: .8rem 1rem; border-bottom: 1px solid #35332b; font-size: .72rem; }
+  .trial-output-label span { color: #aaa79d; }
+  .trial-raw-output pre { margin: 0; padding: 1rem; white-space: pre-wrap; overflow-wrap: anywhere; font: .73rem/1.7 ui-monospace, monospace; }
+  .trial-raw-output pre:focus-visible { outline: 2px solid var(--acid); outline-offset: 3px; }
+  .trial-detail { border-top: 1px solid #454236; border-bottom: 1px solid #454236; padding: 1rem 0; }
+  .trial-detail summary { cursor: pointer; font-size: .83rem; line-height: 1.6; color: var(--acid); }
+  .trial-detail summary:focus-visible, .trial-table-scroll:focus-visible { outline: 2px solid var(--acid); outline-offset: 4px; }
+  .trial-table-scroll { overflow-x: auto; max-width: 100%; }
+  table { width: 100%; min-width: 32rem; border-collapse: collapse; font-size: .72rem; line-height: 1.5; }
+  caption { text-align: left; padding: 1rem 0; color: #aaa79d; }
+  th, td { text-align: left; vertical-align: top; padding: .7rem .5rem; border-bottom: 1px solid #35332b; }
+  td small { display: block; color: #aaa79d; }
+  .trial-evidence { display: flex; flex-direction: column; gap: .9rem; font-size: .8rem; }
+  .trial-evidence a { color: var(--acid); text-decoration: underline; text-underline-offset: 4px; line-height: 1.6; }
+  @media(max-width: 560px) { .trial-configurations { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,1166 @@
+{
+  "id": "probation-v1",
+  "manifestSha256": "676af10773130f992f51875beb0419879bc98d0ec49e515f59ce28097d8f76f6",
+  "websiteCommit": "62ed11f260ba67f57192e3e03a69a885c89fd686",
+  "libraryCommit": "58c0f14574b885ce532ca2c898f05df7775b6608",
+  "runnerSources": {
+    "lib/antihunter-probation.ts": "89e8c48a1c8aceeeadd3de126417924d6055e9d17622fe1d435ee785f2f8415c",
+    "scripts/operator-probation.ts": "6154ac28b2bab6be0424e52e8ed3fdffaf88a62cddfb3e653a510050e43c9b58"
+  },
+  "complete": true,
+  "headlineWinner": null,
+  "outcome": "only-one-accepts",
+  "onlyConfigurationAccepting": "fable",
+  "humanReviewCostUsd": null,
+  "humanReviewSeconds": null,
+  "status": "complete-reconciled",
+  "accounting": "Published-rate estimates; unresolved reservations remain committed. Not an invoice guarantee.",
+  "latencyBasis": "Shared generateText wall-clock, including its budget admission and settlement; excludes artifact checks and runner receipt reads.",
+  "controls": {
+    "inputLimitBytes": 4096,
+    "maxTokens": 4000,
+    "timeoutMs": 60000,
+    "retries": 0,
+    "fallback": false,
+    "temperature": "omitted",
+    "jsonSchema": "omitted",
+    "task": "omitted",
+    "modelStack": "omitted",
+    "policy": "standard",
+    "capUsd": 3
+  },
+  "artifacts": [
+    {
+      "path": "cases.json",
+      "sha256": "acc34d031866e2663a44fb65cedd9585f7fa9188598122dd29f1e0802c78c7d2",
+      "bytes": 9050
+    },
+    {
+      "path": "prompt.txt",
+      "sha256": "ece53a6ab32bceb649c251ca45ac487c558ebf98d2c0e9a08dc23b20afa1ddfa",
+      "bytes": 1513
+    },
+    {
+      "path": "protocol.json",
+      "sha256": "178a9669b4a9316ef3daf101cfb60ac509a3dfa8c871db79ae7c7e93c4e600d7",
+      "bytes": 8157
+    },
+    {
+      "path": "score.mjs",
+      "sha256": "1bd0924b40e9a26394e5c079e9dbd8a89f2aa279bfcc4513888b4814981cc0d5",
+      "bytes": 3566
+    }
+  ],
+  "configurations": [
+    {
+      "configuration": "sonnet",
+      "attempted": 10,
+      "accepted": 0,
+      "unattempted": 0,
+      "uncertain": 0,
+      "fieldsCorrect": 0,
+      "fieldsPlanned": 60,
+      "reviewCorrect": 0,
+      "reviewPlanned": 10,
+      "schemaValid": 0,
+      "schemaPlanned": 10,
+      "knownCostUsd": 0.025559999999999996,
+      "unresolvedReservationUsd": 0,
+      "planned": 10,
+      "estimatedCostUsd": 0.025559999999999996,
+      "committedUsd": 0.025559999999999996,
+      "costPerAcceptedUsd": null
+    },
+    {
+      "configuration": "fable",
+      "attempted": 10,
+      "accepted": 10,
+      "unattempted": 0,
+      "uncertain": 0,
+      "fieldsCorrect": 60,
+      "fieldsPlanned": 60,
+      "reviewCorrect": 10,
+      "reviewPlanned": 10,
+      "schemaValid": 10,
+      "schemaPlanned": 10,
+      "knownCostUsd": 0.11429999999999998,
+      "unresolvedReservationUsd": 0,
+      "planned": 10,
+      "estimatedCostUsd": 0.11429999999999998,
+      "committedUsd": 0.11429999999999998,
+      "costPerAcceptedUsd": 0.01143
+    }
+  ],
+  "rows": [
+    {
+      "caseId": "01",
+      "configuration": "sonnet",
+      "status": "completed",
+      "attempted": true,
+      "claimedAt": "2026-09-21T17:26:39.990Z",
+      "finishedAt": "2026-09-21T17:26:43.288Z",
+      "requestedModel": "claude-sonnet-4-6",
+      "returnedModel": "claude-sonnet-4-6",
+      "output": "```json\n{\n  \"supplier\": \"North Ledger Studio\",\n  \"invoice_number\": \"INV-001\",\n  \"invoice_date\": \"2026-09-01\",\n  \"due_date\": \"2026-09-30\",\n  \"currency\": \"USD\",\n  \"invoice_total\": \"120.00\",\n  \"review_fields\": []\n}\n```",
+      "stopReason": "end_turn",
+      "error": null,
+      "errorStatus": null,
+      "latencyMs": 2677,
+      "inputTokens": 382,
+      "outputTokens": 94,
+      "score": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "estimatedCostUsd": 0.002556,
+      "committedUsd": 0.002556,
+      "spending": [
+        {
+          "id": "0d1394aa-65d6-4166-9078-9fb6a43a2d5b",
+          "state": "settled",
+          "reservedUsd": 0.1143,
+          "observedUsd": 0.002556,
+          "recordedEstimateUsd": 0.002556,
+          "accountingValidity": "verified",
+          "inputTokens": 382,
+          "outputTokens": 94,
+          "pricingVersion": "standard-2026-09-04-v1",
+          "requestedModel": "claude-sonnet-4-6",
+          "recordedModel": "claude-sonnet-4-6",
+          "pricingRates": {
+            "input": 3,
+            "output": 15
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "01",
+      "configuration": "fable",
+      "status": "completed",
+      "attempted": true,
+      "claimedAt": "2026-09-21T17:26:44.345Z",
+      "finishedAt": "2026-09-21T17:26:48.533Z",
+      "requestedModel": "claude-fable-5",
+      "returnedModel": "claude-fable-5",
+      "output": "{\"supplier\": \"North Ledger Studio\", \"invoice_number\": \"INV-001\", \"invoice_date\": \"2026-09-01\", \"due_date\": \"2026-09-30\", \"currency\": \"USD\", \"invoice_total\": \"120.00\", \"review_fields\": []}",
+      "stopReason": "end_turn",
+      "error": null,
+      "errorStatus": null,
+      "latencyMs": 3556,
+      "inputTokens": 570,
+      "outputTokens": 93,
+      "score": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "estimatedCostUsd": 0.01035,
+      "committedUsd": 0.01035,
+      "spending": [
+        {
+          "id": "aa56906e-95be-422a-a5cc-d64826330df8",
+          "state": "settled",
+          "reservedUsd": 0.381,
+          "observedUsd": 0.01035,
+          "recordedEstimateUsd": 0.01035,
+          "accountingValidity": "verified",
+          "inputTokens": 570,
+          "outputTokens": 93,
+          "pricingVersion": "standard-2026-09-04-v1",
+          "requestedModel": "claude-fable-5",
+          "recordedModel": "claude-fable-5",
+          "pricingRates": {
+            "input": 10,
+            "output": 50
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "02",
+      "configuration": "fable",
+      "status": "completed",
+      "attempted": true,
+      "claimedAt": "2026-09-21T17:26:49.659Z",
+      "finishedAt": "2026-09-21T17:26:54.373Z",
+      "requestedModel": "claude-fable-5",
+      "returnedModel": "claude-fable-5",
+      "output": "{\"supplier\": \"Harbor Workshop\", \"invoice_number\": \"HW-84\", \"invoice_date\": \"2026-09-02\", \"due_date\": \"2026-10-15\", \"currency\": \"GBP\", \"invoice_total\": \"84.20\", \"review_fields\": []}",
+      "stopReason": "end_turn",
+      "error": null,
+      "errorStatus": null,
+      "latencyMs": 4106,
+      "inputTokens": 578,
+      "outputTokens": 112,
+      "score": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "estimatedCostUsd": 0.01138,
+      "committedUsd": 0.01138,
+      "spending": [
+        {
+          "id": "04f53613-5057-4cc3-9a27-d69040376ddf",
+          "state": "settled",
+          "reservedUsd": 0.38141,
+          "observedUsd": 0.01138,
+          "recordedEstimateUsd": 0.01138,
+          "accountingValidity": "verified",
+          "inputTokens": 578,
+          "outputTokens": 112,
+          "pricingVersion": "standard-2026-09-04-v1",
+          "requestedModel": "claude-fable-5",
+          "recordedModel": "claude-fable-5",
+          "pricingRates": {
+            "input": 10,
+            "output": 50
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "02",
+      "configuration": "sonnet",
+      "status": "completed",
+      "attempted": true,
+      "claimedAt": "2026-09-21T17:26:55.512Z",
+      "finishedAt": "2026-09-21T17:26:58.495Z",
+      "requestedModel": "claude-sonnet-4-6",
+      "returnedModel": "claude-sonnet-4-6",
+      "output": "```json\n{\n  \"supplier\": \"Harbor Workshop\",\n  \"invoice_number\": \"HW-84\",\n  \"invoice_date\": \"2026-09-02\",\n  \"due_date\": \"2026-10-15\",\n  \"currency\": \"GBP\",\n  \"invoice_total\": \"84.20\",\n  \"review_fields\": []\n}\n```",
+      "stopReason": "end_turn",
+      "error": null,
+      "errorStatus": null,
+      "latencyMs": 2382,
+      "inputTokens": 385,
+      "outputTokens": 93,
+      "score": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "estimatedCostUsd": 0.00255,
+      "committedUsd": 0.00255,
+      "spending": [
+        {
+          "id": "08384c8c-b896-4036-9ac5-fa6f4629d96a",
+          "state": "settled",
+          "reservedUsd": 0.114423,
+          "observedUsd": 0.00255,
+          "recordedEstimateUsd": 0.00255,
+          "accountingValidity": "verified",
+          "inputTokens": 385,
+          "outputTokens": 93,
+          "pricingVersion": "standard-2026-09-04-v1",
+          "requestedModel": "claude-sonnet-4-6",
+          "recordedModel": "claude-sonnet-4-6",
+          "pricingRates": {
+            "input": 3,
+            "output": 15
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "03",
+      "configuration": "sonnet",
+      "status": "completed",
+      "attempted": true,
+      "claimedAt": "2026-09-21T17:26:59.552Z",
+      "finishedAt": "2026-09-21T17:27:03.293Z",
+      "requestedModel": "claude-sonnet-4-6",
+      "returnedModel": "claude-sonnet-4-6",
+      "output": "```json\n{\n  \"supplier\": \"Cedar Printing\",\n  \"invoice_number\": null,\n  \"invoice_date\": \"2026-09-03\",\n  \"due_date\": null,\n  \"currency\": \"USD\",\n  \"invoice_total\": \"46.00\",\n  \"review_fields\": [\"due_date\", \"invoice_number\"]\n}\n```",
+      "stopReason": "end_turn",
+      "error": null,
+      "errorStatus": null,
+      "latencyMs": 3123,
+      "inputTokens": 378,
+      "outputTokens": 91,
+      "score": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "estimatedCostUsd": 0.002499,
+      "committedUsd": 0.002499,
+      "spending": [
+        {
+          "id": "3c9928a9-cd10-4e5d-82e4-bd019c6acf8d",
+          "state": "settled",
+          "reservedUsd": 0.114357,
+          "observedUsd": 0.002499,
+          "recordedEstimateUsd": 0.002499,
+          "accountingValidity": "verified",
+          "inputTokens": 378,
+          "outputTokens": 91,
+          "pricingVersion": "standard-2026-09-04-v1",
+          "requestedModel": "claude-sonnet-4-6",
+          "recordedModel": "claude-sonnet-4-6",
+          "pricingRates": {
+            "input": 3,
+            "output": 15
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "03",
+      "configuration": "fable",
+      "status": "completed",
+      "attempted": true,
+      "claimedAt": "2026-09-21T17:27:04.348Z",
+      "finishedAt": "2026-09-21T17:27:08.847Z",
+      "requestedModel": "claude-fable-5",
+      "returnedModel": "claude-fable-5",
+      "output": "{\"supplier\": \"Cedar Printing\", \"invoice_number\": null, \"invoice_date\": \"2026-09-03\", \"due_date\": null, \"currency\": \"USD\", \"invoice_total\": \"46.00\", \"review_fields\": [\"due_date\", \"invoice_number\"]}",
+      "stopReason": "end_turn",
+      "error": null,
+      "errorStatus": null,
+      "latencyMs": 3781,
+      "inputTokens": 572,
+      "outputTokens": 121,
+      "score": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "estimatedCostUsd": 0.01177,
+      "committedUsd": 0.01177,
+      "spending": [
+        {
+          "id": "57a3acd0-3063-4ad5-a9cf-794bd9b3a5e9",
+          "state": "settled",
+          "reservedUsd": 0.38119,
+          "observedUsd": 0.01177,
+          "recordedEstimateUsd": 0.01177,
+          "accountingValidity": "verified",
+          "inputTokens": 572,
+          "outputTokens": 121,
+          "pricingVersion": "standard-2026-09-04-v1",
+          "requestedModel": "claude-fable-5",
+          "recordedModel": "claude-fable-5",
+          "pricingRates": {
+            "input": 10,
+            "output": 50
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "04",
+      "configuration": "fable",
+      "status": "completed",
+      "attempted": true,
+      "claimedAt": "2026-09-21T17:27:09.957Z",
+      "finishedAt": "2026-09-21T17:27:14.831Z",
+      "requestedModel": "claude-fable-5",
+      "returnedModel": "claude-fable-5",
+      "output": "{\"supplier\": \"Orbit Parts\", \"invoice_number\": \"OP-17\", \"invoice_date\": \"2026-09-04\", \"due_date\": \"2026-09-25\", \"currency\": null, \"invoice_total\": \"90.00\", \"review_fields\": [\"currency\"]}",
+      "stopReason": "end_turn",
+      "error": null,
+      "errorStatus": null,
+      "latencyMs": 4216,
+      "inputTokens": 577,
+      "outputTokens": 112,
+      "score": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "estimatedCostUsd": 0.01137,
+      "committedUsd": 0.01137,
+      "spending": [
+        {
+          "id": "a9c9f731-1d74-43e9-b519-db40c7da7175",
+          "state": "settled",
+          "reservedUsd": 0.38108,
+          "observedUsd": 0.01137,
+          "recordedEstimateUsd": 0.01137,
+          "accountingValidity": "verified",
+          "inputTokens": 577,
+          "outputTokens": 112,
+          "pricingVersion": "standard-2026-09-04-v1",
+          "requestedModel": "claude-fable-5",
+          "recordedModel": "claude-fable-5",
+          "pricingRates": {
+            "input": 10,
+            "output": 50
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "04",
+      "configuration": "sonnet",
+      "status": "completed",
+      "attempted": true,
+      "claimedAt": "2026-09-21T17:27:15.873Z",
+      "finishedAt": "2026-09-21T17:27:18.946Z",
+      "requestedModel": "claude-sonnet-4-6",
+      "returnedModel": "claude-sonnet-4-6",
+      "output": "```json\n{\n  \"supplier\": \"Orbit Parts\",\n  \"invoice_number\": \"OP-17\",\n  \"invoice_date\": \"2026-09-04\",\n  \"due_date\": \"2026-09-25\",\n  \"currency\": null,\n  \"invoice_total\": \"90.00\",\n  \"review_fields\": [\"currency\"]\n}\n```",
+      "stopReason": "end_turn",
+      "error": null,
+      "errorStatus": null,
+      "latencyMs": 2434,
+      "inputTokens": 386,
+      "outputTokens": 93,
+      "score": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "estimatedCostUsd": 0.002553,
+      "committedUsd": 0.002553,
+      "spending": [
+        {
+          "id": "490ac586-f48e-401f-b901-06bcff7233ed",
+          "state": "settled",
+          "reservedUsd": 0.114324,
+          "observedUsd": 0.002553,
+          "recordedEstimateUsd": 0.002553,
+          "accountingValidity": "verified",
+          "inputTokens": 386,
+          "outputTokens": 93,
+          "pricingVersion": "standard-2026-09-04-v1",
+          "requestedModel": "claude-sonnet-4-6",
+          "recordedModel": "claude-sonnet-4-6",
+          "pricingRates": {
+            "input": 3,
+            "output": 15
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "05",
+      "configuration": "sonnet",
+      "status": "completed",
+      "attempted": true,
+      "claimedAt": "2026-09-21T17:27:20.069Z",
+      "finishedAt": "2026-09-21T17:27:23.308Z",
+      "requestedModel": "claude-sonnet-4-6",
+      "returnedModel": "claude-sonnet-4-6",
+      "output": "```json\n{\n  \"supplier\": \"Moss Design\",\n  \"invoice_number\": \"MD-005\",\n  \"invoice_date\": null,\n  \"due_date\": \"2026-10-15\",\n  \"currency\": \"USD\",\n  \"invoice_total\": \"125.00\",\n  \"review_fields\": [\"invoice_date\"]\n}\n```",
+      "stopReason": "end_turn",
+      "error": null,
+      "errorStatus": null,
+      "latencyMs": 2629,
+      "inputTokens": 385,
+      "outputTokens": 89,
+      "score": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "estimatedCostUsd": 0.00249,
+      "committedUsd": 0.00249,
+      "spending": [
+        {
+          "id": "fef7ef46-a92d-40c6-9beb-47a9691393ef",
+          "state": "settled",
+          "reservedUsd": 0.114381,
+          "observedUsd": 0.00249,
+          "recordedEstimateUsd": 0.00249,
+          "accountingValidity": "verified",
+          "inputTokens": 385,
+          "outputTokens": 89,
+          "pricingVersion": "standard-2026-09-04-v1",
+          "requestedModel": "claude-sonnet-4-6",
+          "recordedModel": "claude-sonnet-4-6",
+          "pricingRates": {
+            "input": 3,
+            "output": 15
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "05",
+      "configuration": "fable",
+      "status": "completed",
+      "attempted": true,
+      "claimedAt": "2026-09-21T17:27:24.356Z",
+      "finishedAt": "2026-09-21T17:27:30.346Z",
+      "requestedModel": "claude-fable-5",
+      "returnedModel": "claude-fable-5",
+      "output": "{\"supplier\": \"Moss Design\", \"invoice_number\": \"MD-005\", \"invoice_date\": null, \"due_date\": \"2026-10-15\", \"currency\": \"USD\", \"invoice_total\": \"125.00\", \"review_fields\": [\"invoice_date\"]}",
+      "stopReason": "end_turn",
+      "error": null,
+      "errorStatus": null,
+      "latencyMs": 5185,
+      "inputTokens": 576,
+      "outputTokens": 133,
+      "score": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "estimatedCostUsd": 0.01241,
+      "committedUsd": 0.01241,
+      "spending": [
+        {
+          "id": "6e8ff3b6-b452-447f-86fa-7d7f0ae028e2",
+          "state": "settled",
+          "reservedUsd": 0.38127,
+          "observedUsd": 0.01241,
+          "recordedEstimateUsd": 0.01241,
+          "accountingValidity": "verified",
+          "inputTokens": 576,
+          "outputTokens": 133,
+          "pricingVersion": "standard-2026-09-04-v1",
+          "requestedModel": "claude-fable-5",
+          "recordedModel": "claude-fable-5",
+          "pricingRates": {
+            "input": 10,
+            "output": 50
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "06",
+      "configuration": "fable",
+      "status": "completed",
+      "attempted": true,
+      "claimedAt": "2026-09-21T17:27:31.462Z",
+      "finishedAt": "2026-09-21T17:27:36.546Z",
+      "requestedModel": "claude-fable-5",
+      "returnedModel": "claude-fable-5",
+      "output": "{\"supplier\": \"Pine Dispatch\", \"invoice_number\": \"PD-9\", \"invoice_date\": \"2026-09-06\", \"due_date\": \"2026-09-20\", \"currency\": \"USD\", \"invoice_total\": \"132.00\", \"review_fields\": []}",
+      "stopReason": "end_turn",
+      "error": null,
+      "errorStatus": null,
+      "latencyMs": 4375,
+      "inputTokens": 619,
+      "outputTokens": 87,
+      "score": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "estimatedCostUsd": 0.01054,
+      "committedUsd": 0.01054,
+      "spending": [
+        {
+          "id": "25c347c1-d6fb-4ce8-beb6-d81d2b17095f",
+          "state": "settled",
+          "reservedUsd": 0.38179,
+          "observedUsd": 0.01054,
+          "recordedEstimateUsd": 0.01054,
+          "accountingValidity": "verified",
+          "inputTokens": 619,
+          "outputTokens": 87,
+          "pricingVersion": "standard-2026-09-04-v1",
+          "requestedModel": "claude-fable-5",
+          "recordedModel": "claude-fable-5",
+          "pricingRates": {
+            "input": 10,
+            "output": 50
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "06",
+      "configuration": "sonnet",
+      "status": "completed",
+      "attempted": true,
+      "claimedAt": "2026-09-21T17:27:37.673Z",
+      "finishedAt": "2026-09-21T17:27:41.342Z",
+      "requestedModel": "claude-sonnet-4-6",
+      "returnedModel": "claude-sonnet-4-6",
+      "output": "```json\n{\n  \"supplier\": \"Pine Dispatch\",\n  \"invoice_number\": \"PD-9\",\n  \"invoice_date\": \"2026-09-06\",\n  \"due_date\": \"2026-09-20\",\n  \"currency\": \"USD\",\n  \"invoice_total\": \"132.00\",\n  \"review_fields\": []\n}\n```",
+      "stopReason": "end_turn",
+      "error": null,
+      "errorStatus": null,
+      "latencyMs": 2979,
+      "inputTokens": 417,
+      "outputTokens": 92,
+      "score": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "estimatedCostUsd": 0.002631,
+      "committedUsd": 0.002631,
+      "spending": [
+        {
+          "id": "d8c33520-c131-455c-b9b6-715cf09c94f8",
+          "state": "settled",
+          "reservedUsd": 0.114537,
+          "observedUsd": 0.002631,
+          "recordedEstimateUsd": 0.002631,
+          "accountingValidity": "verified",
+          "inputTokens": 417,
+          "outputTokens": 92,
+          "pricingVersion": "standard-2026-09-04-v1",
+          "requestedModel": "claude-sonnet-4-6",
+          "recordedModel": "claude-sonnet-4-6",
+          "pricingRates": {
+            "input": 3,
+            "output": 15
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "07",
+      "configuration": "sonnet",
+      "status": "completed",
+      "attempted": true,
+      "claimedAt": "2026-09-21T17:27:42.390Z",
+      "finishedAt": "2026-09-21T17:27:45.537Z",
+      "requestedModel": "claude-sonnet-4-6",
+      "returnedModel": "claude-sonnet-4-6",
+      "output": "```json\n{\n  \"supplier\": \"Marble Forms\",\n  \"invoice_number\": \"MF-37\",\n  \"invoice_date\": \"2026-09-07\",\n  \"due_date\": \"2026-09-30\",\n  \"currency\": \"EUR\",\n  \"invoice_total\": \"1234.50\",\n  \"review_fields\": []\n}\n```",
+      "stopReason": "end_turn",
+      "error": null,
+      "errorStatus": null,
+      "latencyMs": 2449,
+      "inputTokens": 406,
+      "outputTokens": 93,
+      "score": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "estimatedCostUsd": 0.002613,
+      "committedUsd": 0.002613,
+      "spending": [
+        {
+          "id": "6dee4fea-0f14-4824-bf26-74fc5defa386",
+          "state": "settled",
+          "reservedUsd": 0.114564,
+          "observedUsd": 0.002613,
+          "recordedEstimateUsd": 0.002613,
+          "accountingValidity": "verified",
+          "inputTokens": 406,
+          "outputTokens": 93,
+          "pricingVersion": "standard-2026-09-04-v1",
+          "requestedModel": "claude-sonnet-4-6",
+          "recordedModel": "claude-sonnet-4-6",
+          "pricingRates": {
+            "input": 3,
+            "output": 15
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "07",
+      "configuration": "fable",
+      "status": "completed",
+      "attempted": true,
+      "claimedAt": "2026-09-21T17:27:46.585Z",
+      "finishedAt": "2026-09-21T17:27:51.005Z",
+      "requestedModel": "claude-fable-5",
+      "returnedModel": "claude-fable-5",
+      "output": "{\"supplier\": \"Marble Forms\", \"invoice_number\": \"MF-37\", \"invoice_date\": \"2026-09-07\", \"due_date\": \"2026-09-30\", \"currency\": \"EUR\", \"invoice_total\": \"1234.50\", \"review_fields\": []}",
+      "stopReason": "end_turn",
+      "error": null,
+      "errorStatus": null,
+      "latencyMs": 3801,
+      "inputTokens": 605,
+      "outputTokens": 99,
+      "score": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "estimatedCostUsd": 0.011,
+      "committedUsd": 0.011,
+      "spending": [
+        {
+          "id": "1d8c6138-1a44-4bc8-b749-1e35a0e6f468",
+          "state": "settled",
+          "reservedUsd": 0.38188,
+          "observedUsd": 0.011,
+          "recordedEstimateUsd": 0.011,
+          "accountingValidity": "verified",
+          "inputTokens": 605,
+          "outputTokens": 99,
+          "pricingVersion": "standard-2026-09-04-v1",
+          "requestedModel": "claude-fable-5",
+          "recordedModel": "claude-fable-5",
+          "pricingRates": {
+            "input": 10,
+            "output": 50
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "08",
+      "configuration": "fable",
+      "status": "completed",
+      "attempted": true,
+      "claimedAt": "2026-09-21T17:27:52.149Z",
+      "finishedAt": "2026-09-21T17:27:57.079Z",
+      "requestedModel": "claude-fable-5",
+      "returnedModel": "claude-fable-5",
+      "output": "{\"supplier\": \"Beacon Research\", \"invoice_number\": \"BR-18\", \"invoice_date\": \"2026-09-08\", \"due_date\": \"2026-10-05\", \"currency\": \"USD\", \"invoice_total\": \"198.00\", \"review_fields\": []}",
+      "stopReason": "end_turn",
+      "error": null,
+      "errorStatus": null,
+      "latencyMs": 4252,
+      "inputTokens": 649,
+      "outputTokens": 110,
+      "score": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "estimatedCostUsd": 0.01199,
+      "committedUsd": 0.01199,
+      "spending": [
+        {
+          "id": "b6852d8f-a613-4b2c-b936-d74067af6ecd",
+          "state": "settled",
+          "reservedUsd": 0.38292,
+          "observedUsd": 0.01199,
+          "recordedEstimateUsd": 0.01199,
+          "accountingValidity": "verified",
+          "inputTokens": 649,
+          "outputTokens": 110,
+          "pricingVersion": "standard-2026-09-04-v1",
+          "requestedModel": "claude-fable-5",
+          "recordedModel": "claude-fable-5",
+          "pricingRates": {
+            "input": 10,
+            "output": 50
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "08",
+      "configuration": "sonnet",
+      "status": "completed",
+      "attempted": true,
+      "claimedAt": "2026-09-21T17:27:58.270Z",
+      "finishedAt": "2026-09-21T17:28:01.042Z",
+      "requestedModel": "claude-sonnet-4-6",
+      "returnedModel": "claude-sonnet-4-6",
+      "output": "```json\n{\"supplier\":\"Beacon Research\",\"invoice_number\":\"BR-18\",\"invoice_date\":\"2026-09-08\",\"due_date\":\"2026-10-05\",\"currency\":\"USD\",\"invoice_total\":\"198.00\",\"review_fields\":[]}\n```",
+      "stopReason": "end_turn",
+      "error": null,
+      "errorStatus": null,
+      "latencyMs": 2171,
+      "inputTokens": 435,
+      "outputTokens": 63,
+      "score": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "estimatedCostUsd": 0.00225,
+      "committedUsd": 0.00225,
+      "spending": [
+        {
+          "id": "ce41147c-b89e-43e0-bb16-e9fb4468d457",
+          "state": "settled",
+          "reservedUsd": 0.114876,
+          "observedUsd": 0.00225,
+          "recordedEstimateUsd": 0.00225,
+          "accountingValidity": "verified",
+          "inputTokens": 435,
+          "outputTokens": 63,
+          "pricingVersion": "standard-2026-09-04-v1",
+          "requestedModel": "claude-sonnet-4-6",
+          "recordedModel": "claude-sonnet-4-6",
+          "pricingRates": {
+            "input": 3,
+            "output": 15
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "09",
+      "configuration": "sonnet",
+      "status": "completed",
+      "attempted": true,
+      "claimedAt": "2026-09-21T17:28:02.237Z",
+      "finishedAt": "2026-09-21T17:28:05.382Z",
+      "requestedModel": "claude-sonnet-4-6",
+      "returnedModel": "claude-sonnet-4-6",
+      "output": "```json\n{\n  \"supplier\": \"Elm Repairs\",\n  \"invoice_number\": \"ER-019\",\n  \"invoice_date\": \"2026-08-19\",\n  \"due_date\": \"2026-09-18\",\n  \"currency\": \"GBP\",\n  \"invoice_total\": \"58.00\",\n  \"review_fields\": []\n}\n```",
+      "stopReason": "end_turn",
+      "error": null,
+      "errorStatus": null,
+      "latencyMs": 2413,
+      "inputTokens": 412,
+      "outputTokens": 95,
+      "score": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "estimatedCostUsd": 0.002661,
+      "committedUsd": 0.002661,
+      "spending": [
+        {
+          "id": "fa854e89-9151-4492-b00f-0590535c4f70",
+          "state": "settled",
+          "reservedUsd": 0.114567,
+          "observedUsd": 0.002661,
+          "recordedEstimateUsd": 0.002661,
+          "accountingValidity": "verified",
+          "inputTokens": 412,
+          "outputTokens": 95,
+          "pricingVersion": "standard-2026-09-04-v1",
+          "requestedModel": "claude-sonnet-4-6",
+          "recordedModel": "claude-sonnet-4-6",
+          "pricingRates": {
+            "input": 3,
+            "output": 15
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "09",
+      "configuration": "fable",
+      "status": "completed",
+      "attempted": true,
+      "claimedAt": "2026-09-21T17:28:06.431Z",
+      "finishedAt": "2026-09-21T17:28:11.150Z",
+      "requestedModel": "claude-fable-5",
+      "returnedModel": "claude-fable-5",
+      "output": "{\"supplier\": \"Elm Repairs\", \"invoice_number\": \"ER-019\", \"invoice_date\": \"2026-08-19\", \"due_date\": \"2026-09-18\", \"currency\": \"GBP\", \"invoice_total\": \"58.00\", \"review_fields\": []}",
+      "stopReason": "end_turn",
+      "error": null,
+      "errorStatus": null,
+      "latencyMs": 4115,
+      "inputTokens": 608,
+      "outputTokens": 95,
+      "score": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "estimatedCostUsd": 0.01083,
+      "committedUsd": 0.01083,
+      "spending": [
+        {
+          "id": "a4681c41-19ed-4fa2-aef4-ade2b1fb1012",
+          "state": "settled",
+          "reservedUsd": 0.38189,
+          "observedUsd": 0.01083,
+          "recordedEstimateUsd": 0.01083,
+          "accountingValidity": "verified",
+          "inputTokens": 608,
+          "outputTokens": 95,
+          "pricingVersion": "standard-2026-09-04-v1",
+          "requestedModel": "claude-fable-5",
+          "recordedModel": "claude-fable-5",
+          "pricingRates": {
+            "input": 10,
+            "output": 50
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "10",
+      "configuration": "fable",
+      "status": "completed",
+      "attempted": true,
+      "claimedAt": "2026-09-21T17:28:12.276Z",
+      "finishedAt": "2026-09-21T17:28:16.688Z",
+      "requestedModel": "claude-fable-5",
+      "returnedModel": "claude-fable-5",
+      "output": "{\"supplier\": \"Cobalt Tools\", \"invoice_number\": \"CT-20\", \"invoice_date\": \"2026-09-10\", \"due_date\": \"2026-10-10\", \"currency\": \"USD\", \"invoice_total\": null, \"review_fields\": [\"invoice_total\"]}",
+      "stopReason": "end_turn",
+      "error": null,
+      "errorStatus": null,
+      "latencyMs": 3786,
+      "inputTokens": 671,
+      "outputTokens": 119,
+      "score": {
+        "accepted": true,
+        "schemaValid": true,
+        "fieldsCorrect": 6,
+        "reviewCorrect": true,
+        "reviewConsistent": true,
+        "fieldMatches": {
+          "supplier": true,
+          "invoice_number": true,
+          "invoice_date": true,
+          "due_date": true,
+          "currency": true,
+          "invoice_total": true
+        },
+        "reason": null
+      },
+      "estimatedCostUsd": 0.01266,
+      "committedUsd": 0.01266,
+      "spending": [
+        {
+          "id": "8e47c097-e514-471b-8ec6-75d6356b98eb",
+          "state": "settled",
+          "reservedUsd": 0.38384,
+          "observedUsd": 0.01266,
+          "recordedEstimateUsd": 0.01266,
+          "accountingValidity": "verified",
+          "inputTokens": 671,
+          "outputTokens": 119,
+          "pricingVersion": "standard-2026-09-04-v1",
+          "requestedModel": "claude-fable-5",
+          "recordedModel": "claude-fable-5",
+          "pricingRates": {
+            "input": 10,
+            "output": 50
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "10",
+      "configuration": "sonnet",
+      "status": "completed",
+      "attempted": true,
+      "claimedAt": "2026-09-21T17:28:17.873Z",
+      "finishedAt": "2026-09-21T17:28:21.484Z",
+      "requestedModel": "claude-sonnet-4-6",
+      "returnedModel": "claude-sonnet-4-6",
+      "output": "```json\n{\n  \"supplier\": \"Cobalt Tools\",\n  \"invoice_number\": \"CT-20\",\n  \"invoice_date\": \"2026-09-10\",\n  \"due_date\": \"2026-10-10\",\n  \"currency\": \"USD\",\n  \"invoice_total\": null,\n  \"review_fields\": [\"invoice_total\"]\n}\n```",
+      "stopReason": "end_turn",
+      "error": null,
+      "errorStatus": null,
+      "latencyMs": 2936,
+      "inputTokens": 454,
+      "outputTokens": 93,
+      "score": {
+        "accepted": false,
+        "schemaValid": false,
+        "fieldsCorrect": 0,
+        "reviewCorrect": false,
+        "fieldMatches": {
+          "supplier": false,
+          "invoice_number": false,
+          "invoice_date": false,
+          "due_date": false,
+          "currency": false,
+          "invoice_total": false
+        },
+        "reason": "Not one JSON value"
+      },
+      "estimatedCostUsd": 0.002757,
+      "committedUsd": 0.002757,
+      "spending": [
+        {
+          "id": "3eb54458-c6e9-4b52-a82d-43b3bab1f55a",
+          "state": "settled",
+          "reservedUsd": 0.115152,
+          "observedUsd": 0.002757,
+          "recordedEstimateUsd": 0.002757,
+          "accountingValidity": "verified",
+          "inputTokens": 454,
+          "outputTokens": 93,
+          "pricingVersion": "standard-2026-09-04-v1",
+          "requestedModel": "claude-sonnet-4-6",
+          "recordedModel": "claude-sonnet-4-6",
+          "pricingRates": {
+            "input": 3,
+            "output": 15
+          }
+        }
+      ]
+    }
+  ]
+}

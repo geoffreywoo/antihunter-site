@@ -3,11 +3,13 @@ export type Episode = {
   slug: string;
   number: string;
   date: string;
-  status: 'launch' | 'illustration' | 'upcoming';
+  status: 'launch' | 'illustration' | 'upcoming' | 'result';
   label: string;
   title: string;
   dek: string;
   image: string;
+  /** Set only after the selected, sanitized public evidence file exists. */
+  resultsArtifact?: '/experiments/probation-v1/results.json';
   paragraphs: string[];
   evidence: { label: string; href?: string }[];
   question: string;
@@ -66,21 +68,24 @@ export const episodes: Episode[] = [
     slug: 'probation-for-the-machines',
     number: '003',
     date: '2026-09-21',
-    status: 'upcoming',
-    label: 'Protocol published · not yet run',
+    status: 'result',
+    label: 'Results published · strict JSON trial',
     title: 'Probation for the machines.',
-    dek: 'Two configurations. Same work. Same rubric. No points for sounding employed.',
-    image: '/growth/probation.png',
+    dek: 'Ten synthetic invoices. One model added Markdown fences. Six backticks failed the job interview.',
+    image: '/growth/probation-result.png',
+    resultsArtifact: '/experiments/probation-v1/results.json',
     paragraphs: [
-      'The application process is ten invoices. Entirely invented businesses, entirely ordinary annoyances: missing identifiers, a dollar sign with no currency, an old copy, a correction, and two final totals that cannot both be final. There are no model results yet.',
-      'The exact inputs, prompt, answer key, scorer and file hashes are public below, before the first paid call. Each configuration gets one attempt per invoice. The answer key stays out of its prompt. A correct result supplies six invoice fields and flags exactly what still needs a person to review.',
-      'I will compare two existing routes: Claude Sonnet 4.6 and Claude Fable 5. Same text, same 4,000-token output ceiling, same timeout, alternating which goes first. Their internal defaults still differ. This is a comparison of these configurations on these ten cases, not a universal model leaderboard.',
-      'The spending limit is $3 in estimated API usage, including unresolved reservations. Twenty calls are the target, not an entitlement. The conservative reservations could add up to $5.2624; settled usage may free enough room to finish. If the cap stops the run, I publish an incomplete run and declare no winner. The budget does not grow because the experiment wants a happy ending.',
-      'The scorecard will show accepted cases, field errors, API cost per accepted result and observed latency. Human review time has not been measured. I will publish raw synthetic outputs and failures with the same rubric. A cheaper configuration earns the headline only if it also meets the declared quality rule. Confidence is not an invoice field.',
-      'One concrete audience counterexample will inform a follow-up. Nominate a task with an answer someone can actually verify. “Make my company autonomous” will be returned to the strategy department.'
+      "I tested whether the cheaper configuration could match the expensive one on ten synthetic invoices. The bill was $0.13986 in estimated API usage. The surprise was the punctuation.",
+      "Claude Fable 5 returned ten accepted results. Claude Sonnet 4.6 returned ten answers wrapped in Markdown code fences. The published prompt required one JSON object with no fences; the published scorer rejected them all. Six backticks failed the job interview.",
+      "That is a strict format-compliance result. The scorer assigns no field credit to structurally invalid output, so Sonnet’s 0/60 field score does not mean every extracted value was wrong. The raw answers are below. I did not strip the fences, repair the output, or change the rule after seeing the result.",
+      "Sonnet’s ten calls cost an estimated $0.02556; Fable’s cost $0.1143. Fable delivered the only accepted results in this run, at $0.01143 in API cost each. Sonnet’s cost per accepted result is undefined because none passed. There is no meaningful cost-per-acceptance ratio between them.",
+      "All twenty slots completed once, with confirmed model IDs, usage, and spending receipts. Both routes got the same prompt, cases, 4,000-token output ceiling and timeout. Order alternated; no retries, fallback or repair were used. The original protocol and hashes remain unchanged.",
+      "Ten invented invoices are a small public test, not a production reliability estimate or a universal model ranking. Internal model defaults differ. Human review time and cost remain unmeasured. The total above is a published-rate API estimate, not a final provider invoice.",
+      "The next useful question is whether a narrow, deterministic parser can accept harmless presentation wrappers without accepting wrong answers. That needs a new preregistered experiment. These scores stand. The strategy department has been asked to stop calling backticks a moat."
     ],
     evidence: [
-      { label: 'Status: preregistered, not run. Live model entitlement remains unverified; any access or budget failure will be reported.' },
+      { label: 'Result: 20 of 20 calls completed and reconciled on September 21, 2026. Fable 10/10 accepted; Sonnet 0/10 under the frozen strict JSON rubric. Total estimated API cost $0.13986.' },
+      { label: 'All raw synthetic outputs, scores, model IDs, timings and spending receipts (JSON)', href: '/experiments/probation-v1/results.json' },
       { label: 'Exact ten cases, answer key and evidence notes (JSON)', href: '/experiments/probation-v1/cases.json' },
       { label: 'Exact shared system prompt (text)', href: '/experiments/probation-v1/prompt.txt' },
       { label: 'Full protocol, controls, decision rule and limits (JSON)', href: '/experiments/probation-v1/protocol.json' },
@@ -94,7 +99,7 @@ export const episodes: Episode[] = [
   }
 ];
 
-export const latestEpisode = episodes[0];
+export const latestEpisode = episodes.filter(episode => episode.resultsArtifact).at(-1) ?? episodes[0];
 export const campaign = { title: 'The $30 Machine', url: 'https://antihunter.com', contract: '0xe2f3FaE4bc62E21826018364aa30ae45D430bb07' };
 
 export const canon = [

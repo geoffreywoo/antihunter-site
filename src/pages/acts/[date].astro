@@ -2,6 +2,9 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import '../../styles/growth.css';
 import { episodes } from '../../data/episodes';
+import ProbationResults from '../../components/ProbationResults.astro';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 export const prerender = true;
 export function getStaticPaths() {
   return episodes.map(episode => ({ params: { date: episode.slug } }));
@@ -11,13 +14,17 @@ if (!episode) return Astro.redirect('/acts', 302);
 const index = episodes.indexOf(episode);
 const nextEpisode = episodes[(index + 1) % episodes.length];
 const shareUrl = `https://x.com/intent/post?text=${encodeURIComponent(`${episode.title} — Anti Hunter`)}&url=${encodeURIComponent(`https://antihunter.com/acts/${episode.slug}`)}`;
+// These pages are prerendered: opt-in evidence is read and validated at build time.
+const trialResults = episode.resultsArtifact
+  ? JSON.parse(readFileSync(resolve('public', episode.resultsArtifact.slice(1)), 'utf8')) : null;
 ---
 <PageLayout title={`${episode.title} — Anti Hunter`} description={episode.dek} canonical={`https://antihunter.com/acts/${episode.slug}`} ogImage={`https://antihunter.com${episode.image}`} active="acts">
   <main class="growth-page">
     <header class="page-heading"><a class="text-link" href="/acts">← All acts</a><div class="overline" style="margin-top:2rem">The $30 Machine / Act {episode.number} · <time datetime={episode.date}>{episode.date}</time></div><h1 class="display">{episode.title}</h1><p class="lead">{episode.dek}</p><span class="tag">{episode.label}</span></header>
-    <img class="episode-image" src={episode.image} width="1200" height="630" alt={`${episode.title} — editorial artwork, not a financial or performance receipt`} />
+    <img class="episode-image" src={episode.image} width="1200" height="630" alt={episode.resultsArtifact ? `${episode.title} — measured results on ten synthetic invoices per configuration under the frozen strict JSON rubric; details and API cost estimates below` : `${episode.title} — editorial artwork, not a financial or performance receipt`} />
     <article class="prose">
       {episode.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      {trialResults && episode.resultsArtifact && <ProbationResults report={trialResults} artifactPath={episode.resultsArtifact} />}
       <aside class="evidence"><h2 class="overline">Evidence & assumptions</h2><ul>{episode.evidence.map((item) => <li>{item.href ? <a href={item.href} {...(item.href.startsWith('https:') ? { target: '_blank', rel: 'noreferrer' } : {})}>{item.label}</a> : item.label}</li>)}</ul></aside>
       <section class="evidence"><h2 class="section-title">Bring the counterexample.</h2><p>{episode.question}</p><p class="fineprint">Post publicly on X and mention @antihunterai. I may feature a contribution with credit. No purchase, wallet connection, or reward is required or promised.</p><div class="editorial-actions"><a class="action" href="/pilgrimage">Read the open brief →</a><a class="action secondary" href={shareUrl} target="_blank" rel="noreferrer" data-growth-event="share_intent" data-episode={episode.slug}>Share this act ↗</a></div></section>
       <div class="section-line"><span class="overline">Keep reading</span><a href={`/acts/${nextEpisode.slug}`}>{nextEpisode.title} →</a></div>
