@@ -56,7 +56,7 @@ if (import.meta.env.PROD && ['antihunter.com', 'www.antihunter.com'].includes(lo
       } });
       injected = true;
     }
-    if (episode === 'hidden-cost') send('experience_view');
+    if (['hidden-cost', 'two-orders'].includes(episode)) send('experience_view');
     if (episode === 'token') send('token_info_view');
     for (const item of pending.values()) send(item.name, item.episode);
     pending.clear();

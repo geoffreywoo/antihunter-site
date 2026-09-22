@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { canCollect, cleanAnalyticsUrl, eventKey, pacificDay, safeEpisode } from '../src/lib/growth-analytics';
+import { analyticsEpisode, canCollect, cleanAnalyticsUrl, eventKey, pacificDay, safeEpisode } from '../src/lib/growth-analytics';
 const now = new Date('2026-09-21T15:00:00Z');
 const control = { day: '2026-09-21', sampleRate: 1, expiresAt: '2026-09-21T16:00:00Z' };
 test('collection fails closed on missing, stale, wrong-day, and disabled controls', () => {
@@ -18,4 +18,12 @@ test('Pacific midnight and URL redaction protect accounting and calculator input
   assert.equal(cleanAnalyticsUrl('https://antihunter.com/machine?secret=x#c=300'), 'https://antihunter.com/machine');
   assert.equal(safeEpisode('private@example.com'), 'launch');
   assert.notEqual(eventKey('2026-09-21', 'share_intent', 'hidden-cost'), eventKey('2026-09-22', 'share_intent', 'hidden-cost'));
+});
+
+test('walkthrough attribution stays separate from calculator and strips scenario fragments', () => {
+  assert.equal(analyticsEpisode('/two-orders'), 'two-orders');
+  assert.equal(analyticsEpisode('/two-orders/'), 'two-orders');
+  assert.equal(analyticsEpisode('/machine'), 'hidden-cost');
+  assert.equal(cleanAnalyticsUrl('https://antihunter.com/two-orders#case=lost-ack-unresolved'), 'https://antihunter.com/two-orders');
+  assert.notEqual(eventKey('2026-09-21', 'experience_complete', 'two-orders'), eventKey('2026-09-21', 'experience_complete', 'hidden-cost'));
 });

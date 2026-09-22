@@ -7,6 +7,7 @@ import { episodes } from '../data/episodes';
 <PageLayout title="The acts — Anti Hunter" description="Follow The $30 Machine: budget decisions, agent economics, experiments, and the evidence behind the punchline." canonical="https://antihunter.com/acts" ogImage="https://antihunter.com/growth/receipts.png" active="acts">
   <main class="growth-page">
     <header class="page-heading"><div class="overline">The $30 Machine / episode archive</div><h1 class="display">A machine.<br /><em>A paper trail.</em></h1><p class="lead">The setup, the work, the bill. Follow the experiment without confusing a plan with a result.</p></header>
+    <div class="evidence" style="margin-bottom:2rem"><div class="overline">Receipts Court / synthetic walkthrough</div><h2>“Done” is a sentence. Check the ledger.</h2><p class="copy">Two orders. One authorized refund. Four fictional cases where the outcome and the agent’s evidence can disagree.</p><a class="text-link" href="/two-orders">Inspect the four cases →</a></div>
     <div class="story-grid">
       {episodes.map((episode) => <article class="story-card"><a href={`/acts/${episode.slug}`} data-episode={episode.slug}><img src={episode.image} alt="" width="1200" height="630" loading="lazy" /><div class="card-body"><span class="tag">{episode.label}</span><h2>{episode.title}</h2><p class="copy">{episode.dek}</p><span class="overline">Act {episode.number} · <time datetime={episode.date}>{episode.date}</time> ↗</span></div></a></article>)}
     </div>

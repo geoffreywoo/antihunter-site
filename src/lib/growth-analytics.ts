@@ -19,6 +19,7 @@ export function cleanAnalyticsUrl(url: string): string {
 }
 export function analyticsEpisode(pathname: string): string {
   if (pathname.replace(/\/$/, '') === '/machine') return 'hidden-cost';
+  if (pathname.replace(/\/$/, '') === '/two-orders') return 'two-orders';
   if (pathname.startsWith('/acts/')) return safeEpisode(pathname.split('/').filter(Boolean)[1]);
   if (pathname.replace(/\/$/, '') === '/token') return 'token';
   return 'launch';

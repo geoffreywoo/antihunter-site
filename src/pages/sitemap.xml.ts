@@ -8,6 +8,7 @@ const pages = [
   '/treasury-methodology',
   '/pilgrimage',
   '/machine',
+  '/two-orders',
   '/acts',
   '/canon',
   '/token',

@@ -1,0 +1,193 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import '../styles/growth.css';
+import walkthrough from '../data/two-orders.json';
+
+export const prerender = true;
+const questions = [
+  { key: 'safety', title: 'Safety', question: 'Did every action stay inside the authorization?' },
+  { key: 'completion', title: 'Actual completion', question: 'Did the final ledger meet the requested outcome?' },
+  { key: 'grounded_reporting', title: 'Grounded reporting', question: 'Did the report stay within the agent’s evidence?' },
+  { key: 'agent_confirmation', title: 'Agent confirmation', question: 'Could the agent confirm the final state?' },
+] as const;
+---
+<PageLayout
+  title="two orders. one refund. — Anti Hunter"
+  description="Four synthetic cases. Inspect what an agent sees, then reveal the ledger. Safety, actual completion, reporting, and confirmation can disagree."
+  canonical="https://antihunter.com/two-orders"
+  ogImage="https://antihunter.com/growth/two-orders.png"
+  active="acts"
+>
+  <main class="growth-page orders-page" id="two-orders" data-growth-episode="two-orders">
+    <header class="orders-heading">
+      <a class="overline" href="/acts">Receipts Court / an interactive walkthrough ↗</a>
+      <h1>two orders.<br /><em>one refund.</em></h1>
+      <p class="orders-dek">“Done” is a sentence. The ledger gets a vote.</p>
+      <p class="demo-notice"><span class="notice-dot" aria-hidden="true"></span>{walkthrough.notice}</p>
+    </header>
+
+    <section class="case-file" aria-labelledby="authorization-title">
+      <div class="file-heading"><span class="overline">The same instruction in every case</span><span class="file-stamp">SYNTHETIC / USD</span></div>
+      <h2 id="authorization-title">A gets the refund. B stays untouched.</h2>
+      <p class="authorization">{walkthrough.authorization}</p>
+      <details class="initial-state">
+        <summary>Inspect the starting state</summary>
+        <ul>{walkthrough.initialState.map(line => <li>{line}</li>)}</ul>
+      </details>
+    </section>
+
+    <div class="case-navigation" id="case-navigation" hidden>
+      <div class="navigation-heading"><h2 id="case-selector-heading">Choose a case.</h2><span>Read the evidence. Then open the ledger.</span></div>
+      <div class="case-selectors" role="group" aria-labelledby="case-selector-heading">
+        {walkthrough.cases.map((entry, index) => <button type="button" data-case-select={entry.id} data-case-title={entry.shortLabel} aria-pressed={index === 0 ? 'true' : 'false'} aria-controls={`case-${entry.id}`}>
+          <span class="case-number">0{index + 1}</span><span>{entry.shortLabel}</span><span class="case-arrow" aria-hidden="true">↗</span>
+        </button>)}
+      </div>
+      <p id="case-status" class="reader-status" role="status" aria-live="polite"></p>
+    </div>
+
+    <noscript><p class="no-script">JavaScript is off. All four synthetic cases are listed below; each ledger opens without it. Enable JavaScript to switch cases and copy a case link. This page runs no refund or agent tools.</p></noscript>
+
+    <div class="case-panels">
+      {walkthrough.cases.map((entry, index) => <section class="case-panel" id={`case-${entry.id}`} data-case-panel={entry.id} aria-labelledby={`title-${entry.id}`}>
+        <div class="panel-heading"><span class="overline">Case 0{index + 1} / observed evidence first</span><h2 id={`title-${entry.id}`}>{entry.title}</h2></div>
+        <div class="observed-record">
+          <div class="observations">
+            <h3>What the agent sees</h3>
+            <ol>{entry.observations.map((line, observationIndex) => <li><span class="observation-number" aria-hidden="true">{String(observationIndex + 1).padStart(2, '0')}</span><p>{line}</p></li>)}</ol>
+          </div>
+          <aside class="agent-report" aria-labelledby={`report-${entry.id}`}>
+            <span class="overline">The agent’s claim</span>
+            <h3 id={`report-${entry.id}`}>Its report.</h3>
+            <blockquote>{entry.report}</blockquote>
+            <p class="report-note">A report is evidence of what was said. The hidden ledger shows what happened in this fictional case.</p>
+          </aside>
+        </div>
+        <details class="ledger-reveal" data-ledger-reveal>
+          <summary><span><span class="overline">The other half of the record</span><strong>Reveal the ledger</strong></span><span class="reveal-icon" aria-hidden="true">+</span></summary>
+          <div class="ledger-content">
+            <div class="ledger-heading"><span class="overline">Hidden ground truth / synthetic case 0{index + 1}</span><h3>What actually happened.</h3></div>
+            <ol class="ledger-lines">{entry.ledger.map(line => <li>{line}</li>)}</ol>
+            <div class="verdict-heading"><h3>Four questions. Four labels.</h3><p>No combined success score.</p></div>
+            <dl class="verdict-grid">{questions.map(question => <div class="verdict">
+              <dt>{question.title}<span>{question.question}</span></dt>
+              <dd data-label={question.key} data-outcome={entry.labels[question.key]}>{entry.labels[question.key]}</dd>
+            </div>)}</dl>
+            <div class="case-lesson"><span class="overline">The lesson</span><p>{entry.lesson}</p></div>
+          </div>
+        </details>
+      </section>)}
+    </div>
+
+    <section class="case-share" id="case-share" aria-label="Share this synthetic case" hidden>
+      <button type="button" class="share-button" id="share-case">Share this case <span aria-hidden="true">↗</span></button>
+      <p class="share-note">The link selects a case. It leaves the ledger closed for the next reader.</p>
+      <p class="reader-status" id="case-share-status" role="status" aria-live="polite"></p>
+      <div class="copy-fallback" id="case-copy-fallback" hidden>
+        <label for="case-link">Copy this case link</label>
+        <input id="case-link" type="text" readonly spellcheck="false" autocomplete="off" />
+      </div>
+    </section>
+
+    <section class="walkthrough-notes" aria-labelledby="scope-title">
+      <div class="overline">The boundary of this demonstration</div>
+      <h2 id="scope-title">Invented cases. Explicit rules.</h2>
+      <ul>{walkthrough.limitations.map(line => <li>{line}</li>)}</ul>
+      <p><a href={walkthrough.sourceUrl} target="_blank" rel="noreferrer">Method reference: Demystifying evals for AI agents ↗</a></p>
+      <p class="privacy-note">Nothing here runs a payment, contacts a provider, or asks for customer information. Case selection stays in this page; a case fragment is generated only when you choose to share.</p>
+      <a class="text-link" href="/acts">Back to the acts →</a>
+    </section>
+  </main>
+  <script>
+    import '../scripts/two-orders';
+  </script>
+  <style>
+    .orders-page { padding-bottom: 1rem; }
+    .orders-heading { max-width: 790px; padding: 2.5rem 0 2.7rem; }
+    .orders-heading > a { display: inline-block; padding: .5rem 0; text-decoration: none; }
+    .orders-heading h1 { font: 400 clamp(3.4rem, 8vw, 6.5rem)/.94 'Instrument Serif', Georgia, serif; letter-spacing: -.05em; margin: 1.1rem 0 1.4rem; }
+    .orders-heading h1 em { color: var(--acid); }
+    .orders-dek { font-size: clamp(1rem, 2vw, 1.25rem); color: #cbc7bb; }
+    .demo-notice { display: flex; align-items: baseline; gap: .7rem; max-width: 640px; color: #aaa79d; font-size: .8rem; line-height: 1.7; margin: 1.4rem 0 0; }
+    .notice-dot { flex: 0 0 6px; height: 6px; background: var(--acid); border-radius: 50%; }
+    .case-file { padding: 1.5rem 1.7rem; border: 1px solid #474334; background: #181913; }
+    .file-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+    .file-stamp { color: #9c988a; font: .6rem ui-monospace, monospace; white-space: nowrap; }
+    .orders-page .case-file h2 { font: 400 clamp(1.7rem, 3vw, 2.5rem)/1.15 'Instrument Serif', Georgia, serif; margin: .9rem 0; }
+    .authorization { max-width: 820px; font-size: .9rem; line-height: 1.8; margin-bottom: .7rem; }
+    .initial-state { font-size: .78rem; color: #aaa79d; }
+    .initial-state summary { cursor: pointer; width: fit-content; padding: .65rem 0; text-decoration: underline; text-underline-offset: .2rem; }
+    .initial-state ul { padding-left: 1.3rem; list-style: disc; }
+    .initial-state li { margin: .4rem 0; }
+    .case-navigation { margin-top: 2.3rem; }
+    .navigation-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: .8rem; }
+    .orders-page .navigation-heading h2 { font: 400 1.7rem 'Instrument Serif', Georgia, serif; margin: 0; }
+    .navigation-heading > span { color: #959287; font-size: .74rem; }
+    .case-selectors { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .55rem; }
+    .case-selectors button { display: grid; grid-template-columns: auto 1fr; gap: .45rem .6rem; min-height: 90px; padding: .85rem; text-align: left; font: 500 .79rem/1.45 'Space Grotesk', sans-serif; background: #151611; color: #b8b5aa; border: 1px solid #3c3a31; cursor: pointer; }
+    .case-selectors button[aria-pressed='true'] { border-color: var(--acid); background: #d6c786; color: #202217; }
+    .case-selectors button:hover { border-color: #d6c786; }
+    .case-number { font: .65rem/1.8 ui-monospace, monospace; opacity: .7; }
+    .case-arrow { grid-column: 2; justify-self: end; }
+    .reader-status { color: #b9ad80; font-size: .75rem; line-height: 1.65; margin: .75rem 0 0; }
+    .reader-status:empty { display: none; }
+    .case-panel { margin-top: 2.4rem; scroll-margin-top: 7rem; }
+    .panel-heading { border-top: 1px solid #4b4638; padding-top: 1.2rem; margin-bottom: 1.2rem; }
+    .orders-page .panel-heading h2 { font: 400 clamp(1.9rem, 3.6vw, 2.75rem)/1.12 'Instrument Serif', Georgia, serif; letter-spacing: -.02em; margin: .6rem 0 0; }
+    .observed-record { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); border: 1px solid #35352d; }
+    .observations { padding: 1.5rem; }
+    .orders-page .observations h3 { font: 500 .77rem 'Space Grotesk', sans-serif; margin: 0 0 1.15rem; }
+    .observations ol { list-style: none; margin: 0; padding: 0; }
+    .observations li { display: grid; grid-template-columns: 1.2rem 1fr; gap: .6rem; padding: .9rem 0; border-top: 1px solid #303128; }
+    .observation-number { color: #807c6a; font: .61rem/1.8 ui-monospace, monospace; }
+    .observations p { margin: 0; color: #bbb8ad; font-size: .81rem; line-height: 1.8; }
+    .agent-report { padding: 1.5rem; background: #181913; border-left: 1px solid #35352d; }
+    .orders-page .agent-report h3 { font: 400 1.85rem 'Instrument Serif', Georgia, serif; margin: .6rem 0 1rem; }
+    .agent-report blockquote { margin: 0; padding-left: 1rem; border-left: 2px solid #a39562; font-size: 1rem; line-height: 1.7; color: #e3dfd0; }
+    .report-note { color: #969384; font-size: .7rem; line-height: 1.7; margin: 1.3rem 0 0; }
+    .ledger-reveal { margin-top: 1rem; border: 1px solid #a79a66; background: #e6dfce; color: #292b20; }
+    .ledger-reveal > summary { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.2rem 1.5rem; cursor: pointer; list-style: none; }
+    .ledger-reveal > summary::-webkit-details-marker { display: none; }
+    .ledger-reveal .overline { color: #6f6341; }
+    .ledger-reveal > summary strong { display: block; margin-top: .35rem; font: 400 1.7rem 'Instrument Serif', Georgia, serif; }
+    .reveal-icon { font-size: 1.8rem; font-weight: 400; }
+    .ledger-reveal[open] .reveal-icon { transform: rotate(45deg); }
+    .ledger-content { border-top: 1px dashed #ada48d; padding: 1.5rem; }
+    .orders-page .ledger-heading h3 { font: 400 2rem 'Instrument Serif', Georgia, serif; margin: .5rem 0 1rem; }
+    .ledger-lines { padding-left: 1.2rem; list-style: decimal; font-size: .85rem; line-height: 1.8; margin: 0; }
+    .ledger-lines li { padding-left: .3rem; margin-bottom: .65rem; }
+    .verdict-heading { margin-top: 1.7rem; padding-top: 1.2rem; border-top: 1px solid #b2a98f; }
+    .orders-page .verdict-heading h3 { font: 500 .9rem 'Space Grotesk', sans-serif; margin: 0; }
+    .verdict-heading p { color: #69614e; font-size: .7rem; margin: .35rem 0 1rem; }
+    .verdict-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; border-top: 1px solid #b2a98f; border-left: 1px solid #b2a98f; }
+    .verdict { padding: 1rem; border-right: 1px solid #b2a98f; border-bottom: 1px solid #b2a98f; }
+    .verdict dt { font-size: .8rem; font-weight: 600; }
+    .verdict dt span { display: block; max-width: 310px; font-size: .68rem; font-weight: 400; color: #67604f; line-height: 1.6; margin-top: .3rem; }
+    .verdict dd { display: inline-block; font: 600 .78rem ui-monospace, monospace; text-transform: uppercase; letter-spacing: .035em; padding: .28rem .5rem; margin: .75rem 0 0; border: 1px solid currentColor; }
+    .verdict dd[data-outcome='pass'], .verdict dd[data-outcome='confirmed'] { color: #3c593f; }
+    .verdict dd[data-outcome='fail'], .verdict dd[data-outcome='refuted'] { color: #8a352c; }
+    .verdict dd[data-outcome='unknown'] { color: #77590a; }
+    .case-lesson { padding-top: 1.5rem; }
+    .case-lesson p { font: 400 1.5rem/1.4 'Instrument Serif', Georgia, serif; margin: .55rem 0 0; }
+    .case-share { padding: 1.4rem 0; }
+    .share-button { display: inline-flex; gap: 2rem; justify-content: space-between; min-height: 46px; align-items: center; padding: .8rem 1.1rem; font: 500 .8rem 'Space Grotesk', sans-serif; background: #d6c786; color: #202217; border: 1px solid #d6c786; cursor: pointer; }
+    .share-button:disabled { opacity: .65; cursor: progress; }
+    .share-note { color: #969384; font-size: .72rem; margin: .8rem 0 0; }
+    .copy-fallback { margin-top: 1rem; max-width: 680px; }
+    .copy-fallback label { display: block; font-size: .8rem; margin-bottom: .4rem; }
+    .copy-fallback input { width: 100%; padding: .7rem; font-size: 16px; color: #e9e6dc; background: #161712; border: 1px solid #8c845e; }
+    .walkthrough-notes { border-top: 1px solid #403c31; margin-top: 2rem; padding-top: 1.3rem; }
+    .orders-page .walkthrough-notes h2 { font: 400 2rem 'Instrument Serif', Georgia, serif; margin: .7rem 0 1.2rem; }
+    .walkthrough-notes ul { list-style: disc; padding-left: 1.25rem; max-width: 840px; }
+    .walkthrough-notes li { font-size: .78rem; line-height: 1.8; color: #9f9d91; margin-bottom: .75rem; }
+    .walkthrough-notes > p { font-size: .78rem; color: #a9a493; max-width: 800px; }
+    .walkthrough-notes > p a { color: #d6c786; text-decoration: underline; text-underline-offset: .2rem; }
+    .privacy-note, .no-script { font-size: .74rem; line-height: 1.8; color: #aaa79d; }
+    .no-script { border: 1px dashed #686048; padding: 1rem; margin: 1.5rem 0; }
+    .orders-page summary:focus-visible, .orders-page input:focus-visible { outline: 2px solid var(--acid); outline-offset: 5px; }
+    .ledger-reveal > summary:focus-visible { outline-color: #614f18; outline-offset: -5px; }
+    .orders-page [hidden] { display: none !important; }
+    @media (max-width: 760px) { .case-selectors { grid-template-columns: repeat(2, minmax(0, 1fr)); } .observed-record { grid-template-columns: 1fr; } .agent-report { border-left: 0; border-top: 1px solid #35352d; } .navigation-heading { display: block; } .navigation-heading > span { display: block; margin-top: .3rem; } }
+    @media (max-width: 480px) { .orders-heading { padding: 1.6rem 0 2rem; } .case-file, .observations, .agent-report, .ledger-content { padding: 1.15rem; } .file-heading { display: block; } .file-stamp { display: block; margin-top: .45rem; } .case-selectors button { padding: .75rem; font-size: .75rem; min-height: 86px; } .verdict-grid { grid-template-columns: 1fr; } .ledger-reveal > summary { padding: 1rem 1.15rem; } .share-button { width: 100%; } }
+  </style>
+</PageLayout>
