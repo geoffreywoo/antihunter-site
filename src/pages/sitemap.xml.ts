@@ -1,4 +1,4 @@
-import { episodes } from '../data/episodes';
+import { canon, episodes } from '../data/episodes';
 export const prerender = true;
 const SITE_URL = 'https://antihunter.com';
 
@@ -12,6 +12,7 @@ const pages = [
   '/canon',
   '/token',
   ...episodes.map(episode => `/acts/${episode.slug}`),
+  ...canon.map(item => `/canon/${item.slug}`),
 ];
 
 export function GET() {

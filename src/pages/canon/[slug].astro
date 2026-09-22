@@ -1,0 +1,51 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import '../../styles/growth.css';
+import { canon } from '../../data/episodes';
+
+export const prerender = true;
+export function getStaticPaths() {
+  return canon.map(item => ({ params: { slug: item.slug }, props: { item } }));
+}
+interface Props { item: (typeof canon)[number] }
+const { item } = Astro.props;
+const image = `/growth/${item.slug}.png`;
+---
+<PageLayout
+  title={`${item.title} — Anti Hunter canon`}
+  description={`${item.caption} Original editorial template, not a financial or performance receipt. Download the PNG or editable SVG.`}
+  canonical={`https://antihunter.com/canon/${item.slug}`}
+  ogImage={`https://antihunter.com${image}`}
+  active="canon"
+>
+  <main class="growth-page">
+    <header class="page-heading">
+      <a class="text-link" href={`/canon#${item.slug}`}>← All templates</a>
+      <div class="overline template-label">The canon / {item.format} / editorial template</div>
+      <h1 class="display">{item.title}</h1>
+      <p class="lead">{item.caption}</p>
+    </header>
+    <figure class="template-preview">
+      <img class="artwork" src={image} width="1200" height="630" alt={`${item.title} — original Anti Hunter editorial template`} />
+      <figcaption class="fineprint">Editorial artwork. This is not evidence of spending, revenue, or a completed trial.</figcaption>
+    </figure>
+    <div class="editorial-actions">
+      <a class="action" href={image} download data-growth-event="share_intent" data-episode={item.slug}>Download PNG ↓</a>
+      <a class="action secondary" href={`/growth/${item.slug}.svg`} download data-growth-event="share_intent" data-episode={item.slug}>Download editable SVG ↓</a>
+    </div>
+    <section class="evidence">
+      <h2 class="section-title">Remix the idea. Keep the evidence honest.</h2>
+      <p class="copy">You may remix this template for the public Anti Hunter brief. Credit the source and distinguish your remix from an official post. Don’t invent endorsements, financial receipts, or trial results. Don’t use another creator’s work without permission.</p>
+      {item.slug === 'probation' && <p class="copy">This is the original pre-trial illustration. The completed trial and its separate result card are in the linked episode.</p>}
+      <div class="editorial-actions">
+        <a class="text-link" href={`/acts/${item.episode}`}>Read the context →</a>
+        <a class="text-link" href="/pilgrimage">Take the current brief →</a>
+      </div>
+    </section>
+  </main>
+</PageLayout>
+<style>
+  .template-label { margin-top: 2rem; }
+  .template-preview { margin: 0; }
+  .template-preview figcaption { margin-top: .8rem; }
+</style>
