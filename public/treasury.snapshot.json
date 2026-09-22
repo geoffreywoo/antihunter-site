@@ -1,7 +1,7 @@
 {
-  "updatedAtMs": 1790013350243,
-  "updatedAt": "2026-09-21T17:55:50.243Z",
-  "date": "2026-09-21",
+  "updatedAtMs": 1790044999980,
+  "updatedAt": "2026-09-22T02:43:19.980Z",
+  "date": "2026-09-22",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "wallets": [
     "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
@@ -19,12 +19,12 @@
       "chainId": null,
       "symbol": "ETH",
       "token": null,
-      "balance": "43.19634750612768",
+      "balance": "43.19634216774717",
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 118516.95472561239,
-      "pnlUsd": 118516.95472561239
+      "fmvUsd": 118555.38482333385,
+      "pnlUsd": 118555.38482333385
     },
     {
       "chain": "ethereum",
@@ -35,8 +35,8 @@
       "entryDate": "2026-02-15",
       "costBasisUsd": 64865.13,
       "costBasisEth": "33",
-      "fmvUsd": 90541.43999999999,
-      "pnlUsd": 25676.30999999999,
+      "fmvUsd": 90570.81000000001,
+      "pnlUsd": 25705.680000000015,
       "link": "https://www.cryptopunks.app/cryptopunks/details/5730",
       "entryLink": "https://etherscan.io/tx/0x897f01a5eedc7f6bcd580cbe1304d9e5f43d8e78784889a7dff448da49a25ca4"
     },
@@ -45,12 +45,12 @@
       "chainId": 8453,
       "symbol": "AntiHunter",
       "token": "0xe2f3fae4bc62e21826018364aa30ae45d430bb07",
-      "balance": "6485809943.930918",
+      "balance": "7585564562.462778",
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 5572.607903825444,
-      "pnlUsd": 5572.607903825444,
+      "fmvUsd": 6836.110783691455,
+      "pnlUsd": 6836.110783691455,
       "lots": null
     },
     {
@@ -58,16 +58,16 @@
       "chainId": 1,
       "symbol": "USDC",
       "token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-      "balance": "2008.032857",
+      "balance": "1003.032857",
       "entryDate": null,
-      "costBasisUsd": 2008.032857,
+      "costBasisUsd": 1003.032857,
       "costBasisEth": null,
-      "fmvUsd": 2008.032857,
+      "fmvUsd": 1003.032857,
       "pnlUsd": 0,
       "link": "https://etherscan.io/token/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
     }
   ],
-  "totalUsd": 216639.03548643782,
+  "totalUsd": 216965.33846402535,
   "notes": [
     "fast_mode: balances-only (log scan skipped)"
   ],
