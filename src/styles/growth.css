@@ -30,6 +30,7 @@
 .growth-page .text-link { display: inline-block; color: var(--acid); font-size: .83rem; border-bottom: 1px solid #655d42; padding-bottom: .2rem; }
 .growth-page .story-grid, .growth-page .canon-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; }
 .growth-page .story-card { border: 1px solid #35332b; background: #121310; transition: border-color .2s; }
+.growth-page .canon-grid > .story-card[id] { scroll-margin-top: 7rem; }
 .growth-page .story-card:hover { border-color: #756b48; }
 .growth-page .story-card img { display: block; width: 100%; height: auto; aspect-ratio: 1200/630; object-fit: cover; border-bottom: 1px solid #35332b; }
 .growth-page .card-body { padding: 1.3rem; }
