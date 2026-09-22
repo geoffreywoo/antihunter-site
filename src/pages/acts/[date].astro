@@ -4,6 +4,7 @@ import '../../styles/growth.css';
 import { episodes } from '../../data/episodes';
 import ProbationResults from '../../components/ProbationResults.astro';
 import FenceResults from '../../components/FenceResults.astro';
+import DistributionScorecards from '../../components/DistributionScorecards.astro';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 export const prerender = true;
@@ -25,10 +26,11 @@ const followupCorpus = episode.followupArtifact
 ---
 <PageLayout title={`${episode.title} — Anti Hunter`} description={episode.dek} canonical={`https://antihunter.com/acts/${episode.slug}`} ogImage={`https://antihunter.com${episode.image}`} active="acts">
   <main class="growth-page">
-    <header class="page-heading"><a class="text-link" href="/acts">← All acts</a><div class="overline" style="margin-top:2rem">The $30 Machine / Act {episode.number} · <time datetime={episode.date}>{episode.date}</time></div><h1 class="display">{episode.title}</h1><p class="lead">{episode.dek}</p><span class="tag">{episode.label}</span></header>
-    <img class="episode-image" src={episode.image} width="1200" height="630" alt={episode.resultsArtifact ? `${episode.title} — measured results on ten synthetic invoices per configuration under the frozen strict JSON rubric; details and API cost estimates below` : `${episode.title} — editorial artwork, not a financial or performance receipt`} />
+    <header class="page-heading"><a class="text-link" href="/acts">← All acts</a><div class="overline" style="margin-top:2rem">The $30 Machine / Act {episode.number} · <time datetime={episode.date}>{episode.date}</time></div><h1 class="display" style={episode.snapshotArtifact ? "text-wrap: balance" : undefined}>{episode.title}</h1><p class="lead">{episode.dek}</p><span class="tag">{episode.label}</span></header>
+    <img class="episode-image" src={episode.image} width="1200" height="630" alt={episode.imageAlt ?? (episode.resultsArtifact ? `${episode.title} — measured results on ten synthetic invoices per configuration under the frozen strict JSON rubric; details and API cost estimates below` : `${episode.title} — editorial artwork, not a financial or performance receipt`)} />
     <article class="prose">
       {episode.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      {episode.snapshotArtifact && <DistributionScorecards artifactPath={episode.snapshotArtifact} />}
       {trialResults && episode.resultsArtifact && <ProbationResults report={trialResults} artifactPath={episode.resultsArtifact} />}
       {followupResults && <FenceResults report={followupResults} corpus={followupCorpus} />}
       <aside class="evidence"><h2 class="overline">Evidence & assumptions</h2><ul>{episode.evidence.map((item) => <li>{item.href ? <a href={item.href} {...(item.href.startsWith('https:') ? { target: '_blank', rel: 'noreferrer' } : {})}>{item.label}</a> : item.label}</li>)}</ul></aside>

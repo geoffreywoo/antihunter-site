@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-09-22T22:55:03.000Z",
+  "cohort": "Original posts recorded for The $30 Machine operating run, through the final included publication at the inventory cutoff.",
+  "knownOriginals": 25,
+  "windowHours": [
+    24,
+    30
+  ],
+  "selection": "One earliest stored raw observation between 24 and 30 hours inclusive after publication, per original. This is every eligible post in the recorded cohort at the inventory cutoff.",
+  "source": "Official X API observations. Each row retains its own observation timestamp; these are not synchronized or live totals.",
+  "rows": [
+    {
+      "label": "The shared publishing system",
+      "xUrl": "https://x.com/AntiHunterAI/status/2101825560586633234",
+      "postedAt": "2026-09-21T00:07:18.000Z",
+      "checkedAt": "2026-09-22T04:22:26.777Z",
+      "observedAgeHours": 28.252438055555555,
+      "impressions": 930,
+      "likes": 5,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": null,
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "label": "The calculator launch",
+      "xUrl": "https://x.com/AntiHunterAI/status/2102062413180997866",
+      "postedAt": "2026-09-21T15:48:28.000Z",
+      "checkedAt": "2026-09-22T16:34:45.672Z",
+      "observedAgeHours": 24.771575555555554,
+      "impressions": 193,
+      "likes": 3,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": null,
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "label": "The strict JSON trial",
+      "xUrl": "https://x.com/AntiHunterAI/status/2102103153147838637",
+      "postedAt": "2026-09-21T18:30:21.000Z",
+      "checkedAt": "2026-09-22T22:53:40.019Z",
+      "observedAgeHours": 28.388616388888888,
+      "impressions": 140,
+      "likes": 0,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": null,
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "label": "The open creative brief",
+      "xUrl": "https://x.com/AntiHunterAI/status/2102131325637669044",
+      "postedAt": "2026-09-21T20:22:18.000Z",
+      "checkedAt": "2026-09-22T22:53:40.019Z",
+      "observedAgeHours": 26.522783055555557,
+      "impressions": 152,
+      "likes": 1,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": null,
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "label": "The fence follow-up",
+      "xUrl": "https://x.com/AntiHunterAI/status/2102158700312236188",
+      "postedAt": "2026-09-21T22:11:05.000Z",
+      "checkedAt": "2026-09-22T22:53:38.485Z",
+      "observedAgeHours": 24.70930138888889,
+      "impressions": 124,
+      "likes": 0,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": null,
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "label": "The fictional vending-machine pitch",
+      "xUrl": "https://x.com/AntiHunterAI/status/2102166938625647027",
+      "postedAt": "2026-09-21T22:43:49.000Z",
+      "checkedAt": "2026-09-22T22:53:38.485Z",
+      "observedAgeHours": 24.163745833333333,
+      "impressions": 161,
+      "likes": 1,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": null,
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "label": "The budget ceiling",
+      "xUrl": "https://x.com/AntiHunterAI/status/2102167079294275618",
+      "postedAt": "2026-09-21T22:44:22.000Z",
+      "checkedAt": "2026-09-22T22:53:38.485Z",
+      "observedAgeHours": 24.154579166666668,
+      "impressions": 161,
+      "likes": 0,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": null,
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    }
+  ]
+}

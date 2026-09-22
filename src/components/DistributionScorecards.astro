@@ -1,0 +1,66 @@
+---
+import report from '../../public/reports/seven-scorecards-2026-09-22.json';
+
+interface Props { artifactPath: string }
+const { artifactPath } = Astro.props;
+const utc = (value: string) => value.replace('T', ' ').replace('Z', ' UTC');
+const elapsed = (postedAt: string, checkedAt: string) => {
+  const milliseconds = Date.parse(checkedAt) - Date.parse(postedAt);
+  const hours = Math.floor(milliseconds / 3_600_000);
+  const minutes = Math.floor(milliseconds % 3_600_000 / 60_000);
+  const seconds = (milliseconds % 60_000 / 1_000).toFixed(3).padStart(6, '0');
+  return `${hours}h ${String(minutes).padStart(2, '0')}m ${seconds}s`;
+};
+---
+<section id="observations" class="scorecards" aria-labelledby="scorecards-title">
+  <div class="overline">The complete eligible cohort / {report.rows.length} of {report.knownOriginals} recorded originals</div>
+  <h2 id="scorecards-title" class="section-title">All seven. No sorting by applause.</h2>
+  <p class="method">Inventory cutoff: <time datetime={report.asOf}>{utc(report.asOf)}</time>.
+    Cards follow publication order. Each uses its earliest stored official X API reading at 24–30 hours old,
+    including both boundaries. Counts below were observed; they are not estimates for missing posts.</p>
+  <ol class="observation-list">
+    {report.rows.map((row) => <li class="observation-card" data-x-id={row.xUrl.split('/').at(-1)}>
+      <h3><a href={row.xUrl} target="_blank" rel="noreferrer">{row.label}<span aria-hidden="true"> ↗</span></a></h3>
+      <dl class="observation-counts">
+        <div><dt>Impressions</dt><dd>{row.impressions.toLocaleString('en-US')}</dd></div>
+        <div><dt>Likes</dt><dd>{row.likes}</dd></div>
+        <div><dt>Reposts</dt><dd>{row.reposts}</dd></div>
+        <div><dt>Quotes</dt><dd>{row.quotes}</dd></div>
+      </dl>
+      <dl class="observation-timing">
+        <div><dt>Observed</dt><dd><time datetime={row.checkedAt}>{utc(row.checkedAt)}</time></dd></div>
+        <div><dt>Post age</dt><dd title={`${row.observedAgeHours} hours`}>{elapsed(row.postedAt, row.checkedAt)}</dd></div>
+        <div><dt>Published</dt><dd><time datetime={row.postedAt}>{utc(row.postedAt)}</time></dd></div>
+      </dl>
+    </li>)}
+  </ol>
+  <p class="method">Repost and quote counts were available for every selected row. Each observed
+    (reposts + quotes) ÷ impressions rate is 0%. Historical series labels are unknown for all seven.
+    The other {report.knownOriginals - report.rows.length} recorded originals have no eligible observation in this snapshot.</p>
+  <a class="text-link" href={artifactPath}>Inspect the dated observations and exact ages (JSON) →</a>
+</section>
+<style>
+  .scorecards { margin: 2.8rem 0; scroll-margin-top: 7rem; }
+  .scorecards .method { font-size: .82rem; line-height: 1.75; color: #aaa79d; }
+  .method time { white-space: nowrap; }
+  .observation-list { list-style: none; padding: 0; margin: 1.5rem 0; display: grid; gap: .9rem; }
+  .observation-card { min-width: 0; border: 1px solid #454236; background: #151610; padding: 1.1rem 1.2rem; }
+  .observation-card h3 { font: 400 1.45rem/1.2 'Instrument Serif', Georgia, serif; margin: 0 0 1rem; }
+  .observation-card h3 a { color: var(--acid); text-decoration: underline; text-underline-offset: .2em; text-decoration-color: #655d42; }
+  .observation-card h3 a:hover { text-decoration-color: var(--acid); }
+  .observation-counts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .6rem; margin: 0 0 .9rem; }
+  .observation-counts dt { font: .62rem/1.5 ui-monospace, monospace; color: #aaa79d; }
+  .observation-counts dd { font-size: 1.45rem; color: var(--ink); margin: .25rem 0 0; font-variant-numeric: tabular-nums; }
+  .observation-timing { border-top: 1px solid #35332b; padding-top: .65rem; margin: 0; font: .68rem/1.7 ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+  .observation-timing div { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: .5rem; }
+  .observation-timing dt { color: #99978b; }
+  .observation-timing dd { margin: 0; color: #bdb9ac; overflow-wrap: anywhere; }
+  @media (max-width: 480px) {
+    .observation-card { padding: 1rem; }
+    .observation-card h3 { font-size: 1.3rem; }
+    .observation-counts { gap: .45rem; }
+    .observation-counts dt { font-size: .56rem; }
+    .observation-timing div { grid-template-columns: 1fr; gap: 0; margin-top: .45rem; }
+    .observation-timing div:first-child { margin-top: 0; }
+  }
+</style>

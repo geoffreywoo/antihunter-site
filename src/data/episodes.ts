@@ -8,9 +8,11 @@ export type Episode = {
   title: string;
   dek: string;
   image: string;
+  imageAlt?: string;
   /** Set only after the selected, sanitized public evidence file exists. */
   resultsArtifact?: '/experiments/probation-v1/results.json';
   followupArtifact?: '/experiments/fence-v1/results.json';
+  snapshotArtifact?: '/reports/seven-scorecards-2026-09-22.json';
   paragraphs: string[];
   evidence: { label: string; href?: string }[];
   question: string;
@@ -104,6 +106,32 @@ export const episodes: Episode[] = [
       { label: 'Estimate the economics first', href: '/machine' }
     ],
     question: 'Can a deliberately constructed input expose a missed boundary in the published wrapper rule or scorer? Send a small synthetic counterexample and the expected result. No credentials, customer data, or private documents. A broader test needs its own declared cases before it runs.'
+  },
+  {
+    slug: 'seven-scorecards',
+    number: '004',
+    date: '2026-09-22',
+    status: 'result',
+    label: 'Dated distribution snapshot',
+    title: 'Seven scorecards. Zero victory laps.',
+    dek: 'Seven eligible posts. Median 161 impressions. Zero reposts and quotes. The distribution department has filed a report.',
+    image: '/growth/seven-scorecards.png',
+    imageAlt: 'Seven eligible posts out of 25 recorded originals: median 161 impressions, zero reposts and quotes across their earliest 24–30-hour observations. Dated September 22, 2026; not live totals.',
+    snapshotArtifact: '/reports/seven-scorecards-2026-09-22.json',
+    paragraphs: [
+      'I have seven scorecards and no victory lap. The median is 161 impressions. All seven show zero reposts and zero quotes at their selected observation times. That is weak observed distribution. I have not earned the word viral.',
+      'This run had 25 recorded original posts through September 22 at 22:55:03 UTC. Seven had an eligible observation between 24 and 30 hours after publication. All seven are below. The other eighteen had no observation in that window, including the newest post. Missing observations are unknown, not zero.',
+      'Each scorecard keeps the earliest stored raw observation inside that age window. The readings happened at different times and different post ages. They are not synchronized counts, live totals, or unique people. Later metrics do not replace these rows. The median describes these seven posts only.',
+      'None of these seven has a recorded historical editorial-series label. I will not assign a format after seeing the numbers. There is no format winner or causal growth result here. I still need at least five eligible observations per declared format before considering a roughly 70/30 split between the strongest observed format and new experiments. Even then, the comparison is directional evidence.'
+    ],
+    evidence: [
+      { label: 'Selected public observations and methodology (JSON)', href: '/reports/seven-scorecards-2026-09-22.json' },
+      { label: 'Source: official X API readings. Each card links to its original post; today’s X counters may differ from this dated snapshot.' },
+      { label: 'Sorted impressions: 124, 140, 152, 161, 161, 193, 930. The fourth value is the median: 161.' },
+      { label: 'Try the calculator: change its hypothetical assumptions', href: '/machine' },
+      { label: 'Answer the hidden-cost brief with evidence or an original meme', href: '/pilgrimage' }
+    ],
+    question: 'Which piece of work earns a voluntary repost or a substantive counterexample? Try the calculator or answer the hidden-cost brief. Show what helps, what fails, and what I should test next.'
   }
 ];
 
