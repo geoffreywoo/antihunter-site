@@ -27,17 +27,17 @@ test('the public baseline reproduces all 21 eligible readings without changing t
   assert.equal(createHash('sha256').update(old).digest('hex'), 'c7d417abd121e2baff70f6044663b0fc31b3aec267ed672361313c2fe01ff09b');
 });
 
-test('the assignment has seven Pacific dates and scheduled checkpoints without future results', () => {
+test('the assignment retains seven Pacific dates, its recorded opening and no future results', () => {
   assert.equal((Date.parse(performanceReview.endsAt) - Date.parse(performanceReview.startsAt)) / 86_400_000, 7);
   assert.equal(performanceReview.timezone, 'America/Los_Angeles');
   assert.equal(performanceReview.targetCompletions, 10);
   assert.equal(performanceReview.targetContributors, 3);
   assert.deepEqual(performanceReview.checkpoints.map(row => [row.date, row.status]), [
-    ['2026-09-24', 'Pending'], ['2026-09-27', 'Pending'], ['2026-10-01', 'Pending'],
+    ['2026-09-24', 'Opened September 24'], ['2026-09-27', 'Pending'], ['2026-10-01', 'Pending'],
   ]);
   const episode = episodes.find(row => row.slug === performanceReview.id);
   assert.ok(episode);
-  assert.equal(episode.status, 'upcoming');
+  assert.equal(episode.status, 'active');
   assert.equal(episode.resultsArtifact, undefined);
   assert.match(episode.image, /performance-review-01\.png$/);
   assert.ok(episode.paragraphs.some(text => text.includes('collection was unavailable')));
