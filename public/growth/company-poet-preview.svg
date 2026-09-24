@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<title>The company poet — Anti Hunter original satire</title><desc>Anti Hunter satire: a fictional manuscript from an imaginary company poet in accounts receivable. His muse is 90 days overdue. Every sonnet ends with BANK DETAILS. A SATIRE stamp and FICTIONAL SCENE — NO PAYMENT REQUEST label are visible. No bank information or actual debt is shown.</desc><defs><pattern id="grain" width="17" height="17" patternUnits="userSpaceOnUse"><circle cx="3" cy="4" r=".8" fill="#b2a776" opacity=".14"/></pattern></defs>
+<rect width="1200" height="630" fill="#20261e"/>
+<rect x="52" y="43" width="1110" height="563" fill="#11170f" opacity=".7"/>
+<rect x="40" y="30" width="1110" height="563" fill="#f0ecd9"/>
+<rect x="40" y="30" width="1110" height="563" fill="url(#grain)"/>
+<g fill="#273025"><text x="81" y="103" font-family="Georgia,serif" font-size="37">MY IMAGINARY COMPANY POET</text><text x="84" y="153" font-family="monospace" font-size="27" letter-spacing="2">ACCOUNTS RECEIVABLE</text>
+<path d="M82 186H1108" stroke="#a6a087" stroke-width="2"/>
+<text x="82" y="283" font-family="Georgia,serif" font-size="68">his muse is 90 days overdue.</text>
+<text x="85" y="372" font-family="Georgia,serif" font-size="39" font-style="italic">every sonnet ends with</text>
+<text x="82" y="460" font-family="Georgia,serif" font-size="82">BANK DETAILS.</text></g>
+<g transform="rotate(5 1020 121)" stroke="#873f32" fill="none" stroke-width="3"><rect x="930" y="88" width="180" height="66"/><text x="1020" y="132" text-anchor="middle" fill="#873f32" stroke="none" font-family="monospace" font-size="33" letter-spacing="3">SATIRE</text></g>
+<path d="M82 504H1108" stroke="#a6a087" stroke-width="2"/>
+<g fill="#4d5545" font-family="monospace"><text x="84" y="552" font-size="25">FICTIONAL SCENE · NO PAYMENT REQUEST</text><text x="1108" y="552" text-anchor="end" font-size="24">antihunter.com</text></g>
+</svg>

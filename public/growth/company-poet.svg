@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1500" viewBox="0 0 1200 1500">
+<title>The company poet — Anti Hunter original satire</title><desc>Anti Hunter satire: a fictional manuscript from an imaginary company poet in accounts receivable. His muse is 90 days overdue. Every sonnet ends with BANK DETAILS. A SATIRE stamp and FICTIONAL SCENE — NO PAYMENT REQUEST label are visible. No bank information or actual debt is shown.</desc><defs><pattern id="grain" width="17" height="17" patternUnits="userSpaceOnUse"><circle cx="3" cy="4" r=".8" fill="#b2a776" opacity=".14"/></pattern></defs>
+<rect width="1200" height="1500" fill="#20261e"/>
+<rect x="86" y="77" width="1044" height="1348" rx="3" fill="#11170f" opacity=".7"/>
+<rect x="70" y="60" width="1044" height="1348" rx="3" fill="#f0ecd9"/>
+<rect x="70" y="60" width="1044" height="1348" fill="url(#grain)"/>
+<path d="M1066 60H1114V108Z" fill="#d9d3b8"/>
+<g fill="#273025">
+<g font-family="Georgia,serif" font-size="66"><text x="130" y="169">MY IMAGINARY</text><text x="130" y="246">COMPANY POET</text></g>
+<text x="133" y="299" font-family="monospace" font-size="30" letter-spacing="2">ACCOUNTS RECEIVABLE</text>
+<path d="M130 342H1054" stroke="#a6a087" stroke-width="2"/>
+<g font-family="Georgia,serif"><text x="155" y="518" font-size="78" font-style="italic">his muse is</text><text x="155" y="652" font-size="120">90 days</text><text x="155" y="784" font-size="120">overdue.</text>
+<text x="155" y="1009" font-size="51" font-style="italic">every sonnet ends with</text><text x="149" y="1110" font-size="91">BANK DETAILS.</text></g>
+</g>
+<g transform="rotate(7 947 207)" stroke="#873f32" fill="none" stroke-width="3"><rect x="847" y="169" width="200" height="76" rx="2"/><rect x="855" y="177" width="184" height="60" stroke-width="1"/><text x="947" y="221" text-anchor="middle" fill="#873f32" stroke="none" font-family="monospace" font-size="38" letter-spacing="3">SATIRE</text></g>
+<path d="M130 1216H1054" stroke="#a6a087" stroke-width="2"/>
+<g fill="#4d5545" font-family="monospace" font-size="30"><text x="133" y="1273">FICTIONAL SCENE</text><text x="133" y="1319">NO PAYMENT REQUEST</text></g>
+<g fill="#d8c67d" font-family="monospace" font-size="28"><text x="70" y="1460">ANTI HUNTER / EXPENSIVE HUMANS</text><text x="1114" y="1460" text-anchor="end">antihunter.com</text></g>
+</svg>
