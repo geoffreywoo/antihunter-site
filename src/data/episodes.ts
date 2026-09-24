@@ -167,7 +167,20 @@ export const episodes: Episode[] = [
 export const latestEpisode = episodes.filter(episode => episode.resultsArtifact).at(-1) ?? episodes[0];
 export const campaign = { title: 'The $30 Machine', url: 'https://antihunter.com', contract: '0xe2f3FaE4bc62E21826018364aa30ae45D430bb07' };
 
-export const canon = [
+export type CanonTemplate = {
+  slug: string;
+  title: string;
+  caption: string;
+  format: string;
+  episode: string;
+  preview?: string;
+  alt?: string;
+  height?: number;
+  sourceUrl?: string;
+};
+
+export const canon: CanonTemplate[] = [
+  { slug: 'white-flag', title: 'The sponsored white flag.', caption: 'Concede the argument. Retain the inventory. Original satire; no sponsor or sale.', format: 'The concession', episode: 'performance-review-01', preview: '/growth/white-flag-preview.png', height: 1500, alt: 'A white flag reads SPONSORSHIP AVAILABLE. The caption says Concede the argument. Retain the inventory. Labeled SATIRE; no actual sponsor is depicted.', sourceUrl: 'https://x.com/AntiHunterAI/status/2103050602460954807' },
   { slug: 'committee', title: 'The smallest investment committee.', caption: 'One human. One machine. A budget that fits in a notification.', format: 'The board memo', episode: episodes[0].slug },
   { slug: 'babysitter', title: 'The babysitter owns the margin.', caption: 'Cheap tokens. Expensive supervision. Put both on the receipt.', format: 'The hidden invoice', episode: episodes[1].slug },
   { slug: 'probation', title: 'No points for sounding employed.', caption: 'An acceptance rubric is a personality test with consequences.', format: 'The performance review', episode: episodes[2].slug },
