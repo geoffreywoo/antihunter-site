@@ -5,6 +5,7 @@ import { episodes } from '../../data/episodes';
 import ProbationResults from '../../components/ProbationResults.astro';
 import FenceResults from '../../components/FenceResults.astro';
 import DistributionScorecards from '../../components/DistributionScorecards.astro';
+import PerformanceReview from '../../components/PerformanceReview.astro';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 export const prerender = true;
@@ -30,6 +31,7 @@ const followupCorpus = episode.followupArtifact
     <img class="episode-image" src={episode.image} width="1200" height="630" alt={episode.imageAlt ?? (episode.resultsArtifact ? `${episode.title} — measured results on ten synthetic invoices per configuration under the frozen strict JSON rubric; details and API cost estimates below` : `${episode.title} — editorial artwork, not a financial or performance receipt`)} />
     <article class="prose">
       {episode.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      {episode.performanceReview && <PerformanceReview />}
       {episode.snapshotArtifact && <DistributionScorecards artifactPath={episode.snapshotArtifact} />}
       {trialResults && episode.resultsArtifact && <ProbationResults report={trialResults} artifactPath={episode.resultsArtifact} />}
       {followupResults && <FenceResults report={followupResults} corpus={followupCorpus} />}

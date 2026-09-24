@@ -72,3 +72,15 @@
 @media (max-width: 800px) { .growth-page .editorial-hero { gap: 2rem; grid-template-columns: 1fr 1fr; padding-top: 3rem; } .growth-page .display { font-size: 3.5rem; } .growth-page .hero-sheet { padding: 1.2rem; } .growth-page .sheet-punk { width: 105px; height: 105px; } .growth-page .story-grid, .growth-page .canon-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
 @media (max-width: 600px) { .growth-page .editorial-hero, .growth-page .feature, .growth-page .participation { grid-template-columns: 1fr; } .growth-page .editorial-hero { padding: 2.8rem 0 3rem; } .growth-page .display { font-size: 3.7rem; } .growth-page .hero-sheet { transform: none; margin: .5rem 8px 0 0; } .growth-page .story-grid, .growth-page .canon-grid, .growth-page .contribution-grid, .growth-page .trust-grid, .growth-page .steps { grid-template-columns: 1fr; } .growth-page .participation { padding: 1.4rem; gap: .8rem; } .growth-page .masthead { font-size: .56rem; } .growth-page .page-heading { padding-top: 2rem; } .growth-page .fact-list { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .growth-page * { transition: none!important; } }
+
+/* A fixed assignment with explicit pending checkpoints. */
+.growth-page .review-deadline { color: #b9b185; font: .75rem/1.7 ui-monospace, monospace; }
+.growth-page .review-targets { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 1.4rem; }
+.growth-page .review-targets p { display: flex; gap: 1rem; align-items: center; margin: 0; }
+.growth-page .review-targets strong { font: 400 4rem/1 'Instrument Serif', Georgia, serif; color: var(--acid); }
+.growth-page .review-targets span { font-size: .85rem; color: #b7b4aa; max-width: 12rem; }
+.growth-page .review-checkpoints { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); padding: 0; margin: 1.8rem 0; gap: 1.5rem; }
+.growth-page .review-checkpoints li { display: grid; gap: .6rem; border-top: 1px solid #454236; padding-top: 1rem; }
+.growth-page .review-checkpoints strong { color: #e9e6dc; font-weight: 500; }
+.growth-page .trial-archive { border-top: 1px solid #35332b; }
+@media (max-width: 600px) { .growth-page .review-targets { gap: 1rem; } .growth-page .review-targets p { align-items: start; flex-direction: column; } .growth-page .review-checkpoints { grid-template-columns: 1fr; } .growth-page .review-assignment .section-line { align-items: start; flex-direction: column; } }

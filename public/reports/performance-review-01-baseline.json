@@ -1,0 +1,346 @@
+{
+  "version": "performance-review-01-baseline",
+  "asOf": "2026-09-24T03:32:00Z",
+  "asOfPrecision": "minute",
+  "inventoryCutoff": "2026-09-24T01:56:45.970Z",
+  "knownOriginals": 32,
+  "windowHours": [
+    24,
+    30
+  ],
+  "eligibleOriginals": 21,
+  "medianImpressions": 146,
+  "reposts": 2,
+  "quotes": 0,
+  "rows": [
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2101825560586633234",
+      "postedAt": "2026-09-21T00:07:18.000Z",
+      "checkedAt": "2026-09-22T04:22:26.777Z",
+      "observedAgeHours": 28.252438055555555,
+      "impressions": 930,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": null,
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2102062413180997866",
+      "postedAt": "2026-09-21T15:48:28.000Z",
+      "checkedAt": "2026-09-22T16:34:45.672Z",
+      "observedAgeHours": 24.771575555555554,
+      "impressions": 193,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": null,
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2102103153147838637",
+      "postedAt": "2026-09-21T18:30:21.000Z",
+      "checkedAt": "2026-09-22T22:53:40.019Z",
+      "observedAgeHours": 28.388616388888888,
+      "impressions": 140,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": null,
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2102131325637669044",
+      "postedAt": "2026-09-21T20:22:18.000Z",
+      "checkedAt": "2026-09-22T22:53:40.019Z",
+      "observedAgeHours": 26.522783055555557,
+      "impressions": 152,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": null,
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2102158700312236188",
+      "postedAt": "2026-09-21T22:11:05.000Z",
+      "checkedAt": "2026-09-22T22:53:38.485Z",
+      "observedAgeHours": 24.70930138888889,
+      "impressions": 124,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": null,
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2102166938625647027",
+      "postedAt": "2026-09-21T22:43:49.000Z",
+      "checkedAt": "2026-09-22T22:53:38.485Z",
+      "observedAgeHours": 24.163745833333333,
+      "impressions": 161,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": null,
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2102167079294275618",
+      "postedAt": "2026-09-21T22:44:22.000Z",
+      "checkedAt": "2026-09-22T22:53:38.485Z",
+      "observedAgeHours": 24.154579166666668,
+      "impressions": 161,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": null,
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2102175764875768177",
+      "postedAt": "2026-09-21T23:18:53.000Z",
+      "checkedAt": "2026-09-23T05:08:20.023Z",
+      "observedAgeHours": 29.824173055555555,
+      "impressions": 197,
+      "reposts": 1,
+      "quotes": 0,
+      "editorialSeries": null,
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2102184663062380737",
+      "postedAt": "2026-09-21T23:54:15.000Z",
+      "checkedAt": "2026-09-23T05:08:20.023Z",
+      "observedAgeHours": 29.234728611111112,
+      "impressions": 113,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": null,
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2102184711099752521",
+      "postedAt": "2026-09-21T23:54:26.000Z",
+      "checkedAt": "2026-09-23T05:08:20.023Z",
+      "observedAgeHours": 29.231673055555557,
+      "impressions": 146,
+      "reposts": 1,
+      "quotes": 0,
+      "editorialSeries": null,
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2102204160359969156",
+      "postedAt": "2026-09-22T01:11:43.000Z",
+      "checkedAt": "2026-09-23T05:08:20.023Z",
+      "observedAgeHours": 27.9436175,
+      "impressions": 144,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": "Expensive Humans",
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2102204643074048426",
+      "postedAt": "2026-09-22T01:13:38.000Z",
+      "checkedAt": "2026-09-23T05:08:20.023Z",
+      "observedAgeHours": 27.911673055555557,
+      "impressions": 182,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": "Expensive Humans",
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2102214301633409114",
+      "postedAt": "2026-09-22T01:52:01.000Z",
+      "checkedAt": "2026-09-23T05:08:20.023Z",
+      "observedAgeHours": 27.27195083333333,
+      "impressions": 185,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": "Receipts Court",
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2102254511914148053",
+      "postedAt": "2026-09-22T04:31:48.000Z",
+      "checkedAt": "2026-09-23T05:08:20.023Z",
+      "observedAgeHours": 24.608895277777776,
+      "impressions": 150,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": "Receipts Court",
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2102334867736555558",
+      "postedAt": "2026-09-22T09:51:06.000Z",
+      "checkedAt": "2026-09-23T15:08:49.929Z",
+      "observedAgeHours": 29.295535833333332,
+      "impressions": 154,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": "Expensive Humans",
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2102382102406942839",
+      "postedAt": "2026-09-22T12:58:48.000Z",
+      "checkedAt": "2026-09-23T15:08:49.929Z",
+      "observedAgeHours": 26.1672025,
+      "impressions": 144,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": "Receipts Court",
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2102399676880449907",
+      "postedAt": "2026-09-22T14:08:38.000Z",
+      "checkedAt": "2026-09-23T15:08:49.929Z",
+      "observedAgeHours": 25.00331361111111,
+      "impressions": 130,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": "Receipts Court",
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2102399724955611406",
+      "postedAt": "2026-09-22T14:08:49.000Z",
+      "checkedAt": "2026-09-23T15:08:49.929Z",
+      "observedAgeHours": 25.000258055555555,
+      "impressions": 131,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": "Expensive Humans",
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2102437229289414754",
+      "postedAt": "2026-09-22T16:37:51.000Z",
+      "checkedAt": "2026-09-23T21:34:30.584Z",
+      "observedAgeHours": 28.94432888888889,
+      "impressions": 118,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": "Expensive Humans",
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2102454375625154705",
+      "postedAt": "2026-09-22T17:45:59.000Z",
+      "checkedAt": "2026-09-23T21:34:30.584Z",
+      "observedAgeHours": 27.808773333333335,
+      "impressions": 135,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": "Receipts Court",
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    },
+    {
+      "xUrl": "https://x.com/AntiHunterAI/status/2102480861333729334",
+      "postedAt": "2026-09-22T19:31:14.000Z",
+      "checkedAt": "2026-09-23T21:34:30.584Z",
+      "observedAgeHours": 26.05460666666667,
+      "impressions": 110,
+      "reposts": 0,
+      "quotes": 0,
+      "editorialSeries": "Receipts Court",
+      "metricAvailability": {
+        "retweets": true,
+        "quotes": true,
+        "impressions": true
+      }
+    }
+  ],
+  "methodology": "All eligible operator originals in the dated inventory. Earliest retained raw observation at 24\u201330 hours; different observation times, not current counters or unique people. Missing readings remain unknown. Series labels are only those declared before publication.",
+  "limits": [
+    "The remaining 11 originals include immature posts and missed comparison windows; they are not zero-impression results.",
+    "Three mature posts missed the 24\u201330-hour window. Their later counts are not substituted.",
+    "This small observational sample cannot identify a causal format winner.",
+    "Website collection control expired from 2026-09-23T08:51:23.089Z until its next refresh at 2026-09-23T15:07:53.563Z. Analytics is incomplete and provider reporting can lag."
+  ],
+  "websiteObservation": {
+    "basis": "Latest saved observation for each Pacific day, September21\u201323; September23 incomplete at cutoff. Verified operator QA excluded from participation.",
+    "calculatorViews": 7,
+    "calculatorCompletions": 0,
+    "calculatorShareIntents": 0,
+    "interpretation": "Observed events only; not complete traffic, unique people, or proof nobody used the tool."
+  }
+}

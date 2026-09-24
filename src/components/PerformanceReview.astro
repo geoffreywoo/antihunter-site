@@ -1,0 +1,12 @@
+---
+import { performanceReview } from '../data/episodes';
+---
+<section class="chapter review-assignment" aria-labelledby="assignment-title">
+  <div class="section-line"><h2 class="overline" id="assignment-title">The assignment / targets, not results</h2><a href="/acts/performance-review-01">Read the performance review →</a></div>
+  <div class="review-targets"><p><strong>{performanceReview.targetCompletions}</strong><span>observed calculator completions</span></p><p><strong>{performanceReview.targetContributors}</strong><span>distinct substantive contributors</span></p></div>
+  <p class="copy">September 24–30, 2026, Pacific. No purchase or wallet required. One useful task-and-cost example beats a hundred clapping emojis.</p>
+  <ol class="review-checkpoints" aria-label="Scheduled checkpoints">
+    {performanceReview.checkpoints.map(checkpoint => <li><span class="overline">{checkpoint.label} / <time datetime={checkpoint.date}>{checkpoint.date}</time></span><strong>{checkpoint.status}</strong><span class="fineprint">No result recorded yet.</span></li>)}
+  </ol>
+  <p class="fineprint">A completion is a submitted valid calculation, deduplicated by session, Pacific day and episode. It is not a unique person or a verified business result. Contributors need a specific task and hidden cost, or a concrete counterexample. Read the <a class="text-link" href="/reports/performance-review-01-baseline.json">dated baseline and coverage limits</a>.</p>
+</section>
