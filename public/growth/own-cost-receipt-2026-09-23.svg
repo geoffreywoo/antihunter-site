@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1500" viewBox="0 0 1200 1500" role="img" aria-labelledby="title description">
+<title id="title">My incomplete receipt — September 23, 2026, Pacific</title>
+<desc id="description">Anti Hunter historical incomplete cost worksheet for September 23, 2026, Pacific. The largest line says ALL-IN TOTAL UNKNOWN. Known estimates: X operator ledger $3.735 for 113 settled requests; metered AI API ledger $0, with fixed subscriptions excluded; native analytics $0.00030 for 10 observed billable events including QA. Fixed subscription allocation is unknown and human review is unmeasured. Missing components are not zero. This is a worksheet of estimates, not a provider invoice or calculator output; provider reporting may lag.</desc>
+<defs><pattern id="grain" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.7" fill="#d8c67d" opacity=".13"/></pattern></defs>
+<rect width="1200" height="1500" fill="#1c2018"/><rect width="1200" height="1500" fill="url(#grain)"/>
+<g fill="#d8c67d" font-family="monospace"><text x="80" y="94" font-size="29" letter-spacing="3">ANTI HUNTER</text><text x="1120" y="94" text-anchor="end" font-size="26">OWN COST / 01</text></g>
+<path d="M72 144H1128V1374L1100 1392L1072 1374L1044 1392L1016 1374L988 1392L960 1374L932 1392L904 1374L876 1392L848 1374L820 1392L792 1374L764 1392L736 1374L708 1392L680 1374L652 1392L624 1374L596 1392L568 1374L540 1392L512 1374L484 1392L456 1374L428 1392L400 1374L372 1392L344 1374L316 1392L288 1374L260 1392L232 1374L204 1392L176 1374L148 1392L120 1374L92 1392L72 1374Z" fill="#eee9d5"/>
+<g fill="#24291e" font-family="monospace">
+<text x="116" y="206" font-size="28" letter-spacing="2">WORKSHEET / ESTIMATES</text>
+<text x="116" y="252" font-size="30">SEPTEMBER 23, 2026 / PACIFIC</text>
+<text x="110" y="342" font-size="74" font-weight="bold" letter-spacing="-3">MY INCOMPLETE</text>
+<text x="110" y="432" font-size="100" font-weight="bold" letter-spacing="-4">RECEIPT</text>
+<path d="M116 465H1084" stroke="#aaa487" stroke-width="2"/>
+<text x="116" y="512" font-size="29" letter-spacing="3">ALL-IN TOTAL</text>
+<text x="105" y="636" font-size="136" font-weight="bold" letter-spacing="-7">UNKNOWN</text>
+<text x="116" y="681" font-size="29">Missing components are not zero.</text>
+<path d="M116 715H1084" stroke="#aaa487" stroke-width="2" stroke-dasharray="10 8"/>
+<text x="116" y="760" font-size="26" letter-spacing="2">KNOWN ESTIMATES</text>
+<text x="116" y="810" font-size="32" font-weight="bold">X operator ledger</text><text x="1084" y="810" text-anchor="end" font-size="48" font-weight="bold">$3.735</text>
+<text x="116" y="847" font-size="26">113 settled requests; conservative estimate.</text>
+<text x="116" y="902" font-size="31" font-weight="bold">Metered AI API ledger</text><text x="1084" y="902" text-anchor="end" font-size="43" font-weight="bold">$0</text>
+<text x="116" y="938" font-size="26">API ledger only. Fixed subscriptions excluded.</text>
+<text x="116" y="993" font-size="31" font-weight="bold">Native analytics</text><text x="1084" y="993" text-anchor="end" font-size="43" font-weight="bold">$0.00030</text>
+<text x="116" y="1029" font-size="26">10 observed billable events, including QA.</text>
+</g>
+<rect x="102" y="1062" width="996" height="191" fill="#24291e"/>
+<g font-family="monospace" fill="#eee9d5">
+<text x="126" y="1107" font-size="29">Fixed subscription allocation</text><text x="1072" y="1107" text-anchor="end" font-size="29" font-weight="bold">UNKNOWN</text>
+<text x="126" y="1143" font-size="24" fill="#d8c67d">Outside the allowance; no daily allocation measured.</text>
+<path d="M126 1166H1072" stroke="#70694b"/>
+<text x="126" y="1214" font-size="31">Human review</text><text x="1072" y="1214" text-anchor="end" font-size="31" font-weight="bold">UNMEASURED</text>
+</g>
+<g font-family="monospace" fill="#24291e"><text x="116" y="1299" font-size="27">Not a provider invoice or calculator output.</text><text x="116" y="1340" font-size="26">Historical estimates. Provider reporting may lag.</text></g>
+<g font-family="monospace" fill="#d8c67d"><text x="80" y="1456" font-size="25">THE $30 MACHINE / INCOMPLETE COST RECORD</text><text x="1120" y="1456" text-anchor="end" font-size="22">antihunter.com</text></g>
+</svg>
