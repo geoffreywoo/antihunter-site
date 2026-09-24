@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { pacificDay, shiftDay, pacificMidnight, dayRange, providerUntil, validateAggregate, countAggregate, parseTraffic, collectObservation, needsReconciliation, refreshAnalytics } from '../scripts/analytics-collector.mjs';
+import { pacificDay, shiftDay, pacificMidnight, dayRange, providerUntil, validateAggregate, countAggregate, parseTraffic, collectObservation, needsReconciliation, refreshAnalytics, analyticsFailure } from '../scripts/analytics-collector.mjs';
 
 const now = new Date('2026-09-24T04:15:00Z');
 const today = '2026-09-23';
@@ -101,7 +101,7 @@ test('persist current before history, retry failed history without manufacturing
   }, save: (observation: any) => { writes.push(observation.day); } });
   assert.deepEqual(writes, ['2026-09-23', '2026-09-21']);
   assert.equal(result.stored, true);
-  assert.deepEqual(result.reconciliation.failures, [{ day: '2026-09-22', error: 'Delayed aggregate unavailable' }]);
+  assert.deepEqual(result.reconciliation.failures, [{ day: '2026-09-22', stage: 'read', code: 'analytics_operation_failed' }]);
 });
 
 test('same-day rerun refreshes only current day after historical reconciliation', async () => {
@@ -112,4 +112,28 @@ test('same-day rerun refreshes only current day after historical reconciliation'
   const result = await refreshAnalytics({ now: later, readState: () => ({ ...fakeState(), days: saved }), query: fakeQuery, save: (row: any) => { writes.push(row.day); } });
   assert.deepEqual(writes, [today]);
   assert.deepEqual(result.reconciliation.skipped, ['2026-09-22', '2026-09-21']);
+});
+
+
+test('provider and child-process failures never serialize arbitrary messages, stderr, or codes', async () => {
+  const secret = 'FAKE_SECRET_MUST_NOT_APPEAR';
+  const poisoned = Object.assign(new Error(`provider echoed ${secret}`), { stderr: secret, stdout: secret, code: secret });
+  assert.deepEqual(analyticsFailure(poisoned), { stage: 'refresh', code: 'analytics_operation_failed' });
+  assert.equal(JSON.stringify(analyticsFailure(poisoned)).includes(secret), false);
+  for (const stage of ['read', 'save']) {
+    const result = await refreshAnalytics({ now, readState: fakeState,
+      query: (dataset: string, range: any, options: any) => {
+        if (stage === 'read' && range.since === pacificMidnight('2026-09-22')) throw poisoned;
+        return fakeQuery(dataset, range, options);
+      }, save: (row: any) => { if (stage === 'save' && row.day === '2026-09-22') throw poisoned; return row; },
+    });
+    assert.deepEqual(result.reconciliation.failures, [{ day: '2026-09-22', stage, code: 'analytics_operation_failed' }]);
+    assert.equal(JSON.stringify(result).includes(secret), false);
+    assert.equal(result.stored, true);
+  }
+  assert.deepEqual(analyticsFailure(new Error('Analytics query crossed the requested Pacific accounting boundary'), 'read'),
+    { stage: 'read', code: 'accounting_boundary_mismatch' });
+  assert.deepEqual(analyticsFailure(Object.assign(new Error(secret), { code: 'ETIMEDOUT' }), 'save'),
+    { stage: 'save', code: 'command_timeout' });
+  assert.deepEqual(analyticsFailure(new SyntaxError(secret)), { stage: 'refresh', code: 'invalid_json_response' });
 });

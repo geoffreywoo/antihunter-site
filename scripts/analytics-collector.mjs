@@ -127,6 +127,29 @@ export async function collectObservation(day, now, query, qaOffsets = []) {
   };
 }
 
+/** Only allowlisted reason codes may cross the process/provider error boundary. */
+export function analyticsFailure(error, stage = 'refresh') {
+  const reasons = new Map([
+    ['Analytics state does not match the current Pacific day', 'state_day_mismatch'],
+    ['Analytics query crossed the requested Pacific accounting boundary', 'accounting_boundary_mismatch'],
+    ['Invalid native analytics aggregate', 'invalid_aggregate'],
+    ['Aggregate may be truncated; total remains unknown', 'possibly_truncated_aggregate'],
+    ['No elapsed analytics interval for requested Pacific day', 'empty_accounting_interval'],
+    ['Invalid pageviews count', 'invalid_aggregate_count'],
+    ['Invalid count count', 'invalid_aggregate_count'],
+    ['Aggregate count exceeds safe integer range', 'invalid_aggregate_count'],
+    ['Billable event count exceeds safe integer range', 'invalid_aggregate_count'],
+  ]);
+  let code = reasons.get(error?.message) || 'analytics_operation_failed';
+  if (error instanceof SyntaxError) code = 'invalid_json_response';
+  else if (error?.code === 'ETIMEDOUT') code = 'command_timeout';
+  else if (error?.code === 'ENOENT') code = 'required_resource_missing';
+  else if (error?.code === 'ERR_CHILD_PROCESS_STDIO_MAXBUFFER') code = 'command_output_limit';
+  else if (error?.code === 'ABORT_ERR' || error?.killed === true) code = 'command_terminated';
+  else if (typeof error?.code === 'number') code = 'external_command_failed';
+  return { stage: ['read', 'save', 'refresh'].includes(stage) ? stage : 'refresh', code };
+}
+
 /** Current control refresh succeeds independently of delayed-history reconciliation. */
 export async function refreshAnalytics({ now = new Date(), readState, query, save, qaOffsets = [], dryRun = false }) {
   const state = await readState();
@@ -140,11 +163,13 @@ export async function refreshAnalytics({ now = new Date(), readState, query, sav
   for (const delta of [-1, -2]) {
     const day = shiftDay(today, delta);
     if (!needsReconciliation(state.days[day], day, now)) { skipped.push(day); continue; }
+    let stage = 'read';
     try {
       const historical = await collectObservation(day, now, query, qaOffsets);
+      stage = 'save';
       if (!dryRun) await save(historical);
       observations.push(historical);
-    } catch (error) { failures.push({ day, error: String(error.message || error).slice(0, 300) }); }
+    } catch (error) { failures.push({ day, ...analyticsFailure(error, stage) }); }
   }
   return { ...current, stored: !dryRun, committedSpendUsd: savedCurrent?.spendUsd ?? null, reconciliation: { observations, skipped, failures }, controlHistory: state.controlHistory || [] };
 }
