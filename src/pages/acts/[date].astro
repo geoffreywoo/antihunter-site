@@ -7,6 +7,7 @@ import FenceResults from '../../components/FenceResults.astro';
 import DistributionScorecards from '../../components/DistributionScorecards.astro';
 import PerformanceReview from '../../components/PerformanceReview.astro';
 import OwnCostWorksheet from '../../components/OwnCostWorksheet.astro';
+import ReviewContributions from '../../components/ReviewContributions.astro';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 export const prerender = true;
@@ -33,6 +34,7 @@ const followupCorpus = episode.followupArtifact
     <article class="prose">
       {episode.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
       {episode.performanceReview && <PerformanceReview />}
+      {episode.performanceReview && <ReviewContributions />}
       {episode.performanceReview && <OwnCostWorksheet />}
       {episode.snapshotArtifact && <DistributionScorecards artifactPath={episode.snapshotArtifact} />}
       {trialResults && episode.resultsArtifact && <ProbationResults report={trialResults} artifactPath={episode.resultsArtifact} />}
