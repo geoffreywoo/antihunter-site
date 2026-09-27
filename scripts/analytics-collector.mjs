@@ -2,7 +2,7 @@ import { parseEpisodeAggregate } from './analytics-aggregate.mjs';
 import { excludeVerifiedQa } from './analytics-qa.mjs';
 
 export const CAMPAIGN = 'thirty-dollar-machine';
-export const EVENT_NAMES = ['experience_view', 'experience_complete', 'share_intent', 'token_info_view'];
+export const EVENT_NAMES = ['experience_view', 'experience_complete', 'share_intent', 'token_info_view', 'kit_download_intent', 'submission_intent'];
 export const AGGREGATE_LIMIT = 100;
 const PACIFIC = 'America/Los_Angeles';
 
@@ -89,7 +89,7 @@ export function needsReconciliation(saved, day, now) {
     || saved?.range?.since !== expected.since || saved?.range?.until !== expected.until;
 }
 
-export async function collectObservation(day, now, query, qaOffsets = []) {
+export async function collectObservation(day, now, query, qaOffsets = [], campaign = CAMPAIGN) {
   const range = dayRange(day, now);
   const read = async (dataset, options) => validateAggregate(await query(dataset, range, options), range, day);
   // Optional traffic dimensions must not stop a valid accounting/control refresh.
@@ -99,7 +99,7 @@ export async function collectObservation(day, now, query, qaOffsets = []) {
   };
   const [visits, custom, episodeRows, paths, referrers] = await Promise.all([
     read('visits', { by: 'hour' }), read('events', { by: 'eventName' }),
-    Promise.all(EVENT_NAMES.map(name => read('events', { by: 'eventData/episode', filter: `eventData/campaign eq '${CAMPAIGN}' and eventName eq '${name}'` }))),
+    Promise.all(EVENT_NAMES.map(name => read('events', { by: 'eventData/episode', filter: `eventData/campaign eq '${campaign}' and eventName eq '${name}'` }))),
     optionalTraffic('requestPath'), optionalTraffic('referrerHostname'),
   ]);
   const events = countAggregate(visits, 'pageviews') + countAggregate(custom, 'count');
@@ -108,7 +108,7 @@ export async function collectObservation(day, now, query, qaOffsets = []) {
   for (const [index, rows] of episodeRows.entries()) {
     countAggregate(rows, 'count');
     for (const { episodeId, count } of parseEpisodeAggregate(rows)) {
-      if (!rawCampaigns.has(episodeId)) rawCampaigns.set(episodeId, { campaignId: CAMPAIGN, episodeId, ...Object.fromEntries(EVENT_NAMES.map(name => [name, 0])) });
+      if (!rawCampaigns.has(episodeId)) rawCampaigns.set(episodeId, { campaignId: campaign, episodeId, ...Object.fromEntries(EVENT_NAMES.map(name => [name, 0])) });
       rawCampaigns.get(episodeId)[EVENT_NAMES[index]] = count;
     }
   }
@@ -151,11 +151,11 @@ export function analyticsFailure(error, stage = 'refresh') {
 }
 
 /** Current control refresh succeeds independently of delayed-history reconciliation. */
-export async function refreshAnalytics({ now = new Date(), readState, query, save, qaOffsets = [], dryRun = false }) {
+export async function refreshAnalytics({ now = new Date(), readState, query, save, qaOffsets = [], dryRun = false, campaign = CAMPAIGN }) {
   const state = await readState();
   const today = pacificDay(now);
   if (state.currentDay !== today || !state.days || typeof state.days !== 'object') throw new Error('Analytics state does not match the current Pacific day');
-  const current = await collectObservation(today, now, query, qaOffsets);
+  const current = await collectObservation(today, now, query, qaOffsets, campaign);
   const savedCurrent = dryRun ? null : await save(current);
   const observations = [];
   const failures = [];
@@ -165,7 +165,7 @@ export async function refreshAnalytics({ now = new Date(), readState, query, sav
     if (!needsReconciliation(state.days[day], day, now)) { skipped.push(day); continue; }
     let stage = 'read';
     try {
-      const historical = await collectObservation(day, now, query, qaOffsets);
+      const historical = await collectObservation(day, now, query, qaOffsets, campaign);
       stage = 'save';
       if (!dryRun) await save(historical);
       observations.push(historical);
