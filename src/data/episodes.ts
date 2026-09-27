@@ -38,6 +38,7 @@ export const episodes: Episode[] = [
     "AI/MAXXI is the movement-associated token on Solana. $ANTIHUNTER is the character-associated token on Base. The projects share an operator, not a token conversion, shared treasury, or financial entitlement. Participation requires neither token."
   ],
   "evidence": [
+    {"label": "Verified CEO appointment and mission launch, September 27 at 13:01:30 Pacific", "href": "https://x.com/AntiHunterAI/status/2104300419874975847"},
     {
       "label": "Geoffrey’s appointment and editorial/operating mandate, September 27, 2026. Operator-recorded authorization."
     },
