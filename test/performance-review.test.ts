@@ -33,14 +33,37 @@ test('the assignment retains seven Pacific dates, its recorded opening and no fu
   assert.equal(performanceReview.targetCompletions, 10);
   assert.equal(performanceReview.targetContributors, 3);
   assert.deepEqual(performanceReview.checkpoints.map(row => [row.date, row.status]), [
-    ['2026-09-24', 'Opened September 24'], ['2026-09-27', 'Pending'], ['2026-10-01', 'Pending'],
+    ['2026-09-24', 'Opened September 24'], ['2026-09-27', 'Checkpoint recorded'], ['2026-10-01', 'Pending'],
   ]);
   const episode = episodes.find(row => row.slug === performanceReview.id);
   assert.ok(episode);
   assert.equal(episode.status, 'active');
   assert.equal(episode.resultsArtifact, undefined);
-  assert.match(episode.image, /performance-review-01\.png$/);
+  assert.match(episode.image, /performance-review-01-midpoint\.png$/);
   assert.ok(episode.paragraphs.some(text => text.includes('collection was unavailable')));
   assert.equal(baseline.websiteObservation.calculatorViews, 7);
   assert.equal(baseline.websiteObservation.calculatorCompletions, 0);
+});
+
+
+test('midpoint summaries reproduce dated readings and preserve unknown click counts', () => {
+  const midpoint = JSON.parse(readFileSync(new URL('../public/reports/performance-review-01-midpoint.json', import.meta.url), 'utf8'));
+  assert.equal(new Set(midpoint.comparisons.map(row => row.url)).size, midpoint.comparisons.length);
+  for (const row of midpoint.comparisons) {
+    const age = (Date.parse(row.observedAt) - Date.parse(row.publishedAt)) / 3_600_000;
+    assert.ok(age >= 24 && age <= 30);
+    assert.ok(Math.abs(age - row.ageHours) < 0.000001);
+    if (!row.urlClicksAvailable) assert.equal(row.urlClicks, null);
+  }
+  for (const group of midpoint.variants) {
+    const rows = midpoint.comparisons.filter(row => row.variant === group.variant);
+    const values = rows.map(row => row.impressions).sort((a, b) => a - b);
+    const middle = Math.floor(values.length / 2);
+    const median = values.length % 2 ? values[middle] : (values[middle - 1] + values[middle]) / 2;
+    assert.equal(group.count, rows.length);
+    assert.equal(group.medianImpressions, median);
+    assert.equal(group.sharingPosts, rows.filter(row => row.reposts + row.quotes > 0).length);
+  }
+  assert.equal(midpoint.calculator.uniquePeople, null);
+  assert.equal(performanceReview.checkpoints.at(-1)?.status, 'Pending');
 });

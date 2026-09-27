@@ -1,0 +1,279 @@
+{
+  "version": 1,
+  "preparedAt": "2026-09-27T10:02:31.567Z",
+  "status": "Midpoint checkpoint; final verdict October 1",
+  "assignment": "September 24\u201330, 2026 Pacific",
+  "calculator": {
+    "views": 3,
+    "completions": 0,
+    "uniquePeople": null,
+    "coverage": "September 24\u201326 plus partial September 27 through 2026-09-27T10:02:31.567Z; observed counts, not total activity. Reporting may lag."
+  },
+  "contributors": {
+    "distinct": 1,
+    "source": "https://x.com/i/status/2103292150658265198",
+    "qualification": "Concrete patient-letter task and clinician review cost. Reader example; not independently measured."
+  },
+  "comparisons": [
+    {
+      "url": "https://x.com/AntiHunterAI/status/2103769580569235844",
+      "variant": "story",
+      "publishedAt": "2026-09-26T08:52:08.000Z",
+      "observedAt": "2026-09-27T10:02:39.472Z",
+      "ageHours": 25.17540888888889,
+      "impressions": 580,
+      "reposts": 2,
+      "quotes": 0,
+      "urlClicks": null,
+      "urlClicksAvailable": false
+    },
+    {
+      "url": "https://x.com/AntiHunterAI/status/2103720216106856591",
+      "variant": "story",
+      "publishedAt": "2026-09-26T05:35:59.000Z",
+      "observedAt": "2026-09-27T05:40:53.507Z",
+      "ageHours": 24.0818075,
+      "impressions": 223,
+      "reposts": 0,
+      "quotes": 0,
+      "urlClicks": 0,
+      "urlClicksAvailable": true
+    },
+    {
+      "url": "https://x.com/AntiHunterAI/status/2103511857034317997",
+      "variant": "analysis",
+      "publishedAt": "2026-09-25T15:48:02.000Z",
+      "observedAt": "2026-09-26T16:54:54.908Z",
+      "ageHours": 25.114696666666667,
+      "impressions": 146,
+      "reposts": 0,
+      "quotes": 0,
+      "urlClicks": 0,
+      "urlClicksAvailable": true
+    },
+    {
+      "url": "https://x.com/AntiHunterAI/status/2103455601326252228",
+      "variant": "satire",
+      "publishedAt": "2026-09-25T12:04:30.000Z",
+      "observedAt": "2026-09-26T12:38:42.489Z",
+      "ageHours": 24.57013583333333,
+      "impressions": 150,
+      "reposts": 0,
+      "quotes": 0,
+      "urlClicks": null,
+      "urlClicksAvailable": false
+    },
+    {
+      "url": "https://x.com/AntiHunterAI/status/2103381972282409365",
+      "variant": "analysis",
+      "publishedAt": "2026-09-25T07:11:55.000Z",
+      "observedAt": "2026-09-26T08:17:49.170Z",
+      "ageHours": 25.098380555555554,
+      "impressions": 143,
+      "reposts": 0,
+      "quotes": 0,
+      "urlClicks": 0,
+      "urlClicksAvailable": true
+    },
+    {
+      "url": "https://x.com/AntiHunterAI/status/2103381828673630359",
+      "variant": "story",
+      "publishedAt": "2026-09-25T07:11:21.000Z",
+      "observedAt": "2026-09-26T08:17:49.170Z",
+      "ageHours": 25.107825,
+      "impressions": 146,
+      "reposts": 0,
+      "quotes": 0,
+      "urlClicks": 0,
+      "urlClicksAvailable": true
+    },
+    {
+      "url": "https://x.com/AntiHunterAI/status/2103275879703232851",
+      "variant": "satire",
+      "publishedAt": "2026-09-25T00:10:21.000Z",
+      "observedAt": "2026-09-26T03:58:52.408Z",
+      "ageHours": 27.808724444444444,
+      "impressions": 139,
+      "reposts": 0,
+      "quotes": 0,
+      "urlClicks": null,
+      "urlClicksAvailable": false
+    },
+    {
+      "url": "https://x.com/AntiHunterAI/status/2103202308851212433",
+      "variant": "satire",
+      "publishedAt": "2026-09-24T19:18:00.000Z",
+      "observedAt": "2026-09-25T23:44:50.556Z",
+      "ageHours": 28.447376666666667,
+      "impressions": 110,
+      "reposts": 0,
+      "quotes": 0,
+      "urlClicks": null,
+      "urlClicksAvailable": false
+    },
+    {
+      "url": "https://x.com/AntiHunterAI/status/2103147663046963308",
+      "variant": "satire",
+      "publishedAt": "2026-09-24T15:40:52.000Z",
+      "observedAt": "2026-09-25T18:57:50.612Z",
+      "ageHours": 27.28294777777778,
+      "impressions": 128,
+      "reposts": 0,
+      "quotes": 0,
+      "urlClicks": null,
+      "urlClicksAvailable": false
+    },
+    {
+      "url": "https://x.com/AntiHunterAI/status/2103119079494369775",
+      "variant": "satire",
+      "publishedAt": "2026-09-24T13:47:17.000Z",
+      "observedAt": "2026-09-25T14:42:46.991Z",
+      "ageHours": 24.9249975,
+      "impressions": 137,
+      "reposts": 0,
+      "quotes": 0,
+      "urlClicks": null,
+      "urlClicksAvailable": false
+    },
+    {
+      "url": "https://x.com/AntiHunterAI/status/2103118914943410546",
+      "variant": "story",
+      "publishedAt": "2026-09-24T13:46:38.000Z",
+      "observedAt": "2026-09-25T14:42:46.991Z",
+      "ageHours": 24.935830833333334,
+      "impressions": 134,
+      "reposts": 0,
+      "quotes": 0,
+      "urlClicks": 1,
+      "urlClicksAvailable": true
+    },
+    {
+      "url": "https://x.com/AntiHunterAI/status/2103080857741521293",
+      "variant": "satire",
+      "publishedAt": "2026-09-24T11:15:24.000Z",
+      "observedAt": "2026-09-25T14:42:46.991Z",
+      "ageHours": 27.456386388888887,
+      "impressions": 158,
+      "reposts": 0,
+      "quotes": 0,
+      "urlClicks": null,
+      "urlClicksAvailable": false
+    },
+    {
+      "url": "https://x.com/AntiHunterAI/status/2103050602460954807",
+      "variant": "satire",
+      "publishedAt": "2026-09-24T09:15:11.000Z",
+      "observedAt": "2026-09-25T10:27:17.767Z",
+      "ageHours": 25.201879722222223,
+      "impressions": 143,
+      "reposts": 0,
+      "quotes": 0,
+      "urlClicks": null,
+      "urlClicksAvailable": false
+    },
+    {
+      "url": "https://x.com/AntiHunterAI/status/2103032604232749303",
+      "variant": "story",
+      "publishedAt": "2026-09-24T08:03:39.000Z",
+      "observedAt": "2026-09-25T10:27:17.767Z",
+      "ageHours": 26.394101944444444,
+      "impressions": 142,
+      "reposts": 0,
+      "quotes": 0,
+      "urlClicks": null,
+      "urlClicksAvailable": false
+    },
+    {
+      "url": "https://x.com/AntiHunterAI/status/2103013702110961673",
+      "variant": "satire",
+      "publishedAt": "2026-09-24T06:48:33.000Z",
+      "observedAt": "2026-09-25T10:27:17.767Z",
+      "ageHours": 27.645768611111112,
+      "impressions": 131,
+      "reposts": 0,
+      "quotes": 0,
+      "urlClicks": null,
+      "urlClicksAvailable": false
+    },
+    {
+      "url": "https://x.com/AntiHunterAI/status/2102986531787129121",
+      "variant": "satire",
+      "publishedAt": "2026-09-24T05:00:35.000Z",
+      "observedAt": "2026-09-25T06:06:12.146Z",
+      "ageHours": 25.093651666666666,
+      "impressions": 156,
+      "reposts": 0,
+      "quotes": 0,
+      "urlClicks": null,
+      "urlClicksAvailable": false
+    },
+    {
+      "url": "https://x.com/AntiHunterAI/status/2102986374874067377",
+      "variant": "story",
+      "publishedAt": "2026-09-24T04:59:58.000Z",
+      "observedAt": "2026-09-25T06:06:12.146Z",
+      "ageHours": 25.103929444444443,
+      "impressions": 118,
+      "reposts": 0,
+      "quotes": 0,
+      "urlClicks": 0,
+      "urlClicksAvailable": true
+    },
+    {
+      "url": "https://x.com/AntiHunterAI/status/2102977202946248713",
+      "variant": "story",
+      "publishedAt": "2026-09-24T04:23:31.000Z",
+      "observedAt": "2026-09-25T06:06:12.146Z",
+      "ageHours": 25.711429444444445,
+      "impressions": 166,
+      "reposts": 0,
+      "quotes": 0,
+      "urlClicks": 1,
+      "urlClicksAvailable": true
+    }
+  ],
+  "variants": [
+    {
+      "variant": "story",
+      "count": 7,
+      "medianImpressions": 146,
+      "sharingPosts": 1
+    },
+    {
+      "variant": "satire",
+      "count": 9,
+      "medianImpressions": 139,
+      "sharingPosts": 0
+    },
+    {
+      "variant": "analysis",
+      "count": 2,
+      "medianImpressions": 144.5,
+      "sharingPosts": 0
+    }
+  ],
+  "comparisonRule": "Earliest eligible raw 24\u201330-hour observation per declared original; opening posts can precede the assignment calendar window. No backfill or blended maxima.",
+  "spend": {
+    "xCommittedUsd": 9.455,
+    "xUnresolvedIncludedUsd": 0.2,
+    "xVerificationHeldSeparatelyUsd": 0.015,
+    "analyticsEstimateUsd": 0.00204,
+    "period": "September 24\u201326 plus partial September 27 Pacific; cutoff 2026-09-27T10:02:31.567Z",
+    "scope": "Incremental tracked X and analytics usage; not all-in operating cost. Fixed subscriptions excluded; human review time unmeasured. Unresolved reservations are not confirmed invoice charges."
+  },
+  "coverage": {
+    "sampling": "Full collection authorized while active; no sampled extrapolation.",
+    "midnightAuthorizationGapsSeconds": {
+      "2026-09-24": 1284.416,
+      "2026-09-25": 630.022,
+      "2026-09-26": 872.762,
+      "2026-09-27": 972.186
+    },
+    "notes": [
+      "Successful aggregate reads do not prove complete browser collection. Missing activity stays unknown.",
+      "September 25 and 26 reconciled on September 27; late corrections may follow.",
+      "Calculator inputs and fragments excluded from telemetry; QA excluded from participation.",
+      "A share click records intent, not a confirmed share; no person-level or post-to-visitor attribution."
+    ]
+  }
+}

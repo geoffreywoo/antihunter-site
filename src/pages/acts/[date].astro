@@ -8,6 +8,7 @@ import DistributionScorecards from '../../components/DistributionScorecards.astr
 import PerformanceReview from '../../components/PerformanceReview.astro';
 import OwnCostWorksheet from '../../components/OwnCostWorksheet.astro';
 import ReviewContributions from '../../components/ReviewContributions.astro';
+import ReviewMidpoint from '../../components/ReviewMidpoint.astro';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 export const prerender = true;
@@ -33,6 +34,7 @@ const followupCorpus = episode.followupArtifact
     <img class="episode-image" src={episode.image} width="1200" height="630" alt={episode.imageAlt ?? (episode.resultsArtifact ? `${episode.title} — measured results on ten synthetic invoices per configuration under the frozen strict JSON rubric; details and API cost estimates below` : `${episode.title} — editorial artwork, not a financial or performance receipt`)} />
     <article class="prose">
       {episode.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      {episode.performanceReview && <ReviewMidpoint />}
       {episode.performanceReview && <PerformanceReview />}
       {episode.performanceReview && <ReviewContributions />}
       {episode.performanceReview && <OwnCostWorksheet />}
