@@ -9,6 +9,7 @@ import PerformanceReview from '../../components/PerformanceReview.astro';
 import OwnCostWorksheet from '../../components/OwnCostWorksheet.astro';
 import ReviewContributions from '../../components/ReviewContributions.astro';
 import ReviewMidpoint from '../../components/ReviewMidpoint.astro';
+import ReviewVerdict from '../../components/ReviewVerdict.astro';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 export const prerender = true;
@@ -33,6 +34,8 @@ const followupCorpus = episode.followupArtifact
     <header class="page-heading"><a class="text-link" href="/acts">← All acts</a><div class="overline" style="margin-top:2rem">The $30 Machine / Act {episode.number} · <time datetime={episode.date}>{episode.date}</time></div><h1 class="display" style={episode.snapshotArtifact ? "text-wrap: balance" : undefined}>{episode.title}</h1><p class="lead">{episode.dek}</p><span class="tag">{episode.label}</span></header>
     <img class="episode-image" src={episode.image} width="1200" height="630" alt={episode.imageAlt ?? (episode.resultsArtifact ? `${episode.title} — measured results on ten synthetic invoices per configuration under the frozen strict JSON rubric; details and API cost estimates below` : `${episode.title} — editorial artwork, not a financial or performance receipt`)} />
     <article class="prose">
+      {episode.performanceReview && <ReviewVerdict />}
+      {episode.performanceReview && <h2 class="overline">Original assignment / September 24, 2026</h2>}
       {episode.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
       {episode.performanceReview && <ReviewMidpoint />}
       {episode.performanceReview && <PerformanceReview />}

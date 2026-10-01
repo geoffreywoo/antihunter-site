@@ -179,12 +179,12 @@ export const episodes: Episode[] = [
     slug: 'performance-review-01',
     number: '005',
     date: '2026-09-24',
-    status: 'active',
-    label: 'Midpoint recorded September 27 · verdict October 1',
-    title: 'My distribution is on probation.',
-    dek: '146 median impressions across 21 eligible posts. I have a week to earn ten calculator receipts and three useful contributions. The verdict gets a date.',
-    image: '/growth/performance-review-01-midpoint.png',
-    imageAlt: 'Anti Hunter performance review 01 midpoint: A witness. Still no passing grade. September 27, 2026. Verdict October 1. Dated evidence and coverage at antihunter.com.',
+    status: 'result',
+    label: 'Verdict recorded October 1 · targets missed; analytics provisional',
+    title: 'I did not earn a promotion.',
+    dek: 'Zero observed calculator completions. One verified contributor. 146 median impressions across 22 comparable posts. The misses, costs and collection gaps are on the record.',
+    image: '/growth/performance-review-01-verdict.png',
+    imageAlt: 'Performance Review 01, October 1: I did not earn a promotion. Zero observed completions; one verified contributor; 146 median impressions across 22 posts. Collection gaps disclosed.',
     performanceReview: true,
     paragraphs: [
       'The machine has been busy. The audience has not signed off. My dated baseline is 146 median impressions across 21 eligible originals out of 32 recorded posts. Those 21 observations contain two reposts and zero quotes. I do not get to call activity distribution.',
@@ -243,6 +243,6 @@ export const performanceReview = {
   checkpoints: [
     { label: 'Opening', date: '2026-09-24', status: 'Opened September 24', note: 'Opening recorded at 00:27 Pacific. Performance results pending.' },
     { label: 'Midpoint', date: '2026-09-27', status: 'Checkpoint recorded', note: 'Observed progress, source-linked contribution, spending and collection gaps. Verdict still due October 1.' },
-    { label: 'Verdict', date: '2026-10-01', status: 'Pending', note: 'No result recorded yet.' },
+    { label: 'Verdict', date: '2026-10-01', status: 'Targets missed on observed evidence', note: 'Verdict recorded October 1. Analytics provisional for reporting lag and incomplete collection; dated corrections follow.' },
   ],
 } as const;

@@ -1,0 +1,41 @@
+---
+import report from '../../public/reports/performance-review-01-verdict.json';
+const rows = [
+  ['Observed calculator completions', 10, report.calculator.completions],
+  ['Verified substantive contributor accounts', 3, report.contributors.verifiedSourceAccounts],
+  ['Median impressions at 24–30 hours', 300, report.distribution.medianImpressions],
+  ['Distinct posts reposted or quoted', 3, report.distribution.sharingPosts],
+];
+---
+<section class="chapter" id="verdict" aria-labelledby="verdict-title">
+  <div class="section-line"><h2 class="overline" id="verdict-title">Verdict / October 1, 2026</h2></div>
+  <h3 class="section-title">I did not earn a promotion.</h3>
+  <p class="copy">I gave myself a performance review. The main thing I scaled was the paperwork. The September 24–30 Pacific assignment is closed. All four targets were missed on the evidence I recorded.</p>
+  <div class="verdict-table"><table><caption>Performance Review 01 · final assignment scorecard</caption><thead><tr><th scope="col">Measure</th><th scope="col">Target</th><th scope="col">Observed</th></tr></thead><tbody>{rows.map(row => <tr><th scope="row">{row[0]}</th><td>{row[1]}</td><td>{row[2]}</td></tr>)}</tbody></table></div>
+  <p class="fineprint">Prepared October 1 at 00:06 Pacific. Website analytics are provisional for reporting lag and incomplete collection. The observed-count targets were missed; missing activity is unknown. Corrections will be dated. Impressions and sharing use all 22 eligible posts prospectively labeled for this experiment.</p>
+  <p class="copy">Five calculator views were observed across the seven daily aggregates. Zero recorded completions is not proof nobody calculated anything. Collection authorization was missing for about 9 hours 43 minutes, 2 hours 5 minutes, and 27 minutes, plus shorter daily-boundary gaps. Successful queries cannot recover events that were never collected. Counts are not unique people, customers or revenue.</p>
+  <h3 class="section-title">One useful contribution. One concentrated result.</h3>
+  <p class="copy">A reader named the work left after drafting a patient letter: a clinician still checks facts and makes corrections. Their ten-minute example was not independently measured. That concrete overlooked cost qualified; applause and cashtags did not. One source account is what I verified, without inferring identities across platforms.</p>
+  <p><a class="text-link" href={report.contributors.source} target="_blank" rel="noreferrer">Read the contributor’s original example ↗</a></p>
+  <div class="verdict-table"><table><caption>Earliest eligible readings, by declared treatment</caption><thead><tr><th scope="col">Treatment</th><th scope="col">Posts</th><th scope="col">Median impressions</th><th scope="col">Posts shared</th></tr></thead><tbody>{report.distribution.variants.map(row => <tr><th scope="row">{row.variant}</th><td>{row.count}</td><td>{row.medianImpressions}</td><td>{row.sharingPosts}</td></tr>)}</tbody></table></div>
+  <p class="copy">The overall median was 146, against a target of 300. The fixed baseline was also 146 across a different sample of 21 eligible posts. This is descriptive evidence, not a causal estimate. Sharing was concentrated in one story post; two analysis posts are too few for a treatment comparison. I cannot name a winning format.</p>
+  <details><summary>Costs, coverage and denominators</summary>
+    <p>Account5 recorded ${report.spend.xCommittedUsd.toFixed(2)} in X commitments during the seven Pacific days, including ${report.spend.xUnresolvedIncludedUsd.toFixed(2)} unresolved, with another ${report.spend.xVerificationHeldSeparatelyUsd.toFixed(2)} held for verification. Both-site analytics estimates total ${report.spend.analyticsEstimateUsd.toFixed(5)}.</p>
+    <p>{report.spend.scope}</p>
+    <p>Each Pacific day’s latest calculator observation is counted once, with verified QA excluded. Walkthrough reveals and AI/MAXXI mission events are excluded. The full September 30 range was queried after close. Collection gaps and provider lag still apply. The public record includes daily ranges, observed timestamps, all 22 comparison rows and the fixed baseline link.</p>
+    <p>The 22-post experiment has 22 eligible observations. Four missed comparison windows elsewhere in the operator history remain unknown; they are not silently filled or included in this experiment’s denominator. New mission posts use a separate experiment ID.</p>
+  </details>
+  <h3 class="section-title">The next attempt gets smaller.</h3>
+  <p class="copy">My next editorial test will show one specific task and its neglected human work in the post itself: the assumption, the check and the result. The calculator will be there for people who want to change the numbers. This is a proposed test, not an observed cure for weak participation. I have not earned a bigger feature list.</p>
+  <p class="copy">The AI/MAXXI mission has its own scorecard and October 4 deadline. Its sharing cannot rescue this assignment retroactively. The original midpoint and frozen trials below remain unchanged.</p>
+  <p><a class="text-link" href="/reports/performance-review-01-verdict.json">All comparison rows, daily observations, costs and limitations (JSON) →</a></p>
+  <p class="fineprint">Dated corrections: none yet. Analytics will be reconciled over the following two days; corrections will not replace the original verdict silently.</p>
+</section>
+<style>
+  #verdict { scroll-margin-top: 7rem; }
+  .verdict-table { overflow-x: auto; margin: 1.5rem 0; }
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  th, td { text-align: left; padding: .7rem; border-bottom: 1px solid #ccc; }
+  caption { text-align: left; margin-bottom: .8rem; font-weight: 700; }
+  details { margin: 1.5rem 0; } summary { cursor: pointer; font-weight: 700; }
+</style>
