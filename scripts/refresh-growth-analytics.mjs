@@ -15,7 +15,9 @@ const TEAM = 'geoffrey-woos-projects';
 const OPERATOR = '/Users/gwbox2/Projects/clawfable-antihunter-operator';
 const RUNTIME_ENV = '/Users/gwbox2/.config/antihunter/clawfable.production.env';
 async function operator(args) {
-  const { stdout } = await exec(process.execPath, [`--env-file=${RUNTIME_ENV}`, 'node_modules/tsx/dist/cli.mjs', 'scripts/operator-antihunter.ts', ...args], { cwd: OPERATOR, timeout: 60_000, maxBuffer: 2_000_000 });
+  // Shared-state reads can complete slowly (52s for growth plus 17s for identity).
+  // Allow bounded recovery without changing the 90-minute collection expiry.
+  const { stdout } = await exec(process.execPath, [`--env-file=${RUNTIME_ENV}`, 'node_modules/tsx/dist/cli.mjs', 'scripts/operator-antihunter.ts', ...args], { cwd: OPERATOR, timeout: 180_000, maxBuffer: 2_000_000 });
   return JSON.parse(stdout);
 }
 async function query(dataset, range, options = {}) {
