@@ -621,5 +621,41 @@
     "caveat": "Inferred control-authorization gaps, not direct browser-uptime measurement; September28 duration approximate. Lost activity unknown. Successful queries cannot reconstruct missing collection. Provider reporting may lag."
   },
   "decision": "Targets missed on observed evidence. No winning treatment: sharing concentrated in one post, analysis n=2. Next editorial test: demonstrate one task and its neglected human work in the post, then offer calculator assumptions for inspection. No feature expansion claimed as audience demand.",
-  "corrections": []
+  "corrections": [
+    {
+      "date": "2026-10-02",
+      "kind": "analytics-reconciliation",
+      "status": "No count change; original verdict retained.",
+      "site": "antihunter",
+      "day": "2026-09-30",
+      "previousObservedAt": "2026-10-01T07:05:24.611Z",
+      "observedAt": "2026-10-02T07:11:16.271Z",
+      "range": {
+        "since": "2026-09-30T07:00:00.000Z",
+        "until": "2026-10-01T07:00:00.000Z"
+      },
+      "previousDay": {
+        "views": 1,
+        "completions": 0
+      },
+      "reconciledDay": {
+        "views": 1,
+        "completions": 0
+      },
+      "previousSevenDay": {
+        "views": 5,
+        "completions": 0
+      },
+      "reconciledSevenDay": {
+        "views": 5,
+        "completions": 0
+      },
+      "coverage": {
+        "aggregateRead": "available",
+        "qaExcludedEvents": 0,
+        "notes": "Control authorization history is stored separately; it does not prove browser collection. Reporting may lag. Sampling cannot reconstruct total traffic."
+      },
+      "scope": "September 30 queried again after reporting lag. Latest observation per September 24\u201330 Pacific day counted once; other six retained daily observations unchanged. Hidden-cost campaign only; QA, walkthroughs, mission events and October activity excluded. Collection gaps cannot be reconstructed. X comparison rows, targets, costs and original verdict are unchanged."
+    }
+  ]
 }
