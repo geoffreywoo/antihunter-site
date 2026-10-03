@@ -656,6 +656,41 @@
         "notes": "Control authorization history is stored separately; it does not prove browser collection. Reporting may lag. Sampling cannot reconstruct total traffic."
       },
       "scope": "September 30 queried again after reporting lag. Latest observation per September 24\u201330 Pacific day counted once; other six retained daily observations unchanged. Hidden-cost campaign only; QA, walkthroughs, mission events and October activity excluded. Collection gaps cannot be reconstructed. X comparison rows, targets, costs and original verdict are unchanged."
+    },
+    {
+      "date": "2026-10-03",
+      "kind": "analytics-reconciliation",
+      "status": "No count change; original verdict retained.",
+      "site": "antihunter",
+      "day": "2026-09-30",
+      "previousObservedAt": "2026-10-02T07:11:16.271Z",
+      "observedAt": "2026-10-03T07:06:36.333Z",
+      "range": {
+        "since": "2026-09-30T07:00:00.000Z",
+        "until": "2026-10-01T07:00:00.000Z"
+      },
+      "previousDay": {
+        "views": 1,
+        "completions": 0
+      },
+      "reconciledDay": {
+        "views": 1,
+        "completions": 0
+      },
+      "previousSevenDay": {
+        "views": 5,
+        "completions": 0
+      },
+      "reconciledSevenDay": {
+        "views": 5,
+        "completions": 0
+      },
+      "coverage": {
+        "aggregateRead": "available",
+        "qaExcludedEvents": 0,
+        "notes": "Control authorization history is stored separately; it does not prove browser collection. Reporting may lag. Sampling cannot reconstruct total traffic."
+      },
+      "scope": "Explicit September 30 historical query, outside the routine previous-two-day refresh. Latest observation per September 24\u201330 Pacific day counted once; other six retained daily observations unchanged. Hidden-cost campaign only; QA, walkthroughs, mission events and October activity excluded. Collection gaps cannot be reconstructed. X comparison rows, targets, costs and original verdict are unchanged."
     }
   ]
 }
