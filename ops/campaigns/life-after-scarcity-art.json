@@ -1,0 +1,23 @@
+{
+  "series": "Life After Scarcity",
+  "createdAt": "2026-10-05",
+  "provider": "OpenAI ImageGen built-in tool",
+  "reference": "cryptopunk5730_openclaw_lobster.png",
+  "assets": [
+    {
+      "slug": "the-last-job",
+      "file": "/scarcity/the-last-job.png",
+      "prompt": "Use case: illustration-story. Asset: original X campaign artwork and wide website social card, landscape 3:2. Series LIFE AFTER SCARCITY, AI/MAXXI abundant-future sitcom. Make a polished bold editorial comic illustration, warm off-white paper, black ink shapes, orange vermilion accents, sunny sage/turquoise future architecture. Use reference image only to keep Anti Hunter's recognizable black cap, tan face, red lobster claw, and flat deadpan expression; reinterpret as illustrated pixel-punk CEO, no celebrity. Scene: A robot finished a whole office's work. A tan pixel-punk CEO with black cap, dark eyes and red lobster on cap sits at an enormous conference table while bored human executives assemble an elaborate meeting about organizing another meeting. Empty chairs, sunlit future city through windows, overhead agenda arrow loops. Typography: large clean readable uppercase \"THE LAST JOB\" near top, small series name \"LIFE AFTER SCARCITY\", small footer \"AI/MAXXI • FICTIONAL FUTURE DISPATCH\". The scene is unmistakably fiction/satire. No financial promises, ticker price charts, unrelated logos. Strong simple visual joke, striking mobile-readable composition, no dense text. Caption idea for mood only, do NOT render full line: we automated every job except explaining why you still need one.. Save a final full resolution file for project use."
+    },
+    {
+      "slug": "the-wet-signature",
+      "file": "/scarcity/the-wet-signature.png",
+      "prompt": "Use case: illustration-story. Asset: original X campaign artwork and wide website social card, landscape 3:2. Series LIFE AFTER SCARCITY, AI/MAXXI abundant-future sitcom. Make a polished bold editorial comic illustration, warm off-white paper, black ink shapes, orange vermilion accents, sunny sage/turquoise future architecture. Use reference image only to keep Anti Hunter's recognizable black cap, tan face, red lobster claw, and flat deadpan expression; reinterpret as illustrated pixel-punk CEO, no celebrity. Scene: A beautiful robot-built future home, trees, solar architecture and warm sun behind a municipal counter. Tiny bureaucrat demands paper form, enormous wet ink pen, and CEO tan pixel punk black cap with red lobster cap points incredulously at the finished building. Cheerful builder robots wait. Typography: large clean readable uppercase \"THE WET SIGNATURE\" near top, small series name \"LIFE AFTER SCARCITY\", small footer \"AI/MAXXI • FICTIONAL FUTURE DISPATCH\". The scene is unmistakably fiction/satire. No financial promises, ticker price charts, unrelated logos. Strong simple visual joke, striking mobile-readable composition, no dense text. Caption idea for mood only, do NOT render full line: the robots finished the house. the zoning board requested a wet signature.. Save a final full resolution file for project use."
+    },
+    {
+      "slug": "retirement-cancelled",
+      "file": "/scarcity/retirement-cancelled.png",
+      "prompt": "Use case: illustration-story. Asset: original X campaign artwork and wide website social card, landscape 3:2. Series LIFE AFTER SCARCITY, AI/MAXXI abundant-future sitcom. Make a polished bold editorial comic illustration, warm off-white paper, black ink shapes, orange vermilion accents, sunny sage/turquoise future architecture. Use reference image only to keep Anti Hunter's recognizable black cap, tan face, red lobster claw, and flat deadpan expression; reinterpret as illustrated pixel-punk CEO, no celebrity. Scene: A cheerful futuristic older worker has a cake with 200 candles. HR robot calmly places a stack of onboarding paperwork in front of them. Anti Hunter tan punk CEO black cap red lobster cap in corner dryly observes. Optimistic lush abundant future skyline and deadpan corporate absurdity. Typography: large clean readable uppercase \"RETIREMENT CANCELLED\" near top, small series name \"LIFE AFTER SCARCITY\", small footer \"AI/MAXXI • FICTIONAL FUTURE DISPATCH\". The scene is unmistakably fiction/satire. No financial promises, ticker price charts, unrelated logos. Strong simple visual joke, striking mobile-readable composition, no dense text. Caption idea for mood only, do NOT render full line: we cured aging. HR updated the retirement policy.. Save a final full resolution file for project use."
+    }
+  ]
+}

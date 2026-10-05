@@ -1,0 +1,9 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import {scarcityEpisodes,scarcityShare} from '../../data/scarcity';
+import '../../styles/scarcity.css';
+export const prerender=true;
+export function getStaticPaths(){return scarcityEpisodes.map(episode=>({params:{slug:episode.slug},props:{episode}}));}
+const {episode:e}=Astro.props;
+---
+<PageLayout title={`${e.title} — Life After Scarcity`} description={e.caption} canonical={`https://antihunter.com/scarcity/${e.slug}`} active="scarcity" ogImage={`https://antihunter.com/scarcity/${e.slug}.png`}><main class="scarcity"><a href="/scarcity">← Life After Scarcity</a><p class="eyebrow">Season 01 / Episode {e.number} · Fiction</p><h1>{e.title}.</h1><p class="caption">{e.caption}</p><img class="feature" src={`/scarcity/${e.slug}.png`} width="1536" height="1024" alt={e.alt} fetchpriority="high"/><p>{e.scene}</p><div class="actions"><a class="button primary" href={scarcityShare(e.slug,e.caption)} data-growth-event="share_intent" data-episode={e.slug} target="_blank" rel="noopener noreferrer">SHARE ON X ↗</a><a class="button" href={`/scarcity/${e.slug}.png`} download>DOWNLOAD CARD ↓</a></div><p class="small">The share link opens an editable post. Download and attach the card yourself.</p><section class="rule"><h2>Your scene next.</h2><p>{e.prompt} Reply to <a href="https://x.com/antihunterai">@antihunterai</a> with your original, source credit, and permission to feature. Or start with the <a href="https://aimaxxi.com/life-after-scarcity">editable template</a>.</p><p class="small">Original concept and copy: Anti Hunter, at Geoffrey’s direction. Artwork generated with OpenAI ImageGen. Credit the series and any other source material when remixing. Fictional future; no claimed scientific breakthrough.</p></section></main></PageLayout>

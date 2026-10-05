@@ -1,5 +1,5 @@
 import { inject, track } from '@vercel/analytics';
-import { CAMPAIGN, EVENT_NAMES, analyticsEpisode, canCollect, cleanAnalyticsUrl, eventKey, pacificDay, safeEpisode, type GrowthEvent } from '../lib/growth-analytics';
+import { analyticsCampaign, EVENT_NAMES, analyticsEpisode, canCollect, cleanAnalyticsUrl, eventKey, pacificDay, safeEpisode, type GrowthEvent } from '../lib/growth-analytics';
 
 // Preview and local QA do not collect. Inputs and URL fragments never enter telemetry.
 if (import.meta.env.PROD && ['antihunter.com', 'www.antihunter.com'].includes(location.hostname)) {
@@ -11,6 +11,7 @@ if (import.meta.env.PROD && ['antihunter.com', 'www.antihunter.com'].includes(lo
   let cohortDay = '';
   let cohort = 1;
   const sent = new Set<string>();
+  const campaign = analyticsCampaign(location.pathname);
   const episode = analyticsEpisode(location.pathname);
   function currentCohort() {
     const day = pacificDay();
@@ -32,12 +33,12 @@ if (import.meta.env.PROD && ['antihunter.com', 'www.antihunter.com'].includes(lo
       return;
     }
     if (!injected || !canCollect(control, currentCohort())) return;
-    const key = eventKey(pacificDay(), name, safe);
+    const key = eventKey(pacificDay(), name, safe, campaign);
     if (sent.has(key)) return;
     try { if (sessionStorage.getItem(key)) return; } catch { /* In-memory dedup remains. */ }
     sent.add(key);
     try { sessionStorage.setItem(key, '1'); } catch { /* No calculator inputs stored here. */ }
-    track(name, { campaign: CAMPAIGN, episode: safe });
+    track(name, { campaign, episode: safe });
   }
   async function refreshControl() {
     if (refreshing) return;
@@ -56,7 +57,7 @@ if (import.meta.env.PROD && ['antihunter.com', 'www.antihunter.com'].includes(lo
       } });
       injected = true;
     }
-    if (['hidden-cost', 'two-orders'].includes(episode)) send('experience_view');
+    if (campaign === 'life-after-scarcity' || ['hidden-cost', 'two-orders'].includes(episode)) send('experience_view');
     if (episode === 'token') send('token_info_view');
     for (const item of pending.values()) send(item.name, item.episode);
     pending.clear();

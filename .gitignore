@@ -24,3 +24,8 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 .gstack/
+
+# Private operator exports and drafts
+ops/runs/
+ops/research/
+ops/drafts/
