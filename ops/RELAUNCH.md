@@ -81,7 +81,7 @@ not completed reposts or contributors. Vercel controls and costs remain shared
 and fail closed. At day7/14/21/30 write a dated scorecard: distinct original IDs,
 matched-age median reposts/impressions, quotes, substantive remixes, verified
 contributors, returning contributors, assistance scope, coverage, decision.
-Update private ops/campaigns/life-after-scarcity-progress.json after confirmed
+Compile stored evidence with scripts/relaunch-scorecard.mjs (private report, progress, sanitized output, collection-date); no provider reads. Keep private contributor details outside Git. Update ops/campaigns/life-after-scarcity-progress.json after confirmed
 receipts only. Publish sanitized report; preserve baseline immutable.
 
 Aspirational day30 criteria: >=3 distinct posts with10 organic reposts; >=10

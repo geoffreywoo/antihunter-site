@@ -1,9 +1,19 @@
 {
   "campaign": "life-after-scarcity",
-  "startsAt": null,
-  "launchReceipt": null,
-  "status": "release-checks",
-  "episodes": [],
+  "startsAt": "2026-10-05T07:13:01.000Z",
+  "launchReceipt": "https://x.com/AntiHunterAI/status/2107006125476610459",
+  "status": "live",
+  "episodes": [
+    {
+      "episodeId": "the-last-job",
+      "localDraftId": "12464",
+      "xPostId": "2107006125476610459",
+      "postedAt": "2026-10-05T07:13:01.000Z",
+      "verified": true,
+      "assistance": "unknown",
+      "assistanceNote": "Track Geoffrey commentary receipts; do not assume future amplification absent."
+    }
+  ],
   "contributors": [],
   "reviews": []
 }
