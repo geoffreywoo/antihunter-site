@@ -1,9 +1,12 @@
 import { canon, episodes } from '../data/episodes';
+import { scarcityEpisodes } from '../data/scarcity';
 export const prerender = true;
 const SITE_URL = 'https://antihunter.com';
 
 const pages = [
   '/',
+  '/scarcity',
+  ...scarcityEpisodes.map(e => `/scarcity/${e.slug}`),
   '/treasury',
   '/treasury-methodology',
   '/pilgrimage',

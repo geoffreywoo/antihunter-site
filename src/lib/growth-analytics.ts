@@ -17,7 +17,9 @@ export function cleanAnalyticsUrl(url: string): string {
   const parsed = new URL(url);
   return parsed.origin + parsed.pathname;
 }
+export function analyticsCampaign(pathname: string): string { return pathname === '/' || pathname.startsWith('/scarcity') ? 'life-after-scarcity' : CAMPAIGN; }
 export function analyticsEpisode(pathname: string): string {
+  if (pathname.startsWith('/scarcity/')) return safeEpisode(pathname.split('/').filter(Boolean)[1]);
   if (pathname.replace(/\/$/, '') === '/machine') return 'hidden-cost';
   if (pathname.replace(/\/$/, '') === '/two-orders') return 'two-orders';
   if (pathname.startsWith('/acts/')) return safeEpisode(pathname.split('/').filter(Boolean)[1]);
@@ -27,6 +29,6 @@ export function analyticsEpisode(pathname: string): string {
 export function safeEpisode(value: unknown): string {
   return typeof value === 'string' && /^[a-z0-9][a-z0-9-]{0,63}$/.test(value) ? value : 'launch';
 }
-export function eventKey(day: string, event: GrowthEvent, episode: string): string {
-  return `antihunter:event:${day}:${CAMPAIGN}:${episode}:${event}`;
+export function eventKey(day: string, event: GrowthEvent, episode: string, campaign = CAMPAIGN): string {
+  return `antihunter:event:${day}:${campaign}:${episode}:${event}`;
 }

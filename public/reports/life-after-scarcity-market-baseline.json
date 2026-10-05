@@ -1,0 +1,96 @@
+{
+  "asOf": "2026-10-05T07:07:27.006630+00:00",
+  "method": "Read-only descriptive snapshots. Prices, volume, and liquidity do not measure organic sharing or establish causality. Holders unknown; no unique traders inferred from transaction counts.",
+  "tokens": [
+    {
+      "chain": "base",
+      "contract": "0xe2f3FaE4bc62E21826018364aa30ae45D430bb07",
+      "source": "https://api.dexscreener.com/token-pairs/v1/base/0xe2f3FaE4bc62E21826018364aa30ae45D430bb07",
+      "pair": {
+        "url": "https://dexscreener.com/base/0x21a138687a96298d44f5dc167ba4950c16d0fa680e8663540c0845834b4aac37",
+        "pairAddress": "0x21a138687a96298d44f5dc167ba4950c16d0fa680e8663540c0845834b4aac37",
+        "dexId": "uniswap",
+        "priceUsd": "0.0000007621",
+        "liquidity": {
+          "usd": 63607.56,
+          "base": 59247848539,
+          "quote": 6.7743
+        },
+        "marketCap": 76007,
+        "fdv": 76007,
+        "volume": {
+          "h24": 377.98,
+          "h6": 0.04,
+          "h1": 0,
+          "m5": 0
+        },
+        "txns": {
+          "m5": {
+            "buys": 0,
+            "sells": 0
+          },
+          "h1": {
+            "buys": 0,
+            "sells": 0
+          },
+          "h6": {
+            "buys": 1,
+            "sells": 1
+          },
+          "h24": {
+            "buys": 2,
+            "sells": 10
+          }
+        }
+      },
+      "holders": null,
+      "observedAt": "2026-10-05T07:08:13.981795+00:00",
+      "selection": "Largest reported USD liquidity among matching base-token pairs; not aggregate market"
+    },
+    {
+      "chain": "solana",
+      "contract": "5cQReyzgJQbtbGLvkm1vN9GDGFBWzcAC6TDprBwzVVjL",
+      "source": "https://api.dexscreener.com/token-pairs/v1/solana/5cQReyzgJQbtbGLvkm1vN9GDGFBWzcAC6TDprBwzVVjL",
+      "pair": {
+        "url": "https://dexscreener.com/solana/gz78swmcffyedcuatxuqam13z5ohiwt11v7uojyzfssg",
+        "pairAddress": "Gz78SWMcFFYEdcUaTXuQam13z5ohiWT11v7UojYzfssG",
+        "dexId": "pumpswap",
+        "priceUsd": "0.00001081",
+        "liquidity": {
+          "usd": 8535.6,
+          "base": 492172468,
+          "quote": 26.5907
+        },
+        "marketCap": 10445,
+        "fdv": 10445,
+        "volume": {
+          "h24": 2270.27,
+          "h6": 359.2,
+          "h1": 12.58,
+          "m5": 0
+        },
+        "txns": {
+          "m5": {
+            "buys": 0,
+            "sells": 0
+          },
+          "h1": {
+            "buys": 1,
+            "sells": 0
+          },
+          "h6": {
+            "buys": 7,
+            "sells": 7
+          },
+          "h24": {
+            "buys": 28,
+            "sells": 31
+          }
+        }
+      },
+      "holders": null,
+      "observedAt": "2026-10-05T07:08:13.982037+00:00",
+      "selection": "Largest reported USD liquidity among matching base-token pairs; not aggregate market"
+    }
+  ]
+}
