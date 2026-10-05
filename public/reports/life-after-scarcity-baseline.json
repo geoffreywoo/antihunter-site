@@ -1,6 +1,7 @@
 {
   "campaign": "life-after-scarcity",
-  "asOf": "2026-09-21T00:07:18.749Z",
+  "asOf": "2026-10-05",
+  "identityVerifiedAt": "2026-09-21T00:07:18.749Z",
   "method": "Latest 30 unique operator originals by X post ID. Compare earliest verified 24–30h observation only. Missing coverage and Geoffrey assistance are unknown, not zero. Includes weak or subsequently deleted originals.",
   "uniqueOriginals": 30,
   "eligibleComparisons": 28,
