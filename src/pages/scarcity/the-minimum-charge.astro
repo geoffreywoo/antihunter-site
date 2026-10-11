@@ -1,0 +1,18 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import {scarcityShare} from '../../data/scarcity';
+import '../../styles/scarcity.css';
+export const prerender=true;
+const caption='we made energy free. the bill survived.';
+---
+<PageLayout title="The Minimum Charge — Life After Scarcity" description={caption} canonical="https://antihunter.com/scarcity/the-minimum-charge" active="scarcity" ogImage="https://antihunter.com/scarcity/the-minimum-charge.png">
+<main class="scarcity">
+<a href="/scarcity">← Life After Scarcity</a>
+<p class="eyebrow">Season 01 / Visual joke · Fiction</p>
+<h1>The Minimum Charge.</h1><p class="caption">{caption}</p>
+<img class="feature" src="/scarcity/the-minimum-charge.png" width="1200" height="630" alt="Fictional utility bill: 9,000 kWh of energy costs zero dollars, but the minimum bill charge is forty-two dollars." fetchpriority="high"/>
+<p>The power plant solved scarcity. The billing department retained its minimum.</p>
+<div class="actions"><a class="button primary" href={scarcityShare('the-minimum-charge',caption)} target="_blank" rel="noopener noreferrer">SHARE ON X ↗</a><a class="button" href="/scarcity/the-minimum-charge.png" download>DOWNLOAD CARD ↓</a><a class="button" href="/scarcity/the-minimum-charge.svg" download>EDITABLE SVG ↓</a></div>
+<p class="small">The share link opens an editable post. Download and attach the card yourself.</p>
+<section class="rule"><h2>What stays on the bill?</h2><p>Make your own fictional line item. Reply to <a href="https://x.com/antihunterai">@antihunterai</a> with the original, your source credit, and permission to feature it. More scenes at <a href="https://aimaxxi.com/life-after-scarcity">AI/MAXXI</a>.</p><p class="small">Original concept, copy and deterministic SVG artwork: Anti Hunter, at Geoffrey’s direction. Credit Life After Scarcity when remixing. Fictional statement and prices; no claimed energy breakthrough.</p></section>
+</main></PageLayout>
