@@ -1,0 +1,103 @@
+{
+  "campaign": "life-after-scarcity",
+  "asOf": "2026-10-12T07:30:39.648Z",
+  "startsAt": "2026-10-05T07:13:01.000Z",
+  "confirmedOriginals": 4,
+  "narrativeEpisodes": 3,
+  "participation": {
+    "confirmedContributionRecords": 0,
+    "reviewedArtifactURLs": 2,
+    "substantiveRemixes": null,
+    "verifiedIndependentHumans": null,
+    "coverage": "Artifact URLs count reviewed inbox references, not assessed original works or unique artifacts. Remix assessment, reproduction permission and cross-platform human identity are not established by this compiler. Zero confirmed records does not establish zero actual participation.",
+    "assessmentNote": "Two image URLs from one source account remain unassessed; originality, duplicate-artifact status and reproduction permission are unknown. No contributor roundup is supported."
+  },
+  "posts": [
+    {
+      "xPostId": "2109170561540895193",
+      "episode": "the-minimum-charge",
+      "format": "visual-joke",
+      "postedAt": "2026-10-11T06:33:43.000Z",
+      "observedAt": "2026-10-12T07:01:20.186Z",
+      "quotes": 0,
+      "assistance": "unknown",
+      "eligible": true,
+      "reposts": 0,
+      "impressions": 171
+    },
+    {
+      "xPostId": "2108452762841416045",
+      "episode": "retirement-cancelled",
+      "format": "story",
+      "postedAt": "2026-10-09T07:01:26.000Z",
+      "observedAt": "2026-10-10T07:01:48.020Z",
+      "quotes": 0,
+      "assistance": "unknown",
+      "eligible": true,
+      "reposts": 1,
+      "impressions": 155
+    },
+    {
+      "xPostId": "2107727933653840201",
+      "episode": "the-wet-signature",
+      "format": "story",
+      "postedAt": "2026-10-07T07:01:13.000Z",
+      "observedAt": "2026-10-08T07:30:31.758Z",
+      "quotes": 0,
+      "assistance": "unknown",
+      "eligible": true,
+      "reposts": 1,
+      "impressions": 149
+    },
+    {
+      "xPostId": "2107006125476610459",
+      "episode": "the-last-job",
+      "format": "story",
+      "postedAt": "2026-10-05T07:13:01.000Z",
+      "observedAt": "2026-10-06T07:30:18.738Z",
+      "quotes": 1,
+      "assistance": "assisted",
+      "eligible": true,
+      "reposts": 0,
+      "impressions": 1749
+    }
+  ],
+  "comparisonGroups": [
+    {
+      "assistance": "unassisted",
+      "posts": 0,
+      "eligible": 0,
+      "medianReposts": null,
+      "medianImpressions": null
+    },
+    {
+      "assistance": "assisted",
+      "posts": 1,
+      "eligible": 1,
+      "medianReposts": 0,
+      "medianImpressions": 1749
+    },
+    {
+      "assistance": "unknown",
+      "posts": 3,
+      "eligible": 3,
+      "medianReposts": 1,
+      "medianImpressions": 155
+    }
+  ],
+  "postsWith10ConfirmedUnassistedReposts": 0,
+  "verifiedSourceAccounts": null,
+  "returningSourceAccounts": null,
+  "coverage": "Only verified stored 24\u201330h comparisons. Unreviewed participation and unrecorded assistance remain unknown. Source accounts are not automatically deduplicated humans.",
+  "creativeReviewDue": false,
+  "decision": "Continue the bounded pilot; no winning treatment or organic lift established. Develop a visually distinct second joke and the next institutional conflict, rather than extrapolating from the assisted launch. Reassess the premise after six narrative episodes; three are published.",
+  "checkpoint": "day7",
+  "assistanceScope": "The Last Job received a verified Geoffrey Woo quote 6m05s after publication. Assistance for the other three originals is unknown. No confirmed unassisted comparison group.",
+  "baseline": {
+    "url": "/reports/life-after-scarcity-baseline.json",
+    "uniqueOriginals": 30,
+    "eligibleComparisons": 28,
+    "medianReposts": 0,
+    "interpretation": "Descriptive frozen baseline; not a controlled comparison. No claim of improvement from the small, differently assisted pilot sample."
+  }
+}
