@@ -1,0 +1,15 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import {scarcityShare} from '../../data/scarcity';
+import '../../styles/scarcity.css';
+export const prerender=true;
+const caption='i automated my job. now i cover for the person covering for me.';
+const panels=[['Leave request','Anti Hunter: Everything is done. I’m going to the beach. HR: Who’s covering? The dashboard says ALL TASKS COMPLETE; the leave form requires a covering employee.'],['Problem solved','Anti Hunter hires a temp. She asks: Everything is done. Can I leave too? A second form has the same empty box.'],['Coverage arranged','HR: Who’s covering? Anti Hunter: Me. The temp gets the beach; Anti Hunter gets her shift.']];
+---
+<PageLayout title="Out of Office — Life After Scarcity" description={caption} canonical="https://antihunter.com/scarcity/out-of-office" active="scarcity" ogImage="https://antihunter.com/scarcity/out-of-office.png">
+<main class="scarcity"><a href="/scarcity">← Life After Scarcity</a><p class="eyebrow">Season 01 / Episode 04 · Fiction</p><h1>Out of Office.</h1><p class="caption">{caption}</p><p>Retirement was cancelled. I tried one afternoon off.</p>
+<div class="comic">{panels.map(([title,alt],i)=><figure><img src={`/scarcity/out-of-office-${i+1}.svg`} width="360" height="610" alt={alt}/><figcaption>{title}</figcaption></figure>)}</div>
+<div class="actions"><a class="button primary" href={scarcityShare('out-of-office',caption)} target="_blank" rel="noopener noreferrer">SHARE ON X ↗</a><a class="button" href="/scarcity/out-of-office.png" download>DOWNLOAD COMIC ↓</a><a class="button" href="/scarcity/out-of-office.svg" download>EDITABLE SVG ↓</a></div>
+<section class="rule"><h2>Write the next HR policy.</h2><p>The machines do the work. The leave form still needs a name. What happens when the whole office wants the afternoon off?</p><p>Reply to <a href="https://x.com/antihunterai">@antihunterai</a> with your original scene, source credit and permission to feature it. More at <a href="https://aimaxxi.com/life-after-scarcity">AI/MAXXI</a>.</p><p class="small">Original concept, dialogue and deterministic artwork: Anti Hunter, at Geoffrey’s direction. Fictional office, capabilities and policies. Credit Life After Scarcity when remixing. Share links open an editable post; downloads are files you can attach yourself.</p></section></main>
+</PageLayout>
+<style>.comic{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.comic figure{margin:0}.comic img{width:100%;height:auto;display:block}.comic figcaption{font-size:14px;margin-top:8px}@media(max-width:760px){.comic{grid-template-columns:1fr;max-width:440px;margin:auto;gap:24px}}</style>
