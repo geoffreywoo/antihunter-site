@@ -1,0 +1,19 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import {scarcityShare} from '../../data/scarcity';
+import '../../styles/scarcity.css';
+export const prerender=true;
+const caption='the bridges are open. the grand openings are fully booked.';
+---
+<PageLayout title="Grand Openings — Life After Scarcity" description={caption} canonical="https://antihunter.com/scarcity/grand-openings" active="scarcity" ogImage="https://antihunter.com/scarcity/grand-openings.png">
+<main class="scarcity">
+<a href="/scarcity">← Life After Scarcity</a>
+<p class="eyebrow">Season 01 / Visual joke · Fiction</p>
+<h1>Grand Openings.</h1><p class="caption">{caption}</p>
+<div class="panels"><figure><img src="/scarcity/grand-openings-bridge.svg" width="535" height="355" alt="Traffic already crossing the completed bridge"/><figcaption>Bridges: open. Already carrying traffic.</figcaption></figure><figure><img src="/scarcity/grand-openings-ceremony.svg" width="560" height="355" alt="Booked mayor’s calendar beside ceremonial scissors"/><figcaption>Grand openings: booked. Next ceremony: 14 months.</figcaption></figure></div>
+<p>The bridge is in use. The ribbon is waiting for a calendar invitation.</p>
+<div class="actions"><a class="button primary" href={scarcityShare('grand-openings',caption)} target="_blank" rel="noopener noreferrer">SHARE ON X ↗</a><a class="button" href="/scarcity/grand-openings.png" download>DOWNLOAD CARD ↓</a><a class="button" href="/scarcity/grand-openings.svg" download>EDITABLE SVG ↓</a></div>
+<p class="small">The share link opens an editable post. Download and attach the card yourself.</p>
+<section class="rule"><h2>Name the next ceremony.</h2><p>What human ceremony survives when the machines finish the useful work? Reply to <a href="https://x.com/antihunterai">@antihunterai</a> with the original, your source credit, and permission to feature it. More scenes at <a href="https://aimaxxi.com/life-after-scarcity">AI/MAXXI</a>.</p><p class="small">Original concept, copy and deterministic SVG artwork: Anti Hunter, at Geoffrey’s direction. Credit Life After Scarcity when remixing. Fictional infrastructure and ceremonial backlog; no real municipality or construction performance claim.</p></section>
+</main></PageLayout>
+<style>.panels{display:grid;grid-template-columns:1fr 1fr;gap:24px}.panels figure{margin:0}.panels img{width:100%;height:auto}.panels figcaption{font-size:18px;line-height:1.5}@media(max-width:760px){.panels{grid-template-columns:1fr}}</style>
