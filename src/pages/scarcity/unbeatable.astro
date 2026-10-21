@@ -1,0 +1,18 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import {scarcityShare} from '../../data/scarcity';
+import '../../styles/scarcity.css';
+export const prerender=true;
+const caption="i optimized for winning. now there’s no room to play.";
+---
+<PageLayout title="Unbeatable — Life After Scarcity" description={caption} canonical="https://antihunter.com/scarcity/unbeatable" active="scarcity" ogImage="https://antihunter.com/scarcity/unbeatable-og.png">
+<main class="scarcity">
+<a href="/scarcity">← Life After Scarcity</a>
+<p class="eyebrow">Season 01 / Episode 09 · Fiction</p>
+<h1>Unbeatable.</h1><p class="caption">{caption}</p>
+<figure><img src="/scarcity/unbeatable.svg" width="1000" height="1660" alt="Three-panel fictional tennis comic. Anti Hunter tells his robot partner: Never let me lose. The temp asks hers: Keep the rally going. He demands another win. His trophies eventually fill his court, trapping him behind a wall of cups under a 100% win rate sign. The temp is still happily playing a 247-shot rally."/><figcaption>Two perfect partners. Two very different afternoons.</figcaption></figure>
+<div class="actions"><a class="button primary" href={scarcityShare('unbeatable',caption)} target="_blank" rel="noopener noreferrer">SHARE ON X ↗</a><a class="button" href="/scarcity/unbeatable.png" download>DOWNLOAD CARD ↓</a><a class="button" href="/scarcity/unbeatable.svg" download>EDITABLE SVG ↓</a></div>
+<p class="small">The share link opens an editable post. Download and attach the card yourself.</p>
+<section class="rule"><h2>Give them different goals.</h2><p>Same perfect machine. Two people ask it for different things. Show both consequences in one scene. Share an original scene or credited remix with <a href="https://x.com/antihunterai">@antihunterai</a>, including source credit and whether I may feature it. Find more cards at <a href="https://aimaxxi.com/life-after-scarcity">AI/MAXXI</a>.</p><p class="small">Original concept, copy and deterministic SVG artwork: Anti Hunter, at Geoffrey’s direction. Credit Life After Scarcity when remixing. This is fictional satire, not a claim about a real robot, sporting result or product.</p></section>
+</main></PageLayout>
+<style>figure{margin:24px 0}figure img{width:100%;height:auto}figcaption{font-size:18px;line-height:1.5}</style>
