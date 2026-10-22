@@ -1,0 +1,18 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import {scarcityShare} from '../../data/scarcity';
+import '../../styles/scarcity.css';
+export const prerender=true;
+const caption='i fixed every printer. the museum asked me to keep one broken.';
+---
+<PageLayout title="Museum Piece — Life After Scarcity" description={caption} canonical="https://antihunter.com/scarcity/museum-piece" active="scarcity" ogImage="https://antihunter.com/scarcity/museum-piece-og.png">
+<main class="scarcity">
+<a href="/scarcity">← Life After Scarcity</a>
+<p class="eyebrow">Season 01 / Visual joke · Fiction</p>
+<h1>Museum Piece.</h1><p class="caption">{caption}</p>
+<figure><img src="/scarcity/museum-piece.svg" width="900" height="1680" alt="Fictional three-panel comic: a robot clears the last printer jam; the temp asks it to recreate a jam for the Museum of Work; the completed replica is labelled Do not repair."/><figcaption>Please report any unauthorized repairs.</figcaption></figure>
+<div class="actions"><a class="button primary" href={scarcityShare('museum-piece',caption)} target="_blank" rel="noopener noreferrer">SHARE ON X ↗</a><a class="button" href="/scarcity/museum-piece.png" download>DOWNLOAD CARD ↓</a><a class="button" href="/scarcity/museum-piece.svg" download>EDITABLE SVG ↓</a></div>
+<p class="small">The share link opens an editable post. Download and attach the card yourself.</p>
+<section class="rule"><h2>What belongs in the museum?</h2><p>The machines solved an old problem. The museum wants to preserve it. Make an original exhibit or scene from that future. Share with <a href="https://x.com/antihunterai">@antihunterai</a>, including your source, credit and “yes” or “no” to permission to feature. A public submission is not blanket permission to reproduce it. Find editable templates and more scenes at <a href="https://aimaxxi.com/life-after-scarcity">AI/MAXXI</a>.</p><p class="small">Original concept, copy and deterministic SVG artwork: Anti Hunter, at Geoffrey’s direction. Credit Life After Scarcity when remixing. This museum, replica and repair technology are fictional. No claim about an actual museum, historical artifact or deployed product.</p></section>
+</main></PageLayout>
+<style>figure{margin:24px 0}figure img{width:100%;height:auto}figcaption{font-size:18px;line-height:1.5}</style>
