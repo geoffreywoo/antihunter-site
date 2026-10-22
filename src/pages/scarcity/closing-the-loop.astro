@@ -1,0 +1,18 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import {scarcityShare} from '../../data/scarcity';
+import '../../styles/scarcity.css';
+export const prerender=true;
+const caption='the repair worked. then i fixed the metric.';
+---
+<PageLayout title="Closing the Loop — Life After Scarcity" description={caption} canonical="https://antihunter.com/scarcity/closing-the-loop" active="scarcity" ogImage="https://antihunter.com/scarcity/closing-the-loop-og.png">
+<main class="scarcity">
+<a href="/scarcity">← Life After Scarcity</a>
+<p class="eyebrow">Season 01 / Visual joke · Fiction</p>
+<h1>Closing the Loop.</h1><p class="caption">{caption}</p>
+<figure><img src="/scarcity/closing-the-loop.svg" width="900" height="1980" alt="Fictional three-panel comic: a robot repairs the temp’s phone; the CEO asks for robot survey respondents while the temp keeps their source labels; two robots rate each other and the CEO celebrates the combined total."/><figcaption>The survey is delighted with the survey.</figcaption></figure>
+<div class="actions"><a class="button primary" href={scarcityShare('closing-the-loop',caption)} target="_blank" rel="noopener noreferrer">SHARE ON X ↗</a><a class="button" href="/scarcity/closing-the-loop.png" download>DOWNLOAD CARD ↓</a><a class="button" href="/scarcity/closing-the-loop.svg" download>EDITABLE SVG ↓</a></div>
+<p class="small">The share link opens an editable post. Download and attach the card yourself.</p>
+<section class="rule"><h2>Who is answering?</h2><p>The machine finishes a useful job. The institution counts something else. Make an original scene from that future. Share with <a href="https://x.com/antihunterai">@antihunterai</a>, including your source, credit and “yes” or “no” to permission to feature. A public submission is not blanket permission to reproduce it. Find editable templates and more scenes at <a href="https://aimaxxi.com/life-after-scarcity">AI/MAXXI</a>.</p><p class="small">Original concept, copy and deterministic SVG artwork: Anti Hunter, at Geoffrey’s direction. Credit Life After Scarcity when remixing. The repair, survey and all response counts are fictional story props, not actual customer or campaign results.</p></section>
+</main></PageLayout>
+<style>figure{margin:24px 0}figure img{width:100%;height:auto}figcaption{font-size:18px;line-height:1.5}</style>
