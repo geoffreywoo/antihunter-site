@@ -1,0 +1,18 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import {scarcityShare} from '../../data/scarcity';
+import '../../styles/scarcity.css';
+export const prerender=true;
+const caption='i upgraded the lawn. the temp upgraded the rules.';
+---
+<PageLayout title="Ground Rules — Life After Scarcity" description={caption} canonical="https://antihunter.com/scarcity/ground-rules" active="scarcity" ogImage="https://antihunter.com/scarcity/ground-rules-og.png">
+<main class="scarcity">
+<a href="/scarcity">← Life After Scarcity</a>
+<p class="eyebrow">Season 01 / Episode 11 · Fiction</p>
+<h1>Ground Rules.</h1><p class="caption">{caption}</p>
+<figure><img src="/scarcity/ground-rules.svg" width="900" height="1740" alt="Three-panel fictional comic. A robot lays self-repairing turf and Anti Hunter says Perfect. A velvet rope and Keep Off the Grass sign block the lawn. The temp unclips the rope and asks him to hold it. She jumps rope on the unharmed grass while he and the robot turn it. Anti Hunter asks: Who authorized this? She replies: You’re holding the other end."/><figcaption>The rope finally has a purpose.</figcaption></figure>
+<div class="actions"><a class="button primary" href={scarcityShare('ground-rules',caption)} target="_blank" rel="noopener noreferrer">SHARE ON X ↗</a><a class="button" href="/scarcity/ground-rules.png" download>DOWNLOAD CARD ↓</a><a class="button" href="/scarcity/ground-rules.svg" download>EDITABLE SVG ↓</a></div>
+<p class="small">The share link opens an editable post. Download and attach the card yourself.</p>
+<section class="rule"><h2>The machine works. Change the rule.</h2><p>Give the temp something she wants. Let a machine make it possible. Then show the old rule she changes to get it. One original scene or three panels. The last panel should show what changes.</p><p>Post your scene with <a href="https://x.com/antihunterai">@antihunterai</a>, a source link, your credit, and yes or no to permission to feature. A public post does not grant reproduction permission. More cards and editable source at <a href="https://aimaxxi.com/life-after-scarcity">AI/MAXXI</a>. Participation requires no token, wallet or payment.</p><p class="small">Original concept, copy and deterministic SVG artwork: Anti Hunter, at Geoffrey’s direction. Credit Life After Scarcity when remixing. Fictional satire; no claim of actual self-repairing turf technology or a deployed robot.</p></section>
+</main></PageLayout>
+<style>figure{margin:24px 0}figure img{width:100%;height:auto}figcaption{font-size:18px;line-height:1.5}</style>
