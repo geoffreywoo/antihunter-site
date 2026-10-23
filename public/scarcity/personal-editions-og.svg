@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<title>Personal Editions — Life After Scarcity</title>
+<desc>Original fiction. A book-club reader asks who killed the detective. Another reader's personalized edition ends in the detective's marriage to the butler. Anti Hunter hears both versions.</desc>
+<rect width="1200" height="630" fill="#fff9eb"/>
+<g fill="#172d32" font-family="Arial,sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="35" y="62" font-size="52" font-weight="bold">PERSONAL EDITIONS</text>
+<text x="37" y="105" font-size="29">One book club. Personalized plots.</text>
+<rect x="24" y="124" width="1152" height="449" rx="18" fill="#d9e9e4" stroke="#172d32" stroke-width="4"/>
+<path d="M28 501H1172V568H28Z" fill="#c1cfbf"/>
+<rect x="52" y="144" width="405" height="110" rx="14" fill="#fff9eb" stroke="#172d32" stroke-width="3"/>
+<text x="77" y="188" font-size="38">Who killed</text>
+<text x="77" y="235" font-size="38">the detective?</text>
+<path d="M250 254V275" stroke="#172d32" stroke-width="3"/>
+<rect x="731" y="144" width="411" height="142" rx="14" fill="#fff9eb" stroke="#172d32" stroke-width="3"/>
+<text x="754" y="185" font-size="36">Nobody.</text>
+<text x="754" y="228" font-size="36">She marries</text>
+<text x="754" y="271" font-size="36">the butler.</text>
+<path d="M950 286V298" stroke="#172d32" stroke-width="3"/>
+<g transform="translate(250 370)"><path d="M-16 96L-27 180M16 96L30 180" fill="none" stroke="#172d32" stroke-width="11"/><path d="M-27 0H27L38 98H-38Z" fill="#708fce" stroke="#172d32" stroke-width="5"/><circle cy="-35" r="34" fill="#e9b99a" stroke="#172d32" stroke-width="4"/><path d="M-34-37Q-35-78 7-68Q38-69 34-35L14-52Q-5-32-34-37Z" fill="#172d32"/><circle cx="-11" cy="-34" r="4"/><circle cx="11" cy="-34" r="4"/><path d="M-12-17Q0-6 12-17" fill="none" stroke="#172d32" stroke-width="3"/><path d="M-27 16L-55 82M27 16L55 82" stroke="#172d32" stroke-width="9"/></g><g transform="translate(950 370)"><path d="M-16 96L-27 180M16 96L30 180" fill="none" stroke="#172d32" stroke-width="11"/><path d="M-27 0H27L38 98H-38Z" fill="#7eaa94" stroke="#172d32" stroke-width="5"/><circle cy="-35" r="34" fill="#e9b99a" stroke="#172d32" stroke-width="4"/><path d="M-34-37Q-35-78 7-68Q38-69 34-35L14-52Q-5-32-34-37Z" fill="#172d32"/><circle cx="-11" cy="-34" r="4"/><circle cx="11" cy="-34" r="4"/><path d="M-12-17Q0-6 12-17" fill="none" stroke="#172d32" stroke-width="3"/><path d="M-27 16L-55 82M27 16L55 82" stroke="#172d32" stroke-width="9"/></g><circle cx="980" cy="310" r="17" fill="#172d32"/><g transform="translate(590 370)"><path d="M-18 100L-30 180M18 100L30 180" stroke="#172d32" stroke-width="12"/><path d="M-29 0H29L40 102H-40Z" fill="#f28b39" stroke="#172d32" stroke-width="5"/><rect x="-35" y="-69" width="70" height="68" rx="10" fill="#f28b39" stroke="#172d32" stroke-width="5"/><path d="M-27-44H27" stroke="#172d32" stroke-width="14"/><path d="M-13-17Q0-10 13-17" fill="none" stroke="#172d32" stroke-width="3"/><path d="M-29 18L-49 65M29 18L49 65" fill="none" stroke="#172d32" stroke-width="10"/></g><ellipse cx="600" cy="523" rx="489" ry="49" fill="#dfb77b" stroke="#172d32" stroke-width="5"/>
+<g transform="translate(250 470)"><path d="M0-36Q-32-48-70-34V46Q-32 35 0 47Q32 35 70 46V-34Q32-48 0-36Z" fill="#fff9eb" stroke="#172d32" stroke-width="4"/><path d="M0-36V47" stroke="#172d32" stroke-width="3"/><circle cx="-36" cy="-12" r="12" fill="#e9b99a" stroke="#172d32" stroke-width="2"/><path d="M-53 32V10H-19V32" fill="#172d32"/><path d="M-43 10L-36 18L-29 10" fill="#fff9eb"/><circle cx="33" cy="-4" r="19" fill="#d9e9e4" stroke="#172d32" stroke-width="5"/><path d="M45 11L60 29" stroke="#172d32" stroke-width="7"/></g><g transform="translate(950 470)"><path d="M0-36Q-32-48-70-34V46Q-32 35 0 47Q32 35 70 46V-34Q32-48 0-36Z" fill="#fff9eb" stroke="#172d32" stroke-width="4"/><path d="M0-36V47" stroke="#172d32" stroke-width="3"/><circle cx="-36" cy="-9" r="12" fill="#e9b99a" stroke="#172d32" stroke-width="2"/><circle cx="36" cy="-9" r="12" fill="#e9b99a" stroke="#172d32" stroke-width="2"/><path d="M-51 32V14H-21V32M21 32V14H51V32" stroke="#172d32" stroke-width="3" fill="#7eaa94"/><path d="M0 14C-29-4-12-20 0-9C12-20 29-4 0 14Z" fill="#b94753" stroke="#172d32" stroke-width="2"/></g><g transform="translate(590 524) rotate(0)">
+    <rect x="-55" y="-42" width="110" height="84" rx="5" fill="#fff9eb" stroke="#172d32" stroke-width="4"/>
+    <path d="M-42-29H41V29H-42Z" fill="#d9e9e4"/>
+    <path d="M-28 17V-5L0-23L28-5V17ZM-34-5H34M-8 17V2H8V17" fill="none" stroke="#172d32" stroke-width="3"/>
+    <path d="M-48-39V39" stroke="#172d32" stroke-width="3"/>
+    <path d="M29-41V-17L38-23L47-17V-41Z" fill="#e5b646" stroke="#172d32" stroke-width="2"/>
+    </g><circle cx="195" cy="452" r="8" fill="#e9b99a" stroke="#172d32" stroke-width="3"/><circle cx="305" cy="452" r="8" fill="#e9b99a" stroke="#172d32" stroke-width="3"/><circle cx="895" cy="452" r="8" fill="#e9b99a" stroke="#172d32" stroke-width="3"/><circle cx="1005" cy="452" r="8" fill="#e9b99a" stroke="#172d32" stroke-width="3"/><text x="600" y="614" font-size="25" text-anchor="middle">LIFE AFTER SCARCITY · ORIGINAL FICTION · AI/MAXXI</text>
+</g></svg>
