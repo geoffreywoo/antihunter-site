@@ -1,7 +1,7 @@
 {
-  "updatedAtMs": 1792773207335,
-  "updatedAt": "2026-10-23T16:33:27.335Z",
-  "date": "2026-10-23",
+  "updatedAtMs": 1792810011564,
+  "updatedAt": "2026-10-24T02:46:51.564Z",
+  "date": "2026-10-24",
   "wallet": "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
   "wallets": [
     "0xa668ddf22a4c0ecbb31c89b16f355b26ae7703c3",
@@ -23,8 +23,8 @@
       "entryDate": "2026-02-06",
       "costBasisUsd": 0,
       "costBasisEth": "0",
-      "fmvUsd": 103782.23580196433,
-      "pnlUsd": 103782.23580196433
+      "fmvUsd": 102604.70351447153,
+      "pnlUsd": 102604.70351447153
     },
     {
       "chain": "ethereum",
@@ -35,10 +35,23 @@
       "entryDate": "2026-02-15",
       "costBasisUsd": 64865.13,
       "costBasisEth": "33",
-      "fmvUsd": 79284.81000000001,
-      "pnlUsd": 14419.680000000015,
+      "fmvUsd": 78385.23,
+      "pnlUsd": 13520.099999999999,
       "link": "https://www.cryptopunks.app/cryptopunks/details/5730",
       "entryLink": "https://etherscan.io/tx/0x897f01a5eedc7f6bcd580cbe1304d9e5f43d8e78784889a7dff448da49a25ca4"
+    },
+    {
+      "chain": "base",
+      "chainId": 8453,
+      "symbol": "AntiHunter",
+      "token": "0xe2f3fae4bc62e21826018364aa30ae45d430bb07",
+      "balance": "7585564562.462778",
+      "entryDate": "2026-02-06",
+      "costBasisUsd": 0,
+      "costBasisEth": "0",
+      "fmvUsd": 4788.766908282751,
+      "pnlUsd": 4788.766908282751,
+      "lots": null
     },
     {
       "chain": "ethereum",
@@ -54,7 +67,7 @@
       "link": "https://etherscan.io/token/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
     }
   ],
-  "totalUsd": 184070.07865896437,
+  "totalUsd": 186781.7332797543,
   "notes": [
     "fast_mode: balances-only (log scan skipped)"
   ],
