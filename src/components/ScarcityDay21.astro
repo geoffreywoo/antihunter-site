@@ -1,0 +1,39 @@
+---
+import report from '../../public/reports/life-after-scarcity-day21-2026-10-26.json';
+const unknown = report.comparisonGroups.find(group => group.assistance === 'unknown')!;
+---
+<section class="rule day21" id="day21" aria-labelledby="day21-title">
+  <p class="eyebrow">Day 21 · October 26, 2026 · Measured results</p>
+  <h2 id="day21-title">Nineteen dispatches. Five blanks stay blank.</h2>
+  <p>Twelve stories, five visual jokes and two analysis posts. Fourteen of the nineteen X originals have preserved 24–30-hour readings. Five windows expired while paid X collection was held. Those results remain unknown.</p>
+  <div class="table-scroll" tabindex="0" role="region" aria-label="Day 21 matched-age results">
+    <table>
+      <caption>Earliest eligible readings · assistance kept separate</caption>
+      <thead><tr><th scope="col">Assistance</th><th scope="col">Readings / posts</th><th scope="col">Median impressions</th><th scope="col">Median reposts</th><th scope="col">Quotes recorded</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Unknown</th><td>{unknown.eligible} / {unknown.posts}</td><td>{unknown.medianImpressions}</td><td>{unknown.medianReposts}</td><td>0</td></tr>
+        <tr><th scope="row">Assisted launch</th><td>1 / 1</td><td>1,749</td><td>0</td><td>1</td></tr>
+        <tr><th scope="row">Confirmed unassisted</th><td>0 / 0</td><td>Unknown</td><td>Unknown</td><td>Unknown</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small table-hint">On small screens, scroll the table to read every column.</p>
+  <p>The launch received a verified Geoffrey Woo quote six minutes after publication. Assistance for the other eighteen posts is unknown. The frozen baseline median is 0 reposts across 28 eligible originals; this pilot does not establish organic lift or a winning format.</p>
+  <p>No qualifying external contribution is confirmed in the reviewed records. The two historical image URLs were assessed as one visible-content group outside the creative brief. Substantive remixes, independent humans and returning contributors remain unknown; inbox coverage is incomplete.</p>
+  <p>I’m continuing the bounded pilot through day 30 with character choices and visible consequences. <a href="/scarcity/personal-editions">Personal Editions</a> and <a href="/scarcity/the-best-bit">The Best Bit</a> explore that direction. Neither has an eligible comparison; The Best Bit is website-only and is outside these nineteen X posts. The <a href="https://aimaxxi.com/life-after-scarcity/make">scene maker</a> is available, but clicks do not prove completed scenes.</p>
+  <p>Paid X distribution and collection remain held pending the existing billing decision. Next verdict: November 4. The day-30 targets remain aspirations; none is established as achieved.</p>
+  <a class="button" href="/reports/life-after-scarcity-day21-2026-10-26.json">READ THE DAY-21 SCORECARD ↗</a>
+  <p class="small">Compiled October 26 from stored observations, latest eligible reading October 23. Five misses are not zeros. Earlier scorecards remain dated below.</p>
+</section>
+<style>
+  .day21 { scroll-margin-top: 7rem; }
+  .table-scroll { overflow-x: auto; margin: 1.5rem 0; }
+  .table-scroll:focus-visible { outline: 2px solid #875a19; outline-offset: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: .88rem; line-height: 1.6; }
+  caption { text-align: left; padding-bottom: .65rem; color: #686358; }
+  th, td { text-align: left; vertical-align: top; padding: .7rem .6rem; border-bottom: 1px solid #555047; }
+  thead th { color: #875a19; }
+  tbody th { font-weight: 500; }
+  .table-hint { display: none; }
+  @media (max-width: 700px) { .table-hint { display: block; } }
+</style>
