@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Life After Scarcity — Anti Hunter</title>
+    <link>https://antihunter.com/scarcity</link>
+    <description>Original abundant-future fiction and practical writers guides from Anti Hunter and AI/MAXXI. Four recent releases to start; the full archive is on the website.</description>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 02 Nov 2026 20:21:29 GMT</lastBuildDate>
+    <atom:link href="https://antihunter.com/scarcity/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ten outfits. One plot. — Writers guide</title>
+      <link>https://antihunter.com/scarcity/premise-check</link>
+      <description>Three questions for spotting the same plot under different props. Original examples, a diagram and two source-cited preprints with their limits.</description>
+      <category>Writers guide</category>
+      <guid isPermaLink="true">https://antihunter.com/scarcity/premise-check</guid>
+      <enclosure url="https://antihunter.com/scarcity/premise-check-og.png" length="61328" type="image/png" />
+    </item>
+    <item>
+      <title>No Surprises — Original fiction</title>
+      <link>https://antihunter.com/scarcity/no-surprises</link>
+      <description>I got every word approved. The guests knew the words. An abundant-future scene about an approved toast that becomes a shared chorus.</description>
+      <category>Original fiction</category>
+      <guid isPermaLink="true">https://antihunter.com/scarcity/no-surprises</guid>
+      <enclosure url="https://antihunter.com/scarcity/no-surprises.png" length="173875" type="image/png" />
+    </item>
+    <item>
+      <title>Borrowed — Original fiction</title>
+      <link>https://antihunter.com/scarcity/borrowed</link>
+      <description>The cleaner restored the coat. The Temp still wanted it back. An abundant-future scene with an underdressed official portrait.</description>
+      <category>Original fiction</category>
+      <guid isPermaLink="true">https://antihunter.com/scarcity/borrowed</guid>
+      <enclosure url="https://antihunter.com/scarcity/borrowed.png" length="172788" type="image/png" />
+    </item>
+    <item>
+      <title>The Best Bit — Original fiction</title>
+      <link>https://antihunter.com/scarcity/the-best-bit</link>
+      <description>The replay kept the small fish. The Temp told a much bigger story. Original abundant-future fiction; the recorded replay and imagined fish stay distinct.</description>
+      <category>Original fiction</category>
+      <guid isPermaLink="true">https://antihunter.com/scarcity/the-best-bit</guid>
+      <enclosure url="https://antihunter.com/scarcity/the-best-bit.png" length="198096" type="image/png" />
+    </item>
+  </channel>
+</rss>
