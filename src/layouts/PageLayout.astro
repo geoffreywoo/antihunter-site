@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
+import ScarcityEpisodeNav from '../components/ScarcityEpisodeNav.astro';
 
 interface Props {
   title: string;
@@ -56,6 +57,7 @@ const {
     <div class="page-body">
       <div class="page-inner">
         <slot />
+        <ScarcityEpisodeNav />
       </div>
       <SiteFooter />
     </div>
