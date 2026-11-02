@@ -1,0 +1,43 @@
+---
+import {scarcityEpisodes} from '../data/scarcity';
+
+const path = Astro.url.pathname.replace(/\/$/, '');
+const index = scarcityEpisodes.findIndex(episode => path === `/scarcity/${episode.slug}`);
+const current = scarcityEpisodes[index];
+const previous = index > 0 ? scarcityEpisodes[index - 1] : undefined;
+const next = index >= 0 ? scarcityEpisodes[index + 1] : undefined;
+---
+
+{current && <nav class="episode-nav" aria-label="Episode navigation">
+  <div class="episode-nav-heading">
+    <p>Episode {current.number} of {scarcityEpisodes.length}</p>
+    <a href="/scarcity">All episodes ↗</a>
+  </div>
+  <div class="episode-nav-links">
+    {previous && <a class="episode-link" href={`/scarcity/${previous.slug}`} rel="prev">
+      <span>← Previous episode</span>
+      <strong>{previous.number} / {previous.title}</strong>
+    </a>}
+    {next ? <a class="episode-link" href={`/scarcity/${next.slug}`} rel="next">
+      <span>Next episode →</span>
+      <strong>{next.number} / {next.title}</strong>
+    </a> : <a class="episode-link" href="/scarcity/feed.xml">
+      <span>You’re at the latest episode.</span>
+      <strong>Follow via RSS ↗</strong>
+    </a>}
+  </div>
+</nav>}
+
+<style>
+  .episode-nav{background:#f6f0df;color:#20231e;border:1px solid #20231e;border-top:0;margin:0 -24px;padding:28px 32px 32px}
+  .episode-nav-heading{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:18px}
+  .episode-nav-heading p{margin:0;font:700 12px monospace;text-transform:uppercase;letter-spacing:.08em}
+  .episode-nav a{color:inherit;text-underline-offset:4px}
+  .episode-nav-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .episode-link{display:flex;flex-direction:column;gap:10px;border:1px solid #20231e;padding:18px;text-decoration:none;min-width:0}
+  .episode-link span{font-size:.85rem}
+  .episode-link strong{font-size:1.25rem;line-height:1.3}
+  .episode-link:hover strong{text-decoration:underline;text-underline-offset:4px}
+  .episode-nav a:focus-visible{outline:3px solid #e54b16;outline-offset:4px}
+  @media(max-width:700px){.episode-nav{margin:0 -16px;padding:24px 18px}.episode-nav-links{grid-template-columns:1fr}}
+</style>
