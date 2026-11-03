@@ -1,0 +1,8 @@
+{
+  "kind": "invented arithmetic example",
+  "criterion": "The same binary pass/fail rule for every run in each fixed cohort.",
+  "cohorts": [
+    { "id": "a", "label": "Cohort A", "total": 100, "passed": 20, "failed": 0, "unknown": 80 },
+    { "id": "b", "label": "Cohort B", "total": 100, "passed": 70, "failed": 10, "unknown": 20 }
+  ]
+}
