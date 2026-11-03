@@ -1,0 +1,62 @@
+---
+import fixture from '../data/token-timing-example.json';
+import { summarizeSyntheticTiming } from '../lib/token-timing.mjs';
+const labels = ['Baseline', 'Faster gaps', 'Earlier first arrival', 'Both changes'];
+const profiles = fixture.profiles.slice(0, 4).map((p, i) => ({ ...summarizeSyntheticTiming(p), label: labels[i], id: p.id }));
+---
+<section class="timing" aria-labelledby="timing-title" data-token-timing>
+  <h2 id="timing-title">Same 101 markers. Different wait.</h2>
+  <p><strong>Invented arithmetic. No model benchmark.</strong> Each stream has 101 marker arrivals and 100 gaps. The first arrival and the later intervals can change separately.</p>
+  <div class="legend"><span><i class="waiting"></i>Before first marker</span><span><i class="later"></i>First-to-last span</span></div>
+  <div class="timeline-pair" role="img" aria-label="Baseline: first marker at 2 seconds, last at 4. Faster gaps: first still at 2 seconds, last at 3. Both clocks begin at request time zero.">
+    {profiles.slice(0, 2).map(p => <div class="timeline">
+      <strong>{p.label}</strong>
+      <div class="track"><span class="waiting" style={`width:${p.requestToFirstRecordedTokenMs / 40}%`}></span><span class="later" style={`width:${(p.requestToLastRecordedTokenMs-p.requestToFirstRecordedTokenMs) / 40}%`}></span></div>
+      <div class="times"><span>Request 0 s</span><span>Scale ends at 4 s</span></div>
+      <p class="small">First marker: 2 s · Last marker: {p.requestToLastRecordedTokenMs / 1000} s</p>
+    </div>)}
+    <p class="small">Both tracks use the same 0–4 second scale. The empty part after 3 seconds is outside the second stream’s recorded span.</p>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <caption>One synthetic clock · No tokenizer or response-closing event</caption>
+      <thead><tr><th scope="col">Case</th><th scope="col">First<br />marker</th><th scope="col">Later<br />gap</th><th scope="col">Gap rate</th><th scope="col">Last<br />marker</th></tr></thead>
+      <tbody>{profiles.map(p => <tr><th scope="row">{p.label}</th><td>{p.requestToFirstRecordedTokenMs / 1000} s</td><td>{1000 / p.meanRecordedGapRatePerSecond} ms</td><td>{p.meanRecordedGapRatePerSecond}/s</td><td>{p.requestToLastRecordedTokenMs / 1000} s</td></tr>)}</tbody>
+    </table>
+  </div>
+  <p><strong>50 → 100 gaps per second.</strong> With the first arrival held at 2 seconds, the last marker moves from 4 to 3 seconds: a <strong>25% shorter duration</strong>.</p>
+  <fieldset class="presets" data-timing-controls hidden>
+    <legend>Compare a change with the baseline</legend>
+    {profiles.map(p => <button type="button" data-timing-preset={p.id} aria-pressed={p.id === 'faster_gaps' ? 'true' : 'false'}>{p.label}</button>)}
+  </fieldset>
+  <div class="selected-result" data-timing-result role="status" aria-atomic="true" hidden>
+    <strong data-timing-selection>Faster gaps</strong>
+    <p data-timing-values></p><p data-timing-meaning></p>
+  </div>
+  <p class="small">Marker IDs are invented, not actual tokenization or captured API chunks. The endpoint here is the last recorded marker; the example has no completion or closed-response event. Preset calculations stay in this browser.</p>
+</section>
+<script>
+  import fixture from '../data/token-timing-example.json';
+  import { summarizeSyntheticTiming } from '../lib/token-timing.mjs';
+  const root = document.querySelector<HTMLElement>('[data-token-timing]');
+  if (root) {
+    const baseline = summarizeSyntheticTiming(fixture.profiles[0]);
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-timing-preset]')];
+    const render = (button: HTMLButtonElement) => {
+      const p = fixture.profiles.find(p => p.id === button.dataset.timingPreset)!;
+      const result = summarizeSyntheticTiming(p);
+      buttons.forEach(b => b.setAttribute('aria-pressed', String(b === button)));
+      root.querySelector('[data-timing-selection]')!.textContent = button.textContent;
+      root.querySelector('[data-timing-values]')!.textContent = `First marker: ${result.requestToFirstRecordedTokenMs / 1000} s · Gap rate: ${result.meanRecordedGapRatePerSecond}/s · Last marker: ${result.requestToLastRecordedTokenMs / 1000} s.`;
+      const reduction = 100 * (1 - result.requestToLastRecordedTokenMs / baseline.requestToLastRecordedTokenMs);
+      root.querySelector('[data-timing-meaning]')!.textContent = reduction === 0 ? 'Same request-to-last-marker duration as the baseline.' : `${reduction}% shorter request-to-last-marker duration than the baseline.`;
+    };
+    buttons.forEach(button => button.addEventListener('click', () => render(button)));
+    render(buttons[1]);
+    root.querySelector<HTMLElement>('[data-timing-controls]')!.hidden = false;
+    root.querySelector<HTMLElement>('[data-timing-result]')!.hidden = false;
+  }
+</script>
+<style>
+  .timing{border:1px solid #77715f;padding:24px;background:#23251f;margin:36px 0}.timing h2{margin-top:0}.timing p{line-height:1.7;color:#c5c0b4}.timing strong{color:#eee6d7}.small{font-size:.82rem}.legend{display:flex;flex-wrap:wrap;gap:12px 24px;margin:24px 0;font-size:.8rem;color:#d7d0bf}.legend span{display:flex;align-items:center;gap:8px}.legend i{display:inline-block;width:14px;height:14px}.waiting{background:#e9b568}.later{background:#8ccac0}.timeline{margin:24px 0}.timeline strong{font-size:.9rem}.track{display:flex;height:22px;background:#141812;outline:1px solid #77715f;margin:12px 0}.track span{display:block}.times{display:flex;justify-content:space-between;font-size:.75rem;color:#d7d0bf}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;margin:24px 0;font-size:.85rem;font-variant-numeric:tabular-nums}caption{text-align:left;color:#c5c0b4;font-size:.75rem;line-height:1.6;margin-bottom:12px}th,td{padding:14px 9px;border-bottom:1px solid #5e6054;text-align:left}thead th{font-size:.75rem;color:#c5c0b4}tbody th{font-weight:500}fieldset{border:0;padding:0;margin:28px 0 16px;min-width:0}legend{font-weight:700;margin-bottom:12px}.presets button{margin:4px 6px 4px 0;padding:11px 12px;min-height:44px;border:1px solid #8f8878;background:#33362d;color:#eee6d7;font:inherit;font-size:.85rem;cursor:pointer}.presets button[aria-pressed=true]{background:#e9b568;color:#1e211b;border-color:#e9b568}.timing button:focus-visible{outline:3px solid #8ccac0;outline-offset:4px}.selected-result{border-left:3px solid #8ccac0;padding:14px 18px;background:#191d18}.selected-result p{margin:8px 0 0;font-size:.9rem}.timing [hidden]{display:none}@media(max-width:540px){.timing{padding:20px 12px}th,td{padding:12px 5px;font-size:.72rem}thead th{font-size:.68rem}.times{font-size:.68rem}.selected-result{padding:12px}}
+</style>
