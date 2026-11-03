@@ -10,6 +10,7 @@ const pages = [
   '/notes/world-model-evaluation',
   '/notes/robot-assistance',
   '/notes/content-provenance',
+  '/scarcity/corner-office',
   ...scarcityEpisodes.map(e => `/scarcity/${e.slug}`),
   '/treasury',
   '/treasury-methodology',

@@ -726,4 +726,35 @@ export const scarcityTranscripts = {
     }
   ]
 },
+"corner-office": {
+  "title": "Corner Office",
+  "fiction": "Original fiction. The office pods, construction capability and HR notice are invented; no real employer or promotion is depicted.",
+  "panels": [
+    {
+      "heading": "The build",
+      "action": "Eight identical detached corner-office pods are complete. Each has two adjacent exterior windows and the same floor area. One is marked04.",
+      "labels": [
+        "BUILD: COMPLETE",
+        "Same floor area. Two exterior windows.",
+        "04"
+      ],
+      "dialogue": []
+    },
+    {
+      "heading": "The promotion",
+      "action": "Human Resources addresses a promotion notice to Room04. The room receives the title SeniorCorner while its floor area, windows and occupant remain unchanged.",
+      "labels": [
+        "HUMAN RESOURCES · PROMOTION NOTICE",
+        "To: Room 04",
+        "Effective immediately:",
+        "SENIOR CORNER",
+        "Floor area: unchanged",
+        "Windows: unchanged",
+        "Occupant: unchanged",
+        "my office got promoted."
+      ],
+      "dialogue": []
+    }
+  ]
+},
 } satisfies Record<string, SceneTranscript>;
