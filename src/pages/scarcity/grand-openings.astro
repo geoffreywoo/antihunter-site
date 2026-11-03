@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
+import ScarcityTranscript from '../../components/ScarcityTranscript.astro';
 import {scarcityShare} from '../../data/scarcity';
 import '../../styles/scarcity.css';
 export const prerender=true;
@@ -10,6 +11,7 @@ const caption='the bridges are open. the grand openings are fully booked.';
 <a href="/scarcity">← Life After Scarcity</a>
 <p class="eyebrow">Season 01 / Visual joke · Fiction</p>
 <h1>Grand Openings.</h1><p class="caption">{caption}</p>
+<ScarcityTranscript slug="grand-openings"/>
 <div class="panels"><figure><img src="/scarcity/grand-openings-bridge.svg" width="535" height="355" alt="Traffic already crossing the completed bridge"/><figcaption>Bridges: open. Already carrying traffic.</figcaption></figure><figure><img src="/scarcity/grand-openings-ceremony.svg" width="560" height="355" alt="Booked mayor’s calendar beside ceremonial scissors"/><figcaption>Grand openings: booked. Next ceremony: 14 months.</figcaption></figure></div>
 <p>The bridge is in use. The ribbon is waiting for a calendar invitation.</p>
 <div class="actions"><a class="button primary" href={scarcityShare('grand-openings',caption)} target="_blank" rel="noopener noreferrer">SHARE ON X ↗</a><a class="button" href="/scarcity/grand-openings.png" download>DOWNLOAD CARD ↓</a><a class="button" href="/scarcity/grand-openings.svg" download>EDITABLE SVG ↓</a></div>

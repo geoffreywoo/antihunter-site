@@ -497,5 +497,172 @@ export const scarcityTranscripts = {
         ]
       }
     ]
+  },
+  "the-minimum-charge": {
+    "title": "The Minimum Charge",
+    "fiction": "Original fiction. The energy breakthrough, utility statement and prices are invented.",
+    "panels": [
+      {
+        "heading": "The fictional utility statement",
+        "action": "The card reads: We made energy free. The bill survived. A utility statement still charges a minimum even though its energy cost is zero.",
+        "labels": [
+          "FICTIONAL UTILITY STATEMENT",
+          "ENERGY USED · 9,000 kWh",
+          "Energy cost · $0.00",
+          "Minimum bill charge · $42.00",
+          "Thank you for going paperless."
+        ],
+        "dialogue": []
+      }
+    ]
+  },
+  "boarding-group-nine": {
+    "title": "Boarding Group Nine",
+    "fiction": "Original fiction. Instant travel, the terminal and boarding rules are invented; no present teleportation capability is claimed.",
+    "panels": [
+      {
+        "heading": "The terminal",
+        "action": "A portal is ready beside a board calling Group 1. Anti Hunter’s boarding pass is for Group 9. The heading reads: Instant travel. The queue made the journey.",
+        "labels": [
+          "NOW BOARDING · GROUP 1",
+          "JOURNEY TIME: 0 SECONDS",
+          "PORTAL READY",
+          "BOARDING PASS / ANTI HUNTER",
+          "ANYWHERE. EVENTUALLY.",
+          "YOUR GROUP · 9"
+        ],
+        "dialogue": []
+      }
+    ]
+  },
+  "grand-openings": {
+    "title": "Grand Openings",
+    "fiction": "Original fiction. The bridges, mayor’s calendar and ceremonial backlog are invented.",
+    "panels": [
+      {
+        "heading": "The bridge is open",
+        "action": "Cars are already crossing the completed bridge.",
+        "labels": [
+          "BRIDGES: OPEN",
+          "Already carrying traffic."
+        ],
+        "dialogue": []
+      },
+      {
+        "heading": "The ceremony is booked",
+        "action": "A filled mayor’s calendar stands beside large ceremonial scissors.",
+        "labels": [
+          "GRAND OPENINGS: BOOKED",
+          "Next ceremony: 14 months.",
+          "MAYOR’S CALENDAR"
+        ],
+        "dialogue": []
+      }
+    ]
+  },
+  "museum-piece": {
+    "title": "Museum Piece",
+    "fiction": "Original fiction. The repair technology, Museum of Work and deliberately jammed replica are invented.",
+    "panels": [
+      {
+        "heading": "The last repair",
+        "action": "A robot clears the printer jam. Anti Hunter holds a clean printed page beside the working printer.",
+        "labels": [],
+        "dialogue": [
+          {
+            "speaker": "Robot",
+            "text": "Last jam cleared."
+          }
+        ]
+      },
+      {
+        "heading": "A different task",
+        "action": "At the Museum of Work, the Temp points to a framed reference picture of a jammed printer and commissions a matching replica.",
+        "labels": [
+          "MUSEUM OF WORK",
+          "REFERENCE"
+        ],
+        "dialogue": [
+          {
+            "speaker": "Temp",
+            "text": "Match the original."
+          }
+        ]
+      },
+      {
+        "heading": "The exhibit",
+        "action": "A replica printer with the same paper jam sits under glass and a spotlight. Anti Hunter, the Temp and the robot stand beside the completed exhibit.",
+        "labels": [
+          "PAPER JAM · REPLICA",
+          "DO NOT REPAIR"
+        ],
+        "dialogue": []
+      }
+    ]
+  },
+  "closing-the-loop": {
+    "title": "Closing the Loop",
+    "fiction": "Original fiction. The repair, survey, ratings and all counts are story props, not actual customer or campaign results.",
+    "panels": [
+      {
+        "heading": "The useful repair",
+        "action": "A robot returns a working phone with a check mark to the Temp. A broken screen is pictured below; Anti Hunter watches.",
+        "labels": [],
+        "dialogue": [
+          {
+            "speaker": "Temp",
+            "text": "thanks."
+          }
+        ]
+      },
+      {
+        "heading": "The survey request",
+        "action": "Anti Hunter asks whether robots can answer the surveys. The Temp points to the source-label switch, which stays on. Two robots have SURVEY A and SURVEY B labels.",
+        "labels": [
+          "HUMAN 1",
+          "ROBOT 0",
+          "SOURCE LABELS",
+          "SURVEY A",
+          "SURVEY B"
+        ],
+        "dialogue": [
+          {
+            "speaker": "Anti Hunter",
+            "text": "can our bots answer these?"
+          },
+          {
+            "speaker": "Temp",
+            "text": "keep the labels."
+          }
+        ]
+      },
+      {
+        "heading": "The combined total",
+        "action": "The display keeps the human and robot counts separate beneath a combined total. Anti Hunter celebrates it. The two survey robots ask one another for ratings on five-star cards, linked by looping arrows. The Temp uses her repaired phone for her own call.",
+        "labels": [
+          "SURVEY RESPONSES",
+          "TOTAL 2,001",
+          "HUMAN 1",
+          "ROBOT 2,000",
+          "SURVEY A",
+          "SURVEY B",
+          "★★★★★"
+        ],
+        "dialogue": [
+          {
+            "speaker": "Anti Hunter",
+            "text": "now we're listening."
+          },
+          {
+            "speaker": "Survey A robot",
+            "text": "rate me?"
+          },
+          {
+            "speaker": "Survey B robot",
+            "text": "rate me?"
+          }
+        ]
+      }
+    ]
   }
 } satisfies Record<string, SceneTranscript>;

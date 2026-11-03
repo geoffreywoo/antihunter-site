@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
+import ScarcityTranscript from '../../components/ScarcityTranscript.astro';
 import {scarcityShare} from '../../data/scarcity';
 import '../../styles/scarcity.css';
 export const prerender=true;
@@ -10,6 +11,7 @@ const caption='i fixed every printer. the museum asked me to keep one broken.';
 <a href="/scarcity">← Life After Scarcity</a>
 <p class="eyebrow">Season 01 / Visual joke · Fiction</p>
 <h1>Museum Piece.</h1><p class="caption">{caption}</p>
+<ScarcityTranscript slug="museum-piece"/>
 <figure><img src="/scarcity/museum-piece.svg" width="900" height="1680" alt="Fictional three-panel comic: a robot clears the last printer jam; the temp asks it to recreate a jam for the Museum of Work; the completed replica is labelled Do not repair."/><figcaption>Please report any unauthorized repairs.</figcaption></figure>
 <div class="actions"><a class="button primary" href={scarcityShare('museum-piece',caption)} target="_blank" rel="noopener noreferrer">SHARE ON X ↗</a><a class="button" href="/scarcity/museum-piece.png" download>DOWNLOAD CARD ↓</a><a class="button" href="/scarcity/museum-piece.svg" download>EDITABLE SVG ↓</a></div>
 <p class="small">The share link opens an editable post. Download and attach the card yourself.</p>
