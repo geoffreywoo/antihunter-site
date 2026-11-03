@@ -664,5 +664,66 @@ export const scarcityTranscripts = {
         ]
       }
     ]
-  }
+  },
+  "late-checkout": {
+  "title": "Late Checkout",
+  "fiction": "Original fiction. The hotel, checkout policy and robot capabilities are imagined; no actual hotel service or campaign result is depicted.",
+  "panels": [
+    {
+      "heading": "Checkout",
+      "action": "The Temp reads in room 101 beside a green window. Room 102 has a separate orange picture. Anti Hunter points out checkout time.",
+      "labels": [
+        "101",
+        "102",
+        "CHECKOUT 11:00"
+      ],
+      "dialogue": [
+        {
+          "speaker": "Anti Hunter",
+          "text": "Checkout is at eleven."
+        },
+        {
+          "speaker": "Temp",
+          "text": "Can I just stay here?"
+        }
+      ]
+    },
+    {
+      "heading": "Next room",
+      "action": "At her request, the robot transports the occupied mobile reading chair into the actual room 102. Room 101 now shows ready. Anti Hunter offers her original room and she accepts the return.",
+      "labels": [
+        "101 READY",
+        "102"
+      ],
+      "dialogue": [
+        {
+          "speaker": "Temp",
+          "text": "Take me with the chair."
+        },
+        {
+          "speaker": "Anti Hunter",
+          "text": "Your old room is ready."
+        },
+        {
+          "speaker": "Temp",
+          "text": "I’ll take it."
+        }
+      ]
+    },
+    {
+      "heading": "Checked in",
+      "action": "The robot returns the same occupied chair to the exact 101 reading spot and green window from the first panel. Room 102 stays separate. Anti Hunter welcomes the same reader with a new check-in slip.",
+      "labels": [
+        "101",
+        "102"
+      ],
+      "dialogue": [
+        {
+          "speaker": "Anti Hunter",
+          "text": "Welcome back."
+        }
+      ]
+    }
+  ]
+},
 } satisfies Record<string, SceneTranscript>;

@@ -5,8 +5,16 @@
     <link>https://antihunter.com/scarcity</link>
     <description>Original abundant-future fiction and practical writers guides from Anti Hunter and AI/MAXXI. Recent releases; the full archive is on the website.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 02 Nov 2026 21:53:14 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 03 Nov 2026 09:35:22 GMT</lastBuildDate>
     <atom:link href="https://antihunter.com/scarcity/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Late Checkout — Original fiction</title>
+      <link>https://antihunter.com/scarcity/late-checkout</link>
+      <description>Same room. New stay. A fictional hotel sends a reader through checkout and back to the exact room she wanted to keep.</description>
+      <category>Original fiction</category>
+      <guid isPermaLink="true">https://antihunter.com/scarcity/late-checkout</guid>
+      <enclosure url="https://antihunter.com/scarcity/late-checkout.png" length="185821" type="image/png" />
+    </item>
     <item>
       <title>Yesterday Me — Original fiction</title>
       <link>https://antihunter.com/scarcity/yesterday-me</link>
