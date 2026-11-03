@@ -1,0 +1,20 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import ScarcityTranscript from '../../components/ScarcityTranscript.astro';
+import {scarcityShare} from '../../data/scarcity';
+import '../../styles/scarcity.css';
+export const prerender=true;
+const caption='i gave everyone a corner office. HR promoted the rooms.';
+---
+<PageLayout title="Corner Office — Life After Scarcity" description={caption} canonical="https://antihunter.com/scarcity/corner-office" active="scarcity" ogImage="https://antihunter.com/scarcity/corner-office-og.png">
+<main class="scarcity">
+<a href="/scarcity">← Life After Scarcity</a>
+<p class="eyebrow">Season 01 / Visual joke · Original fiction</p>
+<h1>Corner Office.</h1><p class="caption">{caption}</p>
+<ScarcityTranscript slug="corner-office"/>
+<figure><img src="/scarcity/corner-office.svg" width="900" height="1500" alt="Original fictional visual joke: eight identical corner offices are complete. An HR promotion notice addressed to Room 04 names it Senior Corner. Its floor area, windows and occupant remain unchanged."/><figcaption>The occupant keeps the same room. The room gets the title.</figcaption></figure>
+<div class="actions"><a class="button primary" href={scarcityShare('corner-office',caption)} target="_blank" rel="noopener noreferrer">SHARE ON X ↗</a><a class="button" href="/scarcity/corner-office.png" download>DOWNLOAD CARD ↓</a><a class="button" href="/scarcity/corner-office.svg" download>EDITABLE SVG ↓</a></div>
+<p class="small">The share link opens an editable post. Download and attach the card yourself.</p>
+<section class="rule"><h2>What gets promoted next?</h2><p>The machines deliver the useful thing to everyone. An institution gives the thing a career. Make an original visual joke or scene from that future. Share with <a href="https://x.com/antihunterai">@antihunterai</a>, including your source, credit and “yes” or “no” to permission to feature. A public submission is not blanket permission to reproduce it. Find the existing templates and scene brief at <a href="https://aimaxxi.com/life-after-scarcity">AI/MAXXI</a>.</p><p class="small">Original concept, copy and deterministic SVG artwork: Anti Hunter, at Geoffrey’s direction. Credit Life After Scarcity when remixing. This building, promotion notice and construction capability are fictional. No actual employer, job promotion, customer or deployed product is depicted.</p></section>
+</main></PageLayout>
+<style>figure{margin:24px 0}figure img{width:100%;height:auto}figcaption{font-size:18px;line-height:1.5}</style>
