@@ -46,4 +46,72 @@ export const scarcityTranscripts = {
       {heading: 'Tonight', action: 'At the concert, the score still bears AH. Anti Hunter praises the song without recognizing his own work. The Temp hands him a microphone and cues his promised part in the duet.', labels: ['SCORE · AH', 'DUET · TONIGHT'], dialogue: [{speaker: 'Anti Hunter', text: 'Whoever wrote this has excellent taste.'}, {speaker: 'Temp', text: 'Your cue.'}]},
     ],
   },
+  "the-last-job": {
+    "title": "The Last Job",
+    "fiction": "Original fiction. The completed work and future boardroom are an imagined scene.",
+    "panels": [
+      {
+        "heading": "The boardroom",
+        "action": "A smiling robot holds a tall stack of completed work. Anti Hunter sits at a conference table with bored-looking executives. A circular meeting agenda is drawn on the wall; a thick binder of meeting logistics sits on the table.",
+        "labels": [
+          "REPORTS ✓",
+          "ANALYSIS ✓",
+          "PRESENTATIONS ✓",
+          "SUMMARIES ✓",
+          "STRATEGY ✓",
+          "EMAILS ✓",
+          "RESEARCH ✓",
+          "PLANS ✓",
+          "FOLLOW UPS ✓",
+          "DONE ✓",
+          "MEETING ABOUT THE MEETING",
+          "ALIGN ON AGENDA",
+          "SCHEDULE NEXT MEETING",
+          "SAME MEETING DIFFERENT DAY",
+          "MEETING LOGISTICS"
+        ],
+        "dialogue": []
+      }
+    ]
+  },
+  "the-wet-signature": {
+    "title": "The Wet Signature",
+    "fiction": "Original fiction. The finished homes and municipal office belong to an imagined abundant future.",
+    "panels": [
+      {
+        "heading": "The municipal desk",
+        "action": "Anti Hunter points toward completed homes while smiling construction robots stand behind him. At the municipal services desk, a zoning official holds an oversized fountain pen beside a thick stack of forms and an ink bottle.",
+        "labels": [
+          "FORM",
+          "ZONING DEPT.",
+          "INK",
+          "MUNICIPAL SERVICES",
+          "A MORE ABUNDANT TOMORROW",
+          "SAME PROCESS BRIGHTER TOMORROW"
+        ],
+        "dialogue": []
+      }
+    ]
+  },
+  "retirement-cancelled": {
+    "title": "Retirement Cancelled",
+    "fiction": "Original fiction. The longevity, birthday and HR policy are invented, not a present medical capability.",
+    "panels": [
+      {
+        "heading": "Another birthday, another onboarding",
+        "action": "A laughing older woman sits beside a candle-covered birthday cake marked 200. A smiling HR robot presents a thick stack of onboarding paperwork. Anti Hunter sits with his head resting on his hand. The city behind them looks bright and green.",
+        "labels": [
+          "200",
+          "HR",
+          "ONBOARDING AGAIN",
+          "STILL HERE FOR IT",
+          "SAME DIFFERENT DAY",
+          "MORE PEOPLE BRIGHTER TOMORROWS",
+          "LONGER HEALTHIER HAPPIER TOGETHER",
+          "ABUNDANCE LOOKS GOOD ON EVERYONE"
+        ],
+        "dialogue": []
+      }
+    ]
+  }
 } satisfies Record<string, SceneTranscript>;
