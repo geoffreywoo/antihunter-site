@@ -14,7 +14,7 @@ const transcript = scarcityTranscripts[Astro.props.slug];
         <h3>{panel.heading}</h3>
         <p>{panel.action}</p>
         <p class="prop-labels"><strong>On screen:</strong> {panel.labels.join(' · ')}</p>
-        <dl>{panel.dialogue.map(line => <div><dt>{line.speaker}</dt><dd>“{line.text}”</dd></div>)}</dl>
+        {panel.dialogue.length > 0 && <dl>{panel.dialogue.map(line => <div><dt>{line.speaker}</dt><dd>“{line.text}”</dd></div>)}</dl>}
       </li>)}
     </ol>
   </div>
