@@ -1,0 +1,67 @@
+---
+import { physicalPercent, policyNames } from '../lib/policy-example';
+---
+<section class="policy-example" aria-labelledby="policy-example-title" data-policy-example hidden>
+  <h2 id="policy-example-title">Change the estimates.</h2>
+  <p>Made-up rows. Physical success stays fixed. Move the simulated estimates and see which receipt changes.</p>
+  <fieldset>
+    <legend>Simulated success</legend>
+    {policyNames.map((name, i) => (
+      <div class="policy-row">
+        <label for={`policy-${name}`}>Policy {name}<span>Physical: {physicalPercent[i]}%</span></label>
+        <input id={`policy-${name}`} type="range" min="0" max="100" step="5" value={physicalPercent[i] + 20} aria-describedby="policy-example-help" />
+        <output for={`policy-${name}`} data-policy-value>{physicalPercent[i] + 20}%</output>
+      </div>
+    ))}
+  </fieldset>
+  <p id="policy-example-help" class="small">Use the sliders or arrow keys. All calculations stay in this browser; input values are not collected.</p>
+  <div class="presets" aria-label="Example estimates">
+    <button type="button" data-estimates="40,60,80">Optimistic</button>
+    <button type="button" data-estimates="20,40,60">Exact</button>
+    <button type="button" data-estimates="60,40,20">Reversed</button>
+    <button type="button" data-estimates="40,40,40">Flat</button>
+  </div>
+  <div class="receipts" role="status" aria-atomic="true">
+    <dl>
+      <div><dt>Order A &lt; B &lt; C</dt><dd data-order>Preserved</dd></div>
+      <div><dt>Pearson correlation</dt><dd data-correlation>1.000</dd></div>
+      <div><dt>Mean signed error</dt><dd data-signed>+20.0 pp</dd></div>
+      <div><dt>Mean absolute error</dt><dd data-absolute>20.0 pp</dd></div>
+    </dl>
+    <p data-explanation>The simulator selects C. Every estimate is 20 percentage points too high.</p>
+  </div>
+  <p class="small">pp = percentage points. Signed errors can cancel; absolute errors cannot. Correlation is undefined when every simulated estimate is equal. Three invented rows illustrate arithmetic, not how well any real model is calibrated.</p>
+</section>
+<script>
+  import { summarizePolicyExample } from '../lib/policy-example';
+  const example = document.querySelector<HTMLElement>('[data-policy-example]');
+  if (example) {
+    const inputs = [...example.querySelectorAll<HTMLInputElement>('input')];
+    const values = [...example.querySelectorAll<HTMLOutputElement>('[data-policy-value]')];
+    const set = (selector: string, text: string) => { example.querySelector<HTMLElement>(selector)!.textContent = text; };
+    const render = () => {
+      const estimates = inputs.map(input => Number(input.value));
+      const result = summarizePolicyExample(estimates);
+      values.forEach((output, i) => { output.value = `${estimates[i]}%`; });
+      set('[data-order]', result.order);
+      set('[data-correlation]', result.correlation === null ? 'Undefined' : result.correlation.toFixed(3));
+      const signed = Math.abs(result.meanSignedError) < 0.05 ? 0 : result.meanSignedError;
+      set('[data-signed]', `${signed > 0 ? '+' : ''}${signed.toFixed(1)} pp`);
+      set('[data-absolute]', `${result.meanAbsoluteError.toFixed(1)} pp`);
+      const selection = result.selected.includes('/') ? `Top estimate tied: ${result.selected}.` : `The simulator selects ${result.selected}. Physical results select C.`;
+      const meaning = result.meanAbsoluteError === 0 ? 'All three estimates match the invented physical results.' : `${result.meanAbsoluteError.toFixed(1)} percentage points of mean absolute error remain.`;
+      set('[data-explanation]', `${selection} ${meaning}`);
+    };
+    inputs.forEach(input => input.addEventListener('input', render));
+    example.querySelectorAll<HTMLButtonElement>('[data-estimates]').forEach(button => button.addEventListener('click', () => {
+      button.dataset.estimates!.split(',').forEach((value, i) => { inputs[i].value = value; });
+      render();
+    }));
+    render();
+    example.hidden = false;
+  }
+</script>
+<style>
+  .policy-example{margin:36px 0;padding:24px;border:1px solid #77715f;background:#23251f;color:#eee6d7}
+  .policy-example[hidden]{display:none}.policy-example h2{font-size:1.7rem;line-height:1.2;margin:0 0 18px}.policy-example p{line-height:1.65;color:#c5c0b4}.policy-example .small{font-size:.83rem}.policy-example fieldset{margin:24px 0 12px;padding:0;border:0;min-width:0}.policy-example legend{font-weight:700;margin-bottom:16px}.policy-row{display:grid;grid-template-columns:100px minmax(70px,1fr) 48px;gap:12px;align-items:center;margin:18px 0}.policy-row label{font-weight:700}.policy-row label span{display:block;color:#c5c0b4;font-size:.75rem;font-weight:400;margin-top:4px}.policy-row output{text-align:right;font-variant-numeric:tabular-nums}.policy-row input{width:100%;min-height:44px;margin:0;accent-color:#e9b568}.presets{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}.presets button{padding:10px 14px;min-height:44px;border:1px solid #8f8878;background:#33362d;color:#eee6d7;cursor:pointer;font:inherit;font-size:.9rem}.presets button:hover{background:#454a3c}.policy-example :is(button,input):focus-visible{outline:3px solid #e9b568;outline-offset:4px}.receipts{border-top:1px solid #77715f;margin-top:24px;padding-top:8px}.receipts dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 12px}.receipts dt{font-size:.75rem;color:#c5c0b4;line-height:1.5}.receipts dd{margin:6px 0 0;font-size:clamp(1.1rem,4vw,1.5rem);line-height:1.2;color:#e9b568;font-variant-numeric:tabular-nums}.receipts p{margin-top:24px}@media(max-width:480px){.policy-example{padding:18px 12px}.policy-row{grid-template-columns:92px minmax(60px,1fr) 42px;gap:8px}}
+</style>
