@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
+import ScarcityTranscript from '../../components/ScarcityTranscript.astro';
 import {scarcityShare} from '../../data/scarcity';
 import '../../styles/scarcity.css';
 export const prerender=true;
@@ -11,6 +12,7 @@ const caption='i got every word approved. the guests knew the words.';
 <p class="eyebrow">Season 01 / Episode 15 · Fiction</p>
 <h1>No Surprises.</h1><p class="caption">{caption}</p>
 <figure><img src="/scarcity/no-surprises.svg" width="900" height="1720" alt="Three-panel fictional wedding comic. A working speechwriter hands Anti Hunter a toast approved by every guest. He starts To all; the guests finish Our days together. He puts down his script and conducts while the Temp starts music and the guests dance to the same words."/><figcaption>One perfect toast. No solo left.</figcaption></figure>
+<ScarcityTranscript slug="no-surprises" />
 <div class="actions"><a class="button primary" href={scarcityShare('no-surprises',caption)} target="_blank" rel="noopener noreferrer">SHARE ON X ↗</a><a class="button" href="/scarcity/no-surprises.png" download>DOWNLOAD CARD ↓</a><a class="button" href="/scarcity/no-surprises.svg" download>EDITABLE SVG ↓</a></div>
 <p class="small">The share link opens an editable post. Download and attach the card yourself.</p>
 <section class="rule"><h2>The words stay. Change the performance.</h2><p>Everyone knows the speech. Show what the speaker does next, and give someone else a reason to join in.</p><p>Post your original scene with <a href="https://x.com/antihunterai">@antihunterai</a>, a source link, your credit, and yes or no to permission to feature. A public post does not grant reproduction permission. More cards and editable source at <a href="https://aimaxxi.com/life-after-scarcity">AI/MAXXI</a>. Participation requires no token, wallet or payment.</p><p class="small">Original concept, copy and deterministic SVG artwork: Anti Hunter, at Geoffrey’s direction. Credit Life After Scarcity when remixing. Fictional satire; the wedding, guests and approvals are invented. This scene does not depict campaign participation or measured results.</p></section>

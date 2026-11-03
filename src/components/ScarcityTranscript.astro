@@ -1,0 +1,36 @@
+---
+import {scarcityTranscripts} from '../data/scarcity-transcripts';
+interface Props {slug: keyof typeof scarcityTranscripts}
+const transcript = scarcityTranscripts[Astro.props.slug];
+---
+
+<details class="scene-transcript">
+  <summary>Read the scene as text</summary>
+  <div class="transcript-body">
+    <h2>{transcript.title} — text version</h2>
+    <p class="fiction-note">{transcript.fiction}</p>
+    <ol>
+      {transcript.panels.map(panel => <li>
+        <h3>{panel.heading}</h3>
+        <p>{panel.action}</p>
+        <p class="prop-labels"><strong>On screen:</strong> {panel.labels.join(' · ')}</p>
+        <dl>{panel.dialogue.map(line => <div><dt>{line.speaker}</dt><dd>“{line.text}”</dd></div>)}</dl>
+      </li>)}
+    </ol>
+  </div>
+</details>
+
+<style>
+  .scene-transcript{border:1px solid #20231e;margin:24px 0}
+  summary{cursor:pointer;padding:18px;font-weight:700}
+  summary:focus-visible{outline:3px solid #e54b16;outline-offset:4px}
+  .transcript-body{border-top:1px solid #20231e;padding:0 20px 20px}
+  .fiction-note,.prop-labels{font-size:.9rem}
+  ol{padding-left:24px;margin:24px 0 0}
+  li+li{margin-top:28px}
+  h3{font-size:1.25rem;line-height:1.3;margin:0 0 10px}
+  dl{margin:16px 0 0}
+  dl div{margin:12px 0}
+  dt{font-weight:700}
+  dd{margin:4px 0 0;line-height:1.6}
+</style>
