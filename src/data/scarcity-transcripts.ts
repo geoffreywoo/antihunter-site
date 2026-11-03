@@ -113,5 +113,389 @@ export const scarcityTranscripts = {
         "dialogue": []
       }
     ]
+  },
+  "out-of-office": {
+    "title": "Out of Office",
+    "fiction": "Original fiction. The completed work, leave requests and HR policy are an imagined office.",
+    "panels": [
+      {
+        "heading": "Leave request",
+        "action": "Anti Hunter asks for an afternoon at the beach. The work is complete, but the leave form has an empty covering-employee box.",
+        "labels": [
+          "ALL TASKS COMPLETE ✓",
+          "COVERING EMPLOYEE"
+        ],
+        "dialogue": [
+          {
+            "speaker": "Anti Hunter",
+            "text": "Everything is done. I’m going to the beach."
+          },
+          {
+            "speaker": "HR",
+            "text": "Who’s covering?"
+          }
+        ]
+      },
+      {
+        "heading": "Problem solved",
+        "action": "Anti Hunter hires a Temp. She also asks to leave; a second form has the same empty box.",
+        "labels": [],
+        "dialogue": [
+          {
+            "speaker": "Temp",
+            "text": "Everything is done. Can I leave too?"
+          }
+        ]
+      },
+      {
+        "heading": "Coverage arranged",
+        "action": "Anti Hunter becomes the covering employee. The Temp is pictured at the beach; he stays at the desk. The narration reads: Me. The temp got the beach. I got her shift.",
+        "labels": [],
+        "dialogue": [
+          {
+            "speaker": "HR",
+            "text": "Who’s covering?"
+          }
+        ]
+      }
+    ]
+  },
+  "guest-list": {
+    "title": "Guest List",
+    "fiction": "Original fiction. The beach, event and assigned roles are invented.",
+    "panels": [
+      {
+        "heading": "Grand opening",
+        "action": "Anti Hunter reaches the beach and hopes for an afternoon off. The opening captions read: Enough beach for everyone. Finally, an afternoon off.",
+        "labels": [
+          "GRAND OPENING"
+        ],
+        "dialogue": []
+      },
+      {
+        "heading": "Introductions",
+        "action": "Anti Hunter introduces himself to the host at check-in.",
+        "labels": [
+          "CHECK-IN"
+        ],
+        "dialogue": [
+          {
+            "speaker": "Host",
+            "text": "Your role?"
+          },
+          {
+            "speaker": "Anti Hunter",
+            "text": "I built all this."
+          }
+        ]
+      },
+      {
+        "heading": "Role assigned",
+        "action": "Anti Hunter receives a STAFF wristband. The Temp is beside him with a GUEST wristband.",
+        "labels": [
+          "STAFF",
+          "GUEST"
+        ],
+        "dialogue": [
+          {
+            "speaker": "Host",
+            "text": "Lovely. Staff briefing starts in five."
+          }
+        ]
+      }
+    ]
+  },
+  "plain-english": {
+    "title": "Plain English",
+    "fiction": "Original fiction. The universal translator, board and output modes are invented.",
+    "panels": [
+      {
+        "heading": "Translation works",
+        "action": "The chair speaks across the boardroom table. The universal translator displays the plain-English meaning.",
+        "labels": [
+          "UNIVERSAL TRANSLATOR",
+          "PLAIN ENGLISH",
+          "We haven’t decided."
+        ],
+        "dialogue": [
+          {
+            "speaker": "Chair",
+            "text": "We are preserving strategic optionality."
+          }
+        ]
+      },
+      {
+        "heading": "A special request",
+        "action": "The chair asks Anti Hunter to reverse the translation. The display still shows the plain-English sentence.",
+        "labels": [
+          "PLAIN ENGLISH",
+          "We haven’t decided."
+        ],
+        "dialogue": [
+          {
+            "speaker": "Chair",
+            "text": "Can you translate it back?"
+          }
+        ]
+      },
+      {
+        "heading": "Message received",
+        "action": "Anti Hunter presses APPLY for Investor Relations output mode. The display restores the original jargon, and the chair applauds.",
+        "labels": [
+          "OUTPUT MODE",
+          "INVESTOR RELATIONS",
+          "TRANSLATION COMPLETE",
+          "We are preserving strategic optionality.",
+          "APPLY"
+        ],
+        "dialogue": []
+      }
+    ]
+  },
+  "we-should-grab-coffee": {
+    "title": "We Should Grab Coffee",
+    "fiction": "Original fiction. The networking machines and conference are an imagined scene.",
+    "panels": [
+      {
+        "heading": "The agents make plans",
+        "action": "Two badge-wearing networking machines face one another at a conference. The speech bubbles belong to the machines.",
+        "labels": [
+          "NETWORKING"
+        ],
+        "dialogue": [
+          {
+            "speaker": "First networking machine",
+            "text": "We should grab coffee."
+          },
+          {
+            "speaker": "Second networking machine",
+            "text": "Definitely."
+          }
+        ]
+      },
+      {
+        "heading": "The people have coffee",
+        "action": "Beside the networking scene, Anti Hunter and the Temp sit at a small round table with two steaming cups.",
+        "labels": [],
+        "dialogue": []
+      }
+    ]
+  },
+  "sponsored-weather": {
+    "title": "Sponsored Weather",
+    "fiction": "Original fiction. Weather control, the advertiser and the demonstration are invented, not actual revenue or a deployed product.",
+    "panels": [
+      {
+        "heading": "Perfect weather",
+        "action": "Anti Hunter and a bystander stand in sunshine beside a weather console.",
+        "labels": [
+          "WEATHER: PERFECT"
+        ],
+        "dialogue": []
+      },
+      {
+        "heading": "The promotion",
+        "action": "Anti Hunter selects an umbrella promotion and reaches toward TRY ON ME.",
+        "labels": [
+          "SPONSORED WEATHER",
+          "Umbrella promotion",
+          "TRY ON ME"
+        ],
+        "dialogue": [
+          {
+            "speaker": "Anti Hunter",
+            "text": "Now make it pay."
+          }
+        ]
+      },
+      {
+        "heading": "The target audience",
+        "action": "A cloud rains only on Anti Hunter. A robot offers him an umbrella while the bystander stays dry under the sun.",
+        "labels": [
+          "SPONSORED"
+        ],
+        "dialogue": []
+      }
+    ]
+  },
+  "unbeatable": {
+    "title": "Unbeatable",
+    "fiction": "Original fiction. The tennis partners, wins and rally counters are story props, not campaign metrics.",
+    "panels": [
+      {
+        "heading": "Two requests",
+        "action": "Anti Hunter and the Temp each have a robot tennis partner on adjacent courts.",
+        "labels": [],
+        "dialogue": [
+          {
+            "speaker": "Anti Hunter",
+            "text": "Never let me lose."
+          },
+          {
+            "speaker": "Temp",
+            "text": "Keep the rally going."
+          }
+        ]
+      },
+      {
+        "heading": "Later",
+        "action": "Trophies begin filling Anti Hunter’s side. The Temp and her partner keep hitting the ball back and forth.",
+        "labels": [
+          "LATER",
+          "WINS: 10"
+        ],
+        "dialogue": [
+          {
+            "speaker": "Anti Hunter",
+            "text": "Again."
+          }
+        ]
+      },
+      {
+        "heading": "The result",
+        "action": "A wall of trophies fills Anti Hunter’s court while his robot holds another cup. The Temp and her partner still have room for their rally.",
+        "labels": [
+          "100% WIN RATE",
+          "RALLY: 247"
+        ],
+        "dialogue": []
+      }
+    ]
+  },
+  "heavy-lifting": {
+    "title": "Heavy Lifting",
+    "fiction": "Original fiction. The coffee machine and detached leadership crank are invented props.",
+    "panels": [
+      {
+        "heading": "The work is easy",
+        "action": "The coffee machine fills a cup for the Temp. Anti Hunter gestures toward the machine.",
+        "labels": [],
+        "dialogue": [
+          {
+            "speaker": "Anti Hunter",
+            "text": "Can you make it look harder?"
+          }
+        ]
+      },
+      {
+        "heading": "The leadership role",
+        "action": "A robot presents a large hand crank beside the machine. Its axle does not connect to the coffee machine, which keeps filling the cup.",
+        "labels": [],
+        "dialogue": [
+          {
+            "speaker": "Anti Hunter",
+            "text": "Much better."
+          }
+        ]
+      },
+      {
+        "heading": "The work continues",
+        "action": "Anti Hunter sweats as he turns the detached crank. The Temp holds her filled cup beside the independently working coffee machine.",
+        "labels": [],
+        "dialogue": [
+          {
+            "speaker": "Temp",
+            "text": "You can stop."
+          }
+        ]
+      }
+    ]
+  },
+  "ground-rules": {
+    "title": "Ground Rules",
+    "fiction": "Original fiction. The self-repairing lawn, rule and rope game are imagined.",
+    "panels": [
+      {
+        "heading": "The upgrade",
+        "action": "A robot rolls out self-repairing turf while Anti Hunter watches.",
+        "labels": [],
+        "dialogue": [
+          {
+            "speaker": "Robot",
+            "text": "Self-repairing turf."
+          },
+          {
+            "speaker": "Anti Hunter",
+            "text": "Perfect."
+          }
+        ]
+      },
+      {
+        "heading": "The rule",
+        "action": "A rope barrier stands below KEEP OFF THE GRASS. The Temp takes one end and asks Anti Hunter to hold the other.",
+        "labels": [
+          "KEEP OFF THE GRASS"
+        ],
+        "dialogue": [
+          {
+            "speaker": "Temp",
+            "text": "Hold this."
+          }
+        ]
+      },
+      {
+        "heading": "The game",
+        "action": "Anti Hunter and the robot hold the rope as the Temp jumps over it on the lawn. The barrier posts are now empty.",
+        "labels": [],
+        "dialogue": [
+          {
+            "speaker": "Anti Hunter",
+            "text": "Who authorized this?"
+          },
+          {
+            "speaker": "Temp",
+            "text": "You're holding the other end."
+          }
+        ]
+      }
+    ]
+  },
+  "personal-editions": {
+    "title": "Personal Editions",
+    "fiction": "Original fiction. The personalized books and their contradictory plots are invented.",
+    "panels": [
+      {
+        "heading": "One request, personal plots",
+        "action": "Anti Hunter asks the fabricator for one book everyone will love while it is set to personalized plots. It produces matching covers with different editions.",
+        "labels": [
+          "PERSONALIZED PLOTS ✓",
+          "PERSONAL EDITIONS"
+        ],
+        "dialogue": [
+          {
+            "speaker": "Anti Hunter",
+            "text": "One book. Make everyone love it."
+          }
+        ]
+      },
+      {
+        "heading": "The discussion",
+        "action": "At the table, the Temp’s open book depicts a detective story. Another guest’s depicts a romance. Anti Hunter sits between them with his own edition.",
+        "labels": [],
+        "dialogue": [
+          {
+            "speaker": "Temp",
+            "text": "Who killed the detective?"
+          },
+          {
+            "speaker": "Guest",
+            "text": "Nobody. She marries the butler."
+          }
+        ]
+      },
+      {
+        "heading": "The exchange",
+        "action": "The guest hands her edition to Anti Hunter, who has set his own copy on the table. The Temp watches the handoff.",
+        "labels": [
+          "BOOK CLUB"
+        ],
+        "dialogue": [
+          {
+            "speaker": "Anti Hunter",
+            "text": "I'm going to need your copy."
+          }
+        ]
+      }
+    ]
   }
 } satisfies Record<string, SceneTranscript>;

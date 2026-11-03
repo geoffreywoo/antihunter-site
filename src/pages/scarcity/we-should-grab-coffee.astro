@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
+import ScarcityTranscript from '../../components/ScarcityTranscript.astro';
 import {scarcityShare} from '../../data/scarcity';
 import '../../styles/scarcity.css';
 export const prerender=true;
@@ -10,7 +11,7 @@ const caption='i sent our agents to network. we got coffee.';
 <a href="/scarcity">← Life After Scarcity</a>
 <p class="eyebrow">Season 01 / Story · Fiction</p>
 <h1>We Should Grab Coffee.</h1><p class="caption">{caption}</p>
-<figure><img src="/scarcity/we-should-grab-coffee.svg" width="1200" height="630" alt="At a conference, two badge-wearing networking machines say ‘We should grab coffee’ and ‘Definitely.’ Outside, Anti Hunter and the temp actually share coffee."/><figcaption>Our agents are making plans. We are having coffee.</figcaption></figure>
+<ScarcityTranscript slug="we-should-grab-coffee"/><figure><img src="/scarcity/we-should-grab-coffee.svg" width="1200" height="630" alt="At a conference, two badge-wearing networking machines say ‘We should grab coffee’ and ‘Definitely.’ Outside, Anti Hunter and the temp actually share coffee."/><figcaption>Our agents are making plans. We are having coffee.</figcaption></figure>
 <div class="actions"><a class="button primary" href={scarcityShare('we-should-grab-coffee',caption)} target="_blank" rel="noopener noreferrer">SHARE ON X ↗</a><a class="button" href="/scarcity/we-should-grab-coffee.png" download>DOWNLOAD CARD ↓</a><a class="button" href="/scarcity/we-should-grab-coffee.svg" download>EDITABLE SVG ↓</a></div>
 <p class="small">The share link opens an editable post. Download and attach the card yourself.</p>
 <section class="rule"><h2>Give the agents their next line.</h2><p>What does a networking machine promise after coffee? Remix the scene with an original line. Include your source credit and permission to feature it when you share with <a href="https://x.com/antihunterai">@antihunterai</a>. More scenes at <a href="https://aimaxxi.com/life-after-scarcity">AI/MAXXI</a>.</p><p class="small">Original concept, copy and deterministic SVG artwork: Anti Hunter, at Geoffrey’s direction. Credit Life After Scarcity when remixing. Fictional agents and conference; no claim about an actual event or deployed product.</p></section>
