@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
+import ScarcityTranscript from '../../components/ScarcityTranscript.astro';
 import {scarcityShare} from '../../data/scarcity';
 import '../../styles/scarcity.css';
 export const prerender=true;
@@ -10,6 +11,7 @@ const caption='i kept the replay. the temp added legs.';
 <a href="/scarcity">← Life After Scarcity</a>
 <p class="eyebrow">Season 01 / Episode 13 · Fiction</p>
 <h1>The Best Bit.</h1><p class="caption">{caption}</p>
+<ScarcityTranscript slug="the-best-bit" />
 <figure><img src="/scarcity/the-best-bit.svg" width="900" height="1980" alt="Three-panel fictional comic. An exact replay shows Anti Hunter’s tiny fish despite his expansive tale. The temp keeps that replay saved and selects a separate fiction mode. A framed story shows a fish with legs carrying their boat ashore. Outside the projection, the temp says it walked them home; Anti Hunter leans toward her and says Go on."/><figcaption>The record stays accurate. The story grows legs.</figcaption></figure>
 <div class="actions"><a class="button primary" href={scarcityShare('the-best-bit',caption)} target="_blank" rel="noopener noreferrer">SHARE ON X ↗</a><a class="button" href="/scarcity/the-best-bit.png" download>DOWNLOAD CARD ↓</a><a class="button" href="/scarcity/the-best-bit.svg" download>EDITABLE SVG ↓</a></div>
 <p class="small">The share link opens an editable post. Download and attach the card yourself.</p>

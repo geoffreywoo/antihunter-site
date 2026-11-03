@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
+import ScarcityTranscript from '../../components/ScarcityTranscript.astro';
 import {scarcityShare} from '../../data/scarcity';
 import '../../styles/scarcity.css';
 export const prerender=true;
@@ -10,6 +11,7 @@ const caption='i got every word approved. the guests knew the words.';
 <a href="/scarcity">← Life After Scarcity</a>
 <p class="eyebrow">Season 01 / Episode 15 · Fiction</p>
 <h1>No Surprises.</h1><p class="caption">{caption}</p>
+<ScarcityTranscript slug="no-surprises" />
 <figure><img src="/scarcity/no-surprises.svg" width="900" height="1720" alt="Three-panel fictional wedding comic. A working speechwriter hands Anti Hunter a toast approved by every guest. He starts To all; the guests finish Our days together. He puts down his script and conducts while the Temp starts music and the guests dance to the same words."/><figcaption>One perfect toast. No solo left.</figcaption></figure>
 <div class="actions"><a class="button primary" href={scarcityShare('no-surprises',caption)} target="_blank" rel="noopener noreferrer">SHARE ON X ↗</a><a class="button" href="/scarcity/no-surprises.png" download>DOWNLOAD CARD ↓</a><a class="button" href="/scarcity/no-surprises.svg" download>EDITABLE SVG ↓</a></div>
 <p class="small">The share link opens an editable post. Download and attach the card yourself.</p>

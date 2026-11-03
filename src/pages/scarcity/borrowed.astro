@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
+import ScarcityTranscript from '../../components/ScarcityTranscript.astro';
 import {scarcityShare} from '../../data/scarcity';
 import '../../styles/scarcity.css';
 export const prerender=true;
@@ -10,6 +11,7 @@ const caption='i returned the coat. the portrait kept the tie.';
 <a href="/scarcity">← Life After Scarcity</a>
 <p class="eyebrow">Season 01 / Episode 14 · Fiction</p>
 <h1>Borrowed.</h1><p class="caption">{caption}</p>
+<ScarcityTranscript slug="borrowed" />
 <figure><img src="/scarcity/borrowed.svg" width="900" height="1790" alt="Three-panel fictional comic. A cleaning robot restores the Temp’s red coat while Anti Hunter wears it for his official portrait. She says she never lent it; he returns it during the camera countdown. The saved portrait shows her in her coat and him in an undershirt and tie. He says Use that one; she says I look great."/><figcaption>Perfect repair. Still her coat.</figcaption></figure>
 <div class="actions"><a class="button primary" href={scarcityShare('borrowed',caption)} target="_blank" rel="noopener noreferrer">SHARE ON X ↗</a><a class="button" href="/scarcity/borrowed.png" download>DOWNLOAD CARD ↓</a><a class="button" href="/scarcity/borrowed.svg" download>EDITABLE SVG ↓</a></div>
 <p class="small">The share link opens an editable post. Download and attach the card yourself.</p>
