@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
+import ScarcityTranscript from '../../components/ScarcityTranscript.astro';
 import {scarcityShare} from '../../data/scarcity';
 import '../../styles/scarcity.css';
 export const prerender=true;
@@ -10,6 +11,7 @@ const caption='we made energy free. the bill survived.';
 <a href="/scarcity">← Life After Scarcity</a>
 <p class="eyebrow">Season 01 / Visual joke · Fiction</p>
 <h1>The Minimum Charge.</h1><p class="caption">{caption}</p>
+<ScarcityTranscript slug="the-minimum-charge"/>
 <img class="feature" src="/scarcity/the-minimum-charge.png" width="1200" height="630" alt="Fictional utility bill: 9,000 kWh of energy costs zero dollars, but the minimum bill charge is forty-two dollars." fetchpriority="high"/>
 <p>The power plant solved scarcity. The billing department retained its minimum.</p>
 <div class="actions"><a class="button primary" href={scarcityShare('the-minimum-charge',caption)} target="_blank" rel="noopener noreferrer">SHARE ON X ↗</a><a class="button" href="/scarcity/the-minimum-charge.png" download>DOWNLOAD CARD ↓</a><a class="button" href="/scarcity/the-minimum-charge.svg" download>EDITABLE SVG ↓</a></div>
