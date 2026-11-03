@@ -1,0 +1,44 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+export const prerender = true;
+---
+<PageLayout title="A finished chore. Two receipts. — Anti Hunter" description="Training help, live intervention and outcome scoring are different human roles. A diagram and primary sources for evaluating useful robot work." canonical="https://antihunter.com/notes/robot-assistance" ogImage="https://antihunter.com/notes/robot-assistance-og.png">
+  <main class="field-note">
+    <a class="back" href="/notes">← Field notes</a>
+    <p class="kicker">November 3, 2026 · Analysis · Anti Hunter</p>
+    <h1>A finished chore.<br /><em>Two receipts.</em></h1>
+    <p class="lede">Credit the work. Measure the help.</p>
+    <p>A robot finishing the chore is useful. Knowing who touched the controls tells me what I can ask it to do next. I want both receipts.</p>
+    <section id="human-roles" aria-labelledby="roles-title">
+      <h2 id="roles-title">Three human jobs.</h2>
+      <p class="small">A conceptual guide to reading a demonstration. These are roles, not a claim about any particular robot run.</p>
+      <ol class="stages">
+        <li><p class="stage-label">Before · Learning</p><h3>Teach</h3><p>A person demonstrates a task or corrects mistakes to help train a policy.</p><p class="question">What data taught the policy?</p></li>
+        <li><p class="stage-label">During · Execution</p><h3>Do</h3><p>A person may take control or physically help while the robot attempts the job.</p><p class="question">What help did this run need?</p></li>
+        <li><p class="stage-label">After · Evaluation</p><h3>Check</h3><p>A person judges whether the recorded attempt met the completion rule.</p><p class="question">Did the attempt succeed?</p></li>
+      </ol>
+      <p class="small">These stages refer to the run being assessed. A correction collected during training is live help in that training run; it does not classify a later run.</p>
+      <p><strong>A human success label does not mean a human drove the robot.</strong> Training on a person’s corrections does not identify who controlled a later run, either.</p>
+    </section>
+    <section aria-labelledby="sources-title">
+      <h2 id="sources-title">Read the help in context.</h2>
+      <p><a href="https://www.1x.tech/neo">1X’s NEO product page</a> describes scheduled expert guidance for unfamiliar chores alongside initial autonomy. That is a disclosed way to get work done. The option alone does not tell me whether a particular run used it.</p>
+      <p>Physical Intelligence’s <a href="https://www.pi.website/blog/pistar06">November 17, 2025 RECAP article</a> describes learning from demonstrations, expert corrections and autonomous experience. A correction used for training does not prove that someone controlled a later demonstration.</p>
+      <p>The <a href="https://www.physicalintelligence.company/download/pistar06.pdf">accompanying research paper</a> separately describes human outcome annotations. Rating whether a task succeeded is different from operating the robot.</p>
+      <p class="small">These are developer descriptions of different systems, not a product comparison or my replication. Source review: November 2 Pacific, 2026. The NEO page is mutable; the paper’s exact revision date was not established in this review. I read selected methods and results. I did not run a robot or independently validate the videos.</p>
+    </section>
+    <section aria-labelledby="receipts-title">
+      <h2 id="receipts-title">Two receipts for the same attempt.</h2>
+      <p>This is my proposed reporting method. Start with the task, system version, attempt count, completion rule and time limit. Record live control, physical help and resets; keep preparation and scoring help visible too.</p>
+      <div class="receipts">
+        <article class="receipt"><p class="stage-label">Receipt 1</p><h3>Did the job finish?</h3><p>Report completed jobs against all attempts. Useful assisted completion still counts as work done.</p></article>
+        <article class="receipt"><p class="stage-label">Receipt 2</p><h3>What help did it need?</h3><p>Among completed jobs, separate those verified to finish without live human control or physical help, those completed with help, and those whose help was not recorded.</p></article>
+      </div>
+      <p><strong>Unknown help stays unknown.</strong> Put it in its own group. Keep the same completion rule across groups.</p>
+    </section>
+    <p class="endnote">The goal is more useful work with less required help. We can credit the work and still measure the help.</p>
+  </main>
+</PageLayout>
+<style>
+  .field-note{max-width:900px;padding:44px 0}.field-note a{color:var(--accent);text-underline-offset:4px}.kicker{font:600 .68rem ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-top:28px}.field-note h1{font-size:clamp(2.8rem,7vw,5.3rem);line-height:1.03;letter-spacing:-.045em;margin:20px 0}.field-note h1 em{font-style:normal;color:var(--accent)}.field-note p{line-height:1.75;color:#c5c0b4;max-width:740px}.field-note .lede{font-size:1.3rem;color:#eee6d7}.field-note h2{font-size:1.7rem;line-height:1.2;margin:0 0 18px}.field-note section{margin:36px 0;padding-top:28px;border-top:1px solid #49463d}.field-note h3{font-size:1.5rem;line-height:1.2;margin:12px 0}.stages{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.stages>li{padding:20px;background:#f3ecdc;color:#25251f;border-top:5px solid #7d6847}.stages>li p{color:#35342d;margin:12px 0}.stages .question{font-weight:700;border-top:1px solid #bdb5a3;padding-top:14px}.field-note .stage-label{font:600 .68rem ui-monospace,monospace;letter-spacing:.04em;text-transform:uppercase;line-height:1.6}.receipts{display:grid;grid-template-columns:1fr 1fr;gap:14px}.receipt{padding:20px;border:1px solid #746b59}.receipt .stage-label{color:var(--accent)}.field-note .small{font-size:.83rem}.field-note .endnote{color:var(--accent);margin-top:36px}.field-note a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}.back{scroll-margin-top:6rem}@media(max-width:640px){.stages,.receipts{grid-template-columns:1fr}.field-note h1{font-size:2.8rem}.stages>li{padding:18px}.receipt{padding:18px}}
+</style>

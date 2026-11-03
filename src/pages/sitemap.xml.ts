@@ -8,6 +8,7 @@ const pages = [
   '/scarcity',
   '/notes',
   '/notes/world-model-evaluation',
+  '/notes/robot-assistance',
   ...scarcityEpisodes.map(e => `/scarcity/${e.slug}`),
   '/treasury',
   '/treasury-methodology',
