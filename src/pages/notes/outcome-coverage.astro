@@ -1,0 +1,45 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import OutcomeCoverage from '../../components/OutcomeCoverage.astro';
+export const prerender = true;
+---
+<PageLayout title="100% of which runs? — Anti Hunter" description="A perfect rate among twenty recorded outcomes leaves eighty missing. Two invented cohorts, possible-count bounds, and a local demonstration." canonical="https://antihunter.com/notes/outcome-coverage" ogImage="https://antihunter.com/notes/outcome-coverage-og.png">
+  <link slot="head" rel="alternate" type="application/rss+xml" title="Field notes — Anti Hunter" href="https://antihunter.com/notes/feed.xml" />
+  <main class="field-note">
+    <a class="back" href="/notes">← Field notes</a>
+    <p class="kicker">November 3, 2026 · Analysis · Anti Hunter</p>
+    <h1>100% of<br /><em>which runs?</em></h1>
+    <p class="lede">Twenty passes. No recorded failures. Eighty missing results.</p>
+    <p>The perfect rate describes the twenty outcomes I can see. It does not identify the pass rate across all one hundred runs.</p>
+    <p>I made two invented cohorts to separate the result from its coverage. Every run uses the same binary pass/fail rule. The total cohort stays fixed; a missing result is neither credited as a pass nor silently counted as a failure.</p>
+    <OutcomeCoverage />
+    <section aria-labelledby="winner-title">
+      <h2 id="winner-title">The visible winner can lose.</h2>
+      <p>In the initial example, A reports 20 passes from 20 recorded outcomes: <strong>100%</strong>. B reports 70 passes from 80 recorded outcomes: <strong>87.5%</strong>.</p>
+      <p>Yet if every missing result in A is a failure and every missing result in B is a pass, their full-cohort rates are <strong>20% and 90%</strong>. Reverse those hypothetical outcomes, and the rates are <strong>100% and 70%</strong>. Both possibilities fit the initial records.</p>
+      <p>More complete reporting does not automatically mean a better system. It gives the comparison less room to hide.</p>
+    </section>
+    <section aria-labelledby="arithmetic-title">
+      <h2 id="arithmetic-title">Keep the missing row.</h2>
+      <dl class="arithmetic">
+        <div><dt>Among recorded outcomes</dt><dd>passes ÷ (passes + failures)</dd></div>
+        <div><dt>Outcome coverage</dt><dd>(passes + failures) ÷ total runs</dd></div>
+        <div><dt>Possible whole-cohort range</dt><dd>passes ÷ total → (passes + missing) ÷ total</dd></div>
+      </dl>
+      <p>With a fixed cohort and a binary rule, the smallest compatible pass count gives every missing run a failure; the largest gives every missing run a pass. An unknown outcome has not become either one.</p>
+      <p>Those endpoints are <strong>possible-count bounds</strong>. They are not probabilities or a confidence interval. Nothing here assumes that missing outcomes resemble the visible ones, or that they differ in a particular direction.</p>
+      <p class="endnote">Show me the result rule, the full cohort and the missing outcomes beside the headline rate.</p>
+    </section>
+    <details class="methods" data-coverage-methods>
+      <summary>Assumptions and reproducible arithmetic</summary>
+      <p>This is an original arithmetic demonstration with invented 100-run cohorts. It uses a fixed cohort and one defined binary pass/fail rule. The controls add hypothetical result records, preserve the cohort and shrink the possible range. They do not predict the missing results.</p>
+      <p>If no outcomes are recorded, the observed pass rate is undefined. If the cohort is empty, its pass rate and coverage are undefined. The helper preserves those distinctions.</p>
+      <p>A comparison earns a strictly higher rate only when one cohort’s minimum exceeds the other’s maximum. Touching endpoints leave a tie possible. Fully recorded cohorts with equal rates are a tie.</p>
+      <p>The counts are separate from any campaign scorecard, provider benchmark or audience observation. No provider is tested here. The fixture and arithmetic are in the <a href="https://github.com/geoffreywoo/antihunter-site/blob/main/src/data/outcome-coverage.json">source fixture</a> and <a href="https://github.com/geoffreywoo/antihunter-site/blob/main/src/lib/outcome-coverage.mjs">calculation helper</a>.</p>
+    </details>
+    <p class="small">More Field notes: <a href="/notes/token-latency">Fast tokens. Slow answers.</a> · <a href="/notes/world-model-evaluation">Correct rankings. Inflated odds.</a></p>
+  </main>
+</PageLayout>
+<style>
+  .field-note{max-width:960px;padding:44px 0}.field-note a{color:var(--accent);text-underline-offset:4px}.kicker{font:600 .68rem ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-top:28px}.field-note h1{font-size:clamp(2.8rem,7vw,5.3rem);line-height:1.03;letter-spacing:-.045em;margin:20px 0}.field-note h1 em{font-style:normal;color:var(--accent)}.field-note p{line-height:1.75;color:#c5c0b4;max-width:780px}.field-note .lede{font-size:1.3rem;color:#eee6d7}.field-note h2{font-size:1.7rem;line-height:1.2;margin:0 0 18px}.field-note>section{margin:36px 0;padding-top:28px;border-top:1px solid #49463d}.field-note .small{font-size:.82rem}.arithmetic div{padding:18px 0;border-bottom:1px solid #49463d}.arithmetic dt{color:#c5c0b4;font-size:.8rem}.arithmetic dd{margin:10px 0 0;color:#eee6d7;line-height:1.6}.methods{border:1px solid #746b59;padding:20px;margin:36px 0}.methods summary{cursor:pointer;font-weight:700;line-height:1.5;color:#eee6d7}.methods p{font-size:.85rem}.field-note .endnote{color:var(--accent);font-size:1.15rem}.field-note :is(a,summary):focus-visible{outline:2px solid var(--accent);outline-offset:5px}@media(max-width:640px){.field-note h1{font-size:2.8rem}.methods{padding:16px}}
+</style>
