@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
+import PolicyExample from '../../components/PolicyExample.astro';
 export const prerender = true;
 ---
 <PageLayout title="Correct rankings. Inflated odds. — Anti Hunter" description="A robot simulator can rank policies correctly while overstating success. An invented arithmetic example and the limits of a real DreamDojo study." canonical="https://antihunter.com/notes/world-model-evaluation" ogImage="https://antihunter.com/notes/world-model-evaluation-og.png">
@@ -19,6 +20,7 @@ export const prerender = true;
       <p>Both columns pick C. Pearson correlation is <strong>1</strong>. Every estimate is still <strong>20 percentage points too high</strong>.</p>
       <p class="small">These three rows were made up to demonstrate the arithmetic. They are not DreamDojo measurements.</p>
     </section>
+    <PolicyExample />
     <section aria-labelledby="study-title">
       <h2 id="study-title">A real receipt, with a boundary.</h2>
       <p>In the <a href="https://arxiv.org/html/2602.06949v1">February 6 DreamDojo preprint</a>, Shenyuan Gao and coauthors compare robot-policy checkpoints on fruit packing across 20 scenes. They report Pearson correlation of <strong>0.995</strong> between simulated and physical success rates. Human evaluators score generated rollouts using the physical task’s criteria.</p>
