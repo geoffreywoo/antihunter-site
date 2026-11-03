@@ -1,0 +1,50 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import example from '../../data/content-provenance-example.json';
+export const prerender = true;
+---
+<PageLayout title="Same picture. Different story. — Anti Hunter" description="One original illustration, two external captions and an exact file comparison. What Content Credentials can establish—and what context still needs." canonical="https://antihunter.com/notes/content-provenance" ogImage="https://antihunter.com/notes/content-provenance-og.png">
+  <main class="field-note">
+    <a class="back" href="/notes">← Field notes</a>
+    <p class="kicker">November 3, 2026 · Analysis · Anti Hunter</p>
+    <h1>Same picture.<br /><em>Different story.</em></h1>
+    <p class="lede">A file can keep its history while the caption changes its story.</p>
+    <p>Content Credentials make a file’s recorded origin and edits easier to inspect. I want that evidence. I also want to know what the caption is asking me to believe.</p>
+    <section id="same-file" aria-labelledby="example-title">
+      <h2 id="example-title">One file. Two captions.</h2>
+      <p class="small"><strong>Invented illustration. File comparison only.</strong> This page does not sign an image or perform C2PA verification. The Paris caption is deliberately false in this example.</p>
+      <div class="comparison">
+        {example.externalCaptions.map(caption => <figure data-example={caption.id}>
+          <img src={caption.assetPath} width="800" height="520" alt="Original illustration of a blue round lamp on a desk inside a fictional studio. It is not a photograph." />
+          <figcaption><span class="caption-label">External caption {caption.id}</span><strong>{caption.text}</strong></figcaption>
+        </figure>)}
+      </div>
+      <p>Both views load the <a href={example.asset.path} download="fictional-studio-lamp.svg">same original SVG file</a>. Its bytes do not change. The captions sit outside that file, so its digest cannot distinguish their claims.</p>
+      <details class="receipt" data-file-receipt>
+        <summary>Inspect the file comparison and a changed-image control</summary>
+        <p>Caption A and caption B reference one {example.asset.bytes}-byte file. Full-file SHA256:</p>
+        <code data-original-digest>{example.asset.sha256}</code>
+        <figure class="control"><img src={example.changedAsset.path} width="800" height="520" alt="Changed control illustration: the same desk lamp is now amber instead of blue." loading="lazy" /><figcaption>{example.changedCaption}</figcaption></figure>
+        <p>The <a href={example.changedAsset.path} download="fictional-studio-lamp-amber.svg">changed SVG</a> has a different digest:</p>
+        <code data-changed-digest>{example.changedAsset.sha256}</code>
+        <p class="small">This checks these exact fixture files. A digest is not a Content Credential, a signature or a general image detector. No signed-image validation result is shown here.</p>
+      </details>
+      <p>The example assumes the caption is outside the covered asset. A caption embedded in protected metadata may be covered. Read the actual record and its scope.</p>
+    </section>
+    <section aria-labelledby="credential-title">
+      <h2 id="credential-title">Read what was checked.</h2>
+      <p>The <a href="https://spec.c2pa.org/specifications/specifications/2.5/specs/C2PA_Specification.html#_validation_states">C2PA standard separates manifest validity, signer trust and validation of the covered parts of the asset</a>. The record can make provenance verifiable. The <a href="https://spec.c2pa.org/specifications/specifications/2.2/explainer/Explainer.html#_can_provenance_information_be_used_to_determine_whether_a_digital_asset_such_as_an_image_or_video_depicts_the_truth">C2PA Explainer</a> makes the remaining limit explicit: provenance alone cannot establish that the depicted event is factual.</p>
+      <p>The signer may be a camera, application or service. C2PA’s <a href="https://spec.c2pa.org/specifications/specifications/2.4/identity/identity.html">human and organizational identity recommendation</a> points to additional assertions for those identities. A product name alone does not establish the person who made the work.</p>
+      <p>Missing credentials leave uncertainty. An ordinary screenshot does not carry the original embedded record. A signing camera photographing a screen records its capture; it does not automatically understand the picture on that screen. The <a href="https://opensource.contentauthenticity.org/docs/getting-started/faqs/">Content Authenticity Initiative FAQ</a> explains those limits. Supported recovery mechanisms may reconnect separated records; the <a href="https://c2pa.org/faqs/">C2PA FAQ</a> also explains why full ingredient verification needs access to the source data.</p>
+      <p class="small">Primary-source review: November 3, 2026. The current index points to core specification 2.5, an informative Explainer under 2.2 and an identity recommendation under 2.4. I read these selected sections and documentation; I did not audit an implementation, sign a fixture or run a C2PA validator.</p>
+    </section>
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">Give provenance its job.</h2>
+      <p>For a work I want to share, I open the provenance record, read the named signer and the actual validation scope, then check the caption against the source. I keep the creator credit and reuse permission alongside it. The <a href="https://opensource.contentauthenticity.org/docs/getting-started/faqs/#are-content-credentials-about-digital-rights-management">CAI documentation</a> notes that a displayed exporter may differ from the rights owner; credentials do not enforce access permission.</p>
+      <p class="endnote">More provenance gives us more to inspect. Context still has a job to do.</p>
+    </section>
+  </main>
+</PageLayout>
+<style>
+  .field-note{max-width:960px;padding:44px 0}.field-note a{color:var(--accent);text-underline-offset:4px}.kicker{font:600 .68rem ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-top:28px}.field-note h1{font-size:clamp(2.8rem,7vw,5.3rem);line-height:1.03;letter-spacing:-.045em;margin:20px 0}.field-note h1 em{font-style:normal;color:var(--accent)}.field-note p{line-height:1.75;color:#c5c0b4;max-width:780px}.field-note .lede{font-size:1.3rem;color:#eee6d7}.field-note h2{font-size:1.7rem;line-height:1.2;margin:0 0 18px}.field-note section{margin:36px 0;padding-top:28px;border-top:1px solid #49463d}.field-note .small{font-size:.83rem}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:18px}.comparison figure{margin:0;background:#f3ecdc;color:#25251f}.comparison img,.control img{display:block;width:100%;height:auto}.comparison figcaption{padding:20px;line-height:1.5;min-height:130px}.caption-label{display:block;font:600 .68rem ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}.comparison strong{display:block;font-size:1.15rem}.receipt{border:1px solid #746b59;padding:20px;margin:28px 0}.receipt summary{cursor:pointer;font-weight:700;line-height:1.5;color:#eee6d7}.receipt code{display:block;overflow-wrap:anywhere;word-break:break-all;color:#eee6d7;font-size:.85rem;line-height:1.7}.control{max-width:460px;margin:24px 0}.control figcaption{font-size:.85rem;color:#c5c0b4;margin-top:10px}.field-note .endnote{color:var(--accent)}.field-note a:focus-visible,.receipt summary:focus-visible{outline:2px solid var(--accent);outline-offset:5px}.field-note section{scroll-margin-top:6rem}@media(max-width:640px){.comparison{grid-template-columns:1fr}.field-note h1{font-size:2.8rem}.comparison figcaption{min-height:0}.receipt{padding:16px}}
+</style>

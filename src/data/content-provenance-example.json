@@ -1,0 +1,29 @@
+{
+  "label": "Invented illustration. Full-file SHA256 comparison, not C2PA verification.",
+  "asset": {
+    "path": "/notes/content-provenance-lamp.svg",
+    "bytes": 1202,
+    "sha256": "3ae5bab75bb205f5c8ae57fb48a67ced3b104230186cf808d099cb1f9054eb93"
+  },
+  "externalCaptions": [
+    {
+      "id": "A",
+      "text": "A blue lamp in our fictional studio.",
+      "assetPath": "/notes/content-provenance-lamp.svg"
+    },
+    {
+      "id": "B",
+      "text": "The moon above Paris this morning.",
+      "assetPath": "/notes/content-provenance-lamp.svg"
+    }
+  ],
+  "changedAsset": {
+    "path": "/notes/content-provenance-lamp-amber.svg",
+    "bytes": 1202,
+    "sha256": "2c8edb31b85ac99782dba0559553646eaf715435bcc4699d88ab5b7859724c85"
+  },
+  "changedCaption": "Control: the lamp is now amber.",
+  "C2PAVerificationPerformed": false,
+  "signedAsset": false,
+  "thirdPartyMedia": false
+}
