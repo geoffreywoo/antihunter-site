@@ -7,6 +7,7 @@ const pages = [
   '/',
   '/scarcity',
   '/notes',
+  '/notes/token-latency',
   '/notes/world-model-evaluation',
   '/notes/robot-assistance',
   '/notes/content-provenance',

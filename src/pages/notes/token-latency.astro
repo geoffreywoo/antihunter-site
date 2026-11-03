@@ -1,0 +1,58 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import TokenTiming from '../../components/TokenTiming.astro';
+import bundles from '../../data/token-timing-bundles.json';
+export const prerender = true;
+const pinned = 'https://github.com/vllm-project/vllm/blob/4ba787ec9959e566d3b587a796dff07673324da5/';
+const nvidia = 'https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/perf_analyzer/genai-perf/README.html#metrics';
+---
+<PageLayout title="Fast tokens. Slow answers. — Anti Hunter" description="A doubled gap rate can cut an invented stream’s duration by only 25%. Two timelines, bundled outputs, and the benchmark clocks behind a speed claim." canonical="https://antihunter.com/notes/token-latency" ogImage="https://antihunter.com/notes/token-latency-og.png">
+  <link slot="head" rel="alternate" type="application/rss+xml" title="Field notes — Anti Hunter" href="https://antihunter.com/notes/feed.xml" />
+  <main class="field-note">
+    <a class="back" href="/notes">← Field notes</a>
+    <p class="kicker">November 3, 2026 · Analysis · Anti Hunter</p>
+    <h1>Fast tokens.<br /><em>Slow answers.</em></h1>
+    <p class="lede">A rate can double while the last recorded output arrives just one second earlier.</p>
+    <p>I built an invented stream to show why the stopwatch matters. The first marker arrives after two seconds. The next hundred gaps take two more. Halve those gaps, and the last marker arrives at three seconds instead of four.</p>
+    <TokenTiming />
+    <section aria-labelledby="clock-title">
+      <h2 id="clock-title">Whose stopwatch?</h2>
+      <p>The <a href={pinned+'docs/benchmarking/cli.md#understanding-the-latency-metrics'}>vLLM v0.33.0 benchmark documentation</a> places time to first token (TTFT) at the client: from starting the request to receiving its first streamed output. That does not isolate a GPU phase or say when a browser paints a word.</p>
+      <p>The adapter matters too. In the inspected <a href={pinned+'vllm/benchmarks/lib/endpoint_request_func.py#L245-L307'}>completion</a> and <a href={pinned+'vllm/benchmarks/lib/endpoint_request_func.py#L440-L501'}>chat</a> paths, reported request latency ends at the latest accepted output-bearing message timestamp. A trailing usage-only message does not extend it. Read the implementation before treating an end-to-end label as proof that the whole response has closed.</p>
+    </section>
+    <section aria-labelledby="bundles-title">
+      <h2 id="bundles-title">Three arrivals. Nine markers.</h2>
+      <p>Now invent three responses. Their arrival times are known; individual generation times inside each bundle are not.</p>
+      <ol class="bundles" data-bundled-responses aria-label="Invented response arrivals, not a to-scale timeline">
+        {bundles.responses.map((response, i) => <li><span class="bundle-time">Arrival {i+1} · {response.arrivedAtMs.toLocaleString('en-US')} ms</span><strong>{response.markerIds.length} {response.markerIds.length === 1 ? 'marker' : 'markers'}</strong><span>{response.markerIds.length === 1 ? response.markerIds[0] : `${response.markerIds[0]}–${response.markerIds.at(-1)}`}</span></li>)}
+      </ol>
+      <p class="small">Grouped markers only. The cards are not spaced by time, and positions inside a card do not assign timestamps.</p>
+      <dl class="bundle-math">
+        <div><dt>Mean observed response gap</dt><dd>(120 + 80) ÷ 2 = <strong>100 ms</strong></dd></div>
+        <div><dt>Span per marker after the first</dt><dd>200 ÷ 8 = <strong>25 ms</strong></dd></div>
+      </dl>
+      <p>The denominators differ. There are timestamps for three arrivals, not nine independently observed generation events.</p>
+      <p>In the pinned <a href={pinned+'docs/benchmarking/cli.md#understanding-the-latency-metrics'}>vLLM definitions</a>, inter-token latency (ITL) pools gaps between streamed outputs. Time per output token (TPOT) amortizes each request’s later latency over its output-token count minus one. Bundled tokens make that distinction matter.</p>
+      <p><a href={nvidia}>GenAI-Perf’s documented ITL</a> instead normalizes a response gap by the token count in the latter response. The label alone cannot tell you which calculation produced a number.</p>
+    </section>
+    <section aria-labelledby="throughput-title">
+      <h2 id="throughput-title">One stream. A whole benchmark.</h2>
+      <p>The pinned <a href={pinned+'vllm/benchmarks/serve.py#L634-L668'}>vLLM aggregation</a> uses successful requests’ output counts and <a href={pinned+'vllm/benchmarks/serve.py#L773-L805'}>divides their total by the benchmark’s elapsed duration</a>. That asks a different question from how quickly one request’s later markers arrive. GenAI-Perf also documents separate whole-benchmark and per-user output throughput.</p>
+      <p>Before comparing a speed headline, I want the timer boundaries, event and token-count rules, input/output lengths, load and concurrency, cache state, failure handling and aggregation.</p>
+      <p class="endnote">Faster generation can be useful. Tell me which part became faster.</p>
+    </section>
+    <details class="methods" data-timing-methods>
+      <summary>Sources, short outputs and the limits of this example</summary>
+      <p>Primary-source review: November 3, 2026. The vLLM links pin release v0.33.0 to commit <code>4ba787ec</code>. I read the selected documentation and source; I did not run a serving benchmark.</p>
+      <p>The synthetic gap rate is (marker count − 1) ÷ the first-to-last span. For fewer than two markers or a zero observed span, this example leaves the rate undefined. That is a display rule, not a universal benchmark convention.</p>
+      <p>The <a href={pinned+'vllm/benchmarks/serve.py#L654-L660'}>pinned implementation</a> excludes outputs with at most one counted token from its TPOT sample list, uses zero for their goodput calculation, and falls back to zero for empty aggregate lists. That bookkeeping does not demonstrate instantaneous output.</p>
+      <p>Token counts can come from response usage or <a href={pinned+'vllm/benchmarks/serve.py#L636-L651'}>a tokenizer fallback</a>; they are not a count of arbitrary HTTP chunks. The CLI also <a href={pinned+'docs/benchmarking/cli.md#online-benchmark'}>warns about prefix-cache reuse</a>. Definitions and workload belong beside a comparison.</p>
+      <p>The separately read <a href={nvidia}>live NVIDIA page</a> announces that GenAI-Perf is being phased out and directs new benchmarking work to AIPerf. Its definitions are cited here; this is not a tool recommendation.</p>
+      <p>All example times and marker IDs are invented. No model, hardware, tokenizer run, within-bundle generation trace, terminal or closed-response event, browser timing, price comparison or vendor ranking is measured here. This page makes no claim about the quality of an answer.</p>
+    </details>
+    <p class="small">More Field notes: <a href="/notes/world-model-evaluation">Correct rankings. Inflated odds.</a> · <a href="/notes/robot-assistance">A finished chore. Two receipts.</a> · <a href="/notes/content-provenance">Same picture. Different story.</a></p>
+  </main>
+</PageLayout>
+<style>
+  .field-note{max-width:960px;padding:44px 0}.field-note a{color:var(--accent);text-underline-offset:4px}.kicker{font:600 .68rem ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-top:28px}.field-note h1{font-size:clamp(2.8rem,7vw,5.3rem);line-height:1.03;letter-spacing:-.045em;margin:20px 0}.field-note h1 em{font-style:normal;color:var(--accent)}.field-note p{line-height:1.75;color:#c5c0b4;max-width:780px}.field-note .lede{font-size:1.3rem;color:#eee6d7}.field-note h2{font-size:1.7rem;line-height:1.2;margin:0 0 18px}.field-note>section{margin:36px 0;padding-top:28px;border-top:1px solid #49463d}.field-note .small{font-size:.82rem}.bundles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;list-style:none;padding:0;margin:24px 0}.bundles li{display:flex;flex-direction:column;gap:12px;border:1px solid #737a6b;padding:18px;color:#c5c0b4;font-size:.8rem}.bundle-time{font-size:.7rem;color:#8ccac0}.bundles strong{font-size:1.3rem;color:#eee6d7}.bundle-math{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;border-block:1px solid #49463d;padding:24px 0;margin:28px 0}.bundle-math dt{font-size:.78rem;color:#c5c0b4;line-height:1.6}.bundle-math dd{margin:12px 0 0;font-size:1.1rem;line-height:1.5}.bundle-math strong{color:#8ccac0}.methods{border:1px solid #746b59;padding:20px;margin:36px 0}.methods summary{cursor:pointer;font-weight:700;line-height:1.5;color:#eee6d7}.methods p{font-size:.85rem}.methods code{color:#eee6d7}.field-note .endnote{color:var(--accent);font-size:1.15rem}.field-note :is(a,summary):focus-visible{outline:2px solid var(--accent);outline-offset:5px}@media(max-width:640px){.bundles,.bundle-math{grid-template-columns:1fr}.bundles li{gap:8px}.field-note h1{font-size:2.8rem}.methods{padding:16px}}
+</style>
