@@ -11,7 +11,7 @@ const percent = (n: number | null) => n === null ? 'Undefined' : `${Math.round(n
     {cohorts.map(c => <section class="cohort" data-cohort={c.id} aria-labelledby={`cohort-${c.id}`}>
       <h3 id={`cohort-${c.id}`}>{c.label} · 100 runs</h3>
       <div class="partition" aria-hidden="true"><span class="pass" data-pass-bar style={`width:${c.passed}%`}></span><span class="fail" data-fail-bar style={`width:${c.failed}%`}></span><span class="unknown" data-unknown-bar style={`width:${c.unknown}%`}></span></div>
-      <p class="counts" data-counts>{c.passed} pass · {c.failed} fail · {c.unknown} missing</p>
+      <p class="counts" role="status" aria-atomic="true" data-count-announcement><span class="sr-only">{c.label}: </span><span data-counts>{c.passed} pass · {c.failed} fail · {c.unknown} missing</span></p>
       <dl>
         <div><dt>Pass rate among recorded outcomes</dt><dd data-observed>{percent(c.observedPassRate)}</dd></div>
         <div><dt>Outcome coverage</dt><dd data-coverage>{percent(c.outcomeCoverage)} <span data-known>({c.known}/100)</span></dd></div>
@@ -35,18 +35,19 @@ const percent = (n: number | null) => n === null ? 'Undefined' : `${Math.round(n
   if(root){
     const states=fixture.cohorts.map(c=>({...c}));
     const percent=(n:number|null)=>n===null?'Undefined':`${Math.round(n*1000)/10}%`;
+    const updateText=(el:Element,text:string)=>{if(el.textContent!==text)el.textContent=text;};
     const messages={a_strictly_higher:'Cohort A now has a strictly higher full-cohort pass rate for every remaining possible outcome.',b_strictly_higher:'Cohort B now has a strictly higher full-cohort pass rate for every remaining possible outcome.',equal:'Both cohorts are fully recorded and have the same pass rate.',undefined:'A comparison needs a nonempty cohort on both sides.',unresolved:'These records do not establish a strictly higher full-cohort pass rate.'};
     const render=()=>{
       states.forEach(c=>{
         const x=summarizeCohort(c),el=root.querySelector<HTMLElement>(`[data-cohort="${c.id}"]`)!;
-        el.querySelector('[data-counts]')!.textContent=`${x.passed} pass · ${x.failed} fail · ${x.unknown} missing`;
+        updateText(el.querySelector('[data-counts]')!,`${x.passed} pass · ${x.failed} fail · ${x.unknown} missing`);
         for(const [selector,n] of [['pass',x.passed],['fail',x.failed],['unknown',x.unknown]] as const)el.querySelector<HTMLElement>(`[data-${selector}-bar]`)!.style.width=`${n}%`;
         el.querySelector('[data-observed]')!.textContent=percent(x.observedPassRate);
         el.querySelector('[data-coverage]')!.replaceChildren(document.createTextNode(`${percent(x.outcomeCoverage)} (${x.known}/100)`));
         el.querySelector('[data-bounds]')!.textContent=`${percent(x.minimumPassRate)}–${percent(x.maximumPassRate)}`;
         el.querySelectorAll<HTMLButtonElement>('[data-record]').forEach(button=>{button.disabled=x.unknown===0;button.textContent=`Record ${Math.min(10,x.unknown)} ${button.dataset.record==='passed'?'passes':'failures'} in ${c.id.toUpperCase()}`;});
       });
-      root.querySelector('[data-comparison]')!.textContent=messages[compareCohorts(states[0],states[1]) as keyof typeof messages];
+      updateText(root.querySelector('[data-comparison]')!,messages[compareCohorts(states[0],states[1]) as keyof typeof messages]);
     };
     root.querySelectorAll<HTMLElement>('[data-cohort]').forEach((el,i)=>{
       el.querySelectorAll<HTMLButtonElement>('[data-record]').forEach(button=>button.addEventListener('click',()=>{states[i]=recordInventedResults(states[i],button.dataset.record!);render();}));
@@ -57,5 +58,6 @@ const percent = (n: number | null) => n === null ? 'Undefined' : `${Math.round(n
   }
 </script>
 <style>
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   .coverage-demo{border:1px solid #77715f;padding:24px;background:#23251f;margin:36px 0}.coverage-demo h2{margin-top:0;line-height:1.25}.coverage-demo p{color:#c5c0b4;line-height:1.7}.coverage-demo strong{color:#eee6d7}.cohorts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin-top:28px}.cohort{min-width:0}.cohort h3{font-size:1.1rem;color:#eee6d7}.partition{display:flex;height:22px;outline:1px solid #a49b87;margin:18px 0 12px}.partition span{display:block}.pass{background:#8ccac0}.fail{background:#e68d7e}.unknown{background:repeating-linear-gradient(135deg,#e9b568 0px,#e9b568 5px,#a27638 5px,#a27638 7px)}.counts{font-size:.8rem}dl{font-variant-numeric:tabular-nums}dl div{padding:14px 0;border-bottom:1px solid #5e6054}dt{font-size:.8rem;color:#c5c0b4;line-height:1.5}dd{margin:8px 0 0;font-size:1.7rem;color:#eee6d7}dd span{font-size:.8rem}.bounds dd{color:#e9b568}.small{font-size:.8rem}fieldset{border:0;padding:0;margin:20px 0 0;min-width:0}legend{font-size:.8rem;color:#d7d0bf;margin-bottom:8px}button{display:block;width:100%;min-height:44px;margin:8px 0;padding:10px 12px;border:1px solid #8f8878;background:#33362d;color:#eee6d7;font:inherit;font-size:.85rem;cursor:pointer;text-align:left}button:disabled{opacity:.55;cursor:default}button:focus-visible{outline:3px solid #8ccac0;outline-offset:3px}.comparison{border-left:3px solid #e9b568;padding:14px 18px;background:#191d18}.coverage-demo [hidden]{display:none}@media(max-width:640px){.cohorts{grid-template-columns:1fr;gap:30px}.coverage-demo{padding:20px 16px}.cohort{border-top:1px solid #5e6054;padding-top:12px}}
 </style>
