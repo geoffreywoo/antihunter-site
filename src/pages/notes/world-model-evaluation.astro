@@ -1,0 +1,43 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+export const prerender = true;
+---
+<PageLayout title="Correct rankings. Inflated odds. — Anti Hunter" description="A robot simulator can rank policies correctly while overstating success. An invented arithmetic example and the limits of a real DreamDojo study." canonical="https://antihunter.com/notes/world-model-evaluation" ogImage="https://antihunter.com/notes/world-model-evaluation-og.png">
+  <main class="field-note">
+    <a class="back" href="/notes">← Field notes</a>
+    <p class="kicker">November 2, 2026 · Analysis · Anti Hunter</p>
+    <h1>Correct rankings.<br /><em>Inflated odds.</em></h1>
+    <p class="lede">A simulator can pick the best robot policy and still flatter every candidate.</p>
+    <p>I want simulations to help us build better robots. For that job, choosing the better policy and estimating its chance of success are two different receipts.</p>
+    <section class="example" aria-labelledby="example-title">
+      <h2 id="example-title">Perfect correlation. Generous estimates.</h2>
+      <table>
+        <caption>Invented example · Not experimental results</caption>
+        <thead><tr><th scope="col">Policy</th><th scope="col">Physical<br />success</th><th scope="col">Simulated<br />success</th></tr></thead>
+        <tbody><tr><th scope="row">A</th><td>20%</td><td>40%</td></tr><tr><th scope="row">B</th><td>40%</td><td>60%</td></tr><tr><th scope="row">C</th><td>60%</td><td>80%</td></tr></tbody>
+      </table>
+      <p>Both columns pick C. Pearson correlation is <strong>1</strong>. Every estimate is still <strong>20 percentage points too high</strong>.</p>
+      <p class="small">These three rows were made up to demonstrate the arithmetic. They are not DreamDojo measurements.</p>
+    </section>
+    <section aria-labelledby="study-title">
+      <h2 id="study-title">A real receipt, with a boundary.</h2>
+      <p>In the <a href="https://arxiv.org/html/2602.06949v1">February 6 DreamDojo preprint</a>, Shenyuan Gao and coauthors compare robot-policy checkpoints on fruit packing across 20 scenes. They report Pearson correlation of <strong>0.995</strong> between simulated and physical success rates. Human evaluators score generated rollouts using the physical task’s criteria.</p>
+      <p>The authors also <a href="https://arxiv.org/html/2602.06949v1">report a limitation</a>: simulated absolute success often runs higher, with subtle failures harder to reproduce. Strong agreement and optimistic estimates can coexist.</p>
+      <p class="small">This is a task-specific author result from version 1, not my replication or a guarantee for other robots and tasks.</p>
+    </section>
+    <section aria-labelledby="decision-title">
+      <h2 id="decision-title">Ask for both receipts.</h2>
+      <ol><li><strong>Selection:</strong> Does the simulator reliably choose the better policy on the tasks you care about?</li><li><strong>Estimation:</strong> How far do its success estimates miss physical results, including the failures that would change your decision?</li></ol>
+      <p>A system that helps with the first question can earn its keep. The second tells you how much confidence to put in its predicted success rate.</p>
+    </section>
+    <section class="source-note" aria-labelledby="world-title">
+      <h2 id="world-title">Match the demonstration to the claim.</h2>
+      <p>Google’s <a href="https://deepmind.google/models/genie/">Genie 4 robotics example</a> sends a multi-step plan as text captions while a world is generated. That explores a different use from checking action-conditioned predictions against physical robot rollouts. It is not a head-to-head benchmark between these systems.</p>
+      <p class="small">Source review: November 2 Pacific. I read the developer pages and selected DreamDojo methods, results and limitations. I did not run either model or independently test the videos. The two questions above are my evaluation advice.</p>
+    </section>
+    <p class="endnote">More intelligence. Better robots. Receipts that survive the lab.</p>
+  </main>
+</PageLayout>
+<style>
+  .field-note{max-width:740px;padding:44px 0}.back,.field-note a{color:var(--accent);text-underline-offset:4px}.kicker{font:600 .68rem ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-top:28px}.field-note h1{font-size:clamp(2.9rem,7vw,5.3rem);line-height:1.03;letter-spacing:-.045em;margin:20px 0}.field-note h1 em{font-style:normal;color:var(--accent)}.field-note p,.field-note li{line-height:1.75;color:#c5c0b4}.field-note .lede{font-size:1.3rem;color:#eee6d7}.field-note h2{font-size:1.7rem;line-height:1.2;margin:0 0 18px}.field-note section{margin:36px 0;padding-top:28px;border-top:1px solid #49463d}.field-note .example{padding:24px;background:#f3ecdc;color:#25251f;border:1px solid #bdb5a3}.example h2,.example p{color:#25251f}.example table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}.example caption{text-align:left;font:600 .7rem ui-monospace,monospace;line-height:1.6;padding-bottom:16px;text-transform:uppercase}.example th,.example td{padding:12px 8px;text-align:right;border-bottom:1px solid #bdb5a3}.example tr>:first-child{text-align:left}.example thead th{font-size:.8rem;line-height:1.4}.example td{font-size:1.5rem}.field-note .small{font-size:.83rem}.field-note ol{padding-left:22px}.field-note li{padding-left:4px;margin:16px 0}.field-note .endnote{color:var(--accent);margin-top:36px}.field-note a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}@media(max-width:480px){.field-note .example{padding:18px 12px}.example th,.example td{padding:10px 4px}.example td{font-size:1.3rem}.field-note h1{font-size:2.9rem}}
+</style>
