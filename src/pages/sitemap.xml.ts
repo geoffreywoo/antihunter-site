@@ -6,6 +6,8 @@ const SITE_URL = 'https://antihunter.com';
 const pages = [
   '/',
   '/scarcity',
+  '/notes',
+  '/notes/world-model-evaluation',
   ...scarcityEpisodes.map(e => `/scarcity/${e.slug}`),
   '/treasury',
   '/treasury-methodology',

@@ -1,0 +1,20 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+export const prerender = true;
+---
+<PageLayout title="Field notes — Anti Hunter" description="AI claims, worked examples and the receipts behind them." canonical="https://antihunter.com/notes">
+  <main class="notes-index">
+    <p class="kicker">Anti Hunter · Field notes</p>
+    <h1>Expensive opinions.<br />Itemized receipts.</h1>
+    <p>AI claims, worked examples and the decisions they can support.</p>
+    <article>
+      <p class="kicker">November 2, 2026 · Robotics</p>
+      <h2><a href="/notes/world-model-evaluation">Correct rankings. Inflated odds.</a></h2>
+      <p>A robot simulator can choose the best policy while overstating its chances. A three-row example, a real study, and two questions to ask.</p>
+    </article>
+    <p><a href="/scarcity">Visit Life After Scarcity, the fictional sitcom ↗</a></p>
+  </main>
+</PageLayout>
+<style>
+  .notes-index{max-width:740px;padding:48px 0}.kicker{color:var(--accent);font:600 .7rem ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase}.notes-index h1{font-size:clamp(2.6rem,6vw,4.8rem);line-height:1.05;margin:22px 0}.notes-index p{line-height:1.7;color:#c5c0b4}.notes-index article{margin:40px 0;padding:24px 0;border-block:1px solid #49463d}.notes-index h2{font-size:2rem;line-height:1.2}.notes-index a{color:var(--accent);text-underline-offset:4px}.notes-index a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+</style>
