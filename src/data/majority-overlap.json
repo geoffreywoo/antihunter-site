@@ -1,0 +1,2740 @@
+{
+  "kind": "Original invented complete binary-task examples",
+  "tasksPerCase": 100,
+  "voters": 3,
+  "individualCorrectCounts": [
+    80,
+    80,
+    80
+  ],
+  "cases": [
+    {
+      "id": "shared",
+      "label": "Same mistakes",
+      "description": "All three miss the same 20 tasks. Every answer is unanimous; 20 are wrong.",
+      "rows": [
+        {
+          "task": 1,
+          "truth": 0,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 2,
+          "truth": 1,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 3,
+          "truth": 0,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 4,
+          "truth": 1,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 5,
+          "truth": 0,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 6,
+          "truth": 1,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 7,
+          "truth": 0,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 8,
+          "truth": 1,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 9,
+          "truth": 0,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 10,
+          "truth": 1,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 11,
+          "truth": 0,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 12,
+          "truth": 1,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 13,
+          "truth": 0,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 14,
+          "truth": 1,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 15,
+          "truth": 0,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 16,
+          "truth": 1,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 17,
+          "truth": 0,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 18,
+          "truth": 1,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 19,
+          "truth": 0,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 20,
+          "truth": 1,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 21,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 22,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 23,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 24,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 25,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 26,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 27,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 28,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 29,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 30,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 31,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 32,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 33,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 34,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 35,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 36,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 37,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 38,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 39,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 40,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 41,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 42,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 43,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 44,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 45,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 46,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 47,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 48,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 49,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 50,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 51,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 52,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 53,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 54,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 55,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 56,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 57,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 58,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 59,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 60,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 61,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 62,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 63,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 64,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 65,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 66,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 67,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 68,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 69,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 70,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 71,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 72,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 73,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 74,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 75,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 76,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 77,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 78,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 79,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 80,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 81,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 82,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 83,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 84,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 85,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 86,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 87,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 88,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 89,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 90,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 91,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 92,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 93,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 94,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 95,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 96,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 97,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 98,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 99,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 100,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "separate",
+      "label": "Separate mistakes",
+      "description": "Each voter misses a different 20 tasks. No task has two wrong votes.",
+      "rows": [
+        {
+          "task": 1,
+          "truth": 0,
+          "predictions": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 2,
+          "truth": 1,
+          "predictions": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 3,
+          "truth": 0,
+          "predictions": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 4,
+          "truth": 1,
+          "predictions": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 5,
+          "truth": 0,
+          "predictions": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 6,
+          "truth": 1,
+          "predictions": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 7,
+          "truth": 0,
+          "predictions": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 8,
+          "truth": 1,
+          "predictions": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 9,
+          "truth": 0,
+          "predictions": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 10,
+          "truth": 1,
+          "predictions": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 11,
+          "truth": 0,
+          "predictions": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 12,
+          "truth": 1,
+          "predictions": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 13,
+          "truth": 0,
+          "predictions": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 14,
+          "truth": 1,
+          "predictions": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 15,
+          "truth": 0,
+          "predictions": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 16,
+          "truth": 1,
+          "predictions": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 17,
+          "truth": 0,
+          "predictions": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 18,
+          "truth": 1,
+          "predictions": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 19,
+          "truth": 0,
+          "predictions": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 20,
+          "truth": 1,
+          "predictions": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 21,
+          "truth": 0,
+          "predictions": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 22,
+          "truth": 1,
+          "predictions": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 23,
+          "truth": 0,
+          "predictions": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 24,
+          "truth": 1,
+          "predictions": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 25,
+          "truth": 0,
+          "predictions": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 26,
+          "truth": 1,
+          "predictions": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 27,
+          "truth": 0,
+          "predictions": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 28,
+          "truth": 1,
+          "predictions": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 29,
+          "truth": 0,
+          "predictions": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 30,
+          "truth": 1,
+          "predictions": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 31,
+          "truth": 0,
+          "predictions": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 32,
+          "truth": 1,
+          "predictions": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 33,
+          "truth": 0,
+          "predictions": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 34,
+          "truth": 1,
+          "predictions": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 35,
+          "truth": 0,
+          "predictions": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 36,
+          "truth": 1,
+          "predictions": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 37,
+          "truth": 0,
+          "predictions": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 38,
+          "truth": 1,
+          "predictions": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 39,
+          "truth": 0,
+          "predictions": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 40,
+          "truth": 1,
+          "predictions": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 41,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 42,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 43,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 44,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 45,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 46,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 47,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 48,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 49,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 50,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 51,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 52,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 53,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 54,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 55,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 56,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 57,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 58,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 59,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 60,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 61,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 62,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 63,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 64,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 65,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 66,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 67,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 68,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 69,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 70,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 71,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 72,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 73,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 74,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 75,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 76,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 77,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 78,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 79,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 80,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 81,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 82,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 83,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 84,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 85,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 86,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 87,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 88,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 89,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 90,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 91,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 92,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 93,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 94,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 95,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 96,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 97,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 98,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 99,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 100,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "paired",
+      "label": "Paired mistakes",
+      "description": "A+B miss 10; A+C miss 10; B+C miss 10. Two voters are wrong on 30 tasks.",
+      "rows": [
+        {
+          "task": 1,
+          "truth": 0,
+          "predictions": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 2,
+          "truth": 1,
+          "predictions": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 3,
+          "truth": 0,
+          "predictions": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 4,
+          "truth": 1,
+          "predictions": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 5,
+          "truth": 0,
+          "predictions": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 6,
+          "truth": 1,
+          "predictions": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 7,
+          "truth": 0,
+          "predictions": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 8,
+          "truth": 1,
+          "predictions": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 9,
+          "truth": 0,
+          "predictions": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 10,
+          "truth": 1,
+          "predictions": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 11,
+          "truth": 0,
+          "predictions": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 12,
+          "truth": 1,
+          "predictions": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 13,
+          "truth": 0,
+          "predictions": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 14,
+          "truth": 1,
+          "predictions": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 15,
+          "truth": 0,
+          "predictions": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 16,
+          "truth": 1,
+          "predictions": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 17,
+          "truth": 0,
+          "predictions": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 18,
+          "truth": 1,
+          "predictions": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 19,
+          "truth": 0,
+          "predictions": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "task": 20,
+          "truth": 1,
+          "predictions": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "task": 21,
+          "truth": 0,
+          "predictions": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 22,
+          "truth": 1,
+          "predictions": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 23,
+          "truth": 0,
+          "predictions": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 24,
+          "truth": 1,
+          "predictions": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 25,
+          "truth": 0,
+          "predictions": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 26,
+          "truth": 1,
+          "predictions": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 27,
+          "truth": 0,
+          "predictions": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 28,
+          "truth": 1,
+          "predictions": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 29,
+          "truth": 0,
+          "predictions": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 30,
+          "truth": 1,
+          "predictions": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 31,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 32,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 33,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 34,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 35,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 36,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 37,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 38,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 39,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 40,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 41,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 42,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 43,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 44,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 45,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 46,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 47,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 48,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 49,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 50,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 51,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 52,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 53,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 54,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 55,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 56,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 57,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 58,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 59,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 60,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 61,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 62,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 63,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 64,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 65,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 66,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 67,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 68,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 69,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 70,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 71,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 72,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 73,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 74,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 75,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 76,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 77,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 78,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 79,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 80,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 81,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 82,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 83,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 84,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 85,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 86,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 87,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 88,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 89,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 90,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 91,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 92,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 93,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 94,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 95,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 96,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 97,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 98,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "task": 99,
+          "truth": 0,
+          "predictions": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "task": 100,
+          "truth": 1,
+          "predictions": [
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "scope": [
+    "Binary truth and binary predictions; exactly three voters; no ties, abstentions, missing labels or task weighting.",
+    "Same marginal accuracy does not identify the joint error pattern.",
+    "Each matrix is invented; no measured provider or human performance.",
+    "Neither correlated errors nor independence is established for a real system here.",
+    "The examples do not show that an ensemble must improve or must fail."
+  ]
+}
