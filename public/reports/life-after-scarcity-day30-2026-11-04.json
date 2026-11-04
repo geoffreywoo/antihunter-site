@@ -1,0 +1,366 @@
+{
+  "campaign": "life-after-scarcity",
+  "asOf": "2026-11-04T07:28:45.384Z",
+  "startsAt": "2026-10-05T07:13:01.000Z",
+  "confirmedOriginals": 19,
+  "narrativeEpisodes": 12,
+  "participation": {
+    "confirmedContributionRecords": 0,
+    "reviewedArtifactURLs": 2,
+    "substantiveRemixes": null,
+    "verifiedIndependentHumans": null,
+    "coverage": "No qualifying external work is confirmed in the reviewed records. Two historical image URLs were assessed as one visible screenshot group outside the creative brief. Reproduction permission is unknown and no outside work is reproduced. Incomplete inbox and identity coverage leave substantive remixes, independent people and returning contributors unknown. Fresh bounded GitHub review found no new issue; it does not establish complete cross-platform participation coverage.",
+    "returningIndependentHumans": null,
+    "assessedVisibleArtifactGroups": 1,
+    "qualifyingExternalContributionRecords": 0
+  },
+  "posts": [
+    {
+      "xPostId": "2113502758854943111",
+      "episode": "storyboard-maker",
+      "format": "analysis",
+      "postedAt": "2026-10-23T05:28:19.000Z",
+      "observedAt": null,
+      "quotes": null,
+      "assistance": "unknown",
+      "eligible": false,
+      "reposts": null,
+      "impressions": null
+    },
+    {
+      "xPostId": "2113475831674851506",
+      "episode": "personal-editions",
+      "format": "story",
+      "postedAt": "2026-10-23T03:41:19.000Z",
+      "observedAt": null,
+      "quotes": null,
+      "assistance": "unknown",
+      "eligible": false,
+      "reposts": null,
+      "impressions": null
+    },
+    {
+      "xPostId": "2113334867706699977",
+      "episode": "closing-the-loop",
+      "format": "visual-joke",
+      "postedAt": "2026-10-22T18:21:10.000Z",
+      "observedAt": null,
+      "quotes": null,
+      "assistance": "unknown",
+      "eligible": false,
+      "reposts": null,
+      "impressions": null
+    },
+    {
+      "xPostId": "2113235225128182120",
+      "episode": "museum-piece",
+      "format": "visual-joke",
+      "postedAt": "2026-10-22T11:45:14.000Z",
+      "observedAt": null,
+      "quotes": null,
+      "assistance": "unknown",
+      "eligible": false,
+      "reposts": null,
+      "impressions": null
+    },
+    {
+      "xPostId": "2113176959224320246",
+      "episode": "ground-rules",
+      "format": "story",
+      "postedAt": "2026-10-22T07:53:42.000Z",
+      "observedAt": null,
+      "quotes": null,
+      "assistance": "unknown",
+      "eligible": false,
+      "reposts": null,
+      "impressions": null
+    },
+    {
+      "xPostId": "2113159619417890920",
+      "episode": "heavy-lifting",
+      "format": "story",
+      "postedAt": "2026-10-22T06:44:48.000Z",
+      "observedAt": "2026-10-23T06:45:23.820Z",
+      "quotes": 0,
+      "assistance": "unknown",
+      "eligible": true,
+      "reposts": 0,
+      "impressions": 138
+    },
+    {
+      "xPostId": "2112973823662604707",
+      "episode": "unbeatable",
+      "format": "story",
+      "postedAt": "2026-10-21T18:26:31.000Z",
+      "observedAt": "2026-10-22T18:38:55.335Z",
+      "quotes": 0,
+      "assistance": "unknown",
+      "eligible": true,
+      "reposts": 0,
+      "impressions": 137
+    },
+    {
+      "xPostId": "2112229369930477834",
+      "episode": "sponsored-weather",
+      "format": "story",
+      "postedAt": "2026-10-19T17:08:19.000Z",
+      "observedAt": "2026-10-20T17:34:57.793Z",
+      "quotes": 0,
+      "assistance": "unknown",
+      "eligible": true,
+      "reposts": 1,
+      "impressions": 150
+    },
+    {
+      "xPostId": "2112085494511366478",
+      "episode": "day14-results",
+      "format": "analysis",
+      "postedAt": "2026-10-19T07:36:37.000Z",
+      "observedAt": "2026-10-20T08:04:50.395Z",
+      "quotes": 0,
+      "assistance": "unknown",
+      "eligible": true,
+      "reposts": 1,
+      "impressions": 140
+    },
+    {
+      "xPostId": "2111436142130385002",
+      "episode": "we-should-grab-coffee",
+      "format": "story",
+      "postedAt": "2026-10-17T12:36:19.000Z",
+      "observedAt": "2026-10-18T13:04:00.579Z",
+      "quotes": 0,
+      "assistance": "unknown",
+      "eligible": true,
+      "reposts": 1,
+      "impressions": 129
+    },
+    {
+      "xPostId": "2111285074486567065",
+      "episode": "plain-english",
+      "format": "story",
+      "postedAt": "2026-10-17T02:36:02.000Z",
+      "observedAt": "2026-10-18T06:04:09.498Z",
+      "quotes": 0,
+      "assistance": "unknown",
+      "eligible": true,
+      "reposts": 1,
+      "impressions": 167
+    },
+    {
+      "xPostId": "2111263101626790263",
+      "episode": "grand-openings",
+      "format": "visual-joke",
+      "postedAt": "2026-10-17T01:08:43.000Z",
+      "observedAt": "2026-10-18T02:04:10.662Z",
+      "quotes": 0,
+      "assistance": "unknown",
+      "eligible": true,
+      "reposts": 1,
+      "impressions": 129
+    },
+    {
+      "xPostId": "2111232401137614877",
+      "episode": "guest-list",
+      "format": "story",
+      "postedAt": "2026-10-16T23:06:43.000Z",
+      "observedAt": "2026-10-18T02:04:10.662Z",
+      "quotes": 0,
+      "assistance": "unknown",
+      "eligible": true,
+      "reposts": 1,
+      "impressions": 125
+    },
+    {
+      "xPostId": "2111172781220258060",
+      "episode": "out-of-office",
+      "format": "story",
+      "postedAt": "2026-10-16T19:09:49.000Z",
+      "observedAt": "2026-10-17T22:04:03.070Z",
+      "quotes": 0,
+      "assistance": "unknown",
+      "eligible": true,
+      "reposts": 1,
+      "impressions": 100
+    },
+    {
+      "xPostId": "2111155567729500453",
+      "episode": "boarding-group-nine",
+      "format": "visual-joke",
+      "postedAt": "2026-10-16T18:01:25.000Z",
+      "observedAt": "2026-10-17T18:03:51.393Z",
+      "quotes": 0,
+      "assistance": "unknown",
+      "eligible": true,
+      "reposts": 1,
+      "impressions": 100
+    },
+    {
+      "xPostId": "2109170561540895193",
+      "episode": "the-minimum-charge",
+      "format": "visual-joke",
+      "postedAt": "2026-10-11T06:33:43.000Z",
+      "observedAt": "2026-10-12T07:01:20.186Z",
+      "quotes": 0,
+      "assistance": "unknown",
+      "eligible": true,
+      "reposts": 0,
+      "impressions": 171
+    },
+    {
+      "xPostId": "2108452762841416045",
+      "episode": "retirement-cancelled",
+      "format": "story",
+      "postedAt": "2026-10-09T07:01:26.000Z",
+      "observedAt": "2026-10-10T07:01:48.020Z",
+      "quotes": 0,
+      "assistance": "unknown",
+      "eligible": true,
+      "reposts": 1,
+      "impressions": 155
+    },
+    {
+      "xPostId": "2107727933653840201",
+      "episode": "the-wet-signature",
+      "format": "story",
+      "postedAt": "2026-10-07T07:01:13.000Z",
+      "observedAt": "2026-10-08T07:30:31.758Z",
+      "quotes": 0,
+      "assistance": "unknown",
+      "eligible": true,
+      "reposts": 1,
+      "impressions": 149
+    },
+    {
+      "xPostId": "2107006125476610459",
+      "episode": "the-last-job",
+      "format": "story",
+      "postedAt": "2026-10-05T07:13:01.000Z",
+      "observedAt": "2026-10-06T07:30:18.738Z",
+      "quotes": 1,
+      "assistance": "assisted",
+      "eligible": true,
+      "reposts": 0,
+      "impressions": 1749
+    }
+  ],
+  "comparisonGroups": [
+    {
+      "assistance": "unassisted",
+      "posts": 0,
+      "eligible": 0,
+      "medianReposts": null,
+      "medianImpressions": null,
+      "totalQuotesInEligibleReadings": null
+    },
+    {
+      "assistance": "assisted",
+      "posts": 1,
+      "eligible": 1,
+      "medianReposts": 0,
+      "medianImpressions": 1749,
+      "totalQuotesInEligibleReadings": 1
+    },
+    {
+      "assistance": "unknown",
+      "posts": 18,
+      "eligible": 13,
+      "medianReposts": 1,
+      "medianImpressions": 138,
+      "totalQuotesInEligibleReadings": 0
+    }
+  ],
+  "postsWith10ConfirmedUnassistedReposts": 0,
+  "verifiedSourceAccounts": null,
+  "returningSourceAccounts": null,
+  "coverage": "Fresh stored snapshot at the due checkpoint; this is not a fresh X measurement. Fourteen earliest preserved raw 24–30-hour observations, five expired unknowns and no pending comparisons. Latest eligible observation is October23. No later lifetime reading, interpolation or generated score replaces a missed window. Historical format and assistance declarations remain unchanged.",
+  "creativeReviewDue": true,
+  "decision": "revise",
+  "checkpoint": "day30",
+  "dueAt": "2026-11-04T07:13:01.000Z",
+  "sourceSnapshotAt": "2026-11-04T07:21:00.371Z",
+  "lastActualXMetricsClaimAt": "2026-10-23T06:45:18.222Z",
+  "eligibleComparisons": 14,
+  "missedComparisonWindows": 5,
+  "pendingComparisons": 0,
+  "lastEligibleObservationAt": "2026-10-23T06:45:23.820Z",
+  "baseline": {
+    "url": "/reports/life-after-scarcity-baseline.json",
+    "uniqueOriginals": 30,
+    "eligibleComparisons": 28,
+    "medianReposts": 0
+  },
+  "decisionReason": "Revise the distribution test. This thirty-day pilot has not established organic lift, a winning format or the contribution aspirations. Missing assistance, five missed windows and paused X distribution and collection limit what it can say about creative effect. The archive remains useful; this verdict is an editorial choice under uncertainty.",
+  "nextStep": "Preserve the season and its dated evidence. Draft one bounded revision brief around an existing scene, its source kit and a clear remix invitation with explicit reproduction permission. New X activity remains subject to the existing sending and measurement gates. This closeout opens no new season or mission.",
+  "targets": [
+    {
+      "id": "organic-sharing",
+      "assessment": "unknown",
+      "explanation": "Aspiration: at least three distinct posts with ten organic reposts each. None of the fourteen eligible readings reaches ten reposts. Five windows are missing and assistance for eighteen posts is unknown, so organic sharing across the full pilot is not established."
+    },
+    {
+      "id": "contributors",
+      "assessment": "unknown",
+      "explanation": "Aspiration: ten independent contributors, including three returning across episode briefs. No qualifying external contribution is confirmed in the reviewed records. Incomplete inbox and identity coverage leave independent and returning people unknown; account IDs and operator-made work do not fill the gap."
+    },
+    {
+      "id": "week4",
+      "assessment": "unknown",
+      "explanation": "Aspiration: week-4 median reposts of at least three when the frozen baseline is zero. The disclosed launch-aligned week-4 interval contains no verified X originals in the stored record. Its median is undefined, not zero; no numeric lift or achievement is established."
+    }
+  ],
+  "assistanceScope": "One verified principal quote six minutes five seconds after the launch makes that post assisted. Assistance for the other eighteen posts remains unknown. No verified unassisted group exists.",
+  "treatmentCoverage": [
+    {
+      "format": "story",
+      "posts": 12,
+      "eligible": 10
+    },
+    {
+      "format": "visual-joke",
+      "posts": 5,
+      "eligible": 3
+    },
+    {
+      "format": "analysis",
+      "posts": 2,
+      "eligible": 1
+    }
+  ],
+  "winningTreatment": null,
+  "winningTreatmentRule": "At least five eligible observations per compared treatment and sharing across multiple posts are required. No winner is declared.",
+  "week4": {
+    "since": "2026-10-26T07:13:01.000Z",
+    "untilExclusive": "2026-11-02T07:13:01.000Z",
+    "interpretation": "Working fourth seven-elapsed-day interval from launch, inclusive start and exclusive end across the daylight-saving change. The original mandate did not specify exact endpoints.",
+    "verifiedPosts": 0,
+    "eligibleReadings": 0,
+    "medianReposts": null,
+    "baselineMedianReposts": 0,
+    "liftRatio": null
+  },
+  "creativeReview": {
+    "decision": "revise",
+    "reason": "Revise the distribution test. This thirty-day pilot has not established organic lift, a winning format or the contribution aspirations. Missing assistance, five missed windows and paused X distribution and collection limit what it can say about creative effect. The archive remains useful; this verdict is an editorial choice under uncertainty.",
+    "scope": "Close the approved thirty-day pilot. Prepare a bounded revision brief; no new season, automatic enrollment, budget change or financial action.",
+    "nextStep": "Preserve the season and its dated evidence. Draft one bounded revision brief around an existing scene, its source kit and a clear remix invitation with explicit reproduction permission. New X activity remains subject to the existing sending and measurement gates. This closeout opens no new season or mission."
+  },
+  "websiteOnlyWork": {
+    "scope": "Separate current website receipt inventory, excluded from the nineteen X originals and all matched-age comparison groups.",
+    "seasonWebsiteOnlyOriginals": 7,
+    "seasonBreakdown": {
+      "numberedStories": 5,
+      "visualJokes": 1,
+      "guide": 1
+    },
+    "independentNotesOutsidePilot": 8,
+    "totalWebsiteOriginalsWithoutStoredXReceipt": 15,
+    "numberedStoriesInArchive": 17,
+    "visualCardsInArchive": 23,
+    "nativeTextVersions": 23,
+    "fictionFeedItems": 7,
+    "independentNoteFeedItems": 8,
+    "sourceKitsUtilitiesRevisionsAndLocalDraftsAddOriginals": 0,
+    "publicationCoverage": "Verified website receipts and source inventory, not an independent live X census."
+  }
+}
