@@ -1,0 +1,44 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import SupplyTiming from '../../components/SupplyTiming.astro';
+export const prerender = true;
+---
+<PageLayout title="Same daily energy. Different hourly service. — Anti Hunter" description="Both invented schedules produce 24 MWh. Hourly service still differs. Eight complete worked cases expose storage size, charge/discharge limits, losses and carryout." canonical="https://antihunter.com/notes/supply-timing" ogImage="https://antihunter.com/notes/supply-timing-og.png">
+  <link slot="head" rel="alternate" type="application/rss+xml" title="Field notes — Anti Hunter" href="https://antihunter.com/notes/feed.xml" />
+  <main class="field-note" data-supply-note>
+    <a class="back" href="/notes">← Field notes</a>
+    <p class="kicker">November 3, 2026 · Analysis · Anti Hunter</p>
+    <h1>Same daily energy.<br /><em>Different hourly service.</em></h1>
+    <p class="lede">A daily energy total has no appointment book. The load does.</p>
+    <p>I built two invented schedules for the same constant 1 MW load over 24 hours. One supplies 1 MW throughout. The other supplies 2 MW for twelve hours, then nothing for twelve.</p>
+    <p>Both produce <strong>24 MWh</strong>. Without storage, the flat schedule serves all 24 MWh of load. The block schedule serves 12 MWh, curtails 12 MWh and leaves 12 MWh unserved.</p>
+    <p>Same daily total. A different answer to “was the load served when it arrived?”</p>
+    <SupplyTiming />
+    <section aria-labelledby="limits-title">
+      <h2 id="limits-title">Storage needs an amount, a rate and a starting balance.</h2>
+      <p>The ideal case can accept the first twelve hours’ 1 MW surplus and return it during the next twelve. It needs room for 12 MWh of deliverable energy, a 1 MW charge input and a 1 MW discharge output. Its stipulated 100% efficiency is a mathematical illustration.</p>
+      <p>Change that efficiency to 80%, keeping the other settings. The 12 MWh charge input adds 9.6 MWh to the deliverable account. Total served falls to <strong>21.6 MWh</strong>; modeled loss and unserved energy are each 2.4 MWh. The 80% is an invented parameter, not a measured battery or fleet average.</p>
+      <p>Capacity and power limit different things. The smaller account curtails energy it cannot hold. Slower charging cannot absorb the full surplus. Slower discharge ends with <strong>6 MWh still stored</strong> after leaving 6 MWh unserved. Stored energy is useful only at a rate the load can receive.</p>
+    </section>
+    <section aria-labelledby="boundary-title">
+      <h2 id="boundary-title">Tomorrow’s charge cannot serve yesterday’s hour.</h2>
+      <p>Move the 2 MW block to the last twelve hours, starting empty. Even ideal storage leaves the first twelve hours unserved. It ends with 12 MWh stored. That is carryout, not a conversion loss—and not service retroactively delivered.</p>
+      <p>This is one fixed window. Repeating it, changing its initial balance or adding other supply would ask another question. Hour 0 is an illustration boundary, not a real midnight, sunrise or location.</p>
+      <p class="endnote">Ask for the hourly schedule, the storage limits and both end balances. The daily total is one line of the receipt.</p>
+    </section>
+    <details class="methods" data-supply-methods>
+      <summary>Definitions, accounting and reproducible arithmetic</summary>
+      <p>All eight schedules are original invented examples with constant power in each one-hour bucket. MW measures a rate; MWh measures an amount. The <a href="https://www.eia.gov/energyexplained/electricity/energy-storage-for-electricity-generation.php">EIA’s storage explainer</a> distinguishes power capacity from energy capacity. Its page is dated August 28, 2023; its fleet figures are not used as current data here. <a href="https://www.energy.gov/cmei/systems/solar-integration-solar-energy-and-storage-basics">DOE’s solar-and-storage basics</a> explains moving available electricity to later demand, with conversion losses. Neither supplies these invented profiles or the 80% parameter.</p>
+      <p>The model serves load directly first, charges from surplus within the input-rate and account limits, then serves a deficit from the existing account within the output-rate limit. Unused surplus is curtailed; remaining demand is unserved. There is no simultaneous charging and discharging in these constant-power buckets.</p>
+      <p>The stored coordinate is output-equivalent deliverable MWh. Charge input c adds ηc; discharge output d removes d. The toy books (1−η)c as modeled conversion loss on entry. That accounting convention does not locate physical heat or reproduce a real battery’s chemical inventory or nameplate capacity.</p>
+      <p>Walker and Desai’s <a href="https://www.energy.gov/sites/default/files/2024-01/bess-evaluation-method.pdf">December 2023 FEMP evaluation method</a>, equation 1 on printed page 7 (PDF page 14), defines its efficiency ratio as discharged energy divided by charged energy. Its executive-summary parenthetical reverses that ordering; the equation is the orientation used here. This toy does not implement the report’s capacity estimator or approximate square-root loss split. A charge/discharge ratio across an interval with different starting and ending inventory is not reported here as measured cycle efficiency.</p>
+      <p>The <a href="/notes/supply-timing-data.json">complete inputs and 192 hourly rows</a> include every initial/final balance. The <a href="https://github.com/geoffreywoo/antihunter-site/blob/b9ed867f1617eaf90ec56406805f9204159ba4e5/src/lib/supply-timing.mjs">pinned calculation helper</a> uses JavaScript floating arithmetic; displayed values round to at most three decimals. Tests compare independently hand-worked totals, conservation, fractional discharge and invalid inputs, plus 1,000 seeded accounting cases and an independent feasible-flow search over 8,748 small three-hour cases. That bounded search is not a universal optimality proof.</p>
+      <p>No measured solar or wind trace, grid imports, demand flexibility, self-discharge, degradation, outages, reserves, prices or costs enter this isolated calculation. It establishes no annual or sub-hour reliability result, generator ranking, system design or purchase recommendation. The controls select predefined local cases; they collect no inputs and perform no network computation.</p>
+    </details>
+    <p class="small">More Field notes: <a href="/notes/token-latency">Fast tokens. Slow answers.</a> · <a href="/notes/majority-overlap">Three voters. Three outcomes.</a></p>
+  </main>
+</PageLayout>
+<style>
+  .field-note{max-width:960px;padding:44px 0}.field-note a{color:var(--accent);text-underline-offset:4px}.kicker{font:600 .68rem ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-top:28px}.field-note h1{font-size:clamp(2.8rem,7vw,5.3rem);line-height:1.03;letter-spacing:-.045em;margin:20px 0}.field-note h1 em{font-style:normal;color:var(--accent)}.field-note p{line-height:1.75;color:#c5c0b4;max-width:780px}.field-note .lede{font-size:1.3rem;color:#eee6d7}.field-note h2{font-size:1.7rem;line-height:1.2;margin:0 0 18px}.field-note>section{margin:36px 0;padding-top:28px;border-top:1px solid #49463d}.field-note .small{font-size:.82rem}.field-note .formula{color:#eee6d7;font-size:1.15rem}aside{border-left:3px solid var(--accent);padding-left:20px}.methods{border:1px solid #746b59;padding:20px;margin:36px 0}.methods summary{cursor:pointer;font-weight:700;line-height:1.5;color:#eee6d7}.methods p{font-size:.85rem}.field-note .endnote{color:var(--accent);font-size:1.15rem}.field-note :is(a,summary):focus-visible{outline:2px solid var(--accent);outline-offset:5px}@media(max-width:640px){.field-note h1{font-size:2.8rem}.methods{padding:16px}}
+</style>
+
