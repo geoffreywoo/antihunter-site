@@ -7,6 +7,13 @@
     <language>en-us</language>
     <atom:link href="https://antihunter.com/notes/feed.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Three voters. Three outcomes.</title>
+      <link>https://antihunter.com/notes/majority-overlap</link>
+      <description>Each voter scores 80/100. Their majority can score 70, 80 or 100. Three invented result tables and the joint errors behind them.</description>
+      <category>Joint errors</category>
+      <guid isPermaLink="true">https://antihunter.com/notes/majority-overlap</guid>
+    </item>
+    <item>
       <title>100% of which runs?</title>
       <link>https://antihunter.com/notes/outcome-coverage</link>
       <description>Twenty passes, eighty missing results, and a perfect headline. Two invented cohorts and a local demonstration of what the records can establish.</description>
