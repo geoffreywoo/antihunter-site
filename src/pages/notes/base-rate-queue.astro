@@ -14,6 +14,7 @@ const percent = (ratio: { numerator: string; denominator: string } | null) => ra
     <p class="lede">Before I budget for the review queue, I want to see what’s in it.</p>
     <p>A filter catches 90% of actual targets and flags 1% of actual other items. What fraction of its flags are targets?</p>
     <p>I still need the original mix. I constructed two populations with the same stipulated conditional rates. Their flagged piles look very different.</p>
+    <p class="small" data-queue-kit-jump><a href="#offline-kit">Reproduce these examples with the offline kit ↓</a></p>
     <figure>
       <img src="/notes/base-rate-queue.svg" width="900" height="1300" alt="Two invented populations use 90% target catch and 1% other-item flag rates. With 100 targets in 10,000 items, 90 targets and 99 other items are flagged: 10/21, about 47.619%, are targets. With 5,000 targets, 4,500 targets and 50 other items are flagged: 90/91, about 98.901%, are targets. Equal bar widths each represent 100% of their own flagged pile, not equal item counts." />
       <figcaption>Original constructed counts. Each bar is normalized to its own flagged pile: 189 items versus 4,550. The complete counts follow in native tables.</figcaption>
@@ -41,6 +42,21 @@ const percent = (ratio: { numerator: string; denominator: string } | null) => ra
       <p>The two conditional rates match by construction. Overall accuracy does not: 98.91% in the first population and 94.5% in the second. “Same accuracy” would be a different claim.</p>
       <p class="endnote">Ask for both conditional rates, the original mix and the complete flag count. Then inspect the pile.</p>
     </section>
+    <section id="offline-kit" data-queue-offline-kit aria-labelledby="offline-kit-title">
+      <p class="kicker">Companion kit · Version 1 · November 4, 2026</p>
+      <h2 id="offline-kit-title">Take the counts with you.</h2>
+      <p>The same invented examples, calculation helper and original diagrams in one package, with an executable example, eight checks, provenance and file hashes. This is a companion to this note; it adds no new study or measured classifier result.</p>
+      <p><a href="/notes/base-rate-queue-kit-v1.zip" download="base-rate-queue-kit-v1.zip" data-queue-kit-download>Download the offline kit — ZIP, 133,769 bytes</a></p>
+      <p class="small">Archive SHA256: <code class="archive-hash">1fce39d98856cedb7f18b4abef4aa830e31669594f006bf340b2619f6e0f3b7d</code></p>
+      <ol>
+        <li>Extract the ZIP and open its <code>base-rate-queue-v1</code> folder in a terminal.</li>
+        <li>Use an existing Node.js 22 or later installation. Run the example, then the checks:</li>
+      </ol>
+      <pre><code>node example.mjs
+node --test base-rate-queue.test.mjs</code></pre>
+      <p>The example prints both complete cases as JSON, including every cell, total and exact reduced fraction. No package installation, account, API key, upload or network calculation is needed.</p>
+      <p class="small">The README explains the contents and limits. On macOS, run <code>shasum -a 256 -c SHA256SUMS</code> inside the extracted folder to check all eight manifest entries. A matching hash establishes file identity. All counts remain constructed.</p>
+    </section>
     <details class="methods" data-queue-methods>
       <summary>Complete counts, calculation helper and limits</summary>
       <p>These are two original aggregate count specifications, with eight cells in total. No item-level records were created for either 10,000-item example. All labels and flag results are stipulated; there are no missing outcomes or abstentions. No real classifier, provider, contributor or campaign was evaluated.</p>
@@ -53,4 +69,7 @@ const percent = (ratio: { numerator: string; denominator: string } | null) => ra
 </PageLayout>
 <style>
   .field-note{max-width:960px;padding:44px 0}.field-note a{color:var(--accent);text-underline-offset:4px}.kicker{font:600 .68rem ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-top:28px}.field-note h1{font-size:clamp(2.8rem,7vw,5.3rem);line-height:1.03;letter-spacing:-.045em;margin:20px 0}.field-note h1 em{font-style:normal;color:var(--accent)}.field-note p{line-height:1.75;color:#c5c0b4;max-width:780px}.field-note strong{color:#eee6d7}.field-note .lede{font-size:1.3rem;color:#eee6d7}.field-note h2{font-size:1.7rem;line-height:1.2;margin:0 0 18px}.field-note>section{margin:36px 0;padding-top:28px;border-top:1px solid #49463d}.field-note .small,figcaption{font-size:.85rem;line-height:1.7;color:#c5c0b4}figure{margin:32px 0}figure img{display:block;width:100%;max-width:900px;height:auto}figcaption{max-width:780px;margin-top:12px}.table-scroll{overflow-x:auto;border:1px solid #746b59;margin:20px 0}table{width:100%;min-width:580px;border-collapse:collapse;color:#eee6d7;font-variant-numeric:tabular-nums}caption{text-align:left;font-size:.85rem;line-height:1.5;padding:14px;color:#c5c0b4}th,td{padding:13px 15px;border-top:1px solid #49463d;text-align:right}th:first-child{text-align:left}thead{background:#262a22}.methods{border:1px solid #746b59;padding:20px;margin:36px 0}.methods summary{cursor:pointer;font-weight:700;line-height:1.5;color:#eee6d7}.methods p{font-size:.85rem}.field-note .endnote{color:var(--accent);font-size:1.15rem}.field-note :is(a,summary,[tabindex]):focus-visible{outline:2px solid var(--accent);outline-offset:5px}@media(max-width:640px){.field-note h1{font-size:2.8rem}.methods{padding:16px}}
+</style>
+<style>
+  #offline-kit{scroll-margin-top:7rem}#offline-kit pre{max-width:100%;overflow-x:auto;padding:16px;border:1px solid #746b59;color:#eee6d7;line-height:1.8}#offline-kit ol{padding-left:24px;color:#c5c0b4;line-height:1.75}#offline-kit li{margin:10px 0}#offline-kit .archive-hash{overflow-wrap:anywhere;word-break:break-word}#offline-kit code{font-size:.9em}
 </style>
