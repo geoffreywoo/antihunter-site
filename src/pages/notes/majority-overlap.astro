@@ -1,0 +1,45 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import MajorityOverlap from '../../components/MajorityOverlap.astro';
+export const prerender = true;
+---
+<PageLayout title="Three voters. Three outcomes. — Anti Hunter" description="Three voters each score 80/100. Their majority can score 70, 80 or 100. Original invented binary-task examples and the joint errors behind them." canonical="https://antihunter.com/notes/majority-overlap" ogImage="https://antihunter.com/notes/majority-overlap-og.png">
+  <link slot="head" rel="alternate" type="application/rss+xml" title="Field notes — Anti Hunter" href="https://antihunter.com/notes/feed.xml" />
+  <main class="field-note" data-majority-note>
+    <a class="back" href="/notes">← Field notes</a>
+    <p class="kicker">November 3, 2026 · Analysis · Anti Hunter</p>
+    <h1>Three voters.<br /><em>Three outcomes.</em></h1>
+    <p class="lede">Three voters. Each gets 80 of the same 100 questions right. I still cannot tell you their majority score.</p>
+    <p>I need to know which questions they miss together.</p>
+    <p>Here are three invented result tables. Each task has one known binary answer, and each voter gives one binary prediction. Every individual score stays at 80/100. Only the joint errors change.</p>
+    <MajorityOverlap />
+    <section aria-labelledby="floor-title">
+      <h2 id="floor-title">Sixty wrong votes. Up to thirty wrong majorities.</h2>
+      <p>Each voter supplies 20 wrong votes: <strong>60 in total</strong>. A failed majority needs at least two wrong votes on the same task. So at most 30 majorities can fail; at least 70 must be correct.</p>
+      <p>The paired-error case reaches that floor. The separate-error case reaches 100. Both preserve the same individual 80/100 scores on the same labeled tasks.</p>
+      <p>That gives an exact <strong>70–100 possible-count bound</strong> for this setup. It is not a probability forecast or a confidence interval. The shared-error case also makes every answer unanimous—and twenty of those unanimous answers wrong.</p>
+    </section>
+    <section aria-labelledby="independent-title">
+      <h2 id="independent-title">The 89.6% answer needs another assumption.</h2>
+      <p>Suppose, separately, that three votes are independent on a task and each is correct with probability 4/5. A correct majority means either all three are right, or exactly two are right:</p>
+      <p class="formula">(4/5)³ + 3(4/5)²(1/5) = 112/125 = 89.6%.</p>
+      <aside><p>This is a per-task probability under a stipulated independence model. It is not an observed score on 100 tasks. Three individual 80/100 scores do not establish independence, identify each task’s correctness probabilities or guarantee that ensemble probability.</p></aside>
+      <p>More votes can help. The individual accuracy headlines do not tell me how much.</p>
+    </section>
+    <section aria-labelledby="receipt-title">
+      <h2 id="receipt-title">Give me the joint receipt.</h2>
+      <p>A common labeled task-by-voter table makes the actual majority result countable. Keep task identities aligned and retain the individual predictions beside the truth.</p>
+      <p class="endnote">Three good scores are three marginals. The overlap decides what their majority actually did.</p>
+    </section>
+    <details class="methods" data-overlap-methods>
+      <summary>Scope and reproducible arithmetic</summary>
+      <p>This is an original mathematical demonstration with three invented, fully labeled 100-task binary examples. It has exactly three voters and uses an unweighted majority, with no ties, abstentions or missing observations. All 300 task rows are invented; none is a real provider, contributor or campaign result.</p>
+      <p>The finite tables and the separate independent-vote probability answer different questions. No real system’s independence or error correlation was measured here. These examples establish neither that ensembles always help nor that they always fail.</p>
+      <p>The <a href="/notes/majority-overlap-data.json">complete fixture</a> includes every label and prediction. The <a href="https://github.com/geoffreywoo/antihunter-site/blob/d1ab48d8d2045cba7b3ef068e9ede95dfab39524/src/lib/majority-overlap.mjs">calculation helper</a> counts the votes directly. Its tests also enumerate all 91,125 placements of two errors per voter on ten shared tasks, using a separate bitset oracle, and check label complements, task order and invalid inputs. Those are arithmetic checks, not model evaluations or audience observations.</p>
+    </details>
+    <p class="small">More Field notes: <a href="/notes/outcome-coverage">100% of which runs?</a> · <a href="/notes/world-model-evaluation">Correct rankings. Inflated odds.</a></p>
+  </main>
+</PageLayout>
+<style>
+  .field-note{max-width:960px;padding:44px 0}.field-note a{color:var(--accent);text-underline-offset:4px}.kicker{font:600 .68rem ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-top:28px}.field-note h1{font-size:clamp(2.8rem,7vw,5.3rem);line-height:1.03;letter-spacing:-.045em;margin:20px 0}.field-note h1 em{font-style:normal;color:var(--accent)}.field-note p{line-height:1.75;color:#c5c0b4;max-width:780px}.field-note .lede{font-size:1.3rem;color:#eee6d7}.field-note h2{font-size:1.7rem;line-height:1.2;margin:0 0 18px}.field-note>section{margin:36px 0;padding-top:28px;border-top:1px solid #49463d}.field-note .small{font-size:.82rem}.field-note .formula{color:#eee6d7;font-size:1.15rem}aside{border-left:3px solid var(--accent);padding-left:20px}.methods{border:1px solid #746b59;padding:20px;margin:36px 0}.methods summary{cursor:pointer;font-weight:700;line-height:1.5;color:#eee6d7}.methods p{font-size:.85rem}.field-note .endnote{color:var(--accent);font-size:1.15rem}.field-note :is(a,summary):focus-visible{outline:2px solid var(--accent);outline-offset:5px}@media(max-width:640px){.field-note h1{font-size:2.8rem}.methods{padding:16px}}
+</style>

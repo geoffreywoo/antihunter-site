@@ -1,0 +1,36 @@
+---
+import fixture from '../data/majority-overlap.json';
+import { summarize } from '../lib/majority-overlap.mjs';
+const cases = fixture.cases.map(c => ({...c, summary: summarize(c.rows)}));
+---
+<section class="overlap" aria-labelledby="overlap-title" data-majority-overlap>
+  <p class="label">Invented data · Three binary voters · Same 100 labeled tasks</p>
+  <h2 id="overlap-title">Keep the individual scores. Change the overlap.</h2>
+  <p class="common">In every case: <strong>A: 80/100 correct · B: 80/100 · C: 80/100.</strong></p>
+  <div class="cases">
+    {cases.map(c => (
+      <article class="case" aria-labelledby={`case-${c.id}`} data-overlap-case={c.id}>
+        <h3 id={`case-${c.id}`}>{c.label}</h3>
+        <p class="description">{c.description}</p>
+        <p class="score"><strong>{c.summary.majorityCorrect}/100</strong><span>majority correct</span></p>
+        <p class="unanimous">Unanimous answers: {c.summary.unanimous}/100</p>
+        <details>
+          <summary>Inspect the joint errors</summary>
+          <div class="table-wrap" tabindex="0" role="region" aria-label={`${c.label}: joint error counts`}>
+            <table>
+              <caption>1 = wrong; 0 = correct. All eight patterns, including zero-count rows.</caption>
+              <thead><tr><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">Tasks</th><th scope="col">Majority</th></tr></thead>
+              <tbody>{c.summary.errorPatternCounts.map((count,mask) => (
+                <tr><td>{Number(Boolean(mask&4))}</td><td>{Number(Boolean(mask&2))}</td><td>{Number(Boolean(mask&1))}</td><td>{count}</td><td>{[4,2,1].filter(bit=>mask&bit).length>=2 ? 'Wrong' : 'Correct'}</td></tr>
+              ))}</tbody>
+            </table>
+          </div>
+        </details>
+      </article>
+    ))}
+  </div>
+  <p class="data-link"><a href="/notes/majority-overlap-data.json">Inspect all 300 invented task rows (JSON)</a>. The labels and predictions are complete; no missing outcomes are filled in.</p>
+</section>
+<style>
+  .overlap{margin:36px 0;padding:24px 0;border-block:1px solid #625b4e}.label{font:600 .68rem/1.6 ui-monospace,monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}h2{font-size:1.7rem;line-height:1.2;margin:18px 0}.common{color:#d7d0c0;line-height:1.7}.cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:24px 0}.case{min-width:0;padding:20px 16px;border:1px solid #746b59;background:#181a17}h3{font-size:1.3rem;line-height:1.25;margin:0 0 16px;color:#eee6d7}.description{color:#c5c0b4;line-height:1.65;font-size:.9rem}.score{margin:26px 0 14px;color:#eee6d7}.score strong{display:block;font-size:2.8rem;line-height:1.1;letter-spacing:-.04em}.score span{display:block;font-size:.86rem;margin-top:10px}.unanimous{font-size:.82rem;color:#c5c0b4;line-height:1.6}details{margin-top:20px;border-top:1px solid #625b4e;padding-top:14px}summary{cursor:pointer;color:var(--accent);font-size:.85rem;line-height:1.6;padding:5px 0}.table-wrap{max-width:100%;overflow:auto;margin-top:12px}table{border-collapse:collapse;width:100%;font:500 .73rem/1.5 ui-monospace,monospace;color:#eee6d7}th,td{text-align:left;padding:8px 4px;border-bottom:1px solid #49463d}th{color:#eee6d7;font:700 .73rem/1.5 ui-monospace,monospace;letter-spacing:0;text-transform:none}caption{text-align:left;font:400 .73rem/1.6 system-ui,sans-serif;color:#c5c0b4;margin-bottom:12px}.data-link{color:#c5c0b4;font-size:.82rem;line-height:1.7}a{color:var(--accent);text-underline-offset:4px}:is(a,summary,.table-wrap):focus-visible{outline:2px solid var(--accent);outline-offset:4px}@media(max-width:850px){.cases{grid-template-columns:1fr}.case{padding:22px 18px}.description{max-width:620px}}@media print{details{display:block}.case{break-inside:avoid}}
+</style>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+<title id="title">Three voters. Three outcomes.</title><desc id="desc">Invented binary-task examples. Every voter scores 80 out of 100; majority scores are 80 for shared mistakes, 100 for separate mistakes, and 70 for paired mistakes.</desc>
+<rect width="1200" height="630" fill="#11130f"/>
+<g font-family="Arial,Helvetica,sans-serif">
+<text x="76" y="57" fill="#ffb263" font-size="20" letter-spacing="3">ANTI HUNTER · FIELD NOTES · INVENTED DATA</text>
+<text x="72" y="142" fill="#eee6d7" font-size="72" font-weight="700">Three voters.</text>
+<text x="72" y="222" fill="#eee6d7" font-size="72" font-weight="700">Three outcomes.</text>
+<text x="76" y="281" fill="#c5c0b4" font-size="28">Each voter: 80/100 correct. Same 100 labeled tasks.</text>
+<g fill="#1c211b" stroke="#746b59"><rect x="76" y="320" width="332" height="198" rx="5"/><rect x="434" y="320" width="332" height="198" rx="5"/><rect x="792" y="320" width="332" height="198" rx="5"/></g>
+<g fill="#eee6d7" font-size="64" font-weight="700"><text x="100" y="400">80/100</text><text x="458" y="400">100/100</text><text x="816" y="400">70/100</text></g>
+<g fill="#c5c0b4" font-size="22"><text x="100" y="439">majority correct</text><text x="458" y="439">majority correct</text><text x="816" y="439">majority correct</text></g>
+<g fill="#ffb263" font-size="24"><text x="100" y="486">Same mistakes</text><text x="458" y="486">Separate mistakes</text><text x="816" y="486">Paired mistakes</text></g>
+<text x="76" y="582" fill="#c5c0b4" font-size="25">The individual scores leave the overlap unresolved.</text>
+</g></svg>
