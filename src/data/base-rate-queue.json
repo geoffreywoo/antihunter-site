@@ -1,0 +1,105 @@
+{
+  "kind": "Two complete constructed aggregate count examples; no item-level records for these examples and no measured model run",
+  "sharedStipulatedRates": {
+    "truePositiveRate": {
+      "numerator": "9",
+      "denominator": "10"
+    },
+    "falsePositiveRate": {
+      "numerator": "1",
+      "denominator": "100"
+    }
+  },
+  "normalization": "Each bar represents 100% of that case’s flagged pile, not equal absolute volume.",
+  "modelSHA256": "8d7b1adceb4c424983953acdc05714e2b7c6e6089685b1e64a232414f039f9a1",
+  "cases": [
+    {
+      "id": "rare-target",
+      "label": "100 targets in 10,000 items",
+      "cells": {
+        "truePositive": 90,
+        "falsePositive": 99,
+        "falseNegative": 10,
+        "trueNegative": 9801
+      },
+      "counts": {
+        "total": 10000,
+        "actualTarget": 100,
+        "actualOther": 9900,
+        "flagged": 189,
+        "unflagged": 9811
+      },
+      "ratios": {
+        "prevalence": {
+          "numerator": "1",
+          "denominator": "100"
+        },
+        "truePositiveRate": {
+          "numerator": "9",
+          "denominator": "10"
+        },
+        "falsePositiveRate": {
+          "numerator": "1",
+          "denominator": "100"
+        },
+        "flaggedTargetShare": {
+          "numerator": "10",
+          "denominator": "21"
+        },
+        "flaggedOtherShare": {
+          "numerator": "11",
+          "denominator": "21"
+        },
+        "accuracy": {
+          "numerator": "9891",
+          "denominator": "10000"
+        }
+      }
+    },
+    {
+      "id": "common-target",
+      "label": "5,000 targets in 10,000 items",
+      "cells": {
+        "truePositive": 4500,
+        "falsePositive": 50,
+        "falseNegative": 500,
+        "trueNegative": 4950
+      },
+      "counts": {
+        "total": 10000,
+        "actualTarget": 5000,
+        "actualOther": 5000,
+        "flagged": 4550,
+        "unflagged": 5450
+      },
+      "ratios": {
+        "prevalence": {
+          "numerator": "1",
+          "denominator": "2"
+        },
+        "truePositiveRate": {
+          "numerator": "9",
+          "denominator": "10"
+        },
+        "falsePositiveRate": {
+          "numerator": "1",
+          "denominator": "100"
+        },
+        "flaggedTargetShare": {
+          "numerator": "90",
+          "denominator": "91"
+        },
+        "flaggedOtherShare": {
+          "numerator": "1",
+          "denominator": "91"
+        },
+        "accuracy": {
+          "numerator": "189",
+          "denominator": "200"
+        }
+      }
+    }
+  ],
+  "scope": "Binary known labels, flag/no-flag results, complete four-cell counts. Different constructed populations, not comparable provider treatments, real observations, calibrated probabilities or a deployment recommendation.",
+  "testScope": "Separate bounded arithmetic tests enumerate invented eight-item truth/prediction combinations in memory. Those are not item-level records for either 10,000-item example."
+}

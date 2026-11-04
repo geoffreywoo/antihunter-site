@@ -7,6 +7,7 @@ const pages = [
   '/',
   '/scarcity',
   '/notes',
+  '/notes/base-rate-queue',
   '/notes/supply-timing',
   '/notes/majority-overlap',
   '/notes/outcome-coverage',
