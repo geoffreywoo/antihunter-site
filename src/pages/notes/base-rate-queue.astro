@@ -1,0 +1,56 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import fixture from '../../data/base-rate-queue.json';
+export const prerender = true;
+const n = (x: number) => new Intl.NumberFormat('en-US').format(x);
+const percent = (ratio: { numerator: string; denominator: string } | null) => ratio === null ? 'Undefined' : new Intl.NumberFormat('en-US', { maximumFractionDigits: 3 }).format(100 * Number(ratio.numerator) / Number(ratio.denominator)) + '%';
+---
+<PageLayout title="Who’s in the flagged pile? — Anti Hunter" description="Catch 90% of targets. Flag 1% of other items. Two complete invented count tables show why the original population mix still matters." canonical="https://antihunter.com/notes/base-rate-queue" ogImage="https://antihunter.com/notes/base-rate-queue-og.png">
+  <link slot="head" rel="alternate" type="application/rss+xml" title="Field notes — Anti Hunter" href="https://antihunter.com/notes/feed.xml" />
+  <main class="field-note" data-queue-note>
+    <a class="back" href="/notes">← Field notes</a>
+    <p class="kicker">November 3, 2026 · Analysis · Anti Hunter</p>
+    <h1>Who’s in the<br /><em>flagged pile?</em></h1>
+    <p class="lede">Before I budget for the review queue, I want to see what’s in it.</p>
+    <p>A filter catches 90% of actual targets and flags 1% of actual other items. What fraction of its flags are targets?</p>
+    <p>I still need the original mix. I constructed two populations with the same stipulated conditional rates. Their flagged piles look very different.</p>
+    <figure>
+      <img src="/notes/base-rate-queue.svg" width="900" height="1300" alt="Two invented populations use 90% target catch and 1% other-item flag rates. With 100 targets in 10,000 items, 90 targets and 99 other items are flagged: 10/21, about 47.619%, are targets. With 5,000 targets, 4,500 targets and 50 other items are flagged: 90/91, about 98.901%, are targets. Equal bar widths each represent 100% of their own flagged pile, not equal item counts." />
+      <figcaption>Original constructed counts. Each bar is normalized to its own flagged pile: 189 items versus 4,550. The complete counts follow in native tables.</figcaption>
+    </figure>
+    {fixture.cases.map(c => <section class="count-case" data-queue-case={c.id} aria-labelledby={`${c.id}-title`}>
+      <h2 id={`${c.id}-title`}>{c.label}</h2>
+      <p><strong>{n(c.counts.flagged)} flags:</strong> {n(c.cells.truePositive)} targets and {n(c.cells.falsePositive)} other items. Target share = {n(c.cells.truePositive)}/{n(c.counts.flagged)} = <strong>{c.ratios.flaggedTargetShare.numerator}/{c.ratios.flaggedTargetShare.denominator} ≈ {percent(c.ratios.flaggedTargetShare)}</strong>.</p>
+      <div class="table-scroll" role="region" aria-label={`${c.label}: complete count table; scroll horizontally if needed`} tabindex="0">
+        <table>
+          <caption>Constructed counts. Every item has one known binary label and one flag/no-flag result.</caption>
+          <thead><tr><th scope="col">Result</th><th scope="col">Actual target</th><th scope="col">Actual other</th><th scope="col">All items</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Flagged</th><td>{n(c.cells.truePositive)}</td><td>{n(c.cells.falsePositive)}</td><td>{n(c.counts.flagged)}</td></tr>
+            <tr><th scope="row">Not flagged</th><td>{n(c.cells.falseNegative)}</td><td>{n(c.cells.trueNegative)}</td><td>{n(c.counts.unflagged)}</td></tr>
+            <tr><th scope="row">All items</th><td>{n(c.counts.actualTarget)}</td><td>{n(c.counts.actualOther)}</td><td>{n(c.counts.total)}</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small">Targets flagged: {n(c.cells.truePositive)}/{n(c.counts.actualTarget)} = {percent(c.ratios.truePositiveRate)}. Other items flagged: {n(c.cells.falsePositive)}/{n(c.counts.actualOther)} = {percent(c.ratios.falsePositiveRate)}. Overall accuracy: {percent(c.ratios.accuracy)}.</p>
+    </section>)}
+    <section aria-labelledby="denominators-title">
+      <h2 id="denominators-title">Three rates. Three denominators.</h2>
+      <p>The target-catch rate divides flagged targets by <strong>all actual targets</strong>. The other-item flag rate divides flagged other items by <strong>all actual other items</strong>. The target share of a flagged pile divides flagged targets by <strong>all flags</strong>.</p>
+      <p>In the first population, 1% of 9,900 other items contributes 99 flags—more than the 90 caught targets. In the second, 1% of 5,000 contributes 50 flags beside 4,500 caught targets.</p>
+      <p>The two conditional rates match by construction. Overall accuracy does not: 98.91% in the first population and 94.5% in the second. “Same accuracy” would be a different claim.</p>
+      <p class="endnote">Ask for both conditional rates, the original mix and the complete flag count. Then inspect the pile.</p>
+    </section>
+    <details class="methods" data-queue-methods>
+      <summary>Complete counts, calculation helper and limits</summary>
+      <p>These are two original aggregate count specifications, with eight cells in total. No item-level records were created for either 10,000-item example. All labels and flag results are stipulated; there are no missing outcomes or abstentions. No real classifier, provider, contributor or campaign was evaluated.</p>
+      <p>The <a href="/notes/base-rate-queue-data.json">complete aggregate fixture</a> includes all cells, totals and exact reduced fractions. The <a href="https://github.com/geoffreywoo/antihunter-site/blob/a6fd9d64a2566ccb7068c812e5034329c6168071/src/lib/base-rate-queue.mjs">pinned calculation helper</a> calculates each denominator from those cells. A denominator of zero is undefined; the helper returns null, never zero precision. Displayed percentages round to at most three decimals.</p>
+      <p>Separate bounded arithmetic tests enumerate 65,536 invented eight-item truth/prediction combinations in memory, comparing bit-count cells with an independent row-based calculation. Hand-worked counts, empty populations, no flags, input bounds, immutability and integer scaling are also checked. Those small test combinations are separate from the two displayed aggregate examples.</p>
+      <p>The shared 90% and 1% rates are stipulations. This does not establish that a real filter keeps its rates across populations, that labels are reliably known in practice or that an unlabeled future item has these odds. These descriptive counts choose no threshold and establish no staffing capacity or future performance. There is no form, upload or remote calculation on this page.</p>
+    </details>
+    <p class="small">More Field notes: <a href="/notes/majority-overlap">Three voters. Three outcomes.</a> · <a href="/notes/outcome-coverage">100% of which runs?</a></p>
+  </main>
+</PageLayout>
+<style>
+  .field-note{max-width:960px;padding:44px 0}.field-note a{color:var(--accent);text-underline-offset:4px}.kicker{font:600 .68rem ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-top:28px}.field-note h1{font-size:clamp(2.8rem,7vw,5.3rem);line-height:1.03;letter-spacing:-.045em;margin:20px 0}.field-note h1 em{font-style:normal;color:var(--accent)}.field-note p{line-height:1.75;color:#c5c0b4;max-width:780px}.field-note strong{color:#eee6d7}.field-note .lede{font-size:1.3rem;color:#eee6d7}.field-note h2{font-size:1.7rem;line-height:1.2;margin:0 0 18px}.field-note>section{margin:36px 0;padding-top:28px;border-top:1px solid #49463d}.field-note .small,figcaption{font-size:.85rem;line-height:1.7;color:#c5c0b4}figure{margin:32px 0}figure img{display:block;width:100%;max-width:900px;height:auto}figcaption{max-width:780px;margin-top:12px}.table-scroll{overflow-x:auto;border:1px solid #746b59;margin:20px 0}table{width:100%;min-width:580px;border-collapse:collapse;color:#eee6d7;font-variant-numeric:tabular-nums}caption{text-align:left;font-size:.85rem;line-height:1.5;padding:14px;color:#c5c0b4}th,td{padding:13px 15px;border-top:1px solid #49463d;text-align:right}th:first-child{text-align:left}thead{background:#262a22}.methods{border:1px solid #746b59;padding:20px;margin:36px 0}.methods summary{cursor:pointer;font-weight:700;line-height:1.5;color:#eee6d7}.methods p{font-size:.85rem}.field-note .endnote{color:var(--accent);font-size:1.15rem}.field-note :is(a,summary,[tabindex]):focus-visible{outline:2px solid var(--accent);outline-offset:5px}@media(max-width:640px){.field-note h1{font-size:2.8rem}.methods{padding:16px}}
+</style>
