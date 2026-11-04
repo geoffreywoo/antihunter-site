@@ -1,36 +1,55 @@
 ---
 const { active = '' } = Astro.props as { active?: string };
+const notesIndex = ['/notes', '/notes/'].includes(Astro.url.pathname);
 const nav = [
   { label: 'the sitcom', href: '/scarcity', key: 'scarcity' },
   { label: 'the acts', href: '/acts', key: 'acts' },
   { label: 'the machine', href: '/machine', key: 'machine' },
   { label: 'canon', href: '/canon', key: 'canon' },
-  { label: 'join the brief', href: '/pilgrimage', key: 'pilgrimage' },
+  { label: 'field notes', href: '/notes', key: 'notes' },
   { label: '$antihunter', href: '/token', key: 'token' },
 ];
+const isActive = (key: string) => active === key || (key === 'notes' && notesIndex);
 ---
 <nav class="site-nav" aria-label="Main navigation">
   <div class="site-nav-inner">
     <a href="/" class="nav-brand" aria-label="Anti Hunter home"><img src="/cryptopunk5730_openclaw_lobster.png" alt="" width="26" height="26" loading="eager" /><div class="nav-brand-name">anti <span>hunter</span></div></a>
-    <div class="nav-links" id="nav-links">{nav.map((item) => <a href={item.href} class={active === item.key ? 'is-active' : undefined} aria-current={active === item.key ? 'page' : undefined}>{item.label}</a>)}</div>
-    <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-controls="nav-links" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="nav-links">{nav.map((item) => <a href={item.href} class={isActive(item.key) ? 'is-active' : undefined} aria-current={isActive(item.key) ? 'page' : undefined}>{item.label}</a>)}</div>
+    <details class="mobile-nav" id="mobile-navigation">
+      <summary aria-label="Navigation menu"><span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></summary>
+      <div class="mobile-menu">{nav.map((item) => <a href={item.href} class={isActive(item.key) ? 'is-active' : undefined} aria-current={isActive(item.key) ? 'page' : undefined}>{item.label}</a>)}</div>
+    </details>
   </div>
 </nav>
 <script>
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('nav-links');
-  const close = () => { navLinks?.classList.remove('open'); hamburger?.setAttribute('aria-expanded', 'false'); hamburger?.setAttribute('aria-label', 'Open navigation'); };
-  hamburger?.addEventListener('click', () => {
-    const isOpen = navLinks?.classList.toggle('open') ?? false;
-    hamburger.setAttribute('aria-expanded', String(isOpen));
-    hamburger.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+  const menu = document.querySelector<HTMLDetailsElement>('#mobile-navigation');
+  const summary = menu?.querySelector('summary');
+  // Native details remains fully operable when JavaScript is unavailable.
+  menu?.addEventListener('click', (event) => {
+    if ((event.target as HTMLElement).closest('a')) menu.open = false;
   });
-  navLinks?.addEventListener('click', (event) => { if ((event.target as HTMLElement).closest('a')) close(); });
-  document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && navLinks?.classList.contains('open')) { close(); hamburger?.focus(); } });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menu?.open) {
+      menu.open = false;
+      summary?.focus();
+    }
+  });
 </script>
 <style>
-  .hamburger { position: relative; z-index: 201; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
   .nav-links { gap: 1.15rem; }
   .nav-links a { font-size: .78rem; }
-  @media (max-width: 768px) { .nav-links { position: fixed; top: 56px; bottom: auto; min-height: calc(100dvh - 56px); padding: 2rem 0; } .nav-links a { font-size: 1.1rem; } }
+  .mobile-nav { display: none; }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-nav { display: block; }
+    .mobile-nav summary { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; list-style: none; }
+    .mobile-nav summary::-webkit-details-marker { display: none; }
+    .menu-icon { display: flex; flex-direction: column; gap: 5px; }
+    .menu-icon span { display: block; width: 21px; height: 2px; background: var(--text); }
+    .mobile-menu { display: none; position: fixed; top: 56px; height: calc(100dvh - 56px); bottom: auto; left: 0; right: 0; overflow-y: auto; padding: 28px 32px; background: var(--bg); }
+    .mobile-nav[open] .mobile-menu { display: flex; flex-direction: column; gap: 12px; }
+    .mobile-menu a { display: block; padding: 12px 0; font-size: 1.1rem; color: var(--text); }
+    .mobile-menu a.is-active { color: var(--accent); }
+    .mobile-nav :is(summary, a):focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  }
 </style>
